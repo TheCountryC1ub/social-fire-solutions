@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Fire Solutions — Spread Like Fire</title>
+<meta name="description" content="A premium growth agency for people, brands, and businesses that want to spread like fire online. Over $10M in ad spend managed. Book a call.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     SOCIAL FIRE SOLUTIONS — ONE PAGE SITE
+     CTA: Book a call
+     >>> TO GO LIVE: replace BOOKING_URL below (in the <script> at the
+         bottom) with your real Calendly / cal.com / booking link.
+     ============================================================ -->
+
+<style>
+:root{
+  --onyx:#0A0A0B;
+  --carbon:#161618;
+  --carbon-2:#1F1F22;
+  --ember:#C81E1E;
+  --molten:#F2531B;
+  --ignition:#FFB020;
+  --ivory:#F4F1EA;
+  --ash:#9A9AA0;
+  --burn:linear-gradient(100deg,#FFB020,#F2531B 50%,#C81E1E);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--onyx);
+  color:var(--ivory);
+  font-family:'Inter',sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--molten);color:#fff;}
+
+h1,h2,h3,.display{font-family:'Playfair Display',serif;line-height:1.05;font-weight:700;}
+.fire{
+  background:var(--burn);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;width:100%;}
+.eyebrow{
+  font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--molten);font-weight:600;margin-bottom:20px;display:inline-block;
+}
+p.lead{color:var(--ash);font-size:clamp(16px,1.5vw,19px);max-width:620px;}
+
+/* ---------- BUTTONS ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Inter';font-weight:600;font-size:15px;letter-spacing:.01em;
+  padding:16px 30px;border-radius:50px;border:1px solid transparent;
+  cursor:pointer;text-decoration:none;transition:transform .25s ease,box-shadow .3s ease,background .3s ease;
+  min-height:48px;
+}
+.btn-primary{
+  background:var(--burn);color:#0A0A0B;
+  box-shadow:0 0 0 rgba(242,83,27,0);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(242,83,27,.45);}
+.btn-ghost{
+  background:transparent;color:var(--ivory);border:1px solid rgba(255,255,255,.18);
+}
+.btn-ghost:hover{border-color:var(--molten);color:#fff;transform:translateY(-2px);}
+.btn .arrow{transition:transform .25s ease;}
+.btn:hover .arrow{transform:translateX(4px);}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 32px;transition:background .4s ease,backdrop-filter .4s ease,padding .4s ease,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{
+  background:rgba(10,10,11,.72);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.07);padding:12px 32px;
+}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.01em;font-size:16px;}
+.flame{
+  width:24px;height:24px;flex:none;
+  background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);
+  box-shadow:0 0 22px rgba(242,83,27,.55);
+}
+.brand b{font-weight:700;}
+.brand span{color:var(--ash);font-weight:400;}
+nav .nav-cta{display:none;}
+@media(min-width:760px){nav .nav-cta{display:inline-flex;padding:12px 24px;min-height:0;}}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;min-height:100vh;min-height:100dvh;
+  display:flex;align-items:center;
+  overflow:hidden;
+}
+.hero-media{position:absolute;inset:0;z-index:0;}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:.34;filter:saturate(1.1);
+}
+.hero-grade{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(120% 90% at 78% 18%, rgba(242,83,27,.22), transparent 52%),
+    radial-gradient(90% 80% at 8% 96%, rgba(200,30,30,.18), transparent 55%),
+    linear-gradient(180deg, rgba(10,10,11,.55) 0%, rgba(10,10,11,.35) 40%, rgba(10,10,11,.92) 100%);
+}
+.hero-figure-wrap{
+  position:absolute;top:0;right:-4%;bottom:0;width:54%;z-index:1;
+  display:none;
+  perspective:1400px;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 32%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 32%,#000 100%);
+}
+@media(min-width:920px){.hero-figure-wrap{display:block;}}
+.hero-figure{
+  position:absolute;inset:0;
+  background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260614_012806_2af9a423-b971-452e-af61-8abe1b0184ff.png');
+  background-size:cover;background-position:center 28%;
+  transform-style:preserve-3d;will-change:transform;
+}
+.hero-content{position:relative;z-index:3;}
+.hero h1{
+  font-size:clamp(46px,8.2vw,104px);letter-spacing:-.025em;font-weight:800;
+  margin:18px 0 0;max-width:14ch;
+}
+.hero .sub{color:var(--ash);font-size:clamp(17px,1.7vw,21px);margin-top:26px;max-width:540px;line-height:1.6;}
+.hero .sub b{color:var(--ivory);font-weight:600;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px;}
+.scrollcue{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ash);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.scrollcue .line{width:1px;height:42px;background:linear-gradient(var(--molten),transparent);animation:cue 2.2s ease-in-out infinite;}
+@keyframes cue{0%,100%{opacity:.3;transform:scaleY(.6);}50%{opacity:1;transform:scaleY(1);}}
+
+/* ---------- MARQUEE STATS ---------- */
+.statsbar{
+  border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);
+  background:var(--carbon);overflow:hidden;position:relative;z-index:5;
+}
+.statsbar .track{display:flex;gap:0;white-space:nowrap;animation:scrollx 28s linear infinite;width:max-content;}
+.statsbar:hover .track{animation-play-state:paused;}
+.statsbar .item{display:flex;align-items:center;gap:18px;padding:22px 44px;}
+.statsbar .num{font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--ivory);}
+.statsbar .num em{font-style:normal;}
+.statsbar .lbl{font-size:13px;letter-spacing:.06em;color:var(--ash);text-transform:uppercase;}
+.statsbar .dot{width:6px;height:6px;border-radius:50%;background:var(--molten);box-shadow:0 0 12px var(--molten);}
+@keyframes scrollx{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ---------- SECTIONS ---------- */
+section.block{position:relative;padding:clamp(90px,12vw,150px) 0;}
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:none;}
+h2.big{font-size:clamp(32px,5vw,60px);letter-spacing:-.02em;max-width:16ch;}
+
+/* PROBLEM */
+.problem h2{margin-top:6px;}
+.problem .body{color:var(--ash);font-size:clamp(17px,1.7vw,20px);max-width:680px;margin-top:26px;line-height:1.7;}
+.problem .body b{color:var(--ivory);font-weight:600;}
+
+/* OFFER CARDS */
+.offer-head{max-width:720px;}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;}
+@media(max-width:880px){.cards{grid-template-columns:1fr;}}
+.card{
+  position:relative;background:var(--carbon);border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;padding:34px 30px;overflow:hidden;
+  transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s;
+}
+.card:hover{transform:translateY(-6px);border-color:rgba(242,83,27,.4);box-shadow:0 24px 60px rgba(0,0,0,.5);}
+.card.feature{border-color:rgba(242,83,27,.35);background:linear-gradient(180deg,rgba(242,83,27,.07),var(--carbon) 60%);}
+.card .tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ignition);font-weight:600;}
+.card.feature .tag{color:var(--molten);}
+.card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:22px;
+  background:rgba(242,83,27,.12);border:1px solid rgba(242,83,27,.25);}
+.card .ic svg{width:24px;height:24px;stroke:var(--molten);}
+.card h3{font-size:23px;margin:14px 0 12px;color:var(--ivory);}
+.card p{color:var(--ash);font-size:15px;line-height:1.65;}
+.card .pill{position:absolute;top:22px;right:22px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--burn);color:#0A0A0B;font-weight:700;padding:5px 11px;border-radius:50px;}
+
+/* SHOWCASE 3D */
+.showcase{position:relative;}
+.showcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+@media(max-width:880px){.showcase-grid{grid-template-columns:1fr;gap:40px;}}
+.showcase-frame{
+  perspective:1300px;
+}
+.showcase-img{
+  width:100%;aspect-ratio:16/10;border-radius:20px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260614_012808_d241e0a1-af34-4f37-b2cc-228dfa03fff4.png');
+  background-size:cover;background-position:center;
+  transform-style:preserve-3d;will-change:transform;
+  box-shadow:0 40px 90px rgba(0,0,0,.6);
+}
+.showcase h2{margin-bottom:18px;}
+.showcase ul{list-style:none;margin-top:26px;}
+.showcase li{display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--ash);font-size:16px;}
+.showcase li b{color:var(--ivory);font-weight:600;}
+.showcase li .mk{color:var(--molten);flex:none;margin-top:3px;}
+
+/* PROCESS */
+.process{background:var(--carbon);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px;}
+@media(max-width:880px){.steps{grid-template-columns:1fr 1fr;gap:32px 24px;}}
+@media(max-width:520px){.steps{grid-template-columns:1fr;}}
+.step .no{font-family:'Playfair Display',serif;font-size:50px;font-weight:700;
+  background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;}
+.step h3{font-family:'Inter';font-size:18px;font-weight:600;color:var(--ivory);margin:16px 0 8px;}
+.step p{color:var(--ash);font-size:14.5px;line-height:1.6;}
+.step{position:relative;}
+
+/* PROOF / BIG NUMBER */
+.proof{position:relative;text-align:center;overflow:hidden;}
+.proof-bg{position:absolute;inset:0;z-index:0;opacity:.5;
+  background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260614_010538_67f31282-6333-4050-838a-97d366f3372d.jpeg');
+  background-size:cover;background-position:center;}
+.proof-grade{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 50% 50%,rgba(10,10,11,.55),rgba(10,10,11,.92));}
+.proof .inner{position:relative;z-index:2;}
+.proof .huge{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(64px,13vw,170px);letter-spacing:-.03em;line-height:.95;}
+.proof .cap{color:var(--ash);font-size:clamp(16px,2vw,21px);max-width:620px;margin:22px auto 0;}
+.proof .cap b{color:var(--ivory);font-weight:600;}
+.proof .row{display:flex;justify-content:center;flex-wrap:wrap;gap:18px 48px;margin-top:48px;}
+.proof .row .k{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--ignition);}
+.proof .row .t{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ash);margin-top:4px;}
+
+/* FAQ */
+.faq-list{margin-top:46px;border-top:1px solid rgba(255,255,255,.08);max-width:860px;}
+.faq{border-bottom:1px solid rgba(255,255,255,.08);}
+.faq button{width:100%;background:none;border:none;cursor:pointer;text-align:left;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:26px 4px;color:var(--ivory);font-family:'Playfair Display',serif;font-size:clamp(19px,2.4vw,26px);font-weight:600;}
+.faq button .x{flex:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+  display:grid;place-items:center;color:var(--molten);font-size:20px;transition:transform .3s,border-color .3s;}
+.faq.open button .x{transform:rotate(45deg);border-color:var(--molten);}
+.faq .ans{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .45s ease;}
+.faq.open .ans{max-height:240px;padding-bottom:26px;}
+.faq .ans p{color:var(--ash);font-size:16px;line-height:1.7;max-width:680px;padding-right:30px;}
+
+/* FINAL CTA */
+.final{position:relative;text-align:center;overflow:hidden;
+  padding:clamp(100px,16vw,190px) 0;}
+.final-grade{position:absolute;inset:0;z-index:0;
+  background:
+   radial-gradient(80% 70% at 50% 110%, rgba(242,83,27,.30), transparent 60%),
+   radial-gradient(60% 60% at 50% -10%, rgba(200,30,30,.18), transparent 60%);}
+.final .inner{position:relative;z-index:2;}
+.final .flame{width:46px;height:46px;margin:0 auto 30px;}
+.final h2{font-size:clamp(40px,7vw,92px);letter-spacing:-.025em;font-weight:800;}
+.final p{color:var(--ash);font-size:clamp(17px,2vw,21px);max-width:560px;margin:24px auto 0;line-height:1.6;}
+.final p b{color:var(--ivory);font-weight:600;}
+.final .btn{margin-top:42px;font-size:17px;padding:20px 44px;}
+.final .micro{margin-top:20px;font-size:13px;color:var(--ash);letter-spacing:.04em;}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,.07);padding:50px 0;}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;}
+footer .brand span{color:var(--ash);}
+footer .copy{color:var(--ash);font-size:13px;letter-spacing:.04em;}
+footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transform:uppercase;}
+
+/* STICKY MOBILE CTA */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:90;
+  padding:14px 18px calc(14px + env(safe-area-inset-bottom));
+  background:rgba(10,10,11,.86);backdrop-filter:blur(14px);
+  border-top:1px solid rgba(255,255,255,.08);
+  transform:translateY(120%);transition:transform .4s ease;}
+.sticky-cta.show{transform:none;}
+.sticky-cta .btn{width:100%;justify-content:center;}
+@media(min-width:760px){.sticky-cta{display:none;}}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;scroll-behavior:auto !important;}
+  .reveal{opacity:1;transform:none;transition:none;}
+  .hero-video{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <div class="brand"><span class="flame"></span><b>Social Fire</b>&nbsp;<span>Solutions</span></div>
+  <a href="#book" class="btn btn-primary nav-cta js-book">Book a call</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="hero-media">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline poster="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260614_010538_67f31282-6333-4050-838a-97d366f3372d.jpeg"></video>
+    <div class="hero-grade"></div>
+  </div>
+  <div class="hero-figure-wrap" id="figWrap"><div class="hero-figure" id="heroFig"></div></div>
+
+  <div class="wrap hero-content">
+    <span class="eyebrow reveal">Growth · Branding · Creative</span>
+    <h1 class="reveal">Make your brand spread&nbsp;like <span class="fire">Fire.</span></h1>
+    <p class="sub reveal">We build premium brands and the scroll-stopping creative behind them — then put real budget to work. <b>Over $10M in ad spend managed. Hundreds of brands lit up.</b></p>
+    <div class="hero-actions reveal">
+      <a href="#book" class="btn btn-primary js-book">Book a call <span class="arrow">→</span></a>
+      <a href="#offer" class="btn btn-ghost">See what we do</a>
+    </div>
+  </div>
+
+  <div class="scrollcue" aria-hidden="true"><span>Scroll</span><span class="line"></span></div>
+</header>
+
+<!-- ===== STATS MARQUEE ===== -->
+<div class="statsbar" aria-label="Key results">
+  <div class="track" id="track">
+    <div class="item"><span class="num fire"><em>$10M+</em></span><span class="lbl">Ad spend managed</span><span class="dot"></span></div>
+    <div class="item"><span class="num">100s</span><span class="lbl">of brands grown</span><span class="dot"></span></div>
+    <div class="item"><span class="num fire"><em>Spread</em></span><span class="lbl">like fire</span><span class="dot"></span></div>
+    <div class="item"><span class="num">Premium</span><span class="lbl">brand &amp; creative</span><span class="dot"></span></div>
+  </div>
+</div>
+
+<!-- ===== PROBLEM ===== -->
+<section class="block problem">
+  <div class="wrap">
+    <span class="eyebrow reveal">01 — The truth</span>
+    <h2 class="big reveal">You don't have a reach problem. You have a <span class="fire">forgettable</span> problem.</h2>
+    <p class="body reveal">Every day your audience scrolls past a hundred brands that look exactly like yours. Same fonts. Same stock photos. Same "we're passionate about quality." <b>Forgettable doesn't sell — it just blends in and burns your budget.</b> The brands that win online aren't the loudest in the room. They're the ones you can't look away from. That's the difference we build.</p>
+  </div>
+</section>
+
+<!-- ===== OFFER ===== -->
+<section class="block" id="offer">
+  <div class="wrap">
+    <div class="offer-head">
+      <span class="eyebrow reveal">02 — What we do</span>
+      <h2 class="big reveal">We make you the brand people <span class="fire">remember.</span></h2>
+      <p class="lead reveal" style="margin-top:22px;">It starts with a brand worth looking at — then we build the creative and the campaigns that turn attention into growth.</p>
+    </div>
+    <div class="cards">
+      <article class="card feature reveal">
+        <span class="pill">Our craft</span>
+        <span class="tag">Lead service</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1.5 3.5 4 4.5 4 8a4 4 0 1 1-8 0c0-1.6.6-2.6 1.5-3.7C10.6 6.7 11.5 4.6 12 2Z"/><path d="M12 14a2 2 0 0 0 2-2"/></svg></div>
+        <h3>Branding &amp; Creative</h3>
+        <p>A cinematic, premium identity built to command attention — logo, palette, voice, and the whole world around your brand. Paired with scroll-stopping creative that makes people assume you're already winning.</p>
+      </article>
+      <article class="card reveal">
+        <span class="tag">Engine</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></div>
+        <h3>Paid Growth</h3>
+        <p>We put budget behind the work. Performance campaigns across Meta, Google and TikTok engineered to turn attention into pipeline — profitably, and at scale.</p>
+      </article>
+      <article class="card reveal">
+        <span class="tag">Momentum</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M21 7v5h-5"/></svg></div>
+        <h3>Content &amp; Social</h3>
+        <p>A steady feed of reels, posts and ad creative with heat behind every frame — so your brand stays in front of the right people and keeps the fire spreading.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SHOWCASE 3D ===== -->
+<section class="block showcase">
+  <div class="wrap showcase-grid">
+    <div class="showcase-frame reveal">
+      <div class="showcase-img" id="showImg" role="img" aria-label="Cinematic dark creative studio representing premium branding work"></div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">03 — The look</span>
+      <h2 class="big">Built in the dark. Designed to <span class="fire">glow.</span></h2>
+      <p class="lead" style="margin-top:18px;">Quiet luxury, with heat behind it. We keep it cinematic, high-contrast and intentional — the kind of brand that looks expensive before you say a word.</p>
+      <ul>
+        <li><span class="mk">✦</span><span><b>Premium by default.</b> Restraint reads as luxury — clean, confident, never cluttered.</span></li>
+        <li><span class="mk">✦</span><span><b>Made to convert.</b> Every frame is designed to stop the scroll and move someone closer to "yes."</span></li>
+        <li><span class="mk">✦</span><span><b>Consistent everywhere.</b> One unmistakable identity across your site, ads and socials.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="block process">
+  <div class="wrap">
+    <span class="eyebrow reveal">04 — How the fire spreads</span>
+    <h2 class="big reveal">Four steps from spark to <span class="fire">wildfire.</span></h2>
+    <div class="steps">
+      <div class="step reveal"><div class="no">01</div><h3>Discover</h3><p>We dig into your brand, your market and your numbers to find the real opportunity.</p></div>
+      <div class="step reveal"><div class="no">02</div><h3>Build</h3><p>We craft the identity and creative that sets you apart and makes you impossible to ignore.</p></div>
+      <div class="step reveal"><div class="no">03</div><h3>Ignite</h3><p>We launch — and put real spend behind the work, dialing in what converts.</p></div>
+      <div class="step reveal"><div class="no">04</div><h3>Scale</h3><p>We double down on what's working and turn early heat into sustained growth.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROOF ===== -->
+<section class="block proof">
+  <div class="proof-bg"></div><div class="proof-grade"></div>
+  <div class="wrap inner">
+    <span class="eyebrow reveal">05 — The receipts</span>
+    <div class="huge fire reveal">$10M+</div>
+    <p class="cap reveal"><b>in ad spend managed</b> — for hundreds of brands, people and businesses who decided blending in wasn't an option. Numbers don't exaggerate. They just compound.</p>
+    <div class="row reveal">
+      <div><div class="k">100s</div><div class="t">Brands grown</div></div>
+      <div><div class="k">$10M+</div><div class="t">Ad spend managed</div></div>
+      <div><div class="k">∞</div><div class="t">Heat behind it</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="block">
+  <div class="wrap">
+    <span class="eyebrow reveal">06 — Before you book</span>
+    <h2 class="big reveal">The honest <span class="fire">answers.</span></h2>
+    <div class="faq-list reveal">
+      <div class="faq"><button>Who is this actually for?<span class="x">+</span></button><div class="ans"><p>Founders, brands and people who want to grow online — and are done looking like everyone else. If you care about being remembered, not just seen, we'll get along.</p></div></div>
+      <div class="faq"><button>What does it cost?<span class="x">+</span></button><div class="ans"><p>It depends on scope — branding, creative and paid growth each scale differently. Book a call and we'll build a plan around your goals. No pressure, no jargon, no surprise invoices.</p></div></div>
+      <div class="faq"><button>How fast will I see movement?<span class="x">+</span></button><div class="ans"><p>Brand and creative come together in weeks, not months. Once we ignite paid, you'll see real data fast — and we optimize toward what's working from day one.</p></div></div>
+      <div class="faq"><button>What happens on the call?<span class="x">+</span></button><div class="ans"><p>We learn about your brand and goals, then tell you exactly how we'd make you spread like fire — whether you hire us or not. You leave with a plan either way.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final" id="book">
+  <div class="final-grade"></div>
+  <div class="wrap inner">
+    <span class="flame reveal"></span>
+    <h2 class="reveal">Let's light this <span class="fire">up.</span></h2>
+    <p class="reveal"><b>Book a call.</b> We'll tell you exactly how we'd make your brand spread like fire — even if you never work with us.</p>
+    <a href="#" class="btn btn-primary js-book reveal">Book a call <span class="arrow">→</span></a>
+    <div class="micro reveal">No pressure. No jargon. Just a plan.</div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="flame"></span><b>Social Fire</b>&nbsp;<span>Solutions</span></div>
+    <div class="tag">Spread like fire</div>
+    <div class="copy">© 2026 Social Fire Solutions. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ===== STICKY MOBILE CTA ===== -->
+<div class="sticky-cta" id="stickyCta"><a href="#book" class="btn btn-primary js-book">Book a call →</a></div>
+
+<script>
+/* =========================================================
+   >>> SET YOUR BOOKING LINK HERE <<<
+   Replace the placeholder with your real Calendly / cal.com /
+   Stripe / phone (tel:) / email (mailto:) link.
+   ========================================================= */
+const BOOKING_URL = "#book"; // e.g. "https://calendly.com/socialfiresolutions/intro"
+
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Wire the hero ambient video (set once it's ready; falls back to poster otherwise)
+  const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260614_012918_37771275-38dc-4d04-a04c-383bcd266f56.mp4";
+  const hv = document.getElementById('heroVideo');
+  if (hv && VIDEO_URL && !reduce){ hv.src = VIDEO_URL; }
+
+  // Booking buttons
+  document.querySelectorAll('.js-book').forEach(a=>{
+    if (BOOKING_URL && BOOKING_URL !== "#book"){
+      a.setAttribute('href', BOOKING_URL);
+      if (/^https?:/.test(BOOKING_URL)) a.setAttribute('target','_blank');
+    } else {
+      a.setAttribute('href', '#book');
+    }
+  });
+
+  // Nav scrolled state + sticky mobile CTA
+  const nav = document.getElementById('nav');
+  const sticky = document.getElementById('stickyCta');
+  const onScrollUI = ()=>{
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 40);
+    sticky.classList.toggle('show', y > 700);
+  };
+  window.addEventListener('scroll', onScrollUI, {passive:true}); onScrollUI();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:0.16, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Stagger card / step reveals
+  document.querySelectorAll('.cards .card, .steps .step').forEach((el,i)=>{ el.style.transitionDelay = (i*0.08)+'s'; });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const item = b.parentElement;
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq.open').forEach(f=>f.classList.remove('open'));
+      if(!open) item.classList.add('open');
+    });
+  });
+
+  if (reduce) return; // skip all motion-driven 3D below
+
+  /* ---- 3D PARALLAX SCROLL ENGINE ---- */
+  const heroFig = document.getElementById('heroFig');
+  const figWrap = document.getElementById('figWrap');
+  const showImg = document.getElementById('showImg');
+  let mouseX = 0, mouseY = 0;
+
+  // subtle mouse-driven 3D on hero figure
+  window.addEventListener('mousemove', (e)=>{
+    mouseX = (e.clientX / window.innerWidth - .5);
+    mouseY = (e.clientY / window.innerHeight - .5);
+  }, {passive:true});
+
+  let ticking = false;
+  function frame(){
+    const y = window.scrollY;
+    const vh = window.innerHeight;
+
+    // Hero figure: parallax drift + 3D tilt that responds to scroll & mouse
+    if (heroFig){
+      const p = Math.min(y / vh, 1);
+      const rotY = (mouseX * 8) - (p * 6);
+      const rotX = (-mouseY * 6) + (p * 2);
+      const ty = p * 90;          // parallax rise
+      const scale = 1.06 - p*0.04;
+      heroFig.style.transform =
+        `translate3d(${mouseX*18}px, ${ty}px, 0) rotateY(${rotY}deg) rotateX(${rotX}deg) scale(${scale})`;
+      figWrap.style.opacity = String(1 - p*0.85);
+    }
+
+    // Showcase image: 3D tilt as it scrolls through the viewport
+    if (showImg){
+      const r = showImg.getBoundingClientRect();
+      const center = r.top + r.height/2;
+      const prog = (center - vh/2) / vh; // -1 .. 1 ish
+      const rotX = Math.max(Math.min(prog * 10, 12), -12);
+      const ty = prog * 26;
+      showImg.style.transform = `translateY(${ty}px) rotateX(${ -rotX }deg) rotateY(${ prog*6 }deg) scale(1.02)`;
+    }
+
+    // Proof background subtle parallax
+    const pb = document.querySelector('.proof-bg');
+    if (pb){
+      const r = pb.parentElement.getBoundingClientRect();
+      const prog = (r.top) / vh;
+      pb.style.transform = `translateY(${prog*40}px) scale(1.1)`;
+    }
+
+    ticking = false;
+  }
+  function onScroll(){ if(!ticking){ requestAnimationFrame(frame); ticking = true; } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('mousemove', onScroll, {passive:true});
+  frame();
+})();
+</script>
+</body>
+</html>
