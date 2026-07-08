@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Your Application — Rio with Love</title>
+<meta name="description" content="A confidential application for Rio with Love — a private matchmaking service introducing accomplished men to warm, devoted women in Brazil. Answer a few questions and we'll see if you're a fit." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0B0D; --ink:#121214; --ink2:#17171a;
+  --gold:#C6A24A; --gold-lt:#E1C885; --gold-deep:#A07C2E;
+  --cream:#EDE8DB; --muted:#A39E92; --line:#2a2823;
+  --green:#009C3B; --yellow:#FFDF00; --blue:#1b3a8c;
+  --err:#c0473a;
+  --max:760px; --r:14px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black); color:var(--cream);
+  font-family:'Inter',system-ui,sans-serif; font-weight:400;
+  line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  min-height:100dvh;
+}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif; font-weight:500; line-height:1.14; letter-spacing:.2px}
+a{color:inherit; text-decoration:none}
+img{max-width:100%;display:block}
+.gold{color:var(--gold)}
+::selection{background:var(--gold);color:#141002}
+
+/* ambient background */
+.bg{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 12% 0%, rgba(198,162,74,.10), transparent 55%),
+    radial-gradient(120% 90% at 88% 100%, rgba(27,58,140,.14), transparent 60%),
+    linear-gradient(180deg,#0b0b0d,#0d0d10 60%,#08080a);
+}
+.bg::after{content:""; position:absolute; inset:0; opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.flagbar{height:4px; width:100%; position:fixed; top:0; left:0; z-index:60;
+  background:linear-gradient(90deg,var(--green) 0 33.3%,var(--yellow) 33.3% 66.6%,var(--blue) 66.6% 100%)}
+
+/* top bar */
+.topbar{position:fixed; top:4px; left:0; right:0; z-index:55;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:16px clamp(18px,4vw,34px);
+  background:linear-gradient(180deg,rgba(11,11,13,.92),rgba(11,11,13,0));
+}
+.brand{display:flex; align-items:center; gap:11px}
+.brand .emb{width:30px;height:30px}
+.brand .name{font-family:'Playfair Display'; font-size:1rem; letter-spacing:.18em; color:var(--cream)}
+.brand .name b{color:var(--gold); font-weight:600}
+.exit{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); border:1px solid var(--line);
+  padding:9px 16px; border-radius:50px; transition:.25s; background:rgba(255,255,255,.02)}
+.exit:hover{border-color:var(--gold); color:var(--gold)}
+
+/* progress */
+.progress{position:fixed; top:0; left:0; height:4px; z-index:61; width:0;
+  background:linear-gradient(90deg,var(--gold-deep),var(--gold-lt)); transition:width .5s var(--ease)}
+
+/* stage */
+.stage{position:relative; z-index:5; min-height:100dvh; display:flex; align-items:center; justify-content:center;
+  padding:110px clamp(20px,5vw,28px) 140px}
+.card{width:100%; max-width:var(--max)}
+
+/* each question panel */
+.q{display:none; animation:none}
+.q.active{display:block}
+.q.active.anim{animation:rise .55s var(--ease) both}
+@keyframes rise{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none}}
+
+.stepno{font-family:'Inter'; font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:16px; display:flex; align-items:center; gap:10px}
+.stepno .arrow{width:14px;height:10px}
+.q h2{font-size:clamp(1.6rem,4.2vw,2.5rem); margin-bottom:10px}
+.q h2 em{font-style:italic; color:var(--gold)}
+.q .desc{color:var(--muted); font-size:1.02rem; margin-bottom:26px; max-width:52ch}
+.q .desc.tight{margin-bottom:18px}
+
+/* text inputs */
+.field{margin-bottom:16px}
+.field label.fl{display:block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; font-weight:600}
+input[type=text],input[type=email],input[type=tel],textarea,select{
+  width:100%; background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:10px;
+  padding:16px 18px; color:var(--cream); font-family:'Inter'; font-size:1.05rem; transition:border-color .25s, background .25s;
+}
+input::placeholder,textarea::placeholder{color:#6f6a5f}
+textarea{min-height:130px; resize:vertical; line-height:1.55}
+select{appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%23C6A24A' stroke-width='2'%3E%3Cpath d='M2 4l5 5 5-5'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 18px center; padding-right:44px; cursor:pointer}
+input:focus,textarea:focus,select:focus{outline:none; border-color:var(--gold); background:rgba(198,162,74,.05)}
+.invalid{border-color:var(--err)!important}
+
+/* choice cards (radio / checkbox) */
+.choices{display:flex; flex-direction:column; gap:12px}
+.choices.grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.choice{position:relative; display:flex; align-items:flex-start; gap:14px; cursor:pointer;
+  border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:rgba(255,255,255,.02); transition:.22s var(--ease)}
+.choice:hover{border-color:rgba(198,162,74,.55); background:rgba(198,162,74,.05); transform:translateY(-2px)}
+.choice input{position:absolute; opacity:0; pointer-events:none}
+.choice .box{flex:0 0 auto; width:22px; height:22px; border-radius:50%; border:1.6px solid var(--muted); margin-top:2px; display:grid; place-items:center; transition:.2s}
+.choice.chk .box{border-radius:6px}
+.choice .box svg{width:12px;height:12px; opacity:0; transform:scale(.4); transition:.2s; stroke:#141002}
+.choice .ctext{flex:1}
+.choice .ctext b{display:block; font-weight:600; font-size:1.04rem; color:var(--cream); font-family:'Inter'}
+.choice .ctext span{display:block; color:var(--muted); font-size:.9rem; margin-top:3px}
+.choice input:checked ~ .box{background:linear-gradient(135deg,var(--gold-lt),var(--gold-deep)); border-color:var(--gold-lt)}
+.choice input:checked ~ .box svg{opacity:1; transform:none}
+.choice:has(input:checked){border-color:var(--gold); background:rgba(198,162,74,.09); box-shadow:0 10px 30px -18px rgba(198,162,74,.7)}
+
+/* chips (compact multi-select) */
+.chips{display:flex; flex-wrap:wrap; gap:10px}
+.chip{position:relative; cursor:pointer}
+.chip input{position:absolute; opacity:0; pointer-events:none}
+.chip span{display:inline-block; border:1px solid var(--line); border-radius:50px; padding:11px 18px; font-size:.92rem; color:var(--cream); transition:.2s var(--ease); background:rgba(255,255,255,.02)}
+.chip:hover span{border-color:rgba(198,162,74,.55)}
+.chip input:checked + span{background:linear-gradient(135deg,rgba(225,200,133,.22),rgba(160,124,46,.22)); border-color:var(--gold); color:var(--gold-lt); font-weight:600}
+
+/* investment framing */
+.invest-note{border:1px solid rgba(198,162,74,.35); border-radius:12px; padding:18px 20px; margin-bottom:22px;
+  background:linear-gradient(180deg,rgba(198,162,74,.08),rgba(198,162,74,.02))}
+.invest-note p{color:var(--cream); font-size:.98rem}
+.invest-note b{color:var(--gold)}
+
+/* nav buttons */
+.actions{display:flex; align-items:center; gap:14px; margin-top:30px; flex-wrap:wrap}
+.btn{display:inline-flex; align-items:center; gap:.55rem; cursor:pointer; border:1px solid transparent;
+  font-family:'Inter'; font-weight:600; font-size:.84rem; letter-spacing:.1em; text-transform:uppercase;
+  padding:16px 30px; border-radius:50px; transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, color .25s, border-color .25s}
+.btn-primary{background:linear-gradient(135deg,var(--gold-lt),var(--gold-deep)); color:#1a1505; box-shadow:0 10px 30px -8px rgba(198,162,74,.5)}
+.btn-primary:hover{transform:translateY(-3px); box-shadow:0 16px 40px -8px rgba(198,162,74,.7)}
+.btn-ghost{border-color:var(--line); color:var(--muted); background:transparent; padding:14px 22px}
+.btn-ghost:hover{border-color:var(--gold); color:var(--gold)}
+.btn:focus-visible{outline:3px solid var(--gold-lt); outline-offset:3px}
+.hintkey{color:#5f5b52; font-size:.78rem; margin-left:2px}
+.err-msg{color:var(--err); font-size:.86rem; margin-top:14px; display:none}
+.err-msg.show{display:block}
+
+/* welcome */
+.welcome h1{font-size:clamp(2.3rem,6vw,3.6rem); margin:18px 0 18px}
+.welcome h1 em{font-style:italic; color:var(--gold)}
+.welcome .lead{color:var(--cream); font-weight:300; font-size:clamp(1.05rem,2vw,1.24rem); max-width:46ch; margin-bottom:14px}
+.welcome .meta{color:var(--muted); font-size:.92rem; margin-bottom:30px; display:flex; gap:22px; flex-wrap:wrap}
+.welcome .meta span{display:flex; align-items:center; gap:8px}
+.welcome .meta svg{width:15px;height:15px; stroke:var(--gold); fill:none}
+.kicker{font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); font-weight:600}
+
+/* success */
+.done{display:none; text-align:center}
+.done.show{display:block; animation:rise .6s var(--ease) both}
+.ring{width:74px;height:74px;border-radius:50%;margin:0 auto 24px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--gold-lt),var(--gold-deep)); box-shadow:0 20px 50px -18px rgba(198,162,74,.7)}
+.ring svg{width:34px;height:34px;stroke:#141002;fill:none}
+.done h2{font-size:clamp(1.9rem,4.6vw,2.7rem); margin-bottom:14px}
+.done p{color:var(--muted); font-size:1.06rem; max-width:44ch; margin:0 auto 10px}
+.done .again{margin-top:26px}
+.copybox{display:none; margin:26px auto 0; max-width:520px; text-align:left; border:1px solid var(--line); border-radius:12px; padding:18px; background:rgba(255,255,255,.02)}
+.copybox.show{display:block}
+.copybox p{font-size:.92rem; color:var(--muted); margin-bottom:12px}
+.copybox textarea{min-height:150px; font-size:.9rem}
+
+footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; color:#5f5b52; font-size:.78rem; letter-spacing:.03em}
+
+@media(max-width:560px){
+  .choices.grid2{grid-template-columns:1fr}
+  .welcome .meta{gap:14px}
+  .actions{gap:10px}
+  .btn{padding:15px 24px}
+}
+@media(prefers-reduced-motion:reduce){ .q.active.anim{animation:none} .done.show{animation:none} .btn:hover,.choice:hover{transform:none} }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="flagbar"></div>
+<div class="progress" id="progress"></div>
+
+<!-- emblem -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="emblem" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2.4"/>
+    <circle cx="50" cy="50" r="39" fill="none" stroke="currentColor" stroke-width="1"/>
+    <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="50" y1="22" x2="50" y2="14"/><line x1="40" y1="24" x2="37" y2="17"/>
+      <line x1="60" y1="24" x2="63" y2="17"/><line x1="32" y1="29" x2="27" y2="24"/>
+      <line x1="68" y1="29" x2="73" y2="24"/>
+    </g>
+    <path d="M50 70 C30 54 34 38 44 38 C49 38 50 43 50 45 C50 43 51 38 56 38 C66 38 70 54 50 70 Z" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<div class="topbar">
+  <a class="brand" href="/brazil" aria-label="Rio with Love home">
+    <svg class="emb gold" aria-hidden="true"><use href="#emblem"/></svg>
+    <span class="name">RIO <b>with</b> LOVE</span>
+  </a>
+  <a class="exit" href="/brazil">Exit</a>
+</div>
+
+<div class="stage">
+  <div class="card">
+    <form id="app" novalidate>
+
+    <!-- 0 · WELCOME -->
+    <section class="q welcome" data-count="no">
+      <span class="kicker">Private Application</span>
+      <h1>Let's find out if we're <em>right for you.</em></h1>
+      <p class="lead">A few honest questions about who you are and what you're looking for. It takes about three minutes, and everything you share stays completely confidential.</p>
+      <div class="meta">
+        <span><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 1l9 4v6c0 5-3.8 9.2-9 11-5.2-1.8-9-6-9-11V5z"/></svg> 100% confidential</span>
+        <span><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~3 minutes</span>
+        <span><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> No obligation</span>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" data-next>Begin
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- 1 · NAME -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>First, what should we call you?</h2>
+      <div class="field">
+        <input type="text" name="firstname" autocomplete="given-name" placeholder="Your first name" required />
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" data-next>OK <span class="hintkey">↵</span></button>
+      </div>
+      <div class="err-msg">Please enter your name to continue.</div>
+    </section>
+
+    <!-- 2 · CONTACT -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>Where can your matchmaker reach you?</h2>
+      <p class="desc tight">We'll only use this to arrange your private call. Never shared, never spammed.</p>
+      <div class="field">
+        <label class="fl">Email</label>
+        <input type="email" name="email" autocomplete="email" placeholder="you@email.com" required />
+      </div>
+      <div class="field">
+        <label class="fl">Phone / WhatsApp <span style="text-transform:none;letter-spacing:0;color:#5f5b52">(optional)</span></label>
+        <input type="tel" name="phone" autocomplete="tel" placeholder="+1 (555) 000-0000" />
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="button" class="btn btn-primary" data-next>Continue</button>
+      </div>
+      <div class="err-msg">Please enter a valid email address.</div>
+    </section>
+
+    <!-- 3 · AGE -->
+    <section class="q auto">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>Which range fits your age?</h2>
+      <div class="choices grid2" role="radiogroup">
+        <label class="choice"><input type="radio" name="age" value="30–39" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>30–39</b></span></label>
+        <label class="choice"><input type="radio" name="age" value="40–49"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>40–49</b></span></label>
+        <label class="choice"><input type="radio" name="age" value="50–59"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>50–59</b></span></label>
+        <label class="choice"><input type="radio" name="age" value="60–69"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>60–69</b></span></label>
+        <label class="choice"><input type="radio" name="age" value="Under 30"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Under 30</b></span></label>
+        <label class="choice"><input type="radio" name="age" value="70+"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>70+</b></span></label>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-ghost" data-back>Back</button></div>
+      <div class="err-msg">Please choose one to continue.</div>
+    </section>
+
+    <!-- 4 · LOCATION -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>Where in the world are you based?</h2>
+      <p class="desc tight">City and country is perfect — it helps us plan introductions and travel.</p>
+      <div class="field">
+        <input type="text" name="location" placeholder="e.g. Miami, USA" required />
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="button" class="btn btn-primary" data-next>Continue</button>
+      </div>
+      <div class="err-msg">Please let us know where you're based.</div>
+    </section>
+
+    <!-- 5 · STATUS -->
+    <section class="q auto">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>What's your situation right now?</h2>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="status" value="Single, never married" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Single, never married</b></span></label>
+        <label class="choice"><input type="radio" name="status" value="Divorced"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Divorced</b></span></label>
+        <label class="choice"><input type="radio" name="status" value="Separated"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Separated</b></span></label>
+        <label class="choice"><input type="radio" name="status" value="Widowed"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Widowed</b></span></label>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-ghost" data-back>Back</button></div>
+      <div class="err-msg">Please choose one to continue.</div>
+    </section>
+
+    <!-- 6 · SEEKING -->
+    <section class="q auto">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>What are you truly hoping to find?</h2>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="seeking" value="Marriage & building a life together" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Marriage &amp; building a life together</b><span>I'm ready for something real and lasting.</span></span></label>
+        <label class="choice"><input type="radio" name="seeking" value="A committed long-term partner"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>A committed long-term partner</b><span>Exclusive and serious, seeing where it grows.</span></span></label>
+        <label class="choice"><input type="radio" name="seeking" value="Companionship & genuine connection"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Companionship &amp; genuine connection</b><span>A real bond, open about where it leads.</span></span></label>
+        <label class="choice"><input type="radio" name="seeking" value="Still figuring it out"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Still figuring it out</b><span>I'd like guidance on what's right for me.</span></span></label>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-ghost" data-back>Back</button></div>
+      <div class="err-msg">Please choose one to continue.</div>
+    </section>
+
+    <!-- 7 · FAMILY -->
+    <section class="q auto">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>How do you feel about family &amp; children?</h2>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="family" value="I want children / a family" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>I want children / to build a family</b></span></label>
+        <label class="choice"><input type="radio" name="family" value="Have children, open to more"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>I have children, and I'm open to more</b></span></label>
+        <label class="choice"><input type="radio" name="family" value="Have children, not looking for more"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>I have children, and I'm complete there</b></span></label>
+        <label class="choice"><input type="radio" name="family" value="Open, partner's wishes matter"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Open — it depends on the right partner</b></span></label>
+        <label class="choice"><input type="radio" name="family" value="No children"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>I'm not looking for children</b></span></label>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-ghost" data-back>Back</button></div>
+      <div class="err-msg">Please choose one to continue.</div>
+    </section>
+
+    <!-- 8 · PERSONALITY TRAITS -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>How would those closest to you describe you?</h2>
+      <p class="desc">Choose the few that fit best — this helps us understand your character.</p>
+      <div class="chips" data-min="1">
+        <label class="chip"><input type="checkbox" name="traits" value="Ambitious"><span>Ambitious</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Grounded & calm"><span>Grounded &amp; calm</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Adventurous"><span>Adventurous</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Romantic"><span>Romantic</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Disciplined"><span>Disciplined</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Easy-going"><span>Easy-going</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Protective"><span>Protective</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Intellectual"><span>Intellectual</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Good humored"><span>Good humored</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Traditional"><span>Traditional</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Generous"><span>Generous</span></label>
+        <label class="chip"><input type="checkbox" name="traits" value="Reserved"><span>Reserved</span></label>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="button" class="btn btn-primary" data-next>Continue</button>
+      </div>
+      <div class="err-msg">Please choose at least one.</div>
+    </section>
+
+    <!-- 9 · SOCIAL ENERGY -->
+    <section class="q auto">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>How do you recharge?</h2>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="energy" value="Introvert — quiet & one-on-one" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Quietly</b><span>I prefer calm, depth, and one-on-one time.</span></span></label>
+        <label class="choice"><input type="radio" name="energy" value="Ambivert — a balance"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>A balance of both</b><span>Social when I want to be, happy alone too.</span></span></label>
+        <label class="choice"><input type="radio" name="energy" value="Extrovert — people & energy"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Around people</b><span>I come alive with energy, events, and company.</span></span></label>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-ghost" data-back>Back</button></div>
+      <div class="err-msg">Please choose one to continue.</div>
+    </section>
+
+    <!-- 10 · WORK / LIFE -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>What do you do, and what fills your days?</h2>
+      <p class="desc">Your work, your passions, how you've built your life. A few sentences is plenty.</p>
+      <div class="field">
+        <textarea name="work" placeholder="Tell us a little about your career and what you love outside of it…" required></textarea>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="button" class="btn btn-primary" data-next>Continue</button>
+      </div>
+      <div class="err-msg">A sentence or two helps us understand you.</div>
+    </section>
+
+    <!-- 11 · TRAVEL -->
+    <section class="q auto">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>Brazil is where love begins here. How do you feel about travel?</h2>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="travel" value="I travel often & gladly" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>I travel often and gladly</b><span>Flying to Brazil to meet her? No hesitation.</span></span></label>
+        <label class="choice"><input type="radio" name="travel" value="Happy to travel a few times a year"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Happy to travel a few times a year</b><span>For the right person, absolutely.</span></span></label>
+        <label class="choice"><input type="radio" name="travel" value="Open, but would want guidance"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Open to it, with guidance</b><span>I'd want a hand with the how and when.</span></span></label>
+        <label class="choice"><input type="radio" name="travel" value="Travel is limited for me right now"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Travel is limited for me right now</b><span>Let's talk about what's realistic.</span></span></label>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-ghost" data-back>Back</button></div>
+      <div class="err-msg">Please choose one to continue.</div>
+    </section>
+
+    <!-- 12 · HER TRAITS -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>What matters most to you in her?</h2>
+      <p class="desc">Pick the qualities that draw you in. There are no wrong answers.</p>
+      <div class="chips" style="margin-bottom:22px">
+        <label class="chip"><input type="checkbox" name="hertraits" value="Family-oriented"><span>Family-oriented</span></label>
+        <label class="chip"><input type="checkbox" name="hertraits" value="Feminine & warm"><span>Feminine &amp; warm</span></label>
+        <label class="chip"><input type="checkbox" name="hertraits" value="Affectionate"><span>Affectionate</span></label>
+        <label class="chip"><input type="checkbox" name="hertraits" value="Faith / shared values"><span>Faith / shared values</span></label>
+        <label class="chip"><input type="checkbox" name="hertraits" value="Ambitious"><span>Ambitious</span></label>
+        <label class="chip"><input type="checkbox" name="hertraits" value="Playful & fun"><span>Playful &amp; fun</span></label>
+        <label class="chip"><input type="checkbox" name="hertraits" value="Intelligent"><span>Intelligent</span></label>
+        <label class="chip"><input type="checkbox" name="hertraits" value="Loyal & devoted"><span>Loyal &amp; devoted</span></label>
+        <label class="chip"><input type="checkbox" name="hertraits" value="Speaks some English"><span>Speaks some English</span></label>
+        <label class="chip"><input type="checkbox" name="hertraits" value="Age-similar"><span>Age-similar</span></label>
+        <label class="chip"><input type="checkbox" name="hertraits" value="Younger"><span>Younger</span></label>
+      </div>
+      <div class="field">
+        <label class="fl">In your own words — describe your ideal partner</label>
+        <textarea name="typewords" placeholder="The kind of woman, and the kind of relationship, you're hoping for…" required></textarea>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="button" class="btn btn-primary" data-next>Continue</button>
+      </div>
+      <div class="err-msg">Please describe what you're looking for.</div>
+    </section>
+
+    <!-- 13 · WHY -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>What's led you to look for love this way?</h2>
+      <p class="desc">Be as candid as you like — what's been missing, or what you're hoping to change.</p>
+      <div class="field">
+        <textarea name="why" placeholder="What brought you here…" required></textarea>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="button" class="btn btn-primary" data-next>Continue</button>
+      </div>
+      <div class="err-msg">A sentence or two helps us understand you.</div>
+    </section>
+
+    <!-- 14 · READINESS -->
+    <section class="q auto">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>How ready are you to meet someone?</h2>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="timeline" value="Ready now — let's begin" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Ready now</b><span>I want to start meeting women soon.</span></span></label>
+        <label class="choice"><input type="radio" name="timeline" value="Within the next few months"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Within a few months</b><span>Getting serious and planning ahead.</span></span></label>
+        <label class="choice"><input type="radio" name="timeline" value="Exploring the idea"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Exploring the idea</b><span>Curious, gathering information first.</span></span></label>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-ghost" data-back>Back</button></div>
+      <div class="err-msg">Please choose one to continue.</div>
+    </section>
+
+    <!-- 15 · INVESTMENT (key qualifier) -->
+    <section class="q auto">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>Finding real love is worth doing right.</h2>
+      <div class="invest-note">
+        <p>Rio with Love is a private, high-touch service — <b>personal matchmaking, careful vetting, translation, coaching, and travel coordination</b> from your first call to your first flight. Like any premium service, it's an investment in an outcome that changes your life.</p>
+      </div>
+      <p class="desc tight">Are you willing to invest in a professional matchmaking service to find real, lasting love in Brazil?</p>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="invest" value="Yes — ready to invest in the right partner" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Yes — I'm ready to invest in finding the right partner</b></span></label>
+        <label class="choice"><input type="radio" name="invest" value="Yes, if it's the right fit — want details first"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Yes, if it's the right fit — I'd like to understand what's involved</b></span></label>
+        <label class="choice"><input type="radio" name="invest" value="Maybe — need to learn more"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Maybe — I'd need to learn more before deciding</b></span></label>
+        <label class="choice"><input type="radio" name="invest" value="No — not looking to invest right now"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>No — I'm not looking to invest right now</b></span></label>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-ghost" data-back>Back</button></div>
+      <div class="err-msg">Please choose one to continue.</div>
+    </section>
+
+    <!-- 16 · CLOSING -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>Anything else you'd like your matchmaker to know?</h2>
+      <p class="desc">A year from now, what would a wonderful outcome look like for you? (Optional)</p>
+      <div class="field">
+        <textarea name="notes" placeholder="Optional — anything at all"></textarea>
+      </div>
+      <label class="choice chk" style="margin-top:6px">
+        <input type="checkbox" name="consent" value="Consented to be contacted confidentially" required>
+        <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span class="ctext"><b>Yes, a matchmaker may contact me privately</b><span>Your details stay confidential and are never shared.</span></span>
+      </label>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Submit my application
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="err-msg">Please confirm we may contact you.</div>
+    </section>
+
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="done" id="done" role="status" aria-live="polite">
+      <div class="ring"><svg viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>Your application is in.</h2>
+      <p id="doneMsg">Thank you. A matchmaker will personally review your answers and reach out within 24 hours to arrange your confidential call. Welcome to Rio with Love.</p>
+      <div class="copybox" id="copybox">
+        <p>If your email app didn't open, copy your answers below and send them to us however you like:</p>
+        <textarea id="copyText" readonly></textarea>
+        <div class="actions" style="margin-top:14px">
+          <button type="button" class="btn btn-primary" id="copyBtn">Copy my answers</button>
+        </div>
+      </div>
+      <div class="again"><a class="exit" href="/brazil">← Back to Rio with Love</a></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>Where respect meets romance. · Private &amp; Confidential · © 2026 Rio with Love</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===================== CONFIG ============================================
+     WHERE APPLICATIONS GO — set ONE of these.
+
+     1) EMAIL (works right now): the applicant's email app opens pre-filled and
+        they hit send. Set this to whoever should receive applications.
+        (Placeholder = Cameron's inbox until the client provides theirs.)
+
+     2) FORMSPREE (recommended upgrade — silent, no email app needed):
+        create a free form at https://formspree.io, paste the endpoint like
+        "https://formspree.io/f/xxxxxxxx". When set, this is used automatically
+        and answers are delivered in the background.
+  ========================================================================= */
+  var CONFIG = {
+    EMAIL: "chtennant1@gmail.com",
+    FORMSPREE: ""   // e.g. "https://formspree.io/f/abcdwxyz"  (leave "" to use email)
+  };
+
+  var LABELS = {
+    firstname:"First name", email:"Email", phone:"Phone / WhatsApp",
+    age:"Age range", location:"Based in", status:"Relationship status",
+    seeking:"Looking for", family:"Family & children", traits:"How friends describe him",
+    energy:"Social energy", work:"Work & life", travel:"Travel to Brazil",
+    hertraits:"Values most in her", typewords:"Ideal partner (in his words)",
+    why:"Why looking for love this way", timeline:"Readiness",
+    invest:"WILLING TO INVEST", notes:"Anything else / ideal outcome",
+    consent:"Consent"
+  };
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var form   = document.getElementById('app');
+  var panels = Array.prototype.slice.call(form.querySelectorAll('.q'));
+  var counted = panels.filter(function(p){ return p.getAttribute('data-count') !== 'no'; });
+  var total = counted.length;
+  var progressEl = document.getElementById('progress');
+  var idx = 0;
+
+  // number the step labels ( "01 → 16" )
+  panels.forEach(function(p){
+    var n = p.querySelector('.stepno .n');
+    if(n){
+      var pos = counted.indexOf(p) + 1;
+      n.textContent = String(pos).padStart(2,'0') + '  →  ' + String(total).padStart(2,'0');
+    }
+  });
+
+  function show(i, dir){
+    idx = Math.max(0, Math.min(panels.length-1, i));
+    panels.forEach(function(p){ p.classList.remove('active','anim'); });
+    var p = panels[idx];
+    p.classList.add('active');
+    if(!reduce) { void p.offsetWidth; p.classList.add('anim'); }
+    // progress
+    var pos = counted.indexOf(p);
+    var pct = pos < 0 ? 0 : ((pos) / total) * 100;
+    progressEl.style.width = pct + '%';
+    // focus first field
+    var f = p.querySelector('input:not([type=radio]):not([type=checkbox]), textarea, select, input[type=radio], input[type=checkbox]');
+    if(f && dir !== 'back'){ try{ f.focus({preventScroll:true}); }catch(e){ f.focus(); } }
+    window.scrollTo({top:0, behavior: reduce ? 'auto':'smooth'});
+    clearErr(p);
+  }
+
+  function clearErr(p){
+    var m = p.querySelector('.err-msg'); if(m) m.classList.remove('show');
+    p.querySelectorAll('.invalid').forEach(function(el){ el.classList.remove('invalid'); });
+  }
+  function showErr(p){
+    var m = p.querySelector('.err-msg'); if(m) m.classList.add('show');
+  }
+
+  function emailValid(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v); }
+
+  function validate(p){
+    var ok = true, firstBad = null;
+    // text/email/tel/textarea/select required
+    p.querySelectorAll('input[required], textarea[required], select[required]').forEach(function(el){
+      if(el.type === 'radio' || el.type === 'checkbox') return; // handled below
+      var v = (el.value||'').trim();
+      var bad = !v || (el.type === 'email' && !emailValid(v));
+      if(bad){ ok=false; el.classList.add('invalid'); firstBad = firstBad||el; }
+      else el.classList.remove('invalid');
+    });
+    // radio groups (required marked on any one radio in group)
+    var radios = {};
+    p.querySelectorAll('input[type=radio]').forEach(function(r){ (radios[r.name]=radios[r.name]||[]).push(r); });
+    Object.keys(radios).forEach(function(name){
+      var grp = radios[name];
+      var req = grp.some(function(r){ return r.required; });
+      if(req && !grp.some(function(r){ return r.checked; })){ ok=false; }
+    });
+    // single required checkbox (consent)
+    p.querySelectorAll('input[type=checkbox][required]').forEach(function(c){
+      if(!c.checked){ ok=false; }
+    });
+    // chip groups with data-min
+    p.querySelectorAll('[data-min]').forEach(function(grp){
+      var min = parseInt(grp.getAttribute('data-min'),10) || 0;
+      var n = grp.querySelectorAll('input[type=checkbox]:checked').length;
+      if(n < min){ ok=false; }
+    });
+    return { ok: ok, firstBad: firstBad };
+  }
+
+  function next(){
+    var p = panels[idx];
+    var res = validate(p);
+    if(!res.ok){ showErr(p); return; }
+    if(idx < panels.length-1) show(idx+1, 'fwd');
+  }
+  function back(){ if(idx>0) show(idx-1, 'back'); }
+
+  // buttons
+  form.addEventListener('click', function(e){
+    var t = e.target.closest('[data-next],[data-back]');
+    if(!t) return;
+    e.preventDefault();
+    if(t.hasAttribute('data-back')) back(); else next();
+  });
+
+  // auto-advance panels (single-select radios)
+  panels.forEach(function(p){
+    if(!p.classList.contains('auto')) return;
+    p.addEventListener('change', function(e){
+      if(e.target && e.target.type === 'radio'){
+        clearErr(p);
+        setTimeout(function(){ next(); }, reduce ? 0 : 240);
+      }
+    });
+  });
+
+  // Enter advances (except inside textarea)
+  form.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter') return;
+    if(e.target && e.target.tagName === 'TEXTAREA') return;
+    e.preventDefault();
+    if(panels[idx].querySelector('#submitBtn')) form.requestSubmit ? form.requestSubmit(document.getElementById('submitBtn')) : submit();
+    else next();
+  });
+
+  /* ---------- gather + build ---------- */
+  function gather(){
+    var data = {};
+    Object.keys(LABELS).forEach(function(name){
+      var els = form.querySelectorAll('[name="'+name+'"]');
+      if(!els.length) return;
+      var first = els[0];
+      if(first.type === 'radio'){
+        var c = form.querySelector('[name="'+name+'"]:checked'); data[name] = c ? c.value : '';
+      } else if(first.type === 'checkbox' && els.length > 1){
+        data[name] = Array.prototype.slice.call(els).filter(function(x){return x.checked;}).map(function(x){return x.value;}).join(', ');
+      } else if(first.type === 'checkbox'){
+        data[name] = first.checked ? first.value : '';
+      } else {
+        data[name] = (first.value||'').trim();
+      }
+    });
+    return data;
+  }
+  function bodyText(d){
+    var lines = ["RIO WITH LOVE — NEW APPLICATION", "================================", ""];
+    Object.keys(LABELS).forEach(function(name){
+      var v = d[name]; if(v === undefined) v = '';
+      lines.push(LABELS[name].toUpperCase() + ":");
+      lines.push(v || "—");
+      lines.push("");
+    });
+    return lines.join("\n");
+  }
+
+  function finish(usedEmail, body){
+    form.style.display = 'none';
+    progressEl.style.width = '100%';
+    var done = document.getElementById('done');
+    done.classList.add('show');
+    if(usedEmail){
+      document.getElementById('copyText').value = body;
+      document.getElementById('copybox').classList.add('show');
+      document.getElementById('doneMsg').textContent =
+        "Your email should have opened, ready to send — just hit send and you're done. A matchmaker reviews every application personally and will reach out within 24 hours.";
+    }
+    window.scrollTo({top:0, behavior: reduce?'auto':'smooth'});
+  }
+
+  function submit(){
+    var last = panels[panels.length-1];
+    var res = validate(last);
+    if(!res.ok){ showErr(last); return; }
+    var d = gather();
+    var body = bodyText(d);
+    var subject = "Rio with Love — Application: " + (d.firstname || "New applicant");
+
+    // 1) Formspree if configured
+    if(CONFIG.FORMSPREE){
+      var btn = document.getElementById('submitBtn');
+      btn.disabled = true; btn.style.opacity = .6;
+      fetch(CONFIG.FORMSPREE, {
+        method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'},
+        body: JSON.stringify(Object.assign({_subject: subject}, d))
+      }).then(function(r){
+        if(r.ok) finish(false, body);
+        else { finish(true, body); openMail(subject, body); }
+      }).catch(function(){ finish(true, body); openMail(subject, body); });
+      return;
+    }
+    // 2) mailto fallback
+    openMail(subject, body);
+    finish(true, body);
+  }
+  function openMail(subject, body){
+    window.location.href = "mailto:" + CONFIG.EMAIL +
+      "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  }
+
+  form.addEventListener('submit', function(e){ e.preventDefault(); submit(); });
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var ta = document.getElementById('copyText');
+    ta.select();
+    navigator.clipboard ? navigator.clipboard.writeText(ta.value) : document.execCommand('copy');
+    this.textContent = 'Copied ✓';
+  });
+
+  // init
+  show(0);
+})();
+</script>
+</body>
+</html>
