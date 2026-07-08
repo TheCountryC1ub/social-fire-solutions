@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rio with Love — Curated Introductions for the Discerning Man</title>
+<meta name="description" content="A private, members-only matchmaking service introducing accomplished men to warm, devoted women in Brazil. Book a confidential call." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0B0D; --ink:#121214; --ink2:#17171a;
+  --gold:#C6A24A; --gold-lt:#E1C885; --gold-deep:#A07C2E;
+  --cream:#EDE8DB; --muted:#A39E92; --line:#2a2823;
+  --green:#009C3B; --yellow:#FFDF00; --blue:#1b3a8c;
+  --max:1200px; --r:14px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black); color:var(--cream);
+  font-family:'Inter',system-ui,sans-serif; font-weight:400;
+  line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif; font-weight:500; line-height:1.12; letter-spacing:.2px}
+img{max-width:100%; display:block}
+a{color:inherit; text-decoration:none}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 28px}
+.kicker{font-size:.72rem; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); font-weight:600; font-family:'Inter'}
+.gold{color:var(--gold)}
+.flagbar{height:4px; width:100%; background:linear-gradient(90deg,var(--green) 0 33.3%,var(--yellow) 33.3% 66.6%,var(--blue) 66.6% 100%)}
+
+/* buttons */
+.btn{
+  display:inline-flex; align-items:center; gap:.55rem; cursor:pointer;
+  font-family:'Inter'; font-weight:600; font-size:.84rem; letter-spacing:.12em; text-transform:uppercase;
+  padding:16px 30px; border-radius:50px; border:1px solid transparent;
+  transition:transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease), color .25s var(--ease);
+  position:relative; will-change:transform;
+}
+.btn-primary{background:linear-gradient(135deg,var(--gold-lt),var(--gold-deep)); color:#1a1505; box-shadow:0 10px 30px -8px rgba(198,162,74,.55)}
+.btn-primary:hover{transform:translateY(-3px); box-shadow:0 16px 40px -8px rgba(198,162,74,.7)}
+.btn-ghost{border-color:rgba(198,162,74,.5); color:var(--cream)}
+.btn-ghost:hover{border-color:var(--gold); color:var(--gold); transform:translateY(-3px)}
+.btn:focus-visible{outline:3px solid var(--gold-lt); outline-offset:3px}
+
+/* nav */
+header{position:fixed; inset:0 0 auto 0; z-index:100; transition:background .4s var(--ease), backdrop-filter .4s, border-color .4s; border-bottom:1px solid transparent}
+header.scrolled{background:rgba(11,11,13,.82); backdrop-filter:blur(14px); border-color:var(--line)}
+.nav{display:flex; align-items:center; justify-content:space-between; height:78px}
+.brand{display:flex; align-items:center; gap:12px}
+.brand .emb{width:34px;height:34px}
+.brand .name{font-family:'Playfair Display'; font-size:1.15rem; letter-spacing:.18em; color:var(--cream)}
+.brand .name b{color:var(--gold); font-weight:600}
+.navlinks{display:flex; align-items:center; gap:34px}
+.navlinks a.lk{font-size:.82rem; letter-spacing:.06em; color:var(--muted); transition:color .25s}
+.navlinks a.lk:hover{color:var(--gold)}
+.nav .btn{padding:12px 24px}
+.menu-toggle{display:none}
+
+/* hero */
+.hero{position:relative; min-height:100vh; min-height:100dvh; display:flex; align-items:center; overflow:hidden}
+.hero-bg{position:absolute; inset:-18% 0 0 0; height:136%; z-index:0; will-change:transform}
+.hero-bg img{width:100%; height:100%; object-fit:cover; object-position:60% center; opacity:.62}
+.hero-scrim{position:absolute; inset:0; z-index:1;
+  background:
+   linear-gradient(90deg, var(--black) 8%, rgba(11,11,13,.72) 40%, rgba(11,11,13,.25) 75%, rgba(11,11,13,.55) 100%),
+   linear-gradient(0deg, var(--black) 2%, transparent 32%);
+}
+.hero .wrap{position:relative; z-index:2; width:100%}
+.hero-inner{max-width:680px; padding:120px 0 60px}
+.hero h1{font-size:clamp(2.7rem,6vw,4.6rem); margin:18px 0 22px}
+.hero h1 em{font-style:italic; color:var(--gold)}
+.hero p.lead{font-size:clamp(1.05rem,2vw,1.3rem); color:var(--cream); max-width:30ch; margin-bottom:36px; font-weight:300}
+.hero-cta{display:flex; gap:16px; flex-wrap:wrap; align-items:center}
+.trust{margin-top:34px; display:flex; gap:26px; flex-wrap:wrap; color:var(--muted); font-size:.8rem; letter-spacing:.04em}
+.trust span{display:flex; align-items:center; gap:8px}
+.trust svg{width:16px;height:16px; stroke:var(--gold)}
+.scrolldown{position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:2; color:var(--muted); font-size:.68rem; letter-spacing:.3em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:10px}
+.scrolldown .line{width:1px; height:42px; background:linear-gradient(var(--gold),transparent); animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(.2);transform-origin:top;opacity:.3}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.2);transform-origin:bottom;opacity:.3}}
+
+/* sections */
+section{position:relative}
+.sec{padding:120px 0}
+.sec-head{max-width:640px; margin-bottom:58px}
+.sec-head h2{font-size:clamp(2rem,4vw,3.1rem); margin:16px 0 18px}
+.sec-head p{color:var(--muted); font-size:1.06rem}
+.divider{width:60px; height:2px; background:var(--gold); margin-top:22px}
+
+/* problem contrast */
+.contrast{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+.panel{border:1px solid var(--line); border-radius:var(--r); padding:34px; background:linear-gradient(180deg,var(--ink),#0d0d0f)}
+.panel h3{font-size:1.25rem; margin-bottom:20px}
+.panel.bad h3{color:var(--muted)}
+.panel.good{border-color:rgba(198,162,74,.4); box-shadow:0 30px 60px -40px rgba(198,162,74,.5)}
+.panel.good h3{color:var(--gold)}
+.panel ul{list-style:none; display:flex; flex-direction:column; gap:14px}
+.panel li{display:flex; gap:12px; align-items:flex-start; font-size:.98rem; color:var(--cream)}
+.panel.bad li{color:var(--muted)}
+.tick{flex:0 0 auto; margin-top:3px; width:18px;height:18px}
+
+/* steps */
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:26px; counter-reset:s}
+.step{border:1px solid var(--line); border-radius:var(--r); padding:38px 30px; background:var(--ink); position:relative; overflow:hidden; transition:transform .4s var(--ease), border-color .4s}
+.step:hover{transform:translateY(-6px); border-color:rgba(198,162,74,.5)}
+.step .num{font-family:'Playfair Display'; font-size:3rem; color:var(--gold-deep); opacity:.55; line-height:1}
+.step h3{font-size:1.35rem; margin:14px 0 12px}
+.step p{color:var(--muted); font-size:.96rem}
+.step::after{content:""; position:absolute; inset:auto 0 0 0; height:2px; background:linear-gradient(90deg,var(--gold),transparent); transform:scaleX(0); transform-origin:left; transition:transform .5s var(--ease)}
+.step:hover::after{transform:scaleX(1)}
+
+/* split feature */
+.split{display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center}
+.split.rev{grid-template-columns:.95fr 1.05fr}
+.split .media{border-radius:18px; overflow:hidden; position:relative; box-shadow:0 50px 90px -50px rgba(0,0,0,.9); border:1px solid var(--line)}
+.split .media img{width:100%; height:100%; object-fit:cover; transition:transform 1.2s var(--ease)}
+.split .media:hover img{transform:scale(1.05)}
+.split .media .frame{position:absolute; inset:14px; border:1px solid rgba(237,232,219,.18); border-radius:10px; pointer-events:none}
+.pillar{display:flex; gap:18px; padding:20px 0; border-bottom:1px solid var(--line)}
+.pillar:last-child{border-bottom:none}
+.pillar .pi{flex:0 0 auto; width:46px;height:46px; border-radius:50%; border:1px solid var(--gold); display:grid; place-items:center}
+.pillar .pi svg{width:22px;height:22px; stroke:var(--gold)}
+.pillar h3{font-size:1.18rem; margin-bottom:6px}
+.pillar p{color:var(--muted); font-size:.96rem}
+
+/* quote */
+.quote{padding:120px 0; text-align:center; background:linear-gradient(180deg,#0d0d0f,var(--black))}
+.quote .mark{font-family:'Playfair Display'; font-size:5rem; color:var(--gold); line-height:.4; height:42px}
+.quote blockquote{font-family:'Playfair Display'; font-style:italic; font-size:clamp(1.5rem,3.4vw,2.5rem); max-width:18ch; margin:30px auto 26px; color:var(--cream)}
+.quote cite{color:var(--gold); font-style:normal; letter-spacing:.2em; text-transform:uppercase; font-size:.78rem}
+
+/* stats */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center}
+.stat .n{font-family:'Playfair Display'; font-size:clamp(2.2rem,4vw,3.2rem); color:var(--gold)}
+.stat .l{color:var(--muted); font-size:.84rem; letter-spacing:.08em; text-transform:uppercase; margin-top:6px}
+
+/* booking CTA */
+.book{position:relative; overflow:hidden}
+.book-bg{position:absolute; inset:0; z-index:0}
+.book-bg img{width:100%;height:100%;object-fit:cover; opacity:.25}
+.book-bg::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,var(--black),rgba(11,11,13,.8)),radial-gradient(circle at 50% 0,rgba(198,162,74,.18),transparent 60%)}
+.book .wrap{position:relative; z-index:1}
+.book-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center}
+.book h2{font-size:clamp(2.1rem,4.4vw,3.3rem); margin:16px 0 18px}
+.book p.sub{color:var(--muted); font-size:1.08rem; margin-bottom:26px}
+.assure{display:flex; flex-direction:column; gap:14px; margin-top:8px}
+.assure div{display:flex; gap:12px; align-items:center; color:var(--cream); font-size:.96rem}
+.assure svg{width:18px;height:18px; stroke:var(--gold); flex:0 0 auto}
+form{background:linear-gradient(180deg,var(--ink2),#0c0c0e); border:1px solid var(--line); border-radius:18px; padding:34px}
+form h3{font-size:1.35rem; margin-bottom:4px}
+form .fnote{color:var(--muted); font-size:.85rem; margin-bottom:22px}
+.field{margin-bottom:16px}
+label{display:block; font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:7px}
+input,select{width:100%; background:#0a0a0c; border:1px solid var(--line); border-radius:10px; color:var(--cream); padding:13px 14px; font-family:'Inter'; font-size:.96rem; transition:border-color .25s, box-shadow .25s; min-height:48px}
+input::placeholder{color:#5b574d}
+input:focus,select:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(198,162,74,.16)}
+form .btn{width:100%; justify-content:center; margin-top:8px}
+.success{display:none; text-align:center; padding:20px 0}
+.success.show{display:block; animation:pop .5s var(--ease)}
+@keyframes pop{from{opacity:0; transform:translateY(10px)}to{opacity:1;transform:none}}
+.success .ring{width:64px;height:64px;border-radius:50%;border:2px solid var(--gold); display:grid;place-items:center; margin:0 auto 16px}
+.success .ring svg{width:30px;height:30px;stroke:var(--gold)}
+
+/* footer */
+footer{border-top:1px solid var(--line); padding:54px 0 40px; background:#08080a}
+.fgrid{display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap}
+.fnav{display:flex; gap:26px; color:var(--muted); font-size:.86rem}
+.fnav a:hover{color:var(--gold)}
+.fine{color:#54514a; font-size:.78rem; margin-top:24px; text-align:center}
+
+/* reveal animation */
+.reveal{opacity:0; transform:translateY(34px); transition:opacity .9s var(--ease), transform .9s var(--ease)}
+.reveal.in{opacity:1; transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+.reveal[data-d="4"]{transition-delay:.32s}
+
+@media (max-width:900px){
+  .navlinks a.lk{display:none}
+  .split,.split.rev,.book-grid{grid-template-columns:1fr; gap:40px}
+  .split .media{order:-1}
+  .steps{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr; gap:34px 24px}
+  .contrast{grid-template-columns:1fr}
+  .sec{padding:84px 0}
+  .hero-inner{padding:120px 0 90px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important}
+  .reveal{opacity:1; transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- emblem svg (reused) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="emblem" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2.4"/>
+    <circle cx="50" cy="50" r="39" fill="none" stroke="currentColor" stroke-width="1"/>
+    <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="50" y1="22" x2="50" y2="14"/><line x1="40" y1="24" x2="37" y2="17"/>
+      <line x1="60" y1="24" x2="63" y2="17"/><line x1="32" y1="29" x2="27" y2="24"/>
+      <line x1="68" y1="29" x2="73" y2="24"/>
+    </g>
+    <path d="M50 70 C30 54 34 38 44 38 C49 38 50 43 50 45 C50 43 51 38 56 38 C66 38 70 54 50 70 Z" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<header id="hdr">
+  <div class="flagbar"></div>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Rio with Love home">
+      <svg class="emb gold" aria-hidden="true"><use href="#emblem"/></svg>
+      <span class="name">RIO <b>with</b> LOVE</span>
+    </a>
+    <nav class="navlinks" aria-label="Primary">
+      <a class="lk" href="#why">Why Brazil</a>
+      <a class="lk" href="#how">How It Works</a>
+      <a class="lk" href="#her">The Women</a>
+      <a class="btn btn-primary" href="#book">Book a Call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg">
+    <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260617_004103_61a9f12f-72e9-4646-a870-964c0b7d56a5.png" alt="An elegant couple on a candlelit Rio de Janeiro rooftop at dusk" />
+  </div>
+  <div class="hero-scrim"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="kicker reveal in">Private · Members-Only Matchmaking</span>
+      <h1 class="reveal in" data-d="1">The love you’ve earned. <em>Curated for you.</em></h1>
+      <p class="lead reveal in" data-d="2">A discreet introduction service connecting accomplished men with warm, devoted women in Brazil — matched to exactly what you’re looking for.</p>
+      <div class="hero-cta reveal in" data-d="3">
+        <a href="#book" class="btn btn-primary">Book a Private Call
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#how" class="btn btn-ghost">How It Works</a>
+      </div>
+      <div class="trust reveal in" data-d="4">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2l2.6 6.3L21 9l-5 4.2L17.5 20 12 16.5 6.5 20 8 13.2 3 9l6.4-.7z"/></svg> Hand-curated matches</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 1l9 4v6c0 5-3.8 9.2-9 11-5.2-1.8-9-6-9-11V5z"/></svg> Verified &amp; discreet</span>
+      </div>
+    </div>
+  </div>
+  <div class="scrolldown" aria-hidden="true"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- WHY / PROBLEM -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Why Rio with Love</span>
+      <h2>She was never on the apps. That’s the point.</h2>
+      <p>Modern dating in America has been rebuilt around social media, endless swiping, and a materialistic, validation-chasing culture — one where good men feel optional. We offer the way off the treadmill.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="contrast">
+      <div class="panel bad reveal" data-d="1">
+        <h3>The App Treadmill</h3>
+        <ul>
+          <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#6b675d" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg> Validation over real connection</li>
+          <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#6b675d" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg> Endless swiping, no commitment</li>
+          <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#6b675d" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg> Status and materialism first</li>
+          <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#6b675d" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg> A good man treated as replaceable</li>
+        </ul>
+      </div>
+      <div class="panel good reveal" data-d="2">
+        <h3>The Rio with Love Way</h3>
+        <ul>
+          <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#C6A24A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg> A real introduction, made for you</li>
+          <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#C6A24A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg> Women who value a committed man</li>
+          <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#C6A24A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg> Warmth, family, and femininity</li>
+          <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="#C6A24A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg> You — appreciated for who you are</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec" id="how" style="background:linear-gradient(180deg,var(--black),#0d0d0f)">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="kicker">A Curated Introduction</span>
+      <h2>Matched to exactly what you’re looking for.</h2>
+      <p style="margin:0 auto">No browsing. No games. You tell us what matters; we do the rest — privately, personally, and with discretion at every step.</p>
+      <div class="divider" style="margin:22px auto 0"></div>
+    </div>
+    <div class="steps">
+      <div class="step reveal" data-d="1">
+        <div class="num">01</div>
+        <h3>Book Your Call</h3>
+        <p>A confidential conversation with a personal matchmaker to understand the man you are and the partner you’re seeking.</p>
+      </div>
+      <div class="step reveal" data-d="2">
+        <div class="num">02</div>
+        <h3>We Curate</h3>
+        <p>From a verified circle of warm, sincere women in Brazil, we hand-select only those who truly fit your values and vision.</p>
+      </div>
+      <div class="step reveal" data-d="3">
+        <div class="num">03</div>
+        <h3>You’re Introduced</h3>
+        <p>Meet your matches with full guidance through culture, language, and connection — all the way to the moment you meet.</p>
+      </div>
+    </div>
+    <div class="reveal" data-d="3" style="text-align:center;margin-top:48px">
+      <a href="#book" class="btn btn-primary">Start With a Private Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- THE WOMEN (split with portrait) -->
+<section class="sec" id="her">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="kicker">What Makes Her Different</span>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin:16px 0 26px">Warm. Feminine. Genuinely glad you’re here.</h2>
+      <div class="pillar">
+        <span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-9.5-8.2C.7 9.9 2 6 5.5 6 8 6 9.4 7.8 12 10c2.6-2.2 4-4 6.5-4C22 6 23.3 9.9 21.5 12.8 19 16.6 12 21 12 21z"/></svg></span>
+        <div><h3>Appreciative</h3><p>She sees a devoted man as a gift, not a given. Effort is noticed, kindness returned, respect mutual.</p></div>
+      </div>
+      <div class="pillar">
+        <span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 5.8L20 9l-4.4 4 1.3 6L12 16.8 7.1 19l1.3-6L4 9l5.6-1.2z"/></svg></span>
+        <div><h3>Unapologetically Feminine</h3><p>Raised to embrace warmth, grace, and womanhood — naturally radiant and proud of who she is.</p></div>
+      </div>
+      <div class="pillar">
+        <span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg></span>
+        <div><h3>Free of the Feed</h3><p>Her worth was never measured in followers or filters. Connection with her is real, present, and offline.</p></div>
+      </div>
+    </div>
+    <div class="media reveal" data-d="2">
+      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260617_004106_76fb1a88-628e-4145-b027-8e927876a261.png" alt="A radiant, warmly smiling woman in golden light" />
+      <div class="frame"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="sec" style="padding:90px 0;background:#0d0d0f;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap stats">
+    <div class="stat reveal"><div class="n">100%</div><div class="l">Verified Members</div></div>
+    <div class="stat reveal" data-d="1"><div class="n">1-to-1</div><div class="l">Personal Matchmaker</div></div>
+    <div class="stat reveal" data-d="2"><div class="n">By Invite</div><div class="l">Members Only</div></div>
+    <div class="stat reveal" data-d="3"><div class="n">Discreet</div><div class="l">Always Confidential</div></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE (concierge split reversed) -->
+<section class="sec" id="experience">
+  <div class="wrap split rev">
+    <div class="media reveal">
+      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260617_004108_b2cf0753-426b-4299-9ed1-f9365a0344fd.png" alt="A private matchmaking consultation on an elegant desk" />
+      <div class="frame"></div>
+    </div>
+    <div class="reveal" data-d="1">
+      <span class="kicker">The Experience</span>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin:16px 0 20px">A concierge for your heart.</h2>
+      <p style="color:var(--muted);font-size:1.06rem;margin-bottom:22px">From the first call to the first flight, you’re never on your own. Your matchmaker handles the introductions, the etiquette, the translation, and the timing — so you can simply show up as the man you are.</p>
+      <div class="assure">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Every profile personally verified</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Complete privacy &amp; discretion</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Guidance through culture &amp; language</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <div class="wrap reveal">
+    <div class="mark">“</div>
+    <blockquote>This isn’t settling for less. It’s finally meeting more.</blockquote>
+    <cite>— Rio with Love</cite>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="book sec" id="book">
+  <div class="book-bg"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260617_002633_451ce320-7128-4753-b9e4-7884e28d8804.png" alt="" aria-hidden="true"/></div>
+  <div class="wrap">
+    <div class="book-grid">
+      <div class="reveal">
+        <span class="kicker">Your Private Invitation</span>
+        <h2>Book your confidential call.</h2>
+        <p class="sub">A relaxed, no-pressure conversation with your personal matchmaker. We’ll learn what you’re looking for and tell you honestly if Rio with Love is the right fit.</p>
+        <div class="assure">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1l9 4v6c0 5-3.8 9.2-9 11-5.2-1.8-9-6-9-11V5z"/></svg> 100% confidential — discretion guaranteed</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg> 20 minutes · no obligation</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg> Speak with a real matchmaker</div>
+        </div>
+      </div>
+
+      <form id="bookForm" novalidate>
+        <div id="formInner">
+          <h3>Request Your Call</h3>
+          <p class="fnote">Limited invitations. Tell us where to reach you.</p>
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@email.com" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone (optional)</label>
+            <input id="phone" name="phone" type="tel" placeholder="+1 (555) 000-0000" autocomplete="tel" />
+          </div>
+          <div class="field">
+            <label for="time">Best Time to Reach You</label>
+            <select id="time" name="time">
+              <option>Weekday mornings</option>
+              <option>Weekday afternoons</option>
+              <option>Weekday evenings</option>
+              <option>Weekends</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Book My Private Call
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <div class="success" id="success" role="status" aria-live="polite">
+          <div class="ring"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>Your request is in.</h3>
+          <p class="fnote" style="margin-top:8px">A matchmaker will reach out within 24 hours to arrange your private call. Welcome to Rio with Love.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap fgrid">
+    <a class="brand" href="#top">
+      <svg class="emb gold" aria-hidden="true"><use href="#emblem"/></svg>
+      <span class="name">RIO <b>with</b> LOVE</span>
+    </a>
+    <nav class="fnav" aria-label="Footer">
+      <a href="#why">Why Brazil</a>
+      <a href="#how">How It Works</a>
+      <a href="#her">The Women</a>
+      <a href="#book">Book a Call</a>
+    </nav>
+  </div>
+  <div class="wrap"><p class="fine">Where respect meets romance. · Private &amp; Confidential · © 2026 Rio with Love. All rights reserved.</p></div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // sticky header
+  var hdr = document.getElementById('hdr');
+  function onScroll(){
+    if(window.scrollY > 40) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
+    // hero parallax
+    if(!reduce){
+      var bg = document.getElementById('heroBg');
+      if(bg && window.scrollY < window.innerHeight){
+        bg.style.transform = 'translateY(' + (window.scrollY * 0.18) + 'px)';
+      }
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // reveal on scroll
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.16, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ io.observe(el); });
+
+  // smooth anchor + focus management
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(ev){
+      var id = a.getAttribute('href');
+      if(id.length>1){
+        var t = document.querySelector(id);
+        if(t){ ev.preventDefault(); t.scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'}); }
+      }
+    });
+  });
+
+  // form
+  var form = document.getElementById('bookForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('name');
+    var email = document.getElementById('email');
+    var ok = true;
+    [name,email].forEach(function(f){
+      if(!f.value.trim() || (f.type==='email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.value))){
+        f.style.borderColor = '#c0473a'; ok=false;
+      } else { f.style.borderColor=''; }
+    });
+    if(!ok){ name.value.trim()?email.focus():name.focus(); return; }
+    document.getElementById('formInner').style.display='none';
+    document.getElementById('success').classList.add('show');
+  });
+})();
+</script>
+</body>
+</html>
