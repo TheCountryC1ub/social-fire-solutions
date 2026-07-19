@@ -285,7 +285,7 @@ h2.big{font-size:clamp(32px,5vw,60px);letter-spacing:-.02em;max-width:16ch;}
    radial-gradient(80% 70% at 50% 110%, rgba(242,83,27,.30), transparent 60%),
    radial-gradient(60% 60% at 50% -10%, rgba(200,30,30,.18), transparent 60%);}
 .final .inner{position:relative;z-index:2;}
-.final .flame{width:46px;height:46px;margin:0 auto 30px;}
+.final .flame{display:block;width:46px;height:46px;margin:0 auto 30px;}
 .final h2{font-size:clamp(40px,7vw,92px);letter-spacing:-.025em;font-weight:800;}
 .final p{color:var(--ash);font-size:clamp(17px,2vw,21px);max-width:560px;margin:24px auto 0;line-height:1.6;}
 .final p b{color:var(--ivory);font-weight:600;}
@@ -308,6 +308,45 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 .sticky-cta.show{transform:none;}
 .sticky-cta .btn{width:100%;justify-content:center;}
 @media(min-width:760px){.sticky-cta{display:none;}}
+
+/* ---------- AMBIENT SECTION BACKDROPS ---------- */
+.problem::before,.brain::before,.process::before,.faqsec::before,.final::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-size:cover;background-position:center;
+}
+.problem .wrap,.brain .wrap,.process .wrap,.faqsec .wrap{position:relative;z-index:2;}
+.problem::before{
+  background-image:
+    linear-gradient(90deg,rgba(10,10,11,.94) 0%,rgba(10,10,11,.6) 52%,rgba(10,10,11,.3) 100%),
+    linear-gradient(180deg,rgba(10,10,11,.95) 0%,transparent 25%,transparent 75%,rgba(10,10,11,.95) 100%),
+    url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260719_201522_5d25eee0-aeb1-413e-b2d9-a7b663ab737f_min.webp');
+  opacity:.55;
+}
+.brain::before{
+  background-image:
+    linear-gradient(180deg,rgba(22,22,24,.96) 0%,rgba(22,22,24,.5) 28%,rgba(22,22,24,.5) 72%,rgba(22,22,24,.96) 100%),
+    url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260719_201524_48bbc77f-be85-456b-a793-cee78a05c7cc_min.webp');
+  opacity:.42;
+}
+.process::before{
+  background-image:
+    linear-gradient(180deg,rgba(22,22,24,.96) 0%,rgba(22,22,24,.62) 45%,rgba(22,22,24,.4) 100%),
+    url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260719_201526_c5d3ebfe-1b2d-48b5-b98c-300716962293_min.webp');
+  opacity:.3;
+}
+.faqsec::before{
+  background-image:
+    linear-gradient(90deg,rgba(10,10,11,.95) 0%,rgba(10,10,11,.65) 55%,rgba(10,10,11,.35) 100%),
+    linear-gradient(180deg,rgba(10,10,11,.95) 0%,transparent 30%,transparent 70%,rgba(10,10,11,.95) 100%),
+    url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260719_201529_c6a87321-d8be-4e18-8cea-37948ad966bc_min.webp');
+  opacity:.4;
+}
+.final::before{
+  background-image:
+    linear-gradient(180deg,rgba(10,10,11,.96) 0%,rgba(10,10,11,.4) 45%,rgba(10,10,11,.15) 100%),
+    url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260719_201530_99a150da-e7f1-40a3-bb21-1c80d0ba343d_min.webp');
+  opacity:.6;
+}
 
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important;scroll-behavior:auto !important;}
@@ -365,43 +404,11 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
   </div>
 </section>
 
-<!-- ===== OFFER ===== -->
-<section class="block" id="offer">
-  <div class="wrap">
-    <div class="offer-head">
-      <span class="eyebrow reveal">02 — What we do</span>
-      <h2 class="big reveal">We make you the brand people <span class="fire">remember.</span></h2>
-      <p class="lead reveal" style="margin-top:22px;">It starts with a brand worth looking at — then we build the creative and the campaigns that turn attention into growth.</p>
-    </div>
-    <div class="cards">
-      <article class="card feature reveal">
-        <span class="pill">Our craft</span>
-        <span class="tag">Lead service</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1.5 3.5 4 4.5 4 8a4 4 0 1 1-8 0c0-1.6.6-2.6 1.5-3.7C10.6 6.7 11.5 4.6 12 2Z"/><path d="M12 14a2 2 0 0 0 2-2"/></svg></div>
-        <h3>Branding &amp; Creative</h3>
-        <p>A cinematic, premium identity built to command attention — logo, palette, voice, and the whole world around your brand. Paired with scroll-stopping creative that makes people assume you're already winning.</p>
-      </article>
-      <article class="card reveal">
-        <span class="tag">Engine</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></div>
-        <h3>Paid Growth</h3>
-        <p>We put budget behind the work. Performance campaigns across Meta, Google and TikTok engineered to turn attention into pipeline — profitably, and at scale.</p>
-      </article>
-      <article class="card reveal">
-        <span class="tag">Momentum</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M21 7v5h-5"/></svg></div>
-        <h3>Content &amp; Social</h3>
-        <p>A steady feed of reels, posts and ad creative with heat behind every frame — so your brand stays in front of the right people and keeps the fire spreading.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ===== AI BRAIN ===== -->
 <section class="block brain" id="ai-brain">
   <div class="wrap brain-grid">
     <div class="reveal">
-      <span class="eyebrow">03 — The AI Brain</span>
+      <span class="eyebrow">02 — The AI Brain</span>
       <h2 class="big">Implement an <span class="fire">AI Brain</span> for you and your business.</h2>
       <p class="lead" style="margin-top:18px;">A second brain, built and trained on your business — your voice, your offers, your customers — working around the clock so you don't have to.</p>
       <ul>
@@ -463,6 +470,38 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
   </div>
 </section>
 
+<!-- ===== OFFER ===== -->
+<section class="block" id="offer">
+  <div class="wrap">
+    <div class="offer-head">
+      <span class="eyebrow reveal">03 — What we do</span>
+      <h2 class="big reveal">We make you the brand people <span class="fire">remember.</span></h2>
+      <p class="lead reveal" style="margin-top:22px;">It starts with a brand worth looking at — then we build the creative and the campaigns that turn attention into growth.</p>
+    </div>
+    <div class="cards">
+      <article class="card feature reveal">
+        <span class="pill">Our craft</span>
+        <span class="tag">Lead service</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1.5 3.5 4 4.5 4 8a4 4 0 1 1-8 0c0-1.6.6-2.6 1.5-3.7C10.6 6.7 11.5 4.6 12 2Z"/><path d="M12 14a2 2 0 0 0 2-2"/></svg></div>
+        <h3>Branding &amp; Creative</h3>
+        <p>A cinematic, premium identity built to command attention — logo, palette, voice, and the whole world around your brand. Paired with scroll-stopping creative that makes people assume you're already winning.</p>
+      </article>
+      <article class="card reveal">
+        <span class="tag">Engine</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></div>
+        <h3>Paid Growth</h3>
+        <p>We put budget behind the work. Performance campaigns across Meta, Google and TikTok engineered to turn attention into pipeline — profitably, and at scale.</p>
+      </article>
+      <article class="card reveal">
+        <span class="tag">Momentum</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M21 7v5h-5"/></svg></div>
+        <h3>Content &amp; Social</h3>
+        <p>A steady feed of reels, posts and ad creative with heat behind every frame — so your brand stays in front of the right people and keeps the fire spreading.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ===== SHOWCASE 3D ===== -->
 <section class="block showcase">
   <div class="wrap showcase-grid">
@@ -512,7 +551,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="block">
+<section class="block faqsec">
   <div class="wrap">
     <span class="eyebrow reveal">07 — Before you book</span>
     <h2 class="big reveal">The honest <span class="fire">answers.</span></h2>
