@@ -144,6 +144,10 @@ input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten)
 .done h2{font-size:clamp(1.9rem,4.6vw,2.7rem); margin-bottom:14px}
 .done p{color:var(--ash); font-size:1.06rem; max-width:46ch; margin:0 auto 10px}
 .done .again{margin-top:26px}
+.book-now{margin:30px auto 4px; max-width:500px; border-top:1px solid var(--line); padding-top:30px}
+.book-now .book-lead{color:var(--ivory); font-size:1.04rem; margin-bottom:22px}
+.book-now .book-lead b{color:var(--molten); font-weight:600}
+.book-now .book-btn{font-size:.9rem; padding:18px 42px}
 .copybox{display:none; margin:26px auto 0; max-width:520px; text-align:left; border:1px solid var(--line); border-radius:12px; padding:18px; background:rgba(255,255,255,.02)}
 .copybox.show{display:block}
 .copybox p{font-size:.92rem; color:var(--ash); margin-bottom:12px}
@@ -330,6 +334,14 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
       <div class="ring"><svg viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>Your survey is in.</h2>
       <p id="doneMsg">We'll review your business personally and come back within 24 hours with exactly what your AI Brain would do — and what it takes to build it.</p>
+
+      <div class="book-now">
+        <p class="book-lead">Want to move faster? <b>Book your call now</b> — we'll show up already knowing your business, ready to map your AI Brain live.</p>
+        <a id="bookBtn" class="btn btn-primary book-btn" href="#" target="_blank" rel="noopener">Book a call
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
       <div class="copybox" id="copybox">
         <p>If your email app didn't open, copy your answers below and send them to us however you like:</p>
         <textarea id="copyText" readonly></textarea>
@@ -350,19 +362,23 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
   "use strict";
 
   /* ===================== CONFIG ============================================
-     WHERE SURVEYS GO — set ONE of these.
+     WHERE SURVEYS GO.
 
-     1) EMAIL (works right now): the visitor's email app opens pre-filled and
-        they hit send. Set this to whoever should receive surveys.
+     1) ENDPOINT (primary): the Vercel serverless function at /api/lead, which
+        pushes the survey into GoHighLevel server-side. Requires GHL_TOKEN and
+        GHL_LOCATION env vars set in Vercel. If it's missing or errors, the form
+        automatically falls back to EMAIL so no lead is ever lost.
 
-     2) FORMSPREE (recommended upgrade — silent, no email app needed):
-        create a free form at https://formspree.io, paste the endpoint like
-        "https://formspree.io/f/xxxxxxxx". When set, this is used automatically
-        and answers are delivered in the background.
+     2) EMAIL (fallback): the visitor's email app opens pre-filled to this
+        address and they hit send.
+
+     3) BOOKING_URL: shown as the "Book a call" button on the success screen,
+        so we capture the survey BEFORE the call.
   ========================================================================= */
   var CONFIG = {
+    ENDPOINT: "/api/lead",
     EMAIL: "chtennant1@gmail.com",
-    FORMSPREE: ""   // e.g. "https://formspree.io/f/abcdwxyz"  (leave "" to use email)
+    BOOKING_URL: "https://api.leadconnectorhq.com/widget/booking/0iXRtrJZbAOtTKLS4y2A"
   };
 
   var LABELS = {
@@ -536,16 +552,16 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
     var body = bodyText(d);
     var subject = "AI Brain Survey — " + (d.name || "New lead");
 
-    // 1) Formspree if configured
-    if(CONFIG.FORMSPREE){
+    // 1) Send to GoHighLevel via the serverless endpoint
+    if(CONFIG.ENDPOINT){
       var btn = document.getElementById('submitBtn');
       btn.disabled = true; btn.style.opacity = .6;
-      fetch(CONFIG.FORMSPREE, {
+      fetch(CONFIG.ENDPOINT, {
         method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'},
-        body: JSON.stringify(Object.assign({_subject: subject}, d))
+        body: JSON.stringify(d)
       }).then(function(r){
-        if(r.ok) finish(false, body);
-        else { finish(true, body); openMail(subject, body); }
+        if(r.ok) finish(false, body);            // delivered to GHL silently
+        else { finish(true, body); openMail(subject, body); }  // fallback to email
       }).catch(function(){ finish(true, body); openMail(subject, body); });
       return;
     }
@@ -565,6 +581,10 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
     navigator.clipboard ? navigator.clipboard.writeText(ta.value) : document.execCommand('copy');
     this.textContent = 'Copied ✓';
   });
+
+  // wire the post-submit "Book a call" button
+  var bookBtn = document.getElementById('bookBtn');
+  if(bookBtn && CONFIG.BOOKING_URL){ bookBtn.setAttribute('href', CONFIG.BOOKING_URL); }
 
   // init
   show(0);

@@ -11,9 +11,9 @@
 
 <!-- ============================================================
      SOCIAL FIRE SOLUTIONS — ONE PAGE SITE
-     CTA: Book a call
-     >>> TO GO LIVE: replace BOOKING_URL below (in the <script> at the
-         bottom) with your real Calendly / cal.com / booking link.
+     Primary CTA: Get Started → /ai-brain-form (AI Brain survey).
+     The "Book a call" step lives at the END of that form, so we
+     capture the visitor's business details before the call.
      ============================================================ -->
 
 <style>
@@ -321,7 +321,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 <!-- ===== NAV ===== -->
 <nav id="nav">
   <div class="brand"><span class="flame"></span><b>Social Fire</b>&nbsp;<span>Solutions</span></div>
-  <a href="#book" class="btn btn-primary nav-cta js-book">Book a call</a>
+  <a href="#book" class="btn btn-primary nav-cta js-book">Get Started</a>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -337,7 +337,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
     <h1 class="reveal">Make your brand spread&nbsp;like <span class="fire">Fire.</span></h1>
     <p class="sub reveal">We build premium brands and the scroll-stopping creative behind them — then put real budget to work. <b>Over $10M in ad spend managed. Hundreds of brands lit up.</b></p>
     <div class="hero-actions reveal">
-      <a href="#book" class="btn btn-primary js-book">Book a call <span class="arrow">→</span></a>
+      <a href="#book" class="btn btn-primary js-book">Get Started <span class="arrow">→</span></a>
       <a href="#offer" class="btn btn-ghost">See what we do</a>
     </div>
   </div>
@@ -519,7 +519,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
     <div class="faq-list reveal">
       <div class="faq"><button>What exactly is the AI Brain?<span class="x">+</span></button><div class="ans"><p>A custom AI system we implement inside your business — trained on your voice, your offers and your customers. It drafts content, answers and follows up with leads, and automates the repetitive work: the output of a full-time hire, without the payroll. <a href="/ai-brain-form" style="color:var(--molten);text-decoration:underline;">Fill out the short survey</a> and we'll map exactly what yours would do.</p></div></div>
       <div class="faq"><button>Who is this actually for?<span class="x">+</span></button><div class="ans"><p>Founders, brands and people who want to grow online — and are done looking like everyone else. If you care about being remembered, not just seen, we'll get along.</p></div></div>
-      <div class="faq"><button>What does it cost?<span class="x">+</span></button><div class="ans"><p>It depends on scope — branding, creative and paid growth each scale differently. Book a call and we'll build a plan around your goals. No pressure, no jargon, no surprise invoices.</p></div></div>
+      <div class="faq"><button>What does it cost?<span class="x">+</span></button><div class="ans"><p>It depends on scope — branding, creative and paid growth each scale differently. Answer the short survey and we'll build a plan around your goals. No pressure, no jargon, no surprise invoices.</p></div></div>
       <div class="faq"><button>How fast will I see movement?<span class="x">+</span></button><div class="ans"><p>Brand and creative come together in weeks, not months. Once we ignite paid, you'll see real data fast — and we optimize toward what's working from day one.</p></div></div>
       <div class="faq"><button>What happens on the call?<span class="x">+</span></button><div class="ans"><p>We learn about your brand and goals, then tell you exactly how we'd make you spread like fire — whether you hire us or not. You leave with a plan either way.</p></div></div>
     </div>
@@ -532,9 +532,9 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
   <div class="wrap inner">
     <span class="flame reveal"></span>
     <h2 class="reveal">Let's light this <span class="fire">up.</span></h2>
-    <p class="reveal"><b>Book a call.</b> We'll tell you exactly how we'd make your brand spread like fire — even if you never work with us.</p>
-    <a href="#" class="btn btn-primary js-book reveal">Book a call <span class="arrow">→</span></a>
-    <div class="micro reveal">No pressure. No jargon. Just a plan.</div>
+    <p class="reveal"><b>Answer a few quick questions.</b> We'll come back with exactly how we'd make your brand spread like fire — then we'll get on a call.</p>
+    <a href="#" class="btn btn-primary js-book reveal">Get Started <span class="arrow">→</span></a>
+    <div class="micro reveal">Takes 2 minutes. No pressure. Just a plan.</div>
   </div>
 </section>
 
@@ -548,15 +548,15 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 </footer>
 
 <!-- ===== STICKY MOBILE CTA ===== -->
-<div class="sticky-cta" id="stickyCta"><a href="#book" class="btn btn-primary js-book">Book a call →</a></div>
+<div class="sticky-cta" id="stickyCta"><a href="#book" class="btn btn-primary js-book">Get Started →</a></div>
 
 <script>
 /* =========================================================
-   >>> SET YOUR BOOKING LINK HERE <<<
-   Replace the placeholder with your real Calendly / cal.com /
-   Stripe / phone (tel:) / email (mailto:) link.
+   All primary CTAs lead to the AI Brain survey (/ai-brain-form).
+   We capture the visitor's business details there FIRST — the
+   "Book a call" button lives at the end of that form.
    ========================================================= */
-const BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/0iXRtrJZbAOtTKLS4y2A";
+const FORM_URL = "/ai-brain-form";
 
 (function(){
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -566,14 +566,10 @@ const BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/0iXRtrJZbAOt
   const hv = document.getElementById('heroVideo');
   if (hv && VIDEO_URL && !reduce){ hv.src = VIDEO_URL; }
 
-  // Booking buttons
+  // Point every primary CTA at the survey form
   document.querySelectorAll('.js-book').forEach(a=>{
-    if (BOOKING_URL && BOOKING_URL !== "#book"){
-      a.setAttribute('href', BOOKING_URL);
-      if (/^https?:/.test(BOOKING_URL)) a.setAttribute('target','_blank');
-    } else {
-      a.setAttribute('href', '#book');
-    }
+    a.setAttribute('href', FORM_URL);
+    a.removeAttribute('target');
   });
 
   // Nav scrolled state + sticky mobile CTA
