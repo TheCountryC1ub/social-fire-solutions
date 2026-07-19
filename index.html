@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Social Fire Solutions — Spread Like Fire</title>
-<meta name="description" content="A premium growth agency for people, brands, and businesses that want to spread like fire online. Over $10M in ad spend managed. Book a call.">
+<meta name="description" content="A premium growth agency for people, brands, and businesses that want to spread like fire online. Branding, paid growth, and AI Brain implementation. Over $10M in ad spend managed.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -209,6 +209,36 @@ h2.big{font-size:clamp(32px,5vw,60px);letter-spacing:-.02em;max-width:16ch;}
 .showcase li b{color:var(--ivory);font-weight:600;}
 .showcase li .mk{color:var(--molten);flex:none;margin-top:3px;}
 
+/* AI BRAIN */
+.brain{background:var(--carbon);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
+.brain-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center;}
+@media(max-width:880px){.brain-grid{grid-template-columns:1fr;gap:44px;}}
+.brain ul{list-style:none;margin-top:26px;}
+.brain li{display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--ash);font-size:16px;}
+.brain li b{color:var(--ivory);font-weight:600;}
+.brain li .mk{color:var(--molten);flex:none;margin-top:3px;}
+.brain-cta{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:34px;}
+.brain-cta .micro{font-size:13px;color:var(--ash);letter-spacing:.02em;}
+.brain-visual{position:relative;display:grid;place-items:center;}
+.brain-visual svg{width:100%;max-width:520px;height:auto;display:block;}
+.brain-visual .rings circle{fill:none;stroke:rgba(244,241,234,.07);stroke-width:1;stroke-dasharray:2 7;}
+.brain-visual .lines path{stroke:rgba(244,241,234,.10);stroke-width:1.2;fill:none;}
+.brain-visual .sparks path{stroke:url(#burnGrad);stroke-width:1.8;fill:none;stroke-linecap:round;
+  stroke-dasharray:12 320;stroke-dashoffset:332;animation:spark 3.4s linear infinite;}
+.brain-visual .sparks path:nth-child(2){animation-delay:.6s;}
+.brain-visual .sparks path:nth-child(3){animation-delay:1.1s;}
+.brain-visual .sparks path:nth-child(4){animation-delay:1.7s;}
+.brain-visual .sparks path:nth-child(5){animation-delay:2.2s;}
+.brain-visual .sparks path:nth-child(6){animation-delay:2.8s;}
+@keyframes spark{to{stroke-dashoffset:0;}}
+.brain-visual .nodes circle.halo{fill:rgba(242,83,27,.14);}
+.brain-visual .nodes circle.pt{fill:var(--molten);}
+.brain-visual .nodes text{fill:var(--ash);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;}
+.brain-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:14px;pointer-events:none;}
+.brain-core .flame{width:54px;height:54px;animation:coreglow 2.6s ease-in-out infinite;}
+.brain-core .corelbl{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ivory);font-weight:600;text-shadow:0 2px 12px rgba(10,10,11,.9);}
+@keyframes coreglow{0%,100%{box-shadow:0 0 22px rgba(242,83,27,.55);}50%{box-shadow:0 0 44px rgba(255,176,32,.85);}}
+
 /* PROCESS */
 .process{background:var(--carbon);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px;}
@@ -322,6 +352,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
     <div class="item"><span class="num">100s</span><span class="lbl">of brands grown</span><span class="dot"></span></div>
     <div class="item"><span class="num fire"><em>Spread</em></span><span class="lbl">like fire</span><span class="dot"></span></div>
     <div class="item"><span class="num">Premium</span><span class="lbl">brand &amp; creative</span><span class="dot"></span></div>
+    <div class="item"><span class="num fire"><em>NEW</em></span><span class="lbl">AI Brain implementation</span><span class="dot"></span></div>
   </div>
 </div>
 
@@ -366,6 +397,72 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
   </div>
 </section>
 
+<!-- ===== AI BRAIN ===== -->
+<section class="block brain" id="ai-brain">
+  <div class="wrap brain-grid">
+    <div class="reveal">
+      <span class="eyebrow">03 — The AI Brain</span>
+      <h2 class="big">Implement an <span class="fire">AI Brain</span> for you and your business.</h2>
+      <p class="lead" style="margin-top:18px;">A second brain, built and trained on your business — your voice, your offers, your customers — working around the clock so you don't have to.</p>
+      <ul>
+        <li><span class="mk">✦</span><span><b>Knows your business cold.</b> Trained on your brand, your offers and the way you speak — it sounds like you on your best day.</span></li>
+        <li><span class="mk">✦</span><span><b>Never sleeps on a lead.</b> Answers questions, follows up and keeps your pipeline warm 24/7 — even while you do.</span></li>
+        <li><span class="mk">✦</span><span><b>Burns through the busywork.</b> Content drafts, replies, admin and ops — hours handed back to you every single week.</span></li>
+      </ul>
+      <div class="brain-cta">
+        <a href="/ai-brain-form" class="btn btn-primary">Get your AI Brain <span class="arrow">→</span></a>
+        <span class="micro">2-minute survey · We map it to your business.</span>
+      </div>
+    </div>
+    <div class="brain-visual reveal" aria-hidden="true">
+      <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="burnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFB020"/>
+            <stop offset="50%" stop-color="#F2531B"/>
+            <stop offset="100%" stop-color="#C81E1E"/>
+          </linearGradient>
+        </defs>
+        <g class="rings">
+          <circle cx="260" cy="210" r="95"/>
+          <circle cx="260" cy="210" r="160"/>
+        </g>
+        <g class="lines">
+          <path d="M260 210 Q265 130 260 60"/>
+          <path d="M260 210 Q335 165 405 140"/>
+          <path d="M260 210 Q330 265 390 300"/>
+          <path d="M260 210 Q255 290 260 360"/>
+          <path d="M260 210 Q185 265 115 300"/>
+          <path d="M260 210 Q190 165 130 140"/>
+        </g>
+        <g class="sparks">
+          <path d="M260 210 Q265 130 260 60"/>
+          <path d="M260 210 Q335 165 405 140"/>
+          <path d="M260 210 Q330 265 390 300"/>
+          <path d="M260 210 Q255 290 260 360"/>
+          <path d="M260 210 Q185 265 115 300"/>
+          <path d="M260 210 Q190 165 130 140"/>
+        </g>
+        <g class="nodes">
+          <circle class="halo" cx="260" cy="60" r="11"/><circle class="pt" cx="260" cy="60" r="5"/>
+          <circle class="halo" cx="405" cy="140" r="11"/><circle class="pt" cx="405" cy="140" r="5"/>
+          <circle class="halo" cx="390" cy="300" r="11"/><circle class="pt" cx="390" cy="300" r="5"/>
+          <circle class="halo" cx="260" cy="360" r="11"/><circle class="pt" cx="260" cy="360" r="5"/>
+          <circle class="halo" cx="115" cy="300" r="11"/><circle class="pt" cx="115" cy="300" r="5"/>
+          <circle class="halo" cx="130" cy="140" r="11"/><circle class="pt" cx="130" cy="140" r="5"/>
+          <text x="260" y="40" text-anchor="middle">Content</text>
+          <text x="422" y="144" text-anchor="start">Leads</text>
+          <text x="406" y="304" text-anchor="start">Follow-up</text>
+          <text x="260" y="388" text-anchor="middle">Ops</text>
+          <text x="99" y="304" text-anchor="end">Your voice</text>
+          <text x="114" y="144" text-anchor="end">Your offers</text>
+        </g>
+      </svg>
+      <div class="brain-core"><span class="flame"></span><span class="corelbl">Your AI Brain</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== SHOWCASE 3D ===== -->
 <section class="block showcase">
   <div class="wrap showcase-grid">
@@ -373,7 +470,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
       <div class="showcase-img" id="showImg" role="img" aria-label="Cinematic dark creative studio representing premium branding work"></div>
     </div>
     <div class="reveal">
-      <span class="eyebrow">03 — The look</span>
+      <span class="eyebrow">04 — The look</span>
       <h2 class="big">Built in the dark. Designed to <span class="fire">glow.</span></h2>
       <p class="lead" style="margin-top:18px;">Quiet luxury, with heat behind it. We keep it cinematic, high-contrast and intentional — the kind of brand that looks expensive before you say a word.</p>
       <ul>
@@ -388,7 +485,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 <!-- ===== PROCESS ===== -->
 <section class="block process">
   <div class="wrap">
-    <span class="eyebrow reveal">04 — How the fire spreads</span>
+    <span class="eyebrow reveal">05 — How the fire spreads</span>
     <h2 class="big reveal">Four steps from spark to <span class="fire">wildfire.</span></h2>
     <div class="steps">
       <div class="step reveal"><div class="no">01</div><h3>Discover</h3><p>We dig into your brand, your market and your numbers to find the real opportunity.</p></div>
@@ -403,7 +500,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 <section class="block proof">
   <div class="proof-bg"></div><div class="proof-grade"></div>
   <div class="wrap inner">
-    <span class="eyebrow reveal">05 — The receipts</span>
+    <span class="eyebrow reveal">06 — The receipts</span>
     <div class="huge fire reveal">$10M+</div>
     <p class="cap reveal"><b>in ad spend managed</b> — for hundreds of brands, people and businesses who decided blending in wasn't an option. Numbers don't exaggerate. They just compound.</p>
     <div class="row reveal">
@@ -417,9 +514,10 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 <!-- ===== FAQ ===== -->
 <section class="block">
   <div class="wrap">
-    <span class="eyebrow reveal">06 — Before you book</span>
+    <span class="eyebrow reveal">07 — Before you book</span>
     <h2 class="big reveal">The honest <span class="fire">answers.</span></h2>
     <div class="faq-list reveal">
+      <div class="faq"><button>What exactly is the AI Brain?<span class="x">+</span></button><div class="ans"><p>A custom AI system we implement inside your business — trained on your voice, your offers and your customers. It drafts content, answers and follows up with leads, and automates the repetitive work: the output of a full-time hire, without the payroll. <a href="/ai-brain-form" style="color:var(--molten);text-decoration:underline;">Fill out the short survey</a> and we'll map exactly what yours would do.</p></div></div>
       <div class="faq"><button>Who is this actually for?<span class="x">+</span></button><div class="ans"><p>Founders, brands and people who want to grow online — and are done looking like everyone else. If you care about being remembered, not just seen, we'll get along.</p></div></div>
       <div class="faq"><button>What does it cost?<span class="x">+</span></button><div class="ans"><p>It depends on scope — branding, creative and paid growth each scale differently. Book a call and we'll build a plan around your goals. No pressure, no jargon, no surprise invoices.</p></div></div>
       <div class="faq"><button>How fast will I see movement?<span class="x">+</span></button><div class="ans"><p>Brand and creative come together in weeks, not months. Once we ignite paid, you'll see real data fast — and we optimize toward what's working from day one.</p></div></div>
