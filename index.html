@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Social Fire Solutions — Spread Like Fire</title>
 <meta name="description" content="A premium growth agency for people, brands, and businesses that want to spread like fire online. Branding, paid growth, and AI Brain implementation. Over $10M in ad spend managed.">
+<link rel="icon" type="image/png" href="/media/favicon.png">
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -85,9 +87,9 @@ nav.scrolled{
 }
 .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.01em;font-size:16px;}
 .flame{
-  width:24px;height:24px;flex:none;
-  background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);
-  box-shadow:0 0 22px rgba(242,83,27,.55);
+  width:26px;height:26px;flex:none;
+  background:url('/media/sfs-flame.png') center/contain no-repeat;
+  filter:drop-shadow(0 0 10px rgba(242,83,27,.6));
 }
 .brand b{font-weight:700;}
 .brand span{color:var(--ash);font-weight:400;}
@@ -259,9 +261,9 @@ h2.big{font-size:clamp(32px,5vw,60px);letter-spacing:-.02em;max-width:16ch;}
 .brain-visual .nodes circle.pt{fill:var(--molten);}
 .brain-visual .nodes text{fill:var(--ash);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;}
 .brain-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:14px;pointer-events:none;}
-.brain-core .flame{width:54px;height:54px;animation:coreglow 2.6s ease-in-out infinite;}
+.brain-core .flame{width:64px;height:64px;animation:coreglow 2.6s ease-in-out infinite;}
 .brain-core .corelbl{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ivory);font-weight:600;text-shadow:0 2px 12px rgba(10,10,11,.9);}
-@keyframes coreglow{0%,100%{box-shadow:0 0 22px rgba(242,83,27,.55);}50%{box-shadow:0 0 44px rgba(255,176,32,.85);}}
+@keyframes coreglow{0%,100%{filter:drop-shadow(0 0 14px rgba(242,83,27,.7));}50%{filter:drop-shadow(0 0 32px rgba(255,176,32,.95));}}
 
 /* PROCESS */
 .process{background:var(--carbon);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
