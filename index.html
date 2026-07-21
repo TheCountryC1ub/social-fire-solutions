@@ -310,11 +310,11 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 @media(min-width:760px){.sticky-cta{display:none;}}
 
 /* ---------- AMBIENT SECTION BACKDROPS ---------- */
-.problem::before,.brain::before,.process::before,.faqsec::before,.final::before{
+.problem::before,.brain::before,.process::before,.faqsec::before,.final::before,#offer::before,.showcase::before{
   content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background-size:cover;background-position:center;
 }
-.problem .wrap,.brain .wrap,.process .wrap,.faqsec .wrap{position:relative;z-index:2;}
+.problem .wrap,.brain .wrap,.process .wrap,.faqsec .wrap,#offer .wrap,.showcase .wrap{position:relative;z-index:2;}
 .problem::before{
   background-image:
     linear-gradient(90deg,rgba(10,10,11,.94) 0%,rgba(10,10,11,.6) 52%,rgba(10,10,11,.3) 100%),
@@ -346,6 +346,21 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
     linear-gradient(180deg,rgba(10,10,11,.96) 0%,rgba(10,10,11,.4) 45%,rgba(10,10,11,.15) 100%),
     url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260719_201530_99a150da-e7f1-40a3-bb21-1c80d0ba343d_min.webp');
   opacity:.6;
+}
+#offer::before{
+  background-image:
+    linear-gradient(90deg,rgba(10,10,11,.94) 0%,rgba(10,10,11,.65) 50%,rgba(10,10,11,.3) 100%),
+    linear-gradient(180deg,rgba(10,10,11,.95) 0%,transparent 30%,transparent 70%,rgba(10,10,11,.95) 100%),
+    url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260721_200719_5710a11d-98f1-4310-a83c-5f43f9058670_min.webp');
+  background-position:right center;
+  opacity:.5;
+}
+.showcase::before{
+  background-image:
+    linear-gradient(90deg,rgba(10,10,11,.5) 0%,rgba(10,10,11,.75) 50%,rgba(10,10,11,.92) 100%),
+    linear-gradient(180deg,rgba(10,10,11,.95) 0%,transparent 28%,transparent 72%,rgba(10,10,11,.95) 100%),
+    url('https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260721_200600_747faab1-fddc-492c-954a-53920ffb7d6a_min.webp');
+  opacity:.45;
 }
 
 @media (prefers-reduced-motion: reduce){
