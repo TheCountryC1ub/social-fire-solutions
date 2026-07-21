@@ -166,6 +166,30 @@ h2.big{font-size:clamp(32px,5vw,60px);letter-spacing:-.02em;max-width:16ch;}
 .problem h2{margin-top:6px;}
 .problem .body{color:var(--ash);font-size:clamp(17px,1.7vw,20px);max-width:680px;margin-top:26px;line-height:1.7;}
 .problem .body b{color:var(--ivory);font-weight:600;}
+.problem-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(40px,6vw,90px);align-items:center;}
+@media(max-width:880px){.problem-grid{grid-template-columns:1fr;gap:48px;}}
+.truth-frame{display:flex;justify-content:center;}
+@property --tb-angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+.truth-border{
+  position:relative;width:100%;max-width:330px;padding:2px;border-radius:30px;
+  background:conic-gradient(from var(--tb-angle),var(--ember),var(--molten) 25%,var(--ignition) 50%,var(--molten) 75%,var(--ember));
+  box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 70px rgba(242,83,27,.25);
+  animation:tb-spin 9s linear infinite;
+}
+@keyframes tb-spin{to{--tb-angle:360deg;}}
+.truth-border::after{
+  content:"";position:absolute;inset:-40px;z-index:-1;border-radius:60px;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(242,83,27,.16),transparent 75%);
+}
+.truth-video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:28px;background:#000;}
+.truth-sound{
+  position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;
+  font:600 12px/1 "Inter",sans-serif;letter-spacing:.08em;white-space:nowrap;
+  color:var(--ivory);background:rgba(10,10,11,.72);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.16);border-radius:50px;padding:10px 16px;cursor:pointer;
+  transition:border-color .3s,background .3s;
+}
+.truth-sound:hover{border-color:rgba(242,83,27,.55);background:rgba(10,10,11,.85);}
 
 /* OFFER CARDS */
 .offer-head{max-width:720px;}
@@ -412,10 +436,18 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 
 <!-- ===== PROBLEM ===== -->
 <section class="block problem">
-  <div class="wrap">
-    <span class="eyebrow reveal">01 — The truth</span>
-    <h2 class="big reveal">You don't have a reach problem. You have a <span class="fire">forgettable</span> problem.</h2>
-    <p class="body reveal">Every day your audience scrolls past a hundred brands that look exactly like yours. Same fonts. Same stock photos. Same "we're passionate about quality." <b>Forgettable doesn't sell — it just blends in and burns your budget.</b> The brands that win online aren't the loudest in the room. They're the ones you can't look away from. That's the difference we build.</p>
+  <div class="wrap problem-grid">
+    <div>
+      <span class="eyebrow reveal">01 — The truth</span>
+      <h2 class="big reveal">You don't have a reach problem. You have a <span class="fire">forgettable</span> problem.</h2>
+      <p class="body reveal">Every day your audience scrolls past a hundred brands that look exactly like yours. Same fonts. Same stock photos. Same "we're passionate about quality." <b>Forgettable doesn't sell — it just blends in and burns your budget.</b> The brands that win online aren't the loudest in the room. They're the ones you can't look away from. That's the difference we build.</p>
+    </div>
+    <div class="truth-frame reveal">
+      <div class="truth-border">
+        <video class="truth-video" id="truthVideo" src="media/truth-video.mp4" poster="media/truth-poster.jpg" autoplay muted loop playsinline></video>
+        <button class="truth-sound" id="truthSound" type="button" aria-label="Toggle sound">🔇 Tap for sound</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -644,6 +676,20 @@ const FORM_URL = "/ai-brain-form";
 
   // Stagger card / step reveals
   document.querySelectorAll('.cards .card, .steps .step').forEach((el,i)=>{ el.style.transitionDelay = (i*0.08)+'s'; });
+
+  // Truth video sound toggle (autoplays muted; pause offscreen to save battery)
+  const tv = document.getElementById('truthVideo');
+  const ts = document.getElementById('truthSound');
+  if (tv && ts){
+    ts.addEventListener('click', ()=>{
+      tv.muted = !tv.muted;
+      if (!tv.muted) tv.play();
+      ts.textContent = tv.muted ? '🔇 Tap for sound' : '🔊 Sound on';
+    });
+    new IntersectionObserver((es)=>{
+      es.forEach(e=>{ e.isIntersecting ? tv.play().catch(()=>{}) : tv.pause(); });
+    },{threshold:0.2}).observe(tv);
+  }
 
   // FAQ accordion
   document.querySelectorAll('.faq button').forEach(b=>{
