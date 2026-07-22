@@ -35,6 +35,10 @@ Hosted on **Vercel** (auto-deploys from GitHub `main`). Works as static + one se
 - `/free-website` is the "Free website — no tricks, no gimmicks" survey funnel for small
   businesses: we build the site free, host it, show it finished; if they love it it's $499
   once, if not they owe nothing. Same Typeform-style engine as `/ai-brain-form`.
+- Homepage section **"04 — The Free Website"** (sky-blue box, the one cool-toned section on
+  the page) links to it. **We do NOT build e-commerce/online stores** (too many steps &
+  optimizations) — stated on both the homepage box and the funnel welcome; there is no
+  "sell products online" option in the survey.
 - Steps: has-a-website? → business type + name + one-liner → what the site should do →
   what they already have (+ links) → timeline → contact + consent.
 - On submit it POSTs to **`/api/free-website`** which upserts the GHL contact (source
