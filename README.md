@@ -31,6 +31,18 @@ Hosted on **Vercel** (auto-deploys from GitHub `main`). Works as static + one se
 - If the function is missing/unconfigured/errors, the form **falls back to a pre-filled
   mailto** to the address in `ai-brain-form/index.html` → `CONFIG.EMAIL`, so no lead is lost.
 
+## Free Website funnel → GoHighLevel
+- `/free-website` is the "Free website — no tricks, no gimmicks" survey funnel for small
+  businesses: we build the site free, host it, show it finished; if they love it it's $499
+  once, if not they owe nothing. Same Typeform-style engine as `/ai-brain-form`.
+- Steps: has-a-website? → business type + name + one-liner → what the site should do →
+  what they already have (+ links) → timeline → contact + consent.
+- On submit it POSTs to **`/api/free-website`** which upserts the GHL contact (source
+  "Free Website Survey (Website)", companyName = business name), appends tags
+  (`Free Website Survey`, `Has site: …`, `Type: …`, `Timeline: …`) and attaches the full
+  survey as a note. Uses the SAME `GHL_TOKEN` / `GHL_LOCATION` env vars as `/api/lead` —
+  nothing new to configure. Falls back to a pre-filled mailto if the function errors.
+
 ## Assets
 Images and the ambient hero video are hosted on Higgsfield's CDN and referenced by URL,
 so the page stays a single lightweight file. To make it fully self-hosted, download the

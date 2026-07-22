@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Free Website — Social Fire Solutions</title>
+<link rel="icon" type="image/png" href="/media/favicon.png">
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
+<meta name="description" content="We build your small business a real website for free. You see it finished first. Love it? It's $499 and it's yours. Don't? You owe nothing." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --onyx:#0A0A0B; --carbon:#161618; --carbon-2:#1F1F22;
+  --ember:#C81E1E; --molten:#F2531B; --ignition:#FFB020;
+  --ivory:#F4F1EA; --ash:#9A9AA0; --line:#2a2a2e;
+  --burn:linear-gradient(100deg,#FFB020,#F2531B 50%,#C81E1E);
+  --err:#c0473a;
+  --max:760px; --r:14px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--onyx); color:var(--ivory);
+  font-family:'Inter',system-ui,sans-serif; font-weight:400;
+  line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  min-height:100dvh;
+}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif; font-weight:600; line-height:1.14; letter-spacing:.2px}
+a{color:inherit; text-decoration:none}
+.fire{background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent}
+::selection{background:var(--molten);color:#fff}
+
+/* ambient background */
+.bg{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 14% 0%, rgba(242,83,27,.10), transparent 55%),
+    radial-gradient(120% 90% at 86% 100%, rgba(200,30,30,.12), transparent 60%),
+    linear-gradient(180deg,#0A0A0B,#0d0d10 60%,#08080a);
+}
+.bg::after{content:""; position:absolute; inset:0; opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* top bar */
+.topbar{position:fixed; top:0; left:0; right:0; z-index:55;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:18px clamp(18px,4vw,34px);
+  background:linear-gradient(180deg,rgba(10,10,11,.92),rgba(10,10,11,0));
+}
+.brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:15px; letter-spacing:.01em}
+.brand .flame{width:22px;height:22px;flex:none;background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:0 0 18px rgba(242,83,27,.55)}
+.brand span.co{color:var(--ash);font-weight:400}
+.exit{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ash); border:1px solid var(--line);
+  padding:9px 16px; border-radius:50px; transition:.25s; background:rgba(255,255,255,.02)}
+.exit:hover{border-color:var(--molten); color:var(--molten)}
+
+/* progress */
+.progress{position:fixed; top:0; left:0; height:4px; z-index:61; width:0;
+  background:var(--burn); transition:width .5s var(--ease)}
+
+/* stage */
+.stage{position:relative; z-index:5; min-height:100dvh; display:flex; align-items:center; justify-content:center;
+  padding:110px clamp(20px,5vw,28px) 140px}
+.card{width:100%; max-width:var(--max)}
+
+/* each question panel */
+.q{display:none; animation:none}
+.q.active{display:block}
+.q.active.anim{animation:rise .55s var(--ease) both}
+@keyframes rise{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none}}
+
+.stepno{font-family:'Inter'; font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:var(--molten); font-weight:600; margin-bottom:16px; display:flex; align-items:center; gap:10px}
+.q h2{font-size:clamp(1.6rem,4.2vw,2.5rem); margin-bottom:10px}
+.q h2 em{font-style:italic; color:var(--molten)}
+.q .desc{color:var(--ash); font-size:1.02rem; margin-bottom:26px; max-width:56ch}
+.q .desc.tight{margin-bottom:18px}
+
+/* text inputs */
+.field{margin-bottom:16px}
+.field label.fl{display:block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ash); margin-bottom:8px; font-weight:600}
+input[type=text],input[type=email],input[type=tel],textarea,select{
+  width:100%; background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:10px;
+  padding:16px 18px; color:var(--ivory); font-family:'Inter'; font-size:1.05rem; transition:border-color .25s, background .25s;
+}
+input::placeholder,textarea::placeholder{color:#606066}
+textarea{min-height:120px; resize:vertical; line-height:1.55}
+input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten); background:rgba(242,83,27,.05)}
+.invalid{border-color:var(--err)!important}
+
+/* choice cards (radio / checkbox) */
+.choices{display:flex; flex-direction:column; gap:12px}
+.choices.grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.choice{position:relative; display:flex; align-items:flex-start; gap:14px; cursor:pointer;
+  border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:rgba(255,255,255,.02); transition:.22s var(--ease)}
+.choice:hover{border-color:rgba(242,83,27,.55); background:rgba(242,83,27,.05); transform:translateY(-2px)}
+.choice input{position:absolute; opacity:0; pointer-events:none}
+.choice .box{flex:0 0 auto; width:22px; height:22px; border-radius:50%; border:1.6px solid var(--ash); margin-top:2px; display:grid; place-items:center; transition:.2s}
+.choice.chk .box{border-radius:6px}
+.choice .box svg{width:12px;height:12px; opacity:0; transform:scale(.4); transition:.2s; stroke:#0A0A0B}
+.choice .ctext{flex:1}
+.choice .ctext b{display:block; font-weight:600; font-size:1.04rem; color:var(--ivory); font-family:'Inter'}
+.choice .ctext span{display:block; color:var(--ash); font-size:.9rem; margin-top:3px}
+.choice input:checked ~ .box{background:var(--burn); border-color:var(--ignition)}
+.choice input:checked ~ .box svg{opacity:1; transform:none}
+.choice:has(input:checked){border-color:var(--molten); background:rgba(242,83,27,.09); box-shadow:0 10px 30px -18px rgba(242,83,27,.8)}
+
+/* chips (compact multi-select) */
+.chips{display:flex; flex-wrap:wrap; gap:10px}
+.chip{position:relative; cursor:pointer}
+.chip input{position:absolute; opacity:0; pointer-events:none}
+.chip span{display:inline-block; border:1px solid var(--line); border-radius:50px; padding:11px 18px; font-size:.92rem; color:var(--ivory); transition:.2s var(--ease); background:rgba(255,255,255,.02)}
+.chip:hover span{border-color:rgba(242,83,27,.55)}
+.chip input:checked + span{background:linear-gradient(135deg,rgba(255,176,32,.20),rgba(200,30,30,.20)); border-color:var(--molten); color:var(--ignition); font-weight:600}
+
+/* nav buttons */
+.actions{display:flex; align-items:center; gap:14px; margin-top:30px; flex-wrap:wrap}
+.btn{display:inline-flex; align-items:center; gap:.55rem; cursor:pointer; border:1px solid transparent;
+  font-family:'Inter'; font-weight:600; font-size:.84rem; letter-spacing:.1em; text-transform:uppercase;
+  padding:16px 30px; border-radius:50px; transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, color .25s, border-color .25s}
+.btn-primary{background:var(--burn); color:#0A0A0B; box-shadow:0 10px 30px -8px rgba(242,83,27,.5)}
+.btn-primary:hover{transform:translateY(-3px); box-shadow:0 16px 40px -8px rgba(242,83,27,.7)}
+.btn-ghost{border-color:var(--line); color:var(--ash); background:transparent; padding:14px 22px}
+.btn-ghost:hover{border-color:var(--molten); color:var(--molten)}
+.btn:focus-visible{outline:3px solid var(--ignition); outline-offset:3px}
+.hintkey{color:#606066; font-size:.78rem; margin-left:2px}
+.err-msg{color:var(--err); font-size:.86rem; margin-top:14px; display:none}
+.err-msg.show{display:block}
+
+/* welcome */
+.welcome h1{font-size:clamp(2.3rem,6vw,3.6rem); margin:18px 0 18px; font-weight:700}
+.welcome .lead{color:var(--ivory); font-weight:300; font-size:clamp(1.05rem,2vw,1.24rem); max-width:52ch; margin-bottom:14px}
+.welcome .meta{color:var(--ash); font-size:.92rem; margin-bottom:30px; display:flex; gap:22px; flex-wrap:wrap}
+.welcome .meta span{display:flex; align-items:center; gap:8px}
+.welcome .meta svg{width:15px;height:15px; stroke:var(--molten); fill:none}
+.kicker{font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; color:var(--molten); font-weight:600}
+
+/* the deal strip on the welcome panel */
+.deal{display:flex; flex-direction:column; gap:10px; margin:6px 0 28px; max-width:560px}
+.deal .row{display:flex; align-items:flex-start; gap:12px; border:1px solid var(--line); border-radius:12px; padding:14px 18px; background:rgba(255,255,255,.02)}
+.deal .row b{font-weight:600; color:var(--ivory)}
+.deal .row span{color:var(--ash); font-size:.95rem}
+.deal .num{flex:0 0 auto; width:26px; height:26px; border-radius:50%; background:var(--burn); color:#0A0A0B; font-weight:700; font-size:.8rem; display:grid; place-items:center; margin-top:1px}
+
+/* success */
+.done{display:none; text-align:center}
+.done.show{display:block; animation:rise .6s var(--ease) both}
+.ring{width:74px;height:74px;border-radius:50%;margin:0 auto 24px;display:grid;place-items:center;
+  background:var(--burn); box-shadow:0 20px 50px -18px rgba(242,83,27,.8)}
+.ring svg{width:34px;height:34px;stroke:#0A0A0B;fill:none}
+.done h2{font-size:clamp(1.9rem,4.6vw,2.7rem); margin-bottom:14px}
+.done p{color:var(--ash); font-size:1.06rem; max-width:46ch; margin:0 auto 10px}
+.done .again{margin-top:26px}
+.copybox{display:none; margin:26px auto 0; max-width:520px; text-align:left; border:1px solid var(--line); border-radius:12px; padding:18px; background:rgba(255,255,255,.02)}
+.copybox.show{display:block}
+.copybox p{font-size:.92rem; color:var(--ash); margin-bottom:12px}
+.copybox textarea{min-height:150px; font-size:.9rem}
+
+footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; color:#606066; font-size:.78rem; letter-spacing:.03em}
+
+@media(max-width:560px){
+  .choices.grid2{grid-template-columns:1fr}
+  .welcome .meta{gap:14px}
+  .actions{gap:10px}
+  .btn{padding:15px 24px}
+}
+@media(prefers-reduced-motion:reduce){ .q.active.anim{animation:none} .done.show{animation:none} .btn:hover,.choice:hover{transform:none} }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="progress" id="progress"></div>
+
+<div class="topbar">
+  <a class="brand" href="/" aria-label="Social Fire Solutions home">
+    <span class="flame"></span><b>Social Fire</b>&nbsp;<span class="co">Solutions</span>
+  </a>
+  <a class="exit" href="/">Exit</a>
+</div>
+
+<div class="stage">
+  <div class="card">
+    <form id="app" novalidate>
+
+    <!-- 0 · WELCOME -->
+    <section class="q welcome" data-count="no">
+      <span class="kicker">Free Website — No Tricks, No Gimmicks</span>
+      <h1>We'll build your business a <span class="fire">free website.</span> Seriously.</h1>
+      <p class="lead">Here's the whole deal, up front:</p>
+      <div class="deal">
+        <div class="row"><span class="num">1</span><span><b>We build your website for free.</b> <span>Designed for your business, built by us, hosted by us. You pay nothing to get it made.</span></span></div>
+        <div class="row"><span class="num">2</span><span><b>You see it finished first.</b> <span>We send you a private link to the real, working site — not a mockup, not a sales pitch.</span></span></div>
+        <div class="row"><span class="num">3</span><span><b>Love it? It's $499, once. Don't? Walk away.</b> <span>If you don't love it, you owe us nothing and we part as friends. That's it. That's the catch — there isn't one.</span></span></div>
+      </div>
+      <div class="meta">
+        <span><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~2 minutes</span>
+        <span><svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> $0 up front</span>
+        <span><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 1l9 4v6c0 5-3.8 9.2-9 11-5.2-1.8-9-6-9-11V5z"/></svg> Zero obligation</span>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" data-next>Claim my free website
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- 1 · CURRENT WEBSITE -->
+    <section class="q auto">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>Do you have a website right now?</h2>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="hassite" value="No — never had one" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>No — never had one</b><span>Business runs on word of mouth, Facebook, or a Google listing.</span></span></label>
+        <label class="choice"><input type="radio" name="hassite" value="Yes, but it's old / embarrassing"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Yes, but it's old or embarrassing</b><span>It exists… you just don't send people there.</span></span></label>
+        <label class="choice"><input type="radio" name="hassite" value="Yes, a DIY one I never finished"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Yes — a DIY one I never finished</b><span>Wix, Squarespace, GoDaddy… it's been "almost done" for a while.</span></span></label>
+        <label class="choice"><input type="radio" name="hassite" value="Yes, it's decent — curious what you'd do"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Yes, it's decent</b><span>Just curious what you'd do differently.</span></span></label>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-ghost" data-back>Back</button></div>
+      <div class="err-msg">Please choose one to continue.</div>
+    </section>
+
+    <!-- 2 · BUSINESS -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>Tell us about the business.</h2>
+      <div class="choices grid2" role="radiogroup" style="margin-bottom:22px">
+        <label class="choice"><input type="radio" name="biztype" value="Local service (cleaning, salon, repair…)" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Local service</b><span>Cleaning, salon, detailing, repair…</span></span></label>
+        <label class="choice"><input type="radio" name="biztype" value="Trades & construction"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Trades &amp; construction</b><span>Plumbing, electric, roofing, landscaping…</span></span></label>
+        <label class="choice"><input type="radio" name="biztype" value="Restaurant / food"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Restaurant / food</b><span>Restaurant, café, truck, catering…</span></span></label>
+        <label class="choice"><input type="radio" name="biztype" value="Retail / local shop"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Retail / local shop</b><span>Storefront, boutique, products…</span></span></label>
+        <label class="choice"><input type="radio" name="biztype" value="Professional services"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Professional services</b><span>Legal, accounting, real estate, coaching…</span></span></label>
+        <label class="choice"><input type="radio" name="biztype" value="Something else"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Something else</b><span>Tell us below.</span></span></label>
+      </div>
+      <div class="field">
+        <label class="fl">Business name</label>
+        <input type="text" name="bizname" placeholder="e.g. Tennant & Sons Plumbing" required />
+      </div>
+      <div class="field">
+        <label class="fl">What do you do, and where? <span style="text-transform:none;letter-spacing:0;color:#606066">(one sentence is perfect)</span></label>
+        <input type="text" name="bizdesc" placeholder="e.g. Residential plumbing in the Nashville area" required />
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="button" class="btn btn-primary" data-next>Continue</button>
+      </div>
+      <div class="err-msg">Pick the closest fit and give us the business name + one sentence.</div>
+    </section>
+
+    <!-- 3 · WHAT THE SITE SHOULD DO -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>What should your website <em>do</em> for you?</h2>
+      <p class="desc">Pick everything that matters. This is how we decide what to build.</p>
+      <div class="chips" data-min="1">
+        <label class="chip"><input type="checkbox" name="goals" value="Get more phone calls"><span>Get more phone calls</span></label>
+        <label class="chip"><input type="checkbox" name="goals" value="Look professional / legit"><span>Look professional &amp; legit</span></label>
+        <label class="chip"><input type="checkbox" name="goals" value="Show up on Google"><span>Show up on Google</span></label>
+        <label class="chip"><input type="checkbox" name="goals" value="Take bookings / appointments"><span>Take bookings</span></label>
+        <label class="chip"><input type="checkbox" name="goals" value="Show off my work / menu"><span>Show off my work</span></label>
+        <label class="chip"><input type="checkbox" name="goals" value="Answer the questions I get asked all day"><span>Answer common questions</span></label>
+        <label class="chip"><input type="checkbox" name="goals" value="Collect reviews & referrals"><span>Collect reviews</span></label>
+        <label class="chip"><input type="checkbox" name="goals" value="Sell products online"><span>Sell products online</span></label>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="button" class="btn btn-primary" data-next>Continue</button>
+      </div>
+      <div class="err-msg">Please pick at least one.</div>
+    </section>
+
+    <!-- 4 · WHAT THEY HAVE -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>What do you already have?</h2>
+      <p class="desc">"Nothing yet" is a completely fine answer — we work with whatever you've got.</p>
+      <div class="chips" style="margin-bottom:22px">
+        <label class="chip"><input type="checkbox" name="assets" value="A logo"><span>A logo</span></label>
+        <label class="chip"><input type="checkbox" name="assets" value="Photos of my work / place"><span>Photos of my work</span></label>
+        <label class="chip"><input type="checkbox" name="assets" value="Google Business listing"><span>Google Business listing</span></label>
+        <label class="chip"><input type="checkbox" name="assets" value="Facebook / Instagram page"><span>Facebook / Instagram</span></label>
+        <label class="chip"><input type="checkbox" name="assets" value="A domain name"><span>A domain name</span></label>
+        <label class="chip"><input type="checkbox" name="assets" value="Nothing yet"><span>Nothing yet</span></label>
+      </div>
+      <div class="field">
+        <label class="fl">Links — current site, Facebook, Instagram, Google listing… <span style="text-transform:none;letter-spacing:0;color:#606066">(optional, but helps us a lot)</span></label>
+        <textarea name="links" placeholder="yourbusiness.com&#10;facebook.com/yourbusiness&#10;your Google Maps listing"></textarea>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="button" class="btn btn-primary" data-next>Continue</button>
+      </div>
+      <div class="err-msg">Pick what you have — or "Nothing yet."</div>
+    </section>
+
+    <!-- 5 · TIMING -->
+    <section class="q auto">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>If you love it, when would you want it live?</h2>
+      <p class="desc tight">No wrong answer — this just tells us how fast to move.</p>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="timeline" value="As soon as possible" required><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>As soon as possible</b><span>I've been putting this off too long.</span></span></label>
+        <label class="choice"><input type="radio" name="timeline" value="Within the next month"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Within the next month</b><span>Soon, but no fire drill.</span></span></label>
+        <label class="choice"><input type="radio" name="timeline" value="Just curious for now"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Just curious for now</b><span>Show me what you'd build and we'll see.</span></span></label>
+      </div>
+      <div class="actions"><button type="button" class="btn btn-ghost" data-back>Back</button></div>
+      <div class="err-msg">Please choose one to continue.</div>
+    </section>
+
+    <!-- 6 · CONTACT + SUBMIT -->
+    <section class="q">
+      <div class="stepno"><span class="n"></span></div>
+      <h2>Where do we send your <em>free website</em>?</h2>
+      <p class="desc tight">We'll build it and email you a private preview link. You look at the finished thing, then decide. $0 until you say "I love it."</p>
+      <div class="field">
+        <label class="fl">Your name</label>
+        <input type="text" name="name" autocomplete="name" placeholder="Your name" required />
+      </div>
+      <div class="field">
+        <label class="fl">Email</label>
+        <input type="email" name="email" autocomplete="email" placeholder="you@email.com" required />
+      </div>
+      <div class="field">
+        <label class="fl">Phone <span style="text-transform:none;letter-spacing:0;color:#606066">(optional — handy if we have a quick question about your business)</span></label>
+        <input type="tel" name="phone" autocomplete="tel" placeholder="+1 (555) 000-0000" />
+      </div>
+      <label class="choice chk" style="margin-top:6px">
+        <input type="checkbox" name="consent" value="Consented to be contacted" required>
+        <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span class="ctext"><b>Yes — build my free website</b><span>I understand there's zero obligation: if I don't love it, I owe nothing.</span></span>
+      </label>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" data-back>Back</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Build my free website
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="err-msg">Please add your name and a valid email, and confirm you want the free build.</div>
+    </section>
+
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="done" id="done" role="status" aria-live="polite">
+      <div class="ring"><svg viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>Your free website is in the queue.</h2>
+      <p id="doneMsg">We'll design and build it, then email you a private preview link — the real, working site. If you love it, it's $499 once and it's yours, live on your own domain. If you don't, you owe nothing. No tricks, no gimmicks.</p>
+
+      <div class="copybox" id="copybox">
+        <p>If your email app didn't open, copy your answers below and send them to us however you like:</p>
+        <textarea id="copyText" readonly></textarea>
+        <div class="actions" style="margin-top:14px">
+          <button type="button" class="btn btn-primary" id="copyBtn">Copy my answers</button>
+        </div>
+      </div>
+      <div class="again"><a class="exit" href="/">← Back to Social Fire Solutions</a></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>Spread like fire. · © 2026 Social Fire Solutions</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===================== CONFIG ============================================
+     WHERE SURVEYS GO.
+
+     1) ENDPOINT (primary): the Vercel serverless function at /api/free-website,
+        which pushes the survey into GoHighLevel server-side. Uses the same
+        GHL_TOKEN and GHL_LOCATION env vars as /api/lead. If it's missing or
+        errors, the form automatically falls back to EMAIL so no lead is lost.
+
+     2) EMAIL (fallback): the visitor's email app opens pre-filled to this
+        address and they hit send.
+  ========================================================================= */
+  var CONFIG = {
+    ENDPOINT: "/api/free-website",
+    EMAIL: "chtennant1@gmail.com"
+  };
+
+  var LABELS = {
+    name:"Name", email:"Email", phone:"Phone",
+    hassite:"Has a website?", biztype:"Business type", bizname:"Business name",
+    bizdesc:"What they do & where", goals:"What the site should do",
+    assets:"What they have", links:"Links",
+    timeline:"Timeline", consent:"Consent"
+  };
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var form   = document.getElementById('app');
+  var panels = Array.prototype.slice.call(form.querySelectorAll('.q'));
+  var counted = panels.filter(function(p){ return p.getAttribute('data-count') !== 'no'; });
+  var total = counted.length;
+  var progressEl = document.getElementById('progress');
+  var idx = 0;
+
+  // number the step labels ( "01 → 06" )
+  panels.forEach(function(p){
+    var n = p.querySelector('.stepno .n');
+    if(n){
+      var pos = counted.indexOf(p) + 1;
+      n.textContent = String(pos).padStart(2,'0') + '  →  ' + String(total).padStart(2,'0');
+    }
+  });
+
+  function show(i, dir){
+    idx = Math.max(0, Math.min(panels.length-1, i));
+    panels.forEach(function(p){ p.classList.remove('active','anim'); });
+    var p = panels[idx];
+    p.classList.add('active');
+    if(!reduce) { void p.offsetWidth; p.classList.add('anim'); }
+    // progress
+    var pos = counted.indexOf(p);
+    var pct = pos < 0 ? 0 : ((pos) / total) * 100;
+    progressEl.style.width = pct + '%';
+    // focus first field
+    var f = p.querySelector('input:not([type=radio]):not([type=checkbox]), textarea, select, input[type=radio], input[type=checkbox]');
+    if(f && dir !== 'back'){ try{ f.focus({preventScroll:true}); }catch(e){ f.focus(); } }
+    window.scrollTo({top:0, behavior: reduce ? 'auto':'smooth'});
+    clearErr(p);
+  }
+
+  function clearErr(p){
+    var m = p.querySelector('.err-msg'); if(m) m.classList.remove('show');
+    p.querySelectorAll('.invalid').forEach(function(el){ el.classList.remove('invalid'); });
+  }
+  function showErr(p){
+    var m = p.querySelector('.err-msg'); if(m) m.classList.add('show');
+  }
+
+  function emailValid(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v); }
+
+  function validate(p){
+    var ok = true, firstBad = null;
+    // text/email/tel/textarea/select required
+    p.querySelectorAll('input[required], textarea[required], select[required]').forEach(function(el){
+      if(el.type === 'radio' || el.type === 'checkbox') return; // handled below
+      var v = (el.value||'').trim();
+      var bad = !v || (el.type === 'email' && !emailValid(v));
+      if(bad){ ok=false; el.classList.add('invalid'); firstBad = firstBad||el; }
+      else el.classList.remove('invalid');
+    });
+    // radio groups (required marked on any one radio in group)
+    var radios = {};
+    p.querySelectorAll('input[type=radio]').forEach(function(r){ (radios[r.name]=radios[r.name]||[]).push(r); });
+    Object.keys(radios).forEach(function(name){
+      var grp = radios[name];
+      var req = grp.some(function(r){ return r.required; });
+      if(req && !grp.some(function(r){ return r.checked; })){ ok=false; }
+    });
+    // single required checkbox (consent)
+    p.querySelectorAll('input[type=checkbox][required]').forEach(function(c){
+      if(!c.checked){ ok=false; }
+    });
+    // chip groups with data-min
+    p.querySelectorAll('[data-min]').forEach(function(grp){
+      var min = parseInt(grp.getAttribute('data-min'),10) || 0;
+      var n = grp.querySelectorAll('input[type=checkbox]:checked').length;
+      if(n < min){ ok=false; }
+    });
+    return { ok: ok, firstBad: firstBad };
+  }
+
+  function next(){
+    var p = panels[idx];
+    var res = validate(p);
+    if(!res.ok){ showErr(p); return; }
+    if(idx < panels.length-1) show(idx+1, 'fwd');
+  }
+  function back(){ if(idx>0) show(idx-1, 'back'); }
+
+  // buttons
+  form.addEventListener('click', function(e){
+    var t = e.target.closest('[data-next],[data-back]');
+    if(!t) return;
+    e.preventDefault();
+    if(t.hasAttribute('data-back')) back(); else next();
+  });
+
+  // auto-advance panels (single-select radios)
+  panels.forEach(function(p){
+    if(!p.classList.contains('auto')) return;
+    p.addEventListener('change', function(e){
+      if(e.target && e.target.type === 'radio'){
+        clearErr(p);
+        setTimeout(function(){ next(); }, reduce ? 0 : 240);
+      }
+    });
+  });
+
+  // Enter advances (except inside textarea)
+  form.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter') return;
+    if(e.target && e.target.tagName === 'TEXTAREA') return;
+    e.preventDefault();
+    if(panels[idx].querySelector('#submitBtn')) form.requestSubmit ? form.requestSubmit(document.getElementById('submitBtn')) : submit();
+    else next();
+  });
+
+  /* ---------- gather + build ---------- */
+  function gather(){
+    var data = {};
+    Object.keys(LABELS).forEach(function(name){
+      var els = form.querySelectorAll('[name="'+name+'"]');
+      if(!els.length) return;
+      var first = els[0];
+      if(first.type === 'radio'){
+        var c = form.querySelector('[name="'+name+'"]:checked'); data[name] = c ? c.value : '';
+      } else if(first.type === 'checkbox' && els.length > 1){
+        data[name] = Array.prototype.slice.call(els).filter(function(x){return x.checked;}).map(function(x){return x.value;}).join(', ');
+      } else if(first.type === 'checkbox'){
+        data[name] = first.checked ? first.value : '';
+      } else {
+        data[name] = (first.value||'').trim();
+      }
+    });
+    return data;
+  }
+  function bodyText(d){
+    var lines = ["SOCIAL FIRE — FREE WEBSITE SURVEY", "=================================", ""];
+    Object.keys(LABELS).forEach(function(name){
+      var v = d[name]; if(v === undefined) v = '';
+      lines.push(LABELS[name].toUpperCase() + ":");
+      lines.push(v || "—");
+      lines.push("");
+    });
+    return lines.join("\n");
+  }
+
+  function finish(usedEmail, body){
+    form.style.display = 'none';
+    progressEl.style.width = '100%';
+    var done = document.getElementById('done');
+    done.classList.add('show');
+    if(usedEmail){
+      document.getElementById('copyText').value = body;
+      document.getElementById('copybox').classList.add('show');
+      document.getElementById('doneMsg').textContent =
+        "Your email should have opened, ready to send — just hit send and you're done. We'll build your free website and email you a private preview link. Love it? $499 once. Don't? You owe nothing.";
+    }
+    window.scrollTo({top:0, behavior: reduce?'auto':'smooth'});
+  }
+
+  function submit(){
+    var last = panels[panels.length-1];
+    var res = validate(last);
+    if(!res.ok){ showErr(last); return; }
+    var d = gather();
+    var body = bodyText(d);
+    var subject = "Free Website Survey — " + (d.bizname || d.name || "New lead");
+
+    // 1) Send to GoHighLevel via the serverless endpoint
+    if(CONFIG.ENDPOINT){
+      var btn = document.getElementById('submitBtn');
+      btn.disabled = true; btn.style.opacity = .6;
+      fetch(CONFIG.ENDPOINT, {
+        method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'},
+        body: JSON.stringify(d)
+      }).then(function(r){
+        if(r.ok) finish(false, body);            // delivered to GHL silently
+        else { finish(true, body); openMail(subject, body); }  // fallback to email
+      }).catch(function(){ finish(true, body); openMail(subject, body); });
+      return;
+    }
+    // 2) mailto fallback
+    openMail(subject, body);
+    finish(true, body);
+  }
+  function openMail(subject, body){
+    window.location.href = "mailto:" + CONFIG.EMAIL +
+      "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  }
+
+  form.addEventListener('submit', function(e){ e.preventDefault(); submit(); });
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var ta = document.getElementById('copyText');
+    ta.select();
+    navigator.clipboard ? navigator.clipboard.writeText(ta.value) : document.execCommand('copy');
+    this.textContent = 'Copied ✓';
+  });
+
+  // init
+  show(0);
+})();
+</script>
+</body>
+</html>
