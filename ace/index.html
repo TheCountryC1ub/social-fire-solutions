@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P350HNJX4Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P350HNJX4Y');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ace Energy — The Golf Energy Drink | An Ace a Day Keeps the Bogeys Away</title>
+<link rel="icon" type="image/png" href="/media/favicon.png">
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
+<meta name="description" content="Ace Energy is the energy drink built for golf. Clean energy, sharp focus, lower scores. 150mg green-tea caffeine, ashwagandha and L-theanine in Coastal Peach. An ace a day keeps the bogeys away." />
+<meta property="og:title" content="Ace Energy — The Golf Energy Drink" />
+<meta property="og:description" content="Clean energy. Sharp focus. Lower scores. Beat the Bogey Man. Built by two brothers, made for the course." />
+<meta property="og:image" content="https://socialfire.solutions/ace/assets/tee-shot.jpg" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=Yellowtail&display=swap" rel="stylesheet">
+<script>try{ if('IntersectionObserver' in window) document.documentElement.classList.add('js-ready'); }catch(e){}</script>
+<style>
+:root{
+  --cream:#F8F2E4; --cream2:#F2EAD6; --paper:#FDFAF2;
+  --green:#1E4A2C; --green-deep:#14351F; --turf:#3E7C4F;
+  --red:#D6544F; --red-deep:#B93F3B;
+  --peach:#E8955C; --peach-soft:#F6C89B;
+  --ink:#20301F; --muted:#5E6B57; --line:#E0D5BB;
+  --max:1180px; --r:18px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream); color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif; line-height:1.7;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif; font-weight:700; line-height:1.08; color:var(--green-deep); letter-spacing:-.01em}
+img{max-width:100%; display:block}
+a{color:inherit; text-decoration:none}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 28px}
+.kicker{font-size:.74rem; letter-spacing:.32em; text-transform:uppercase; color:var(--red); font-weight:700}
+.script{font-family:'Yellowtail',cursive; font-weight:400; color:var(--red); letter-spacing:0; text-transform:none}
+
+/* buttons */
+.btn{
+  display:inline-flex; align-items:center; gap:.6rem; cursor:pointer;
+  font-weight:700; font-size:.86rem; letter-spacing:.12em; text-transform:uppercase;
+  padding:17px 34px; border-radius:999px; border:2px solid transparent;
+  transition:transform .22s var(--ease), box-shadow .22s var(--ease), background .22s, border-color .22s, color .22s;
+}
+.btn-primary{background:var(--green); color:var(--cream); box-shadow:0 14px 32px -12px rgba(30,74,44,.55)}
+.btn-primary:hover{transform:translateY(-3px); background:var(--green-deep); box-shadow:0 20px 40px -12px rgba(30,74,44,.65)}
+.btn-red{background:var(--red); color:#FFF7EA; box-shadow:0 14px 32px -12px rgba(214,84,79,.55)}
+.btn-red:hover{transform:translateY(-3px); background:var(--red-deep)}
+.btn-ghost{border-color:var(--green); color:var(--green)}
+.btn-ghost:hover{background:var(--green); color:var(--cream); transform:translateY(-3px)}
+.btn:focus-visible{outline:3px solid var(--red); outline-offset:3px}
+
+/* nav */
+header{position:fixed; inset:0 0 auto 0; z-index:100; border-bottom:1px solid transparent; transition:background .35s var(--ease), border-color .35s, backdrop-filter .35s}
+header.scrolled{background:rgba(248,242,228,.9); backdrop-filter:blur(14px); border-color:var(--line)}
+.nav{display:flex; align-items:center; justify-content:space-between; height:76px}
+.wordmark{font-family:'Yellowtail',cursive; font-size:1.75rem; color:var(--green-deep); line-height:1}
+.byline{font-size:.6rem; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); display:block; font-family:'Inter',sans-serif; margin-top:2px; font-weight:600}
+.nav .btn{padding:11px 24px; font-size:.72rem}
+.hero-nav .wordmark, .hero-nav .byline{color:#FFF7EA; text-shadow:0 2px 12px rgba(0,0,0,.4)}
+header.scrolled .wordmark{color:var(--green-deep); text-shadow:none}
+header.scrolled .byline{color:var(--muted); text-shadow:none}
+
+/* hero */
+.hero{position:relative; min-height:92vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden}
+.hero-bg{position:absolute; inset:0}
+.hero-bg img{width:100%; height:100%; object-fit:cover}
+.hero-bg::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,53,31,.35), rgba(20,53,31,.15) 40%, rgba(248,242,228,0) 78%, var(--cream) 100%)}
+.hero-inner{position:relative; z-index:2; padding:140px 28px 120px; max-width:900px}
+.hero .script-lead{font-family:'Yellowtail',cursive; font-size:clamp(1.6rem,3.4vw,2.4rem); color:#FFF3DF; text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.hero h1{font-size:clamp(2.6rem,6.6vw,5rem); color:#FFF7EA; text-shadow:0 4px 30px rgba(10,30,15,.55); margin:10px 0 22px}
+.hero p.lead{color:#F4EBD8; font-size:clamp(1rem,1.8vw,1.2rem); max-width:54ch; margin:0 auto 40px; text-shadow:0 2px 14px rgba(10,30,15,.6); font-weight:400}
+.hero .btns{display:flex; gap:16px; justify-content:center; flex-wrap:wrap}
+
+/* ticker */
+.ticker{background:var(--red); color:#FFF7EA; overflow:hidden; padding:13px 0; border-top:2px solid var(--red-deep); border-bottom:2px solid var(--red-deep)}
+.ticker-track{display:flex; width:max-content; animation:tick 30s linear infinite; gap:0}
+.ticker span{font-weight:700; font-size:.78rem; letter-spacing:.3em; text-transform:uppercase; padding:0 26px; white-space:nowrap}
+.ticker i{font-style:normal}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.ticker-track{animation:none}}
+
+/* sections */
+section{padding:100px 0; position:relative}
+.sechead{text-align:center; max-width:720px; margin:0 auto 60px}
+.sechead h2{font-size:clamp(1.9rem,3.8vw,2.8rem); margin:14px 0 16px}
+.sechead p{color:var(--muted)}
+
+/* split */
+.split{display:grid; grid-template-columns:1.02fr .98fr; gap:60px; align-items:center}
+.split h2{font-size:clamp(1.8rem,3.4vw,2.6rem); margin:14px 0 20px}
+.split p{color:var(--muted); margin-bottom:16px}
+.split p b, .split p strong{color:var(--ink); font-weight:600}
+.split .quote{border-left:4px solid var(--peach); padding:8px 0 8px 22px; font-family:'Fraunces',serif; font-size:1.3rem; color:var(--green-deep); font-weight:600; margin:28px 0; line-height:1.4}
+.imgcard{border-radius:var(--r); overflow:hidden; border:1px solid var(--line); box-shadow:0 30px 70px -30px rgba(32,48,31,.4); background:#fff}
+.imgcard img{transition:transform .6s var(--ease); width:100%}
+.imgcard:hover img{transform:scale(1.03)}
+.imgcap{font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); text-align:center; margin-top:14px; font-weight:600}
+
+/* ingredient cards */
+.icards{display:grid; grid-template-columns:repeat(4,1fr); gap:18px}
+.icard{background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:30px 26px; text-align:left;
+  transition:transform .25s var(--ease), box-shadow .25s, border-color .25s}
+.icard:hover{transform:translateY(-5px); border-color:var(--peach); box-shadow:0 22px 50px -22px rgba(232,149,92,.5)}
+.icard .num{font-family:'Fraunces',serif; font-size:1.9rem; font-weight:700; color:var(--red); line-height:1}
+.icard h3{font-size:1.05rem; margin:14px 0 8px}
+.icard p{color:var(--muted); font-size:.88rem}
+.finenote{margin-top:36px; text-align:center; color:#8B927E; font-size:.74rem; max-width:680px; margin-left:auto; margin-right:auto}
+
+/* green band */
+.band{background:var(--green); color:var(--cream); position:relative; overflow:hidden}
+.band::before{content:""; position:absolute; inset:0; opacity:.08; background:
+  radial-gradient(circle at 15% 20%, #fff 0 2px, transparent 2px),
+  radial-gradient(circle at 80% 60%, #fff 0 2px, transparent 2px);
+  background-size:90px 90px}
+.band h2, .band h3{color:#FFF7EA}
+.band .kicker{color:var(--peach-soft)}
+.band p{color:#D7E3CE}
+.band .split .quote{color:#FFF3DF; border-color:var(--peach)}
+.band .imgcap{color:#A9BCA0}
+
+/* mission stat row */
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:54px}
+.stat{background:rgba(255,247,234,.07); border:1px solid rgba(255,247,234,.16); border-radius:var(--r); padding:28px 24px; text-align:center}
+.stat .big{font-family:'Yellowtail',cursive; font-size:2rem; color:var(--peach-soft); line-height:1.2}
+.stat p{font-size:.85rem; margin-top:8px}
+
+/* gallery */
+.gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+.gitem{border-radius:14px; overflow:hidden; border:1px solid var(--line); position:relative; cursor:pointer; background:var(--paper); padding:0; aspect-ratio:4/3}
+.gitem img{width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease)}
+.gitem:hover img{transform:scale(1.05)}
+.gitem::after{content:attr(data-label); position:absolute; left:14px; bottom:12px; z-index:2;
+  font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:#FFF7EA; font-weight:700;
+  opacity:0; transition:opacity .3s; text-shadow:0 2px 8px rgba(0,0,0,.8)}
+.gitem::before{content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(0deg, rgba(20,53,31,.65), transparent 45%); opacity:0; transition:opacity .3s}
+.gitem:hover::after, .gitem:hover::before{opacity:1}
+.gitem:focus-visible{outline:3px solid var(--red); outline-offset:2px}
+
+/* lightbox */
+.lightbox{position:fixed; inset:0; z-index:200; background:rgba(18,30,18,.92); backdrop-filter:blur(8px);
+  display:none; align-items:center; justify-content:center; padding:4vh 4vw; cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%; max-height:100%; border-radius:12px; box-shadow:0 40px 120px rgba(0,0,0,.8)}
+
+/* cta */
+.cta{text-align:center; padding:130px 0; position:relative; overflow:hidden}
+.cta-bg{position:absolute; inset:0}
+.cta-bg img{width:100%; height:100%; object-fit:cover}
+.cta-bg::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,53,31,.72), rgba(20,53,31,.55))}
+.cta .wrap{position:relative; z-index:2}
+.cta .script-lead{font-family:'Yellowtail',cursive; font-size:clamp(1.5rem,3vw,2.2rem); color:var(--peach-soft)}
+.cta h2{font-size:clamp(2.2rem,5.4vw,3.8rem); color:#FFF7EA; margin:10px 0 16px}
+.cta p{color:#EDE4CF; max-width:52ch; margin:0 auto 40px}
+.cta .ig{margin-top:30px; font-size:.8rem; letter-spacing:.24em; text-transform:uppercase; color:#D7E3CE; font-weight:600}
+.cta .ig a{color:var(--peach-soft); border-bottom:1px solid var(--peach-soft)}
+
+/* footer */
+footer{border-top:1px solid var(--line); padding:38px 0; color:var(--muted); font-size:.82rem; background:var(--cream2)}
+footer .frow{display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap}
+footer a{color:var(--red); font-weight:600}
+footer a:hover{text-decoration:underline}
+
+/* reveal */
+.js-ready .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s var(--ease), transform .7s var(--ease)}
+.js-ready .reveal.in{opacity:1; transform:none}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1; transform:none; transition:none}
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms !important; animation:none !important}
+}
+
+@media (max-width:980px){
+  .icards{grid-template-columns:repeat(2,1fr)}
+  .split{grid-template-columns:1fr; gap:36px}
+  .stats{grid-template-columns:1fr; gap:14px}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){
+  .icards{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr}
+  .nav .btn{display:none}
+  section{padding:72px 0}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr" class="hero-nav">
+  <div class="wrap nav">
+    <a href="#top" aria-label="Ace Energy home">
+      <span class="wordmark">Ace Energy</span>
+      <span class="byline">presented by Social Fire Solutions</span>
+    </a>
+    <a class="btn btn-red" href="https://www.drinkaceenergy.com/" target="_blank" rel="noopener">Grab Your Ace</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" style="padding:0">
+  <div class="hero-bg" aria-hidden="true"><img src="/ace/assets/hero.jpg" alt="" fetchpriority="high" /></div>
+  <div class="hero-inner">
+    <div class="script-lead">The golf energy drink</div>
+    <h1>An Ace a Day Keeps the Bogeys Away</h1>
+    <p class="lead">Clean energy, sharp focus and back-nine composure — built by two brothers on a mission to get a can on every golf course in America.</p>
+    <div class="btns">
+      <a class="btn btn-red" href="https://www.drinkaceenergy.com/" target="_blank" rel="noopener">Shop Ace Energy</a>
+      <a class="btn btn-ghost" style="border-color:#FFF7EA; color:#FFF7EA" href="#story">Meet the Brothers</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Clean Energy <i>·</i> Sharp Focus <i>·</i> Lower Scores <i>·</i> Beat the Bogey Man <i>·</i></span>
+    <span>Clean Energy <i>·</i> Sharp Focus <i>·</i> Lower Scores <i>·</i> Beat the Bogey Man <i>·</i></span>
+    <span>Clean Energy <i>·</i> Sharp Focus <i>·</i> Lower Scores <i>·</i> Beat the Bogey Man <i>·</i></span>
+    <span>Clean Energy <i>·</i> Sharp Focus <i>·</i> Lower Scores <i>·</i> Beat the Bogey Man <i>·</i></span>
+  </div>
+</div>
+
+<!-- WHAT'S IN THE CAN -->
+<section>
+  <div class="wrap">
+    <div class="sechead reveal">
+      <span class="kicker">Built for the course</span>
+      <h2>Not a Jolt and a Crash.<br/>A <span class="script" style="font-size:1.15em">lift</span> That Lasts 18.</h2>
+      <p>Most energy drinks are built for a warehouse shift. Ace Energy is built for the focus, patience and steady hands the game actually demands.</p>
+    </div>
+    <div class="icards">
+      <div class="icard reveal">
+        <div class="num">150mg</div>
+        <h3>Green-Tea Caffeine</h3>
+        <p>Smooth, clean energy from green tea — enough to stay sharp from the first tee to the eighteenth green, without the shakes over a four-footer.</p>
+      </div>
+      <div class="icard reveal">
+        <div class="num">01</div>
+        <h3>Ashwagandha</h3>
+        <p>The composure ingredient. Helps you stay level after the double bogey instead of letting one hole wreck the card.</p>
+      </div>
+      <div class="icard reveal">
+        <div class="num">02</div>
+        <h3>L-Theanine</h3>
+        <p>Paired with caffeine for calm, locked-in focus — alert, never wired. Quiet the noise, see the line.</p>
+      </div>
+      <div class="icard reveal">
+        <div class="num">03</div>
+        <h3>Organic Cane Sugar</h3>
+        <p>Real ingredients you can pronounce. Nothing artificial standing between you and your best round.</p>
+      </div>
+    </div>
+    <p class="finenote">16 fl oz per can. Enjoy one before the round, and watch the bogeys keep their distance.</p>
+  </div>
+</section>
+
+<!-- COASTAL PEACH -->
+<section style="background:var(--cream2); border-top:1px solid var(--line); border-bottom:1px solid var(--line)">
+  <div class="wrap split">
+    <div class="imgcard reveal"><img src="/ace/assets/peach-still.jpg" alt="An ice-cold Ace Energy Coastal Peach can surrounded by crushed ice, fresh peaches and a golf ball" loading="lazy" /></div>
+    <div class="reveal">
+      <span class="kicker">The flavor</span>
+      <h2>Coastal <span class="script" style="font-size:1.15em">Peach</span></h2>
+      <p>Ripe peach with an ocean-air finish — crisp, bright and dangerously easy to drink on a warm back nine. The can wears the course it was made for: cliffs, surf, seabirds and a ball tracking toward the pin.</p>
+      <p><strong>Cold out of the cooler on the turn</strong>, it tastes like the good part of summer. And at 16 ounces, it's built to go the distance.</p>
+      <div class="quote">"Show up sharp. Bring your best energy to the first tee and carry it to the eighteenth green."</div>
+      <a class="btn btn-primary" href="https://www.drinkaceenergy.com/" target="_blank" rel="noopener">Get the 12-Pack</a>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="kicker">The story</span>
+      <h2>Two Brothers,<br/>One Bet on Each Other</h2>
+      <p>Ace Energy isn't a founder-and-cofounder arrangement stitched together by a pitch deck. It's <strong>Trevor Soderholm, a Northern California firefighter</strong>, and his brother <strong>Tommy, a Southern California entrepreneur</strong>, who looked at each other and asked one simple question:</p>
+      <div class="quote">What could we make if we made it side by side?</div>
+      <p>The point was never just to launch a drink. It was the doing of it — the early mornings, the phone calls, the wins and setbacks, and the shared belief that two people pushing in the same direction reach places neither could alone.</p>
+      <p>Golf understands this instinctively. You play your own ball — but the best rounds of your life happen with people pulling for you. Ace Energy was born in that spirit.</p>
+    </div>
+    <div>
+      <div class="imgcard reveal"><img src="/ace/assets/brothers-activation.jpg" alt="Tommy and Trevor Soderholm live at an Ace Energy activation booth, Coastal Peach cans stacked in front of them" loading="lazy" /></div>
+      <p class="imgcap reveal">Tommy &amp; Trevor Soderholm — live at an Ace Energy activation</p>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION BAND -->
+<section class="band">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <span class="kicker">The mission</span>
+      <h2>A Can on Every Golf Course</h2>
+      <p>Not growth as a spreadsheet metric — growth as a way of living. Keep climbing, keep building, and find out what's actually possible when you refuse to do it alone.</p>
+    </div>
+    <div class="imgcard reveal" style="border-color:rgba(255,247,234,.2)"><img src="/ace/assets/together-sunset.jpg" alt="Two brothers walking up the eighteenth fairway together at sunset, golf bags on their shoulders" loading="lazy" /></div>
+    <div class="stats">
+      <div class="stat reveal">
+        <div class="big">Show up sharp</div>
+        <p>An ace isn't just a hole-in-one. It's a standard — the version of you that plays loose, confident and present.</p>
+      </div>
+      <div class="stat reveal">
+        <div class="big">Together &gt; alone</div>
+        <p>Alone you can go fast. Together you can go somewhere that actually matters.</p>
+      </div>
+      <div class="stat reveal">
+        <div class="big">Every course</div>
+        <p>From muni tracks to country clubs — the mission is a cooler full of Ace behind every pro shop counter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACE ATHLETES -->
+<section>
+  <div class="wrap split">
+    <div class="imgcard reveal"><img src="/ace/assets/poster.jpg" alt="Vintage-style Ace Energy poster illustration of a coastal golf hole with peaches and a ball arcing toward the pin" loading="lazy" /></div>
+    <div class="reveal">
+      <span class="kicker">The community</span>
+      <h2>Become an <span class="script" style="font-size:1.15em">Ace Athlete</span></h2>
+      <p>Ace Energy doesn't have customers so much as it has <strong>ace athletes</strong> — a growing crew of golfers who've decided they want the edge, the standard, and the people who hold them to it.</p>
+      <p>You don't apply. You don't qualify. <strong>You opt in with a mindset:</strong> bring your best energy, pull for the people next to you, and keep the bogeys — on the card and everywhere else — at a respectful distance.</p>
+      <p>Follow the journey, rep the ball, and drink the drink that believes your ceiling is higher than you think.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:28px">
+        <a class="btn btn-primary" href="https://www.drinkaceenergy.com/" target="_blank" rel="noopener">Join the Ace Athletes</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/ace_energydrink/" target="_blank" rel="noopener">@ace_energydrink</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section style="background:var(--cream2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding-bottom:110px">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <span class="kicker">On the course</span>
+      <h2>Life With an <span class="script" style="font-size:1.15em">Ace</span> in Hand</h2>
+    </div>
+    <div class="gallery">
+      <button class="gitem reveal" data-label="First Tee, First Can"><img src="/ace/assets/tee-shot.jpg" alt="Ace Energy Coastal Peach can on the tee box at sunrise as a golfer swings in the background" loading="lazy"/></button>
+      <button class="gitem reveal" data-label="The 12-Pack"><img src="/ace/assets/coastal-peach-12pack.jpg" alt="Ace Energy Coastal Peach 12-pack on the fairway beside a logo golf ball and wedge" loading="lazy"/></button>
+      <button class="gitem reveal" data-label="Rep the Ball"><img src="/ace/assets/ace-golfball.jpg" alt="Ace Energy logo golf ball sitting on the lip of the cup beside the flagstick" loading="lazy"/></button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" style="padding:0; margin:0">
+  <div class="cta-bg" aria-hidden="true"><img src="/ace/assets/tee-shot.jpg" alt="" loading="lazy" /></div>
+  <div class="wrap reveal" style="padding-top:130px; padding-bottom:130px">
+    <div class="script-lead">Ready when you are</div>
+    <h2>Grab Your Ace</h2>
+    <p>Clean energy. Sharp focus. Lower scores. The bogey man doesn't stand a chance.</p>
+    <a class="btn btn-red" style="font-size:1rem; padding:20px 46px" href="https://www.drinkaceenergy.com/" target="_blank" rel="noopener">Shop drinkaceenergy.com
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <div class="ig">Follow along — <a href="https://www.instagram.com/ace_energydrink/" target="_blank" rel="noopener">@ace_energydrink</a></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap frow">
+    <span>&copy; 2026 Ace Energy. All rights reserved.</span>
+    <span>Page crafted by <a href="https://socialfire.solutions">Social Fire Solutions</a></span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+  <img id="lightbox-img" alt="" />
+</div>
+
+<script>
+// header scroll state
+try{
+  const hdr = document.getElementById('hdr');
+  addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 24), {passive:true});
+}catch(e){}
+
+// reveal on scroll — safety net: force-show anything not revealed within 2.5s
+try{
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }), {threshold:.12});
+  reveals.forEach(el => io.observe(el));
+  setTimeout(() => reveals.forEach(el => el.classList.add('in')), 2500);
+}catch(e){
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+}
+
+// lightbox
+try{
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.gitem').forEach(b => b.addEventListener('click', () => {
+    const img = b.querySelector('img');
+    lbImg.src = img.src; lbImg.alt = img.alt;
+    lb.classList.add('open');
+  }));
+  lb.addEventListener('click', () => lb.classList.remove('open'));
+  addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+}catch(e){}
+</script>
+
+</body>
+</html>
