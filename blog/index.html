@@ -20,6 +20,7 @@
   --sky-2:#38BDF8;
   --sky-3:#0284C7;
   --skyburn:linear-gradient(100deg,#BAE6FD,#38BDF8 45%,#0284C7);
+  --burn:linear-gradient(100deg,#FFB020,#F2531B 50%,#C81E1E);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -116,7 +117,8 @@ nav.scrolled{background:rgba(10,10,11,.82);backdrop-filter:blur(14px);border-col
 .soon{margin-top:26px;border:1px dashed rgba(255,255,255,.14);border-radius:18px;padding:26px 30px;
   display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
 .soon span{color:var(--ash);font-size:14.5px;}
-.soon b{color:var(--sky-1);font-weight:600;}
+.soon b{font-weight:600;background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 14px rgba(242,83,27,.45));}
 
 /* ---------- CTA ---------- */
 .cta{padding:90px 0 110px;text-align:center;}
