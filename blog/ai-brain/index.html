@@ -99,6 +99,27 @@ article{padding:70px 0 30px;}
 .prose li b{font-weight:600;background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 0 14px rgba(242,83,27,.45));}
 
+/* ---------- THE PURPLE CRYSTAL ---------- */
+.crystal{padding:30px 0 10px;}
+.crystal-box{
+  border:1px solid rgba(168,85,247,.35);border-radius:24px;overflow:hidden;
+  background:
+    radial-gradient(120% 140% at 50% 0%,rgba(168,85,247,.16),transparent 60%),
+    radial-gradient(120% 140% at 50% 100%,rgba(126,34,206,.12),transparent 60%),
+    #120F18;
+  box-shadow:0 30px 90px -30px rgba(168,85,247,.45),inset 0 1px 0 rgba(233,213,255,.14);
+}
+.crystal-body{padding:clamp(36px,5vw,64px);text-align:center;}
+.crystal-body .step{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:#C084FC;font-weight:600;display:inline-block;margin-bottom:16px;}
+.crystal-body h2{font-size:clamp(30px,4.2vw,50px);margin-bottom:18px;}
+.violet{background:linear-gradient(100deg,#E9D5FF,#A855F7 45%,#7E22CE);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 16px rgba(168,85,247,.5));}
+.crystal-body p{color:#CBBFDA;font-size:17px;font-weight:300;max-width:560px;margin:0 auto;}
+.crystal-fig{position:relative;}
+.crystal-fig img{width:100%;display:block;}
+.crystal-fig .grade{position:absolute;inset:0;background:linear-gradient(180deg,#120F18 0%,transparent 22%);}
+.crystal-cap{padding:14px 20px;color:#9F8FB5;font-size:13px;letter-spacing:.08em;text-align:center;background:#120F18;border-top:1px solid rgba(168,85,247,.2);}
+
 /* ---------- CTA ---------- */
 .cta{padding:80px 0 110px;}
 .cta-box{
@@ -186,6 +207,24 @@ footer .copy{color:var(--ash);font-size:13px;letter-spacing:.04em;}
     </div>
   </div>
 </article>
+
+<!-- ===== THE PURPLE CRYSTAL ===== -->
+<section class="crystal">
+  <div class="wrap">
+    <div class="crystal-box reveal">
+      <div class="crystal-body">
+        <span class="step">So where do you start?</span>
+        <h2>Step One: Find the <span class="violet">Purple Crystal</span></h2>
+        <p>Every AI brain we build begins the same strange way — with a purple crystal. What it is, and why it comes first, is something we'd rather show you than tell you. For now, all you need to know: it glows, it remembers, and it's waiting for you.</p>
+      </div>
+      <div class="crystal-fig">
+        <img src="/media/the-purple-crystal.webp" alt="A glowing purple crystal on a mossy stone pedestal, deep in the jungle" loading="lazy">
+        <div class="grade"></div>
+      </div>
+      <div class="crystal-cap">Step one. The Purple Crystal.</div>
+    </div>
+  </div>
+</section>
 
 <!-- ===== CTA ===== -->
 <section class="cta">
