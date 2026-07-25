@@ -129,6 +129,8 @@ nav.scrolled{
 }
 .brand b{font-weight:700;}
 .brand span{color:var(--ash);font-weight:400;}
+.nav-blog{color:var(--ash);text-decoration:none;font-size:14px;font-weight:500;transition:color .25s;}
+.nav-blog:hover{color:#7DD3FC;}
 nav .nav-cta{display:none;}
 @media(min-width:760px){nav .nav-cta{display:inline-flex;padding:12px 24px;min-height:0;}}
 
@@ -437,7 +439,10 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 <!-- ===== NAV ===== -->
 <nav id="nav">
   <div class="brand"><span class="flame"></span><b>Social Fire</b>&nbsp;<span>Solutions</span></div>
-  <a href="#book" class="btn btn-primary nav-cta js-book">Get Started</a>
+  <div style="display:flex;align-items:center;gap:22px;">
+    <a href="/blog" class="nav-blog">The Blog</a>
+    <a href="#book" class="btn btn-primary nav-cta js-book">Get Started</a>
+  </div>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -691,6 +696,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
   <div class="wrap">
     <div class="brand"><span class="flame"></span><b>Social Fire</b>&nbsp;<span>Solutions</span></div>
     <div class="tag">Spread like fire</div>
+    <a href="/blog" class="nav-blog">The Blue Flame — our blog</a>
     <div class="copy">© 2026 Social Fire Solutions. All rights reserved.</div>
   </div>
 </footer>

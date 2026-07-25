@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Blue Flame — The Social Fire Solutions Blog</title>
+<meta name="description" content="The Blue Flame — the Social Fire Solutions journal. Ideas on brands, AI brains, and spreading like fire. Written where the fire burns hottest.">
+<link rel="icon" href="/media/favicon.png">
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --onyx:#0A0A0B;
+  --carbon:#161618;
+  --ivory:#F4F1EA;
+  --ash:#9A9AA0;
+  --sky-1:#BAE6FD;
+  --sky-2:#38BDF8;
+  --sky-3:#0284C7;
+  --skyburn:linear-gradient(100deg,#BAE6FD,#38BDF8 45%,#0284C7);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--onyx);
+  color:var(--ivory);
+  font-family:'Inter',sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--sky-2);color:#062A3A;}
+h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.08;font-weight:700;}
+.sky{background:var(--skyburn);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px;width:100%;}
+.eyebrow{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--sky-2);font-weight:600;display:inline-block;}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 32px;transition:background .4s,backdrop-filter .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(10,10,11,.82);backdrop-filter:blur(14px);border-color:rgba(56,189,248,.14);}
+.brand{display:flex;align-items:center;gap:10px;font-size:17px;letter-spacing:.01em;text-decoration:none;color:var(--ivory);}
+.brand b{font-weight:700;}
+.brand span{color:var(--ash);font-weight:400;}
+.flame{width:12px;height:12px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--skyburn);box-shadow:0 0 14px rgba(56,189,248,.8);}
+.nav-links{display:flex;align-items:center;gap:22px;}
+.nav-links a{color:var(--ash);text-decoration:none;font-size:14px;font-weight:500;transition:color .25s;}
+.nav-links a:hover{color:var(--sky-1);}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Inter';font-weight:600;font-size:15px;
+  padding:14px 26px;border-radius:50px;border:1px solid transparent;
+  cursor:pointer;text-decoration:none;transition:transform .25s ease,box-shadow .3s ease;
+  min-height:44px;
+}
+.btn-sky{background:var(--skyburn);color:#062A3A;box-shadow:0 12px 36px -8px rgba(56,189,248,.55);}
+.btn-sky:hover{transform:translateY(-2px);box-shadow:0 18px 50px -8px rgba(56,189,248,.7);}
+.btn .arrow{transition:transform .25s ease;}
+.btn:hover .arrow{transform:translateX(4px);}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;min-height:72vh;display:flex;align-items:flex-end;
+  padding:140px 0 70px;overflow:hidden;
+}
+.hero-media{position:absolute;inset:0;z-index:0;}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 70%;opacity:.9;}
+.hero-grade{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(10,10,11,.72) 0%,rgba(10,10,11,.25) 45%,rgba(10,10,11,.92) 100%);}
+.hero-content{position:relative;z-index:2;}
+.hero h1{font-size:clamp(46px,7.5vw,96px);margin:16px 0 18px;}
+.hero p{color:#C8D9E4;font-size:clamp(16px,1.6vw,19px);max-width:560px;text-shadow:0 2px 18px rgba(0,0,0,.6);}
+
+/* ---------- POSTS ---------- */
+.posts{padding:90px 0 40px;}
+.posts .lede{display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:44px;}
+.posts h2{font-size:clamp(28px,3.4vw,42px);}
+.posts .count{color:var(--ash);font-size:13px;letter-spacing:.2em;text-transform:uppercase;}
+
+.post-card{
+  display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(26px,4vw,52px);align-items:center;
+  border:1px solid rgba(56,189,248,.28);border-radius:24px;overflow:hidden;
+  background:
+    radial-gradient(120% 140% at 10% 0%,rgba(56,189,248,.12),transparent 55%),
+    radial-gradient(120% 140% at 90% 100%,rgba(2,132,199,.10),transparent 60%),
+    #101318;
+  box-shadow:0 30px 80px -30px rgba(56,189,248,.35),inset 0 1px 0 rgba(186,230,253,.1);
+  text-decoration:none;color:var(--ivory);
+  transition:transform .3s ease,box-shadow .35s ease,border-color .35s ease;
+}
+.post-card:hover{transform:translateY(-4px);border-color:rgba(56,189,248,.55);
+  box-shadow:0 40px 100px -30px rgba(56,189,248,.5),inset 0 1px 0 rgba(186,230,253,.14);}
+.post-card .thumb{align-self:stretch;min-height:300px;position:relative;}
+.post-card .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.post-card .body{padding:clamp(26px,3.5vw,48px);padding-left:0;}
+.post-card .meta{display:flex;gap:14px;align-items:center;color:var(--ash);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;}
+.post-card .meta .no{color:var(--sky-2);font-weight:600;}
+.post-card h3{font-size:clamp(26px,3vw,38px);margin-bottom:14px;}
+.post-card p{color:var(--ash);font-size:15.5px;max-width:480px;}
+.post-card .read{display:inline-flex;align-items:center;gap:10px;margin-top:22px;color:var(--sky-1);font-weight:600;font-size:15px;}
+.post-card .read .arrow{transition:transform .25s ease;}
+.post-card:hover .read .arrow{transform:translateX(5px);}
+@media(max-width:820px){
+  .post-card{grid-template-columns:1fr;}
+  .post-card .thumb{min-height:230px;}
+  .post-card .body{padding:26px;padding-top:0;}
+}
+
+/* Soon strip */
+.soon{margin-top:26px;border:1px dashed rgba(255,255,255,.14);border-radius:18px;padding:26px 30px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.soon span{color:var(--ash);font-size:14.5px;}
+.soon b{color:var(--sky-1);font-weight:600;}
+
+/* ---------- CTA ---------- */
+.cta{padding:90px 0 110px;text-align:center;}
+.cta h2{font-size:clamp(32px,4.6vw,56px);margin-bottom:14px;}
+.cta p{color:var(--ash);max-width:520px;margin:0 auto 30px;}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid rgba(255,255,255,.07);padding:50px 0;}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;}
+footer .tag{color:var(--sky-2);font-size:13px;letter-spacing:.22em;text-transform:uppercase;}
+footer .copy{color:var(--ash);font-size:13px;letter-spacing:.04em;}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <a class="brand" href="/"><span class="flame"></span><b>Social Fire</b>&nbsp;<span>Solutions</span></a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/ai-brain-form" class="btn btn-sky">Schedule a Call</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-media">
+    <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260725_135419_9fc3cce6-1f7f-4044-9436-2e4ede2dd7a9_min.webp" alt="A flame burning sky blue against the dark">
+    <div class="hero-grade"></div>
+  </div>
+  <div class="wrap hero-content">
+    <span class="eyebrow reveal">The Social Fire Solutions Blog</span>
+    <h1 class="reveal">The <span class="sky">Blue Flame</span></h1>
+    <p class="reveal">The hottest part of any fire burns blue. This is where we write from — ideas on brands, AI brains, and building things that spread.</p>
+  </div>
+</header>
+
+<!-- ===== POSTS ===== -->
+<section class="posts">
+  <div class="wrap">
+    <div class="lede reveal">
+      <h2>Latest from the flame</h2>
+      <span class="count">No. 001</span>
+    </div>
+
+    <a class="post-card reveal" href="/blog/ai-brain">
+      <div class="thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260725_135426_99ecb9ed-41ea-47cd-9a6a-7bcf698ea540_min.webp" alt="A brain made of sky-blue fire and circuitry"></div>
+      <div class="body">
+        <div class="meta"><span class="no">No. 001</span><span>·</span><span>AI Brains</span></div>
+        <h3>Why You Need Your Own <span class="sky">AI Brain</span></h3>
+        <p>For years, big companies organized your data for their benefit. It's time to organize your business for yours — and think like Iron Man while you do it.</p>
+        <span class="read">Read the article <span class="arrow">→</span></span>
+      </div>
+    </a>
+
+    <div class="soon reveal">
+      <span><b>More coming.</b> The Blue Flame is just getting lit — new articles land here as we write them.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta">
+  <div class="wrap reveal">
+    <h2>Ready to spread like <span class="sky">fire?</span></h2>
+    <p>Tell us what you're building and we'll show you what it looks like on fire.</p>
+    <a href="/ai-brain-form" class="btn btn-sky">Schedule a Call <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/"><span class="flame"></span><b>Social Fire</b>&nbsp;<span>Solutions</span></a>
+    <div class="tag">Spread like fire</div>
+    <div class="copy">© 2026 Social Fire Solutions. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  const onScroll = ()=> nav.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:0.14, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>
