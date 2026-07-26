@@ -176,6 +176,8 @@ section{padding:104px 0; position:relative}
 .svc .num{font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:var(--brass-soft); letter-spacing:.1em; margin-bottom:14px}
 .svc h3{font-size:1.42rem; margin-bottom:10px}
 .svc p{font-size:.94rem; color:#B4A78E}
+.svc-wide{margin-top:26px}
+.svc-wide .imgcard{box-shadow:0 34px 80px -30px rgba(0,0,0,.7)}
 @media(max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.svc-grid{grid-template-columns:1fr}}
 
@@ -194,6 +196,7 @@ section{padding:104px 0; position:relative}
 /* casa kuro */
 .kuro{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center}
 .kuro .imgcard{box-shadow:0 34px 80px -30px rgba(0,0,0,.65)}
+.kuro-brand{max-width:250px; margin:20px auto 0; box-shadow:0 20px 46px -22px rgba(0,0,0,.75)}
 @media(max-width:900px){.kuro{grid-template-columns:1fr; gap:40px}}
 
 /* team */
@@ -224,6 +227,8 @@ section{padding:104px 0; position:relative}
 .contact-info .alt{border-top:1px solid var(--line-dark); margin-top:30px; padding-top:26px}
 .contact-info .alt a{color:var(--brass-soft); font-weight:600}
 .contact-info .alt a:hover{text-decoration:underline}
+.contact-img{margin-top:30px; aspect-ratio:4/5}
+.contact-img img{width:100%; height:100%; object-fit:cover; object-position:center 62%}
 form.lead-form{background:rgba(252,248,238,.04); border:1px solid var(--line-dark); border-radius:var(--r); padding:36px}
 @media(max-width:640px){form.lead-form{padding:26px 20px}}
 .field{margin-bottom:18px}
@@ -359,6 +364,10 @@ footer .fsmall{font-size:.78rem}
         <p>The unglamorous machinery behind every effortless night — systems, standards, and day-to-day operational support that keep the experience exceptional.</p>
       </div>
     </div>
+    <div class="svc-wide reveal">
+      <div class="imgcard"><img src="/on-brand-hospitality/assets/the-pass.jpg" alt="A chef plating a dish at the pass under a single brass pendant light" loading="lazy" /></div>
+      <p class="imgcap">The pass at service — where all six disciplines meet the plate</p>
+    </div>
   </div>
 </section>
 
@@ -405,7 +414,10 @@ footer .fsmall{font-size:.78rem}
 <!-- CASA KURO -->
 <section id="kuro" class="dark">
   <div class="wrap kuro">
-    <div class="imgcard reveal"><img src="/on-brand-hospitality/assets/casa-kuro.jpg" alt="Casa Kuro — the next On Brand Hospitality concept, coming soon" loading="lazy" /></div>
+    <div>
+      <div class="imgcard reveal"><img src="/on-brand-hospitality/assets/kuro-room.jpg" alt="A dark, minimalist dining room under a single warm pendant light — the mood of Casa Kuro, coming soon" loading="lazy" /></div>
+      <div class="imgcard reveal kuro-brand"><img src="/on-brand-hospitality/assets/casa-kuro.jpg" alt="Casa Kuro — an On Brand Hospitality concept" loading="lazy" /></div>
+    </div>
     <div class="reveal">
       <span class="kicker">Coming Soon</span>
       <h2>The next room is already being built.</h2>
@@ -464,6 +476,8 @@ footer .fsmall{font-size:.78rem}
         <p>Follow along: <a href="https://www.instagram.com/onbrandhospitality" target="_blank" rel="noopener">@onbrandhospitality</a></p>
         <p>The flagship: <a href="https://cafeoliviatx.com" target="_blank" rel="noopener">cafeoliviatx.com</a></p>
       </div>
+      <div class="imgcard reveal contact-img"><img src="/on-brand-hospitality/assets/table-for-two.jpg" alt="A candlelit table set for two, waiting" loading="lazy" /></div>
+      <p class="imgcap">Your table is already waiting</p>
     </div>
     <div class="reveal">
       <form class="lead-form" id="leadForm" novalidate>
