@@ -194,10 +194,16 @@ section{padding:104px 0; position:relative}
 @media(max-width:700px){.locs{grid-template-columns:1fr}}
 
 /* casa kuro */
-.kuro{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center}
-.kuro .imgcard{box-shadow:0 34px 80px -30px rgba(0,0,0,.65)}
-.kuro-brand{max-width:250px; margin:20px auto 0; box-shadow:0 20px 46px -22px rgba(0,0,0,.75)}
-@media(max-width:900px){.kuro{grid-template-columns:1fr; gap:40px}}
+#kuro{overflow:hidden}
+.kuro-sky{position:absolute; inset:0; z-index:0}
+.kuro-sky img{width:100%; height:100%; object-fit:cover; object-position:center 40%; opacity:.72}
+.kuro-sky::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, var(--ink) 0%, rgba(21,17,13,.44) 28%, rgba(21,17,13,.5) 68%, var(--ink) 100%)}
+#kuro h2, #kuro p, #kuro .kicker, #kuro .imgcap{text-shadow:0 2px 14px rgba(12,8,4,.75)}
+.kuro{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; position:relative; z-index:1}
+.kuro .imgcard{box-shadow:0 40px 90px -26px rgba(0,0,0,.8)}
+.kuro-brand{max-width:430px}
+#kuro .imgcap{color:#C9BCA2; text-align:left; padding-left:4px}
+@media(max-width:900px){.kuro{grid-template-columns:1fr; gap:40px} .kuro-brand{max-width:none}}
 
 /* team */
 .team{display:grid; grid-template-columns:1fr 1fr; gap:26px; max-width:980px; margin:0 auto}
@@ -413,10 +419,11 @@ footer .fsmall{font-size:.78rem}
 
 <!-- CASA KURO -->
 <section id="kuro" class="dark">
+  <div class="kuro-sky" aria-hidden="true"><img src="/on-brand-hospitality/assets/clouds.jpg" alt="" loading="lazy" /></div>
   <div class="wrap kuro">
     <div>
-      <div class="imgcard reveal"><img src="/on-brand-hospitality/assets/kuro-room.jpg" alt="A dark, minimalist dining room under a single warm pendant light — the mood of Casa Kuro, coming soon" loading="lazy" /></div>
       <div class="imgcard reveal kuro-brand"><img src="/on-brand-hospitality/assets/casa-kuro.jpg" alt="Casa Kuro — an On Brand Hospitality concept" loading="lazy" /></div>
+      <p class="imgcap">Still in the clouds — for now</p>
     </div>
     <div class="reveal">
       <span class="kicker">Coming Soon</span>
