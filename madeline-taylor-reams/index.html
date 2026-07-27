@@ -95,16 +95,25 @@ a{color:inherit; text-decoration:none}
 .kicker{font-size:.72rem; letter-spacing:.32em; text-transform:uppercase; color:var(--sea); font-weight:700}
 .script{font-family:'Fraunces',serif; font-style:italic; font-weight:400; letter-spacing:0; text-transform:none}
 
-/* buttons */
+/* buttons — glossy + sheen sweep */
 .btn{
   display:inline-flex; align-items:center; gap:.6rem; cursor:pointer;
   font-weight:600; font-size:.84rem; letter-spacing:.12em; text-transform:uppercase;
   padding:17px 34px; border-radius:999px; border:2px solid transparent;
+  position:relative; overflow:hidden; isolation:isolate;
   transition:transform .22s var(--ease), box-shadow .22s var(--ease), background .22s, border-color .22s, color .22s;
 }
-.btn-primary{background:var(--sea); color:#F4FBF9; box-shadow:0 14px 32px -12px rgba(51,96,107,.55)}
-.btn-primary:hover{transform:translateY(-3px); background:var(--sea-deep); box-shadow:0 20px 40px -12px rgba(35,71,80,.6)}
-.btn-sand{background:var(--sand); color:#FFF9EF; box-shadow:0 14px 32px -12px rgba(200,155,108,.55)}
+.btn::before{content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:1;
+  background:linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.06) 46%, rgba(0,0,0,.06))}
+.btn::after{content:""; position:absolute; top:-20%; bottom:-20%; left:-60%; width:38%; pointer-events:none; z-index:2;
+  background:linear-gradient(105deg, rgba(255,255,255,0), rgba(255,255,255,.5) 50%, rgba(255,255,255,0));
+  transform:skewX(-20deg); animation:sheen 4.6s var(--ease) infinite}
+@keyframes sheen{0%{left:-60%}52%{left:130%}100%{left:130%}}
+.btn:hover::after{animation-duration:1.1s}
+@media (prefers-reduced-motion: reduce){.btn::after{animation:none; display:none}}
+.btn-primary{background:var(--sea); color:#F4FBF9; box-shadow:0 14px 32px -12px rgba(51,96,107,.55), inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-primary:hover{transform:translateY(-3px); background:var(--sea-deep); box-shadow:0 20px 40px -12px rgba(35,71,80,.6), inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-sand{background:var(--sand); color:#FFF9EF; box-shadow:0 14px 32px -12px rgba(200,155,108,.55), inset 0 1px 0 rgba(255,255,255,.4)}
 .btn-sand:hover{transform:translateY(-3px); background:var(--sand-deep)}
 .btn-ghost{border-color:var(--sea); color:var(--sea)}
 .btn-ghost:hover{background:var(--sea); color:var(--shell); transform:translateY(-3px)}
@@ -177,18 +186,23 @@ section{padding:100px 0; position:relative}
 .mcard h3{font-size:1.12rem; margin:14px 0 10px}
 .mcard p{color:var(--ink2); font-size:.92rem}
 
-/* sea band */
-.band{background:var(--sea-deep); color:#E8EFEC; position:relative; overflow:hidden}
-.band::before{content:""; position:absolute; inset:0; opacity:.07; background:
-  radial-gradient(circle at 15% 20%, #fff 0 2px, transparent 2px),
-  radial-gradient(circle at 80% 60%, #fff 0 2px, transparent 2px);
-  background-size:90px 90px}
-.band h2, .band h3{color:#FBF7EC}
+/* sea band — beach backdrop */
+.band{background:var(--sea-deep); color:#F2F6F3; position:relative; overflow:hidden}
+.band-bg{position:absolute; inset:0}
+.band-bg img{width:100%; height:100%; object-fit:cover; object-position:center 60%}
+.band-bg::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(21,42,48,.88), rgba(21,42,48,.72) 45%, rgba(21,42,48,.86))}
+.band h2, .band h3{color:#FFFDF6; text-shadow:0 2px 18px rgba(10,24,28,.6)}
 .band .kicker{color:var(--blush)}
-.band p{color:#C4D3CF}
-.band .quote{color:#F5EFDF; border-color:var(--sand)}
-.band .imgcap{color:#9DB3AE}
+.band p{color:#DCE7E2; text-shadow:0 1px 12px rgba(10,24,28,.55)}
+.band .quote{color:#F8F2E2; border-color:var(--sand)}
+.band .imgcap{color:#B7C8C2}
 .band .wrap{position:relative; z-index:2}
+.band .rcard{background:rgba(16,34,39,.66); border-color:rgba(255,251,242,.22); backdrop-filter:blur(6px)}
+.band .rcard .big{color:var(--blush)}
+.band .rcard p{color:#E3ECE7; text-shadow:none}
+.band .bigquote blockquote{color:#FFFDF6; text-shadow:0 2px 18px rgba(10,24,28,.6)}
+.band .bigquote cite{color:#B7C8C2}
 
 /* animals duo */
 .duo{display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start}
@@ -378,6 +392,7 @@ footer{border-top:1px solid var(--line); background:var(--shell2); padding:34px 
 
 <!-- HER STYLE / BAND -->
 <section class="band">
+  <div class="band-bg" aria-hidden="true"><img src="/madeline-taylor-reams/assets/shore.jpg" alt="" loading="lazy" /></div>
   <div class="wrap">
     <div class="sechead reveal">
       <span class="kicker">What it's like in the room</span>
@@ -385,20 +400,20 @@ footer{border-top:1px solid var(--line); background:var(--shell2); padding:34px 
       <p>Madeline is not the therapist who nods vaguely for fifty minutes. She'll meet you in the hard place, and she won't pretend it isn't hard. But she also won't let you stay stuck there. That combination is rarer than it should be — it's what makes someone safe to fall apart in front of <em>and</em> worth listening to when it's time to stand back up.</p>
     </div>
     <div class="rgrid">
-      <div class="rcard reveal" style="background:rgba(251,247,236,.06); border-color:rgba(251,247,236,.16)">
-        <div class="big" style="color:var(--blush)">Warm</div>
+      <div class="rcard reveal">
+        <div class="big">Warm</div>
         <p>You'll feel, for the length of one conversation, like you're not carrying it alone. Because you're not.</p>
       </div>
-      <div class="rcard reveal" style="background:rgba(251,247,236,.06); border-color:rgba(251,247,236,.16)">
-        <div class="big" style="color:var(--blush)">Direct</div>
+      <div class="rcard reveal">
+        <div class="big">Direct</div>
         <p>No vague nodding. Real questions, honest reflections, and the truth said kindly — even when it's hard.</p>
       </div>
-      <div class="rcard reveal" style="background:rgba(251,247,236,.06); border-color:rgba(251,247,236,.16)">
-        <div class="big" style="color:var(--blush)">Empowering</div>
+      <div class="rcard reveal">
+        <div class="big">Empowering</div>
         <p>The goal is you, standing back up — with boundaries held and a life you don't need to escape from.</p>
       </div>
-      <div class="rcard reveal" style="background:rgba(251,247,236,.06); border-color:rgba(251,247,236,.16)">
-        <div class="big" style="color:var(--blush)">A little humorous</div>
+      <div class="rcard reveal">
+        <div class="big">A little humorous</div>
         <p>Healing is heavy enough. She brings the lightness that makes the hard work possible.</p>
       </div>
     </div>
@@ -466,9 +481,11 @@ footer{border-top:1px solid var(--line); background:var(--shell2); padding:34px 
       <div class="quote">Anyone can be present for your highlight reel. Madeline shows up for the hard seasons — that's the whole point of her.</div>
       <ul class="sidelinks">
         <li>Prefer to browse first? See her practice details on <a href="https://www.psychologytoday.com/us/therapists/madeline-reams-newport-beach-ca/1480023" target="_blank" rel="noopener">Psychology Today</a>.</li>
-        <li>Say hello on Instagram — <a href="https://www.instagram.com/madeline_taylorr" target="_blank" rel="noopener">@madeline_taylorr</a>.</li>
-        <li>Read her full story in <a href="https://thecountryc1ub.com/members/madeline-reams-therapist-newport-beach" target="_blank" rel="noopener">The Country C1ub Member Spotlight</a>.</li>
       </ul>
+      <div style="margin-top:30px">
+        <div class="imgcard"><img src="/madeline-taylor-reams/assets/healing-room.jpg" alt="A warm, calm therapy room in coastal California style — two armchairs in soft natural light" loading="lazy" /></div>
+        <p class="imgcap">The healing room · Newport Beach &amp; online</p>
+      </div>
     </div>
     <div class="reveal">
       <div class="formcard">
@@ -519,7 +536,7 @@ footer{border-top:1px solid var(--line); background:var(--shell2); padding:34px 
 
 <!-- CTA STRIP -->
 <section class="cta">
-  <div class="cta-bg" aria-hidden="true"><img src="/madeline-taylor-reams/assets/beach.jpg" alt="" loading="lazy" /></div>
+  <div class="cta-bg" aria-hidden="true"><img src="/madeline-taylor-reams/assets/harbor.jpg" alt="" loading="lazy" /></div>
   <div class="wrap reveal">
     <div class="script-lead">Newport Beach &amp; online</div>
     <h2>The conversation you've been putting off starts here.</h2>
