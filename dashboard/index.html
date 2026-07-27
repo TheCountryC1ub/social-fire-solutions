@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The Fire Watch — Social Fire Solutions</title>
+<link rel="icon" href="/media/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --onyx:#0A0A0B; --carbon:#161618; --ivory:#F4F1EA; --ash:#9A9AA0;
+  --line:rgba(244,241,234,.08); --sky:#38BDF8; --skydeep:#0284C7;
+  --skyburn:linear-gradient(100deg,#BAE6FD,#38BDF8 45%,#0284C7);
+  --burn:linear-gradient(100deg,#FFB020,#F2531B 50%,#C81E1E);
+  /* form identity colors — validated on carbon (dark) */
+  --c-free:#0284C7; --c-brain:#D97706; --c-ariel:#059669; --c-madeline:#8B5CF6; --c-obh:#E11D48;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--onyx);color:var(--ivory);font-family:'Inter',sans-serif;font-size:15px;line-height:1.5;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(60% 34% at 50% -8%,rgba(56,189,248,.14),transparent 70%)}
+a{color:var(--sky);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:34px 22px 60px}
+
+/* ---------- gate ---------- */
+#gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+  background:rgba(10,10,11,.92);backdrop-filter:blur(8px)}
+#gate .card{width:min(400px,92vw);background:var(--carbon);border:1px solid var(--line);border-radius:14px;
+  padding:38px 34px;text-align:center}
+#gate .flame{font-size:30px;margin-bottom:10px}
+#gate h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin-bottom:4px}
+#gate p{color:var(--ash);font-size:13px;margin-bottom:22px}
+#gate input{width:100%;padding:12px 14px;border-radius:9px;border:1px solid var(--line);
+  background:var(--onyx);color:var(--ivory);font-size:15px;text-align:center;letter-spacing:.12em;outline:none}
+#gate input:focus{border-color:var(--sky)}
+#gate button{width:100%;margin-top:12px;padding:12px;border:0;border-radius:9px;background:var(--skyburn);
+  color:#06263a;font-weight:700;font-size:14px;letter-spacing:.06em;cursor:pointer}
+#gate .err{color:#FB7185;font-size:13px;min-height:20px;margin-top:12px}
+#gate .card.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+
+/* ---------- header ---------- */
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.32em;color:var(--ash);text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,50px);font-weight:800;line-height:1.05}
+h1 .grad{background:var(--skyburn);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--ash);font-size:14px;margin-top:8px;max-width:520px}
+.clockbox{text-align:right}
+#clock{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+#dateline{color:var(--ash);font-size:13px;margin-top:5px}
+.status{display:flex;gap:8px;justify-content:flex-end;margin-top:10px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--ash);
+  border:1px solid var(--line);border-radius:99px;padding:4px 11px;white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--sky);flex:none}
+.dot.live{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(56,189,248,.5)}50%{box-shadow:0 0 0 5px rgba(56,189,248,0)}}
+
+/* ---------- range pills ---------- */
+.ranges{display:flex;align-items:center;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:transparent;color:var(--ash);border-radius:99px;
+  padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.pill:hover{color:var(--ivory)}
+.pill.on{background:var(--skyburn);border-color:transparent;color:#06263a}
+.ranges .note{font-size:11px;color:var(--ash);margin-left:4px}
+
+/* ---------- tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:22px}
+.tile{background:var(--carbon);border:1px solid var(--line);border-radius:12px;padding:16px 16px 13px}
+.tile .k{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ash)}
+.tile .v{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;margin-top:6px;font-variant-numeric:tabular-nums}
+.tile.spark .v{background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- panels ---------- */
+.panel{background:var(--carbon);border:1px solid var(--line);border-radius:14px;padding:20px 20px 16px}
+.panel h3{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;display:flex;align-items:center;gap:9px}
+.panel .cap{color:var(--ash);font-size:12.5px;margin:4px 0 14px}
+.duo{display:grid;grid-template-columns:1.7fr 1fr;gap:14px;margin-bottom:22px}
+
+/* ---------- signal feed ---------- */
+#feed{list-style:none;max-height:520px;overflow-y:auto;scrollbar-width:thin}
+#feed li{display:flex;gap:12px;align-items:baseline;padding:11px 6px;border-top:1px solid var(--line);flex-wrap:wrap}
+#feed li:first-child{border-top:0}
+#feed li.new{animation:landed 2.4s ease-out}
+@keyframes landed{0%{background:rgba(255,176,32,.22)}100%{background:transparent}}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;border-radius:99px;padding:3px 10px;white-space:nowrap;flex:none;color:var(--ivory)}
+.badge i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.b-free{background:rgba(2,132,199,.18)} .b-free i{background:var(--c-free)}
+.b-brain{background:rgba(217,119,6,.18)} .b-brain i{background:var(--c-brain)}
+.b-ariel{background:rgba(5,150,105,.18)} .b-ariel i{background:var(--c-ariel)}
+.b-madeline{background:rgba(139,92,246,.18)} .b-madeline i{background:var(--c-madeline)}
+.b-obh{background:rgba(225,29,72,.18)} .b-obh i{background:var(--c-obh)}
+.newpill{font-size:9.5px;font-weight:800;letter-spacing:.1em;background:var(--burn);color:#fff;
+  border-radius:99px;padding:2px 8px;flex:none}
+.lead-main{flex:1;min-width:200px}
+.lead-name{font-weight:600}
+.lead-contact{color:var(--ash);font-size:12.5px}
+.lead-meta{width:100%;padding-left:2px;font-size:11px;color:var(--ash)}
+.lead-meta span{border:1px solid var(--line);border-radius:6px;padding:1px 7px;margin-right:5px;display:inline-block;margin-top:4px}
+.lead-when{color:var(--ash);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.empty{color:var(--ash);font-size:13.5px;padding:26px 6px;text-align:center;font-style:italic}
+
+/* ---------- scoreboard ---------- */
+#board table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+#board th{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);
+  text-align:right;padding:4px 2px 8px}
+#board th:first-child{text-align:left}
+#board td{padding:9px 2px;border-top:1px solid var(--line);font-size:13.5px;text-align:right}
+#board td:first-child{text-align:left}
+#board .f{display:inline-flex;align-items:center;gap:8px;font-weight:600}
+#board .f i{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
+#board td.today{font-weight:700;color:var(--sky)}
+#board tfoot td{font-weight:700;color:var(--ivory)}
+
+/* ---------- traffic ---------- */
+.traffic{display:grid;grid-template-columns:1fr;gap:14px}
+.twin{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#chartbox svg{width:100%;height:auto;display:block}
+.bar{fill:var(--sky);opacity:.85}
+.bar:hover{opacity:1}
+.gridline{stroke:rgba(244,241,234,.07);stroke-width:1}
+.axis{fill:var(--ash);font-size:10px;font-family:'Inter',sans-serif}
+.peaklabel{fill:var(--ivory);font-size:10.5px;font-weight:600;font-family:'Inter',sans-serif}
+.mini table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.mini td{padding:8px 2px;border-top:1px solid var(--line);font-size:13px}
+.mini tr:first-child td{border-top:0}
+.mini td.n{text-align:right;color:var(--ivory);font-weight:600}
+.mini td.p{color:var(--ash);max-width:0;width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ga-wait{border:1px dashed rgba(56,189,248,.35);border-radius:10px;padding:16px;color:var(--ash);font-size:13px}
+.ga-wait b{color:var(--ivory)}
+
+#tooltip{position:fixed;z-index:60;pointer-events:none;background:#1F1F22;border:1px solid var(--line);
+  border-radius:8px;padding:7px 11px;font-size:12px;color:var(--ivory);display:none;white-space:nowrap;
+  box-shadow:0 6px 20px rgba(0,0,0,.5)}
+#toasts{position:fixed;right:18px;bottom:18px;z-index:70;display:flex;flex-direction:column;gap:8px}
+.toast{background:#1F1F22;border:1px solid rgba(255,176,32,.4);border-left:3px solid #F2531B;border-radius:10px;
+  padding:11px 15px;font-size:13.5px;box-shadow:0 8px 26px rgba(0,0,0,.55);animation:rise .3s ease-out}
+@keyframes rise{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
+
+footer{margin-top:34px;text-align:center;color:var(--ash);font-size:12px}
+footer .flame{background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+
+@media (prefers-reduced-motion:reduce){
+  .dot.live,#feed li.new,.toast,#gate .card.shake{animation:none}
+}
+@media (max-width:900px){
+  .tiles{grid-template-columns:repeat(3,1fr)}
+  .duo,.twin{grid-template-columns:1fr}
+  .clockbox{text-align:left}
+  .status{justify-content:flex-start}
+}
+@media (max-width:520px){
+  .tiles{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="card">
+    <div class="flame">🔥</div>
+    <h2>The Fire Watch</h2>
+    <p>Social Fire Solutions — staff only</p>
+    <input id="pw" type="password" placeholder="password" autocomplete="off">
+    <button id="go">Step inside</button>
+    <div class="err" id="gateErr"></div>
+  </div>
+</div>
+
+<div class="wrap" id="app" style="visibility:hidden">
+  <header>
+    <div>
+      <div class="eyebrow">Social Fire Solutions · Internal</div>
+      <h1>The Fire <span class="grad">Watch</span></h1>
+      <p class="sub">Every spark on socialfire.solutions — surveys the moment they land, traffic as it burns.</p>
+    </div>
+    <div class="clockbox">
+      <div id="clock">—:—:—</div>
+      <div id="dateline"></div>
+      <div class="status">
+        <span class="chip"><span class="dot live"></span>LIVE</span>
+        <span class="chip" id="leadStamp">sparks — checking…</span>
+        <span class="chip" id="trafStamp">traffic — checking…</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="ranges" id="ranges">
+    <button class="pill on" data-r="today">Today</button>
+    <button class="pill" data-r="7d">7 Days</button>
+    <button class="pill" data-r="28d">28 Days</button>
+    <button class="pill" data-r="season">Season</button>
+    <span class="note">range applies to traffic — the Signal Feed is always live</span>
+  </div>
+
+  <div class="tiles">
+    <div class="tile spark"><div class="k">Sparks Today</div><div class="v" id="t-sparks">—</div></div>
+    <div class="tile"><div class="k">Visitors</div><div class="v" id="t-users">—</div></div>
+    <div class="tile"><div class="k">Sessions</div><div class="v" id="t-sessions">—</div></div>
+    <div class="tile"><div class="k">Page Views</div><div class="v" id="t-views">—</div></div>
+    <div class="tile"><div class="k">Engagement</div><div class="v" id="t-eng">—</div></div>
+    <div class="tile"><div class="k">Avg Session</div><div class="v" id="t-avg">—</div></div>
+  </div>
+
+  <div class="duo">
+    <div class="panel">
+      <h3><span class="dot live"></span>The Signal Feed</h3>
+      <p class="cap">Free Website &amp; AI Brain surveys — plus every client-page lead — checked every 60 seconds.</p>
+      <ul id="feed"><li class="empty">Listening…</li></ul>
+    </div>
+    <div class="panel" id="board">
+      <h3>The Scoreboard</h3>
+      <p class="cap">Submissions by form.</p>
+      <table>
+        <thead><tr><th>Form</th><th>Today</th><th>7d</th><th>All</th></tr></thead>
+        <tbody id="boardBody"><tr><td class="empty" colspan="4">—</td></tr></tbody>
+        <tfoot><tr><td>Total</td><td class="today" id="b-today">—</td><td id="b-week">—</td><td id="b-all">—</td></tr></tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div class="traffic">
+    <div class="panel" id="chartbox">
+      <h3 id="chartTitle">Sessions — hour by hour</h3>
+      <p class="cap" id="chartCap">socialfire.solutions, today</p>
+      <div id="chart"></div>
+    </div>
+    <div class="twin">
+      <div class="panel mini">
+        <h3>Top Pages</h3>
+        <p class="cap">Views · visitors</p>
+        <table><tbody id="pages"><tr><td class="empty">—</td></tr></tbody></table>
+      </div>
+      <div class="panel mini">
+        <h3>The Draft</h3>
+        <p class="cap">Where sessions are coming from</p>
+        <table><tbody id="sources"><tr><td class="empty">—</td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <footer>The <span class="flame">fire</span> is always lit · The Fire Watch refreshes itself — sparks every minute, traffic every five.</footer>
+</div>
+
+<div id="tooltip"></div>
+<div id="toasts"></div>
+
+<script>
+(function(){
+  "use strict";
+  var LS_KEY = "sfs_dash_pass";
+  var state = { pass:null, range:"today", seen:null, unseen:0, leadAt:0, trafAt:0 };
+  var timers = {};
+  var $ = function(id){ return document.getElementById(id); };
+  var nf = new Intl.NumberFormat("en-US");
+
+  /* ---------- helpers ---------- */
+  function relTime(iso){
+    var s = (Date.now() - Date.parse(iso)) / 1000;
+    if (s < 60) return "just now";
+    if (s < 3600) return Math.floor(s/60) + "m ago";
+    if (s < 86400) return Math.floor(s/3600) + "h ago";
+    if (s < 7*86400) return Math.floor(s/86400) + "d ago";
+    return new Date(iso).toLocaleDateString("en-US",{month:"short",day:"numeric"});
+  }
+  function esc(t){ var d=document.createElement("div"); d.textContent=t==null?"":String(t); return d.innerHTML; }
+  function ago(t){ if(!t) return "—"; var s=Math.round((Date.now()-t)/1000); return s<60 ? s+"s ago" : Math.round(s/60)+"m ago"; }
+  function stamp(){
+    $("leadStamp").textContent = "sparks — " + ago(state.leadAt);
+    $("trafStamp").textContent = "traffic — " + ago(state.trafAt);
+  }
+  function toast(msg){
+    var d = document.createElement("div");
+    d.className = "toast"; d.textContent = msg;
+    $("toasts").appendChild(d);
+    setTimeout(function(){ d.remove(); }, 8000);
+  }
+  function setTitle(){
+    document.title = (state.unseen > 0 ? "(" + state.unseen + ") " : "") + "The Fire Watch — Social Fire Solutions";
+  }
+  document.addEventListener("visibilitychange", function(){
+    if (!document.hidden){ state.unseen = 0; setTitle(); }
+  });
+
+  /* ---------- clock ---------- */
+  function tickClock(){
+    var n = new Date();
+    $("clock").textContent = n.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",second:"2-digit"});
+    $("dateline").textContent = n.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+  }
+
+  /* ---------- api ---------- */
+  var TZ = (Intl.DateTimeFormat().resolvedOptions().timeZone || "");
+  function api(part){
+    var u = "/api/dash?part=" + part + "&range=" + state.range + "&pass=" + encodeURIComponent(state.pass)
+      + "&tz=" + encodeURIComponent(TZ);
+    return fetch(u).then(function(r){
+      if (r.status === 401) throw { auth:true };
+      if (r.status === 503) throw { setup:true };
+      return r.json().then(function(j){ if (!r.ok) throw new Error(j.error || r.status); return j; });
+    });
+  }
+
+  /* ---------- leads ---------- */
+  function renderLeads(L){
+    state.leadAt = Date.now(); stamp();
+    if (!L || !L.ready) return;
+    var first = state.seen === null;
+    if (first) state.seen = {};
+    var feed = $("feed");
+    var html = "";
+    var fresh = [];
+    (L.leads || []).forEach(function(x){
+      var isNew = !first && !state.seen[x.id];
+      if (isNew) fresh.push(x);
+      state.seen[x.id] = 1;
+      var contact = [x.email, x.phone].filter(Boolean).join(" · ");
+      html += '<li' + (isNew ? ' class="new"' : '') + '>'
+        + '<span class="badge b-' + esc(x.form) + '"><i></i>' + esc(x.formLabel) + '</span>'
+        + (isNew ? '<span class="newpill">NEW</span>' : '')
+        + '<span class="lead-main"><span class="lead-name">' + esc(x.name) + '</span>'
+        + (contact ? ' &nbsp;<span class="lead-contact">' + esc(contact) + '</span>' : '') + '</span>'
+        + '<span class="lead-when" title="' + esc(new Date(x.when).toLocaleString()) + '">' + relTime(x.when) + '</span>'
+        + (x.meta && x.meta.length ? '<span class="lead-meta">' + x.meta.map(function(m){ return '<span>' + esc(m) + '</span>'; }).join('') + '</span>' : '')
+        + '</li>';
+    });
+    feed.innerHTML = html || '<li class="empty">No sparks yet — the watch continues.</li>';
+
+    fresh.forEach(function(x){ toast("🔥 New spark — " + x.name + " · " + x.formLabel); });
+    if (fresh.length && document.hidden){ state.unseen += fresh.length; setTitle(); }
+
+    var order = ["free","brain","ariel","madeline","obh"];
+    var tb = "", today = 0, week = 0, all = 0;
+    order.forEach(function(k){
+      var c = (L.counts || {})[k]; if (!c) return;
+      today += c.today; week += c.week; all += c.all;
+      tb += '<tr><td><span class="f"><i style="background:var(--c-' + k + ')"></i>' + esc(c.label) + '</span></td>'
+        + '<td class="today">' + nf.format(c.today) + '</td><td>' + nf.format(c.week) + '</td><td>' + nf.format(c.all) + '</td></tr>';
+    });
+    $("boardBody").innerHTML = tb || '<tr><td class="empty" colspan="4">—</td></tr>';
+    $("b-today").textContent = nf.format(today);
+    $("b-week").textContent = nf.format(week);
+    $("b-all").textContent = nf.format(all) + (L.window ? "*" : "");
+    if (L.window) $("b-all").title = "counted over the " + L.window;
+    $("t-sparks").textContent = nf.format(today);
+  }
+
+  /* ---------- traffic ---------- */
+  function hourLabel(h){
+    h = parseInt(h,10);
+    if (h === 0) return "12a"; if (h < 12) return h + "a";
+    if (h === 12) return "12p"; return (h-12) + "p";
+  }
+  function dayLabel(d){
+    return new Date(d.slice(0,4) + "-" + d.slice(4,6) + "-" + d.slice(6,8) + "T12:00:00")
+      .toLocaleDateString("en-US",{month:"short",day:"numeric"});
+  }
+  function drawChart(rows, isToday){
+    var box = $("chart");
+    if (!rows.length){ box.innerHTML = '<div class="empty">Nothing in this range yet.</div>'; return; }
+    var data;
+    if (isToday){
+      var byHour = {};
+      rows.forEach(function(r){ byHour[parseInt(r[0],10)] = r; });
+      var lastH = new Date().getHours();
+      data = [];
+      for (var h = 0; h <= lastH; h++){
+        var r = byHour[h] || [String(h),0,0];
+        data.push({ label:hourLabel(h), sessions:+r[1], users:+r[2] });
+      }
+    } else {
+      data = rows.map(function(r){ return { label:dayLabel(r[0]), sessions:+r[1], users:+r[2] }; });
+    }
+    var W = 900, H = 230, padL = 34, padB = 24, padT = 14;
+    var iw = W - padL - 8, ih = H - padT - padB;
+    var max = Math.max(1, Math.max.apply(null, data.map(function(d){ return d.sessions; })));
+    var step = iw / data.length;
+    var bw = Math.min(30, Math.max(4, step - 2)); /* 2px surface gap between bars */
+    var peak = data.reduce(function(a,b){ return b.sessions > a.sessions ? b : a; }, data[0]);
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Sessions chart">';
+    [0,.5,1].forEach(function(f){
+      var y = padT + ih - ih*f;
+      svg += '<line class="gridline" x1="' + padL + '" y1="' + y + '" x2="' + (W-8) + '" y2="' + y + '"/>'
+        + '<text class="axis" x="' + (padL-6) + '" y="' + (y+3) + '" text-anchor="end">' + Math.round(max*f) + '</text>';
+    });
+    var labelEvery = Math.ceil(data.length / 12);
+    data.forEach(function(d,i){
+      var x = padL + i*step + (step-bw)/2;
+      var bh = Math.max(d.sessions > 0 ? 2 : 0, ih * d.sessions / max);
+      var y = padT + ih - bh;
+      if (bh > 0){
+        var rr = Math.min(4, bw/2, bh); /* rounded at the data end, square at the baseline */
+        svg += '<path class="bar" data-tip="' + esc(d.label + " — " + nf.format(d.sessions) + " sessions · " + nf.format(d.users) + " visitors") + '"'
+          + ' d="M' + x + ' ' + (padT+ih) + ' V' + (y+rr) + ' Q' + x + ' ' + y + ' ' + (x+rr) + ' ' + y
+          + ' H' + (x+bw-rr) + ' Q' + (x+bw) + ' ' + y + ' ' + (x+bw) + ' ' + (y+rr) + ' V' + (padT+ih) + ' Z"/>';
+      } else {
+        svg += '<rect class="bar" data-tip="' + esc(d.label + " — 0 sessions") + '" x="' + x + '" y="' + (padT+ih-1) + '" width="' + bw + '" height="1" opacity=".25"/>';
+      }
+      if (d === peak && d.sessions > 0)
+        svg += '<text class="peaklabel" x="' + (x+bw/2) + '" y="' + (y-5) + '" text-anchor="middle">' + nf.format(d.sessions) + '</text>';
+      if (i % labelEvery === 0)
+        svg += '<text class="axis" x="' + (x+bw/2) + '" y="' + (H-7) + '" text-anchor="middle">' + esc(d.label) + '</text>';
+    });
+    svg += '</svg>';
+    box.innerHTML = svg;
+  }
+  var tip = null;
+  document.addEventListener("mousemove", function(e){
+    var t = e.target.closest ? e.target.closest("[data-tip]") : null;
+    if (!tip) tip = $("tooltip");
+    if (t){
+      tip.textContent = t.getAttribute("data-tip");
+      tip.style.display = "block";
+      var x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 10);
+      tip.style.left = x + "px";
+      tip.style.top = (e.clientY - 34) + "px";
+    } else tip.style.display = "none";
+  });
+
+  function fmtDur(sec){
+    sec = Math.round(sec || 0);
+    return Math.floor(sec/60) + ":" + String(sec%60).padStart(2,"0");
+  }
+  function renderTraffic(T){
+    state.trafAt = Date.now(); stamp();
+    if (!T) return;
+    if (!T.ready){
+      $("t-users").textContent = $("t-sessions").textContent = $("t-views").textContent = "—";
+      $("t-eng").textContent = $("t-avg").textContent = "—";
+      $("chart").innerHTML = '<div class="ga-wait"><b>Traffic tiles are dark.</b> Paste the GA4 keys into the Vercel project '
+        + '(social-fire-solutions → Settings → Environment Variables) — the ready-made list is in '
+        + '<b>~/.config/thecountryc1ub/ga4/vercel-env-sfs-dashboard.txt</b> — then redeploy. The Signal Feed works either way.</div>';
+      $("pages").innerHTML = $("sources").innerHTML = '<tr><td class="empty">awaiting GA4 keys</td></tr>';
+      return;
+    }
+    var t = T.totals;
+    $("t-users").textContent = nf.format(t[0]);
+    $("t-sessions").textContent = nf.format(t[1]);
+    $("t-views").textContent = nf.format(t[2]);
+    $("t-eng").textContent = Math.round((t[4] || 0) * 100) + "%";
+    $("t-avg").textContent = fmtDur(t[3]);
+    var isToday = state.range === "today";
+    $("chartTitle").textContent = isToday ? "Sessions — hour by hour" : "Sessions — day by day";
+    var capMap = { today:"socialfire.solutions, today", "7d":"last 7 days", "28d":"last 28 days", season:"season — since July 1" };
+    $("chartCap").textContent = capMap[state.range];
+    drawChart(isToday ? T.hourly : T.daily, isToday);
+    $("pages").innerHTML = (T.pages || []).slice(0,8).map(function(p){
+      return '<tr><td class="p" title="' + esc(p[0]) + '">' + esc(p[0]) + '</td><td class="n">' + nf.format(p[1]) + '</td><td class="n" style="color:var(--ash)">' + nf.format(p[2]) + '</td></tr>';
+    }).join("") || '<tr><td class="empty">no views yet</td></tr>';
+    $("sources").innerHTML = (T.sources || []).slice(0,8).map(function(s){
+      return '<tr><td class="p" title="' + esc(s[0]) + '">' + esc(s[0]) + '</td><td class="n">' + nf.format(s[1]) + '</td></tr>';
+    }).join("") || '<tr><td class="empty">no sessions yet</td></tr>';
+  }
+
+  /* ---------- polling ---------- */
+  function pollLeads(){
+    api("leads").then(function(j){ renderLeads(j.leads); }).catch(fail);
+  }
+  function pollTraffic(){
+    api("traffic").then(function(j){ renderTraffic(j.traffic); }).catch(fail);
+  }
+  function fail(e){
+    if (e && e.auth){ lock("Not tonight."); return; }
+    if (e && e.setup){ lock("The watch isn't configured yet — set DASHBOARD_PASS on the Vercel project, then redeploy."); return; }
+    stamp(); /* transient errors: keep the last good render, stamps show staleness */
+  }
+
+  /* ---------- gate ---------- */
+  function lock(msg){
+    clearInterval(timers.leads); clearInterval(timers.traffic);
+    localStorage.removeItem(LS_KEY);
+    state.pass = null; state.seen = null;
+    $("gate").style.display = "flex";
+    $("gateErr").textContent = msg || "";
+    $("pw").focus();
+  }
+  function unlock(){
+    $("gate").style.display = "none";
+    $("app").style.visibility = "visible";
+    state.seen = null;
+    pollLeads(); pollTraffic();
+    clearInterval(timers.leads); clearInterval(timers.traffic);
+    timers.leads = setInterval(pollLeads, 60000);
+    timers.traffic = setInterval(pollTraffic, 300000);
+  }
+  function tryPass(p){
+    state.pass = p;
+    api("leads").then(function(j){
+      localStorage.setItem(LS_KEY, p);
+      unlock();
+      renderLeads(j.leads);
+    }).catch(function(e){
+      state.pass = null;
+      var card = document.querySelector("#gate .card");
+      card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+      $("gateErr").textContent = e && e.setup
+        ? "Not configured yet — set DASHBOARD_PASS on the Vercel project."
+        : (e && e.auth ? "Not tonight." : "Couldn't reach the watch — try again.");
+    });
+  }
+  $("go").addEventListener("click", function(){ tryPass($("pw").value); });
+  $("pw").addEventListener("keydown", function(e){ if (e.key === "Enter" || e.keyCode === 13) tryPass($("pw").value); });
+
+  /* ---------- range pills ---------- */
+  $("ranges").addEventListener("click", function(e){
+    var b = e.target.closest(".pill"); if (!b) return;
+    document.querySelectorAll(".pill").forEach(function(x){ x.classList.remove("on"); });
+    b.classList.add("on");
+    state.range = b.getAttribute("data-r");
+    pollTraffic();
+  });
+
+  /* ---------- boot ---------- */
+  tickClock(); setInterval(tickClock, 1000);
+  setInterval(stamp, 10000);
+  var saved = localStorage.getItem(LS_KEY);
+  if (saved) tryPass(saved); else $("pw").focus();
+})();
+</script>
+</body>
+</html>
