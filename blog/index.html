@@ -10,6 +10,44 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "The Blue Flame — The Social Fire Solutions Blog",
+      "url": "https://socialfire.solutions/blog",
+      "description": "The Blue Flame — the Social Fire Solutions journal. Ideas on brands, AI brains, and spreading like fire. Written where the fire burns hottest.",
+      "isPartOf": { "@id": "https://socialfire.solutions/#organization" }
+    },
+    {
+      "@type": "Blog",
+      "@id": "https://socialfire.solutions/blog#blog",
+      "name": "The Blue Flame",
+      "url": "https://socialfire.solutions/blog",
+      "description": "The Social Fire Solutions journal — ideas on brands, AI brains, and spreading like fire.",
+      "publisher": { "@id": "https://socialfire.solutions/#organization" },
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "@id": "https://socialfire.solutions/blog/own-your-name#article",
+          "headline": "Own Your Name",
+          "url": "https://socialfire.solutions/blog/own-your-name",
+          "datePublished": "2026-07-28"
+        },
+        {
+          "@type": "BlogPosting",
+          "@id": "https://socialfire.solutions/blog/ai-brain#article",
+          "headline": "Why You Need Your Own AI Brain",
+          "url": "https://socialfire.solutions/blog/ai-brain",
+          "datePublished": "2026-07-25"
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 :root{
   --onyx:#0A0A0B;
@@ -103,6 +141,7 @@ nav.scrolled{background:rgba(10,10,11,.82);backdrop-filter:blur(14px);border-col
   text-decoration:none;color:var(--ivory);
   transition:transform .3s ease,box-shadow .35s ease,border-color .35s ease;
 }
+.post-card + .post-card{margin-top:26px;}
 .post-card:hover{transform:translateY(-4px);border-color:rgba(56,189,248,.55);
   box-shadow:0 40px 100px -30px rgba(56,189,248,.5),inset 0 1px 0 rgba(186,230,253,.14);}
 .post-card .thumb{align-self:stretch;min-height:300px;position:relative;}
@@ -173,15 +212,25 @@ footer .copy{color:var(--ash);font-size:13px;letter-spacing:.04em;}
   <div class="wrap">
     <div class="lede reveal">
       <h2>Latest from the flame</h2>
-      <span class="count">No. 001</span>
+      <span class="count">No. 002</span>
     </div>
+
+    <a class="post-card reveal" href="/blog/own-your-name">
+      <div class="thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260727_214146_5d07e414-01e4-4247-b6c6-a409d4d9ec7e_min.webp" alt="A dark front door with a brass nameplate glowing sky blue"></div>
+      <div class="body">
+        <div class="meta"><span class="no">No. 002</span><span>·</span><span>Owning Your Story</span></div>
+        <h3>Own Your <span class="sky">Name</span></h3>
+        <p>Every platform you build on belongs to somebody else. A URL with your name on it is the one thing online nobody can take away from you — your story, your brand, your résumé.</p>
+        <span class="read">Read the article <span class="arrow">→</span></span>
+      </div>
+    </a>
 
     <a class="post-card reveal" href="/blog/ai-brain">
       <div class="thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260725_135426_99ecb9ed-41ea-47cd-9a6a-7bcf698ea540_min.webp" alt="A brain made of sky-blue fire and circuitry"></div>
       <div class="body">
         <div class="meta"><span class="no">No. 001</span><span>·</span><span>AI Brains</span></div>
         <h3>Why You Need Your Own <span class="sky">AI Brain</span></h3>
-        <p>For years, big companies organized your data for their benefit. It's time to organize your business for yours — and think like Iron Man while you do it.</p>
+        <p>For years, big companies organized your data for their benefit. Now it's your turn to organize your life &amp; business for yours — and think like Iron Man while you do it.</p>
         <span class="read">Read the article <span class="arrow">→</span></span>
       </div>
     </a>
