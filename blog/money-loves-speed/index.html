@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Loves Speed — The Blue Flame</title>
+<meta name="description" content="Clutter is what's slowing your business down. Know your numbers, fix your analytics, put it all on one dashboard — and watch how fast everything gets easier.">
+<link rel="icon" href="/media/favicon.png">
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://socialfire.solutions/blog/money-loves-speed",
+      "name": "Money Loves Speed — The Blue Flame",
+      "url": "https://socialfire.solutions/blog/money-loves-speed",
+      "description": "Clutter is what's slowing your business down. Know your numbers, fix your analytics, put it all on one dashboard — and watch how fast everything gets easier.",
+      "isPartOf": { "@id": "https://socialfire.solutions/blog#blog" },
+      "primaryImageOfPage": "https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260729_142657_fe685814-9ad2-4bdf-a9b4-b0702049f047_min.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://socialfire.solutions/blog/money-loves-speed#article",
+      "headline": "Money Loves Speed",
+      "description": "Clutter is what's slowing your business down. Know your numbers, fix your analytics, put it all on one dashboard — and watch how fast everything gets easier.",
+      "image": "https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260729_142657_fe685814-9ad2-4bdf-a9b4-b0702049f047_min.webp",
+      "url": "https://socialfire.solutions/blog/money-loves-speed",
+      "mainEntityOfPage": { "@id": "https://socialfire.solutions/blog/money-loves-speed" },
+      "datePublished": "2026-07-29",
+      "dateModified": "2026-07-29",
+      "author": { "@id": "https://socialfire.solutions/#organization" },
+      "publisher": { "@id": "https://socialfire.solutions/#organization" },
+      "isPartOf": { "@id": "https://socialfire.solutions/blog#blog" }
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --onyx:#0A0A0B;
+  --ivory:#F4F1EA;
+  --ash:#9A9AA0;
+  --sky-1:#BAE6FD;
+  --sky-2:#38BDF8;
+  --sky-3:#0284C7;
+  --skyburn:linear-gradient(100deg,#BAE6FD,#38BDF8 45%,#0284C7);
+  --burn:linear-gradient(100deg,#FFB020,#F2531B 50%,#C81E1E);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--onyx);color:var(--ivory);
+  font-family:'Inter',sans-serif;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+::selection{background:var(--sky-2);color:#062A3A;}
+h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.08;font-weight:700;}
+.sky{background:var(--skyburn);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px;width:100%;}
+.eyebrow{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--sky-2);font-weight:600;display:inline-block;}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 32px;transition:background .4s,backdrop-filter .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(10,10,11,.82);backdrop-filter:blur(14px);border-color:rgba(56,189,248,.14);}
+.brand{display:flex;align-items:center;gap:10px;font-size:17px;text-decoration:none;color:var(--ivory);}
+.brand b{font-weight:700;}
+.brand span{color:var(--ash);font-weight:400;}
+.flame{width:12px;height:12px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--skyburn);box-shadow:0 0 14px rgba(56,189,248,.8);}
+.nav-links{display:flex;align-items:center;gap:22px;}
+.nav-links a{color:var(--ash);text-decoration:none;font-size:14px;font-weight:500;transition:color .25s;}
+.nav-links a:hover{color:var(--sky-1);}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Inter';font-weight:600;font-size:15px;
+  padding:14px 26px;border-radius:50px;border:1px solid transparent;
+  cursor:pointer;text-decoration:none;transition:transform .25s ease,box-shadow .3s ease;
+  min-height:44px;
+}
+.btn-sky{background:var(--skyburn);color:#062A3A;box-shadow:0 12px 36px -8px rgba(56,189,248,.55);}
+.btn-sky:hover{transform:translateY(-2px);box-shadow:0 18px 50px -8px rgba(56,189,248,.7);}
+.btn .arrow{transition:transform .25s ease;}
+.btn:hover .arrow{transform:translateX(4px);}
+.brand,.nav-links a{white-space:nowrap;}
+@media(max-width:640px){
+  nav{padding:14px 16px;}
+  .brand{font-size:15px;}
+  .brand span:not(.flame){display:none;}
+  .nav-links{gap:14px;}
+  .nav-links .btn{padding:10px 16px;font-size:13px;min-height:38px;}
+}
+
+/* ---------- ARTICLE HERO ---------- */
+.a-hero{position:relative;padding:150px 0 60px;overflow:hidden;}
+.a-hero .glow{position:absolute;inset:0;background:
+  radial-gradient(70% 60% at 50% 0%,rgba(56,189,248,.14),transparent 65%);pointer-events:none;}
+.a-hero .meta{display:flex;gap:14px;align-items:center;color:var(--ash);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;margin:18px 0 22px;flex-wrap:wrap;}
+.a-hero .meta .no{color:var(--sky-2);font-weight:600;}
+.a-hero h1{font-size:clamp(40px,6.4vw,80px);max-width:900px;}
+.a-hero p.stand{color:#C8D9E4;font-size:clamp(17px,1.8vw,21px);max-width:640px;margin-top:24px;font-weight:300;}
+
+.a-figure{margin:56px 0 0;border-radius:24px;overflow:hidden;border:1px solid rgba(56,189,248,.25);
+  box-shadow:0 40px 100px -40px rgba(56,189,248,.4);}
+.a-figure img{width:100%;display:block;}
+.a-figure figcaption{padding:14px 20px;color:var(--ash);font-size:13px;letter-spacing:.06em;background:#101318;border-top:1px solid rgba(56,189,248,.14);}
+
+/* ---------- ARTICLE BODY ---------- */
+article{padding:70px 0 30px;}
+.prose{max-width:700px;margin:0 auto;}
+.prose h2{font-size:clamp(26px,3.2vw,38px);margin:64px 0 20px;}
+.prose h2:first-child{margin-top:0;}
+.prose p{color:#C6C6CC;font-size:17.5px;margin-bottom:22px;font-weight:300;}
+.prose p b{font-weight:600;background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 14px rgba(242,83,27,.45));}
+.prose a.inline{color:var(--sky-1);text-decoration:none;border-bottom:1px solid rgba(56,189,248,.4);transition:color .25s,border-color .25s;}
+.prose a.inline:hover{color:#fff;border-color:var(--sky-2);}
+.prose .drop::first-letter{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:64px;line-height:.85;
+  float:left;margin:6px 12px 0 0;
+  background:var(--skyburn);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.pull{
+  border-left:3px solid var(--sky-2);padding:8px 0 8px 26px;margin:40px 0;
+  font-family:'Playfair Display',serif;font-size:clamp(21px,2.4vw,27px);line-height:1.35;color:var(--sky-1);
+}
+.prose ul{list-style:none;margin:0 0 22px;}
+.prose li{color:#C6C6CC;font-size:17px;font-weight:300;padding:10px 0 10px 34px;position:relative;}
+.prose li::before{content:"";position:absolute;left:6px;top:19px;width:10px;height:10px;border-radius:50% 50% 50% 0;
+  transform:rotate(-45deg);background:var(--skyburn);box-shadow:0 0 10px rgba(56,189,248,.7);}
+.prose li b{font-weight:600;background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 14px rgba(242,83,27,.45));}
+
+/* ---------- THE BOARD (KPI tiles) ---------- */
+.board{margin:40px 0 46px;}
+.board + .board{margin-top:-14px;}
+.board-label{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--ash);margin-bottom:14px;display:block;}
+.board-label.on{color:var(--sky-2);font-weight:600;}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.tile{
+  border:1px solid rgba(255,255,255,.08);border-radius:16px;
+  background:linear-gradient(180deg,#111419,#0C0E13);
+  padding:18px 16px;min-height:104px;display:flex;flex-direction:column;justify-content:space-between;
+}
+.tile .k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);line-height:1.35;}
+.tile .v{font-family:'Playfair Display',serif;font-size:clamp(24px,3.4vw,34px);font-weight:700;color:#4A4A52;}
+.board.lit .tile{border-color:rgba(56,189,248,.3);
+  background:radial-gradient(120% 160% at 0% 0%,rgba(56,189,248,.12),transparent 62%),#101318;
+  box-shadow:0 20px 50px -30px rgba(56,189,248,.6),inset 0 1px 0 rgba(186,230,253,.09);}
+.board.lit .tile .v{background:var(--skyburn);-webkit-background-clip:text;background-clip:text;color:transparent;}
+@media(max-width:640px){
+  .tiles{grid-template-columns:repeat(2,1fr);}
+  .tile{min-height:92px;}
+}
+
+/* ---------- IN-BODY FIGURE ---------- */
+.b-figure{max-width:820px;margin:56px auto;border-radius:24px;overflow:hidden;border:1px solid rgba(56,189,248,.25);
+  box-shadow:0 40px 100px -40px rgba(56,189,248,.4);}
+.b-figure img{width:100%;display:block;}
+.b-figure figcaption{padding:14px 20px;color:var(--ash);font-size:13px;letter-spacing:.06em;background:#101318;border-top:1px solid rgba(56,189,248,.14);}
+
+/* ---------- MID CTA ---------- */
+.midcta{
+  max-width:700px;margin:56px auto;border:1px solid rgba(56,189,248,.3);border-radius:22px;
+  background:radial-gradient(120% 160% at 0% 0%,rgba(56,189,248,.13),transparent 60%),#101318;
+  box-shadow:0 26px 70px -34px rgba(56,189,248,.5),inset 0 1px 0 rgba(186,230,253,.1);
+  padding:clamp(26px,4vw,38px);
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.midcta h3{font-size:clamp(22px,2.8vw,30px);margin-bottom:8px;}
+.midcta p{color:var(--ash);font-size:15px;max-width:400px;}
+
+/* ---------- CTA ---------- */
+.cta{padding:60px 0 110px;}
+.cta-box{
+  text-align:center;border:1px solid rgba(56,189,248,.32);border-radius:24px;
+  padding:clamp(40px,6vw,72px) clamp(24px,5vw,64px);
+  background:
+    radial-gradient(120% 140% at 50% 0%,rgba(56,189,248,.14),transparent 60%),
+    #101318;
+  box-shadow:0 30px 80px -30px rgba(56,189,248,.35),inset 0 1px 0 rgba(186,230,253,.12);
+}
+.cta-box h2{font-size:clamp(30px,4.4vw,52px);margin-bottom:14px;}
+.cta-box p{color:var(--ash);max-width:520px;margin:0 auto 30px;}
+
+/* ---------- BACK / FOOTER ---------- */
+.backrow{max-width:700px;margin:0 auto;padding:0 32px 20px;}
+.backrow a{color:var(--ash);text-decoration:none;font-size:14px;transition:color .25s;}
+.backrow a:hover{color:var(--sky-1);}
+footer{border-top:1px solid rgba(255,255,255,.07);padding:50px 0;}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;}
+footer .tag{color:var(--sky-2);font-size:13px;letter-spacing:.22em;text-transform:uppercase;}
+footer .copy{color:var(--ash);font-size:13px;letter-spacing:.04em;}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <a class="brand" href="/"><span class="flame"></span><b>Social Fire</b>&nbsp;<span>Solutions</span></a>
+  <div class="nav-links">
+    <a href="/blog">The Blue Flame</a>
+    <a href="/ai-brain-form" class="btn btn-sky">Schedule a Call</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="a-hero">
+  <div class="glow"></div>
+  <div class="wrap">
+    <span class="eyebrow reveal">The Blue Flame</span>
+    <div class="meta reveal"><span class="no">No. 003</span><span>·</span><span>Clarity &amp; Numbers</span><span>·</span><span>7 min read</span></div>
+    <h1 class="reveal">Money Loves <span class="sky">Speed</span></h1>
+    <p class="stand reveal">It isn't effort that's slowing your business down. It's clutter. Here's what clarity actually looks like — your numbers, your analytics, one dashboard — and why everything gets easier the moment you have it.</p>
+
+    <figure class="a-figure reveal">
+      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260729_142657_fe685814-9ad2-4bdf-a9b4-b0702049f047_min.webp" alt="A single glowing sky-blue dashboard floating in a dark room">
+      <figcaption>One screen. Every number that matters. That's the whole trick.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- ===== ARTICLE ===== -->
+<article>
+  <div class="wrap">
+    <div class="prose">
+      <p class="drop reveal">Ask a business owner what it costs them to get one customer and watch what happens. There's a pause. Then a range. Then a story about how it depends on the month. It's never a number, because the number doesn't exist anywhere — not in a document, not on a screen, not in their head. And a business that can't answer that question in under three seconds is a business that has to guess at every decision it makes for the rest of the year.</p>
+      <p class="reveal">That's not a knock. Almost nobody has it. But it's the reason so many talented people feel like they're pushing a car uphill: <b>they're making every call in the dark.</b></p>
+
+      <div class="pull reveal">"You can't move fast through a room you can't see."</div>
+
+      <h2 class="reveal">Clarity is the whole game</h2>
+      <p class="reveal">Everything you want — more customers, better margins, a calmer week — sits on the other side of one thing: knowing what's actually happening. Not what you feel is happening. Not what happened in a good month last spring. What is happening, right now, in numbers you trust.</p>
+      <p class="reveal">Because when you have that, decisions stop being arguments. Should we keep running that ad? Look at the number. Is the new page working? Look at the number. Where did our best customer come from? Look at the number. The conversation that used to eat a whole afternoon takes forty seconds, and you're on to the next thing.</p>
+      <p class="reveal">That's what clarity buys you. Not comfort — <b>speed.</b></p>
+
+      <h2 class="reveal">Everything gets easier when you know your numbers</h2>
+      <p class="reveal">You don't need a hundred metrics. You need a handful you actually understand. For most businesses, it's four or five: where people come from, what it costs to get one, how many turn into customers, what they're worth, and how many stay.</p>
+      <p class="reveal">Here's what most dashboards look like — including the ones that "have analytics installed":</p>
+
+      <div class="board reveal">
+        <span class="board-label">Most businesses</span>
+        <div class="tiles">
+          <div class="tile"><span class="k">Top lead<br>source</span><span class="v">?</span></div>
+          <div class="tile"><span class="k">Cost per<br>lead</span><span class="v">?</span></div>
+          <div class="tile"><span class="k">Close<br>rate</span><span class="v">?</span></div>
+          <div class="tile"><span class="k">Best<br>page</span><span class="v">?</span></div>
+        </div>
+      </div>
+
+      <p class="reveal">And here's what the same four tiles look like on a business that got organized:</p>
+
+      <div class="board lit reveal">
+        <span class="board-label on">Organized</span>
+        <div class="tiles">
+          <div class="tile"><span class="k">Top lead<br>source</span><span class="v">62%</span></div>
+          <div class="tile"><span class="k">Cost per<br>lead</span><span class="v">$14</span></div>
+          <div class="tile"><span class="k">Close<br>rate</span><span class="v">31%</span></div>
+          <div class="tile"><span class="k">Best<br>page</span><span class="v">/story</span></div>
+        </div>
+      </div>
+
+      <p class="reveal">Same business. Same effort. The second one can double down on what's working by Tuesday, and the first one is still "thinking about it." <b>That gap is the whole difference,</b> and it compounds every single week.</p>
+
+      <h2 class="reveal">Which is why your analytics have to be right</h2>
+      <p class="reveal">Here's the uncomfortable part. Most businesses do have Google Analytics on the site. It's been there for years. And it's telling them almost nothing useful, because it was pasted in once and never set up.</p>
+      <p class="reveal">A default install counts visits. That's it. It can't tell you which ad brought the person who actually bought, what a lead is worth, which page does the convincing, or whether last month's spend was brilliant or wasted. So people look at a chart of pageviews going up, feel vaguely good, and <b>learn nothing they can act on.</b></p>
+      <p class="reveal">Set up properly, the same free tool answers real questions:</p>
+      <ul class="reveal">
+        <li><b>Which ad, post, or email</b> actually produced the sale — not just the click.</li>
+        <li><b>What a lead costs you</b> from each source, so you know where the next dollar goes.</li>
+        <li><b>Where people quit</b> — the exact step that's leaking money right now.</li>
+        <li><b>What's worth repeating,</b> instead of a hunch about what felt like it worked.</li>
+      </ul>
+      <p class="reveal">That's the difference between measuring and knowing. Same tool, same cost, completely different business.</p>
+
+      <figure class="b-figure reveal">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260729_142417_fc991b8f-99ac-4556-9bc7-c1c7fac0ba82_min.webp" alt="A chaotic desk buried in scattered papers and tangled cables in near darkness" loading="lazy">
+        <figcaption>Nobody thinks clearly in here. Not you, not anyone.</figcaption>
+      </figure>
+
+      <h2 class="reveal">Clutter is what's making you slow</h2>
+      <p class="reveal">Think about the last time you tried to do focused work at a buried desk. You didn't just work slower — you worked worse. Your attention kept getting taxed by everything in your peripheral vision, and the good idea never showed up.</p>
+      <p class="reveal">Your business runs on the same rule. Leads in one inbox, numbers in a spreadsheet somebody stopped updating, receipts in a text thread, the offer explained perfectly on a call and written down nowhere, four platforms each showing a different version of the truth. <b>None of that is a strategy problem.</b> It's a stacking problem.</p>
+      <p class="reveal">And it costs you twice. First in the hours spent hunting for things. Then — the expensive one — in the decisions you postpone because you don't trust what you're looking at. Overthinking isn't a personality trait. Most of the time it's just <b>the sound of missing information.</b></p>
+      <p class="reveal">Clear the clutter and the overthinking mostly goes with it. Not because you got smarter. Because you can finally see.</p>
+
+      <div class="midcta reveal">
+        <div>
+          <h3>Want to see your <span class="sky">numbers?</span></h3>
+          <p>Tell us what you're running. We'll show you what clarity looks like on your business, not a generic one.</p>
+        </div>
+        <a href="/ai-brain-form" class="btn btn-sky">Schedule a Call <span class="arrow">→</span></a>
+      </div>
+
+      <h2 class="reveal">A dashboard is where clarity lives</h2>
+      <p class="reveal">Knowing your numbers isn't a one-time audit. It's a habit, and habits need a place to happen. That place is a dashboard: one screen, built for your business, that answers the five questions you actually care about — before your coffee's finished.</p>
+      <p class="reveal">Two things change once it exists. The obvious one: you stop digging. The bigger one: <b>a number you look at every day starts to move.</b> Not by magic — because attention is the whole mechanism. You notice a dip on a Wednesday instead of at the end of a quarter, and the fix costs you an hour instead of a season.</p>
+      <p class="reveal">It's the same principle behind <a class="inline" href="/blog/ai-brain">building your own AI brain</a>, and behind <a class="inline" href="/blog/own-your-name">owning your name</a>. The power was never in having the information. It's in the shape you put it in.</p>
+
+      <figure class="b-figure reveal">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3Ciw2B3NdrGYcBkMi8byKa5I2Dj/hf_20260729_142419_bf5e0e98-fb15-4a23-815a-7713fea20f5a_min.webp" alt="A streak of sky-blue fire racing down a dark road at night" loading="lazy">
+        <figcaption>Clarity first. Speed is what it turns into.</figcaption>
+      </figure>
+
+      <h2 class="reveal">Money loves speed</h2>
+      <p class="reveal">There's an old saying in business: money loves speed. It gets repeated like a motivational line, but it's a mechanical observation. The business that tests four offers this month learns four times as much as the one that spent the month deciding. The one that answers a lead in five minutes beats the one that answers in two days, every time, regardless of who's better at the work.</p>
+      <p class="reveal">Speed isn't rushing. Rushing is what you do <em>without</em> information. Speed is what happens when the answer is already on the screen and you simply act on it. <b>Fast is a byproduct of clear.</b></p>
+
+      <div class="pull reveal">"Overthinking is usually just missing information wearing a costume."</div>
+
+      <p class="reveal">And this is the part that surprises people: getting organized is not the boring admin task standing between you and the real work. It <em>is</em> the real work. It's the difference between a pile of sticks and a fire that catches — same wood, one match, entirely different outcome. Stack it right and the whole thing goes up.</p>
+
+      <h2 class="reveal">Where to start</h2>
+      <p class="reveal">You don't need a rebuild. You need three things in the right order: analytics that actually track what matters, a short list of numbers that decide your week, and one screen that shows them without you asking. Most businesses can get there in days, not months.</p>
+      <p class="reveal">That's the part we do. You bring the business; <b>we handle the organizing</b> — the tracking, the numbers, the dashboard, the whole thing sitting in one place where you can finally see it.</p>
+      <p class="reveal">Then you get to do the fun part, which is going fast.</p>
+    </div>
+  </div>
+</article>
+
+<!-- ===== CTA ===== -->
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>Ready to move <span class="sky">faster?</span></h2>
+      <p>A few quick questions about what you're building, then pick a time. We'll walk you through exactly what your numbers should be telling you — and what they're not.</p>
+      <a href="/ai-brain-form" class="btn btn-sky">Schedule a Call <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="backrow"><a href="/blog">← Back to The Blue Flame</a></div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/"><span class="flame"></span><b>Social Fire</b>&nbsp;<span>Solutions</span></a>
+    <div class="tag">Spread like fire</div>
+    <div class="copy">© 2026 Social Fire Solutions. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  const onScroll = ()=> nav.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:0.12, rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>
