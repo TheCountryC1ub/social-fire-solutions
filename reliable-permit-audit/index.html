@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P350HNJX4Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P350HNJX4Y');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Reliable Permit Solutions — Site Audit | Social Fire Solutions</title>
+<link rel="icon" type="image/png" href="/media/favicon.png">
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
+<meta name="description" content="A full performance and SEO audit of reliablepermitsolutions.com — Core Web Vitals, page weight, and the mobile rendering failure costing the site its visitors." />
+<meta property="og:title" content="Reliable Permit Solutions — Site Audit" />
+<meta property="og:description" content="21.8 seconds to load. A blank page on mobile. 302 articles of trapped SEO equity. The full data, and the path forward." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --onyx: #0A0A0B;
+    --carbon: #161618;
+    --carbon-2: #101012;
+    --line: #26262b;
+    --ivory: #F4F1EA;
+    --ash: #9A9AA0;
+    --ash-dim: #6c6c74;
+    --sky-1: #BAE6FD;
+    --sky-2: #38BDF8;
+    --sky-deep: #0e7ab8;
+    --crit: #f0564a;
+    --warn: #f2a63b;
+    --pass: #3fc97c;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ivory);
+    background: var(--onyx);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2 { font-family: 'Playfair Display', serif; line-height: 1.08; font-weight: 700; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px 96px; }
+
+  /* ---------- header ---------- */
+  header { padding: 44px 0 0; }
+  .brandline { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 20px; }
+  .brand { font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: var(--sky-2); font-weight: 700; }
+  .brand a { color: inherit; text-decoration: none; }
+  .brand span { color: var(--ash-dim); font-weight: 400; }
+  .stamp { font-family: var(--mono); font-size: 12px; color: var(--ash-dim); }
+  h1 { font-size: clamp(34px, 5.4vw, 54px); letter-spacing: -.01em; margin: 34px 0 12px; text-wrap: balance; font-weight: 800; }
+  .subject { font-family: var(--mono); font-size: 14px; color: var(--sky-2); margin-bottom: 8px; }
+  .prepared { font-family: var(--mono); font-size: 12px; color: var(--ash-dim); margin-bottom: 22px; letter-spacing: .06em; }
+  .lede { color: var(--ash); max-width: 62ch; font-size: 17px; }
+  .lede strong { color: var(--ivory); }
+
+  /* ---------- section scaffolding ---------- */
+  section { margin-top: 68px; }
+  .eyebrow { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--sky-2); font-weight: 700; margin-bottom: 14px; }
+  h2 { font-size: clamp(24px, 3.2vw, 30px); margin-bottom: 10px; text-wrap: balance; }
+  .note { color: var(--ash); max-width: 68ch; margin-bottom: 24px; }
+  .note strong { color: var(--ivory); }
+
+  /* ---------- headline finding: phone ---------- */
+  .flagship { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: center;
+    background: linear-gradient(160deg, #1a0d0e 0%, var(--carbon-2) 55%); border: 1px solid #3d1a1c; border-radius: 14px; padding: 36px; margin-top: 26px; }
+  @media (max-width: 720px) { .flagship { grid-template-columns: 1fr; justify-items: center; } }
+  .phone { width: 240px; border-radius: 30px; border: 3px solid #2e2e34; background: #000; padding: 8px; box-shadow: 0 24px 60px rgba(0,0,0,.55); }
+  .phone-screen { border-radius: 22px; overflow: hidden; background: #fff; height: 470px; display: flex; flex-direction: column; }
+  .ps-nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid #e5e5e5; }
+  .ps-logo { font-size: 11px; font-weight: 800; color: #3a9c33; line-height: 1.15; }
+  .ps-logo em { display: block; font-style: normal; color: #3d55a5; font-size: 9px; }
+  .ps-burger { width: 18px; }
+  .ps-burger i { display: block; height: 2px; background: #c9c9c9; margin: 3px 0; }
+  .ps-void { flex: 1; background: #fff; }
+  .ps-chat { display: flex; gap: 6px; align-items: center; padding: 10px; border-top: 1px solid #eee; }
+  .ps-chat .bubble { flex: 1; border: 1.5px solid #d6d6d6; border-radius: 6px; color: #b9b9b9; font-size: 10px; padding: 7px 9px; }
+  .ps-chat .clip { width: 22px; height: 22px; border-radius: 50%; background: #ececec; }
+  .phone-caption { font-family: var(--mono); font-size: 11.5px; color: var(--ash-dim); text-align: center; margin-top: 12px; max-width: 240px; }
+  .flag-copy .tag { display: inline-block; font-family: var(--mono); font-size: 11.5px; letter-spacing: .12em; color: var(--crit); border: 1px solid var(--crit); border-radius: 4px; padding: 3px 10px; margin-bottom: 16px; }
+  .flag-copy p { color: var(--ash); max-width: 52ch; }
+  .flag-copy p + p { margin-top: 12px; }
+  .flag-copy h2 { margin-bottom: 12px; }
+
+  /* ---------- score rings ---------- */
+  .scores { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 720px) { .scores { grid-template-columns: repeat(2, 1fr); } }
+  .score { background: var(--carbon); border: 1px solid var(--line); border-radius: 12px; padding: 22px 16px; text-align: center; }
+  .ring { width: 92px; height: 92px; border-radius: 50%; margin: 0 auto 14px; display: grid; place-items: center; position: relative; }
+  .ring::after { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--carbon); }
+  .ring b { position: relative; z-index: 1; font-family: var(--mono); font-size: 26px; font-weight: 700; }
+  .score .label { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ash); }
+  .score small { display: block; margin-top: 4px; font-family: var(--mono); font-size: 11px; color: var(--ash-dim); }
+  .r-crit { background: conic-gradient(var(--crit) calc(var(--v)*1%), #2a2a30 0); }
+  .r-crit b { color: var(--crit); }
+  .r-warn { background: conic-gradient(var(--warn) calc(var(--v)*1%), #2a2a30 0); }
+  .r-warn b { color: var(--warn); }
+  .r-pass { background: conic-gradient(var(--pass) calc(var(--v)*1%), #2a2a30 0); }
+  .r-pass b { color: var(--pass); }
+
+  /* ---------- vitals bars ---------- */
+  .vitals { display: flex; flex-direction: column; gap: 18px; background: var(--carbon); border: 1px solid var(--line); border-radius: 12px; padding: 28px; }
+  .vital .vhead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 7px; flex-wrap: wrap; }
+  .vital .vname { font-size: 14px; font-weight: 600; }
+  .vital .vname span { color: var(--ash-dim); font-weight: 400; font-size: 12.5px; }
+  .vital .vval { font-family: var(--mono); font-size: 14px; font-weight: 700; }
+  .v-crit .vval { color: var(--crit); }
+  .v-warn .vval { color: var(--warn); }
+  .v-pass .vval { color: var(--pass); }
+  .track { position: relative; height: 12px; border-radius: 6px; background: #222228; overflow: hidden; }
+  .fill { position: absolute; inset: 0 auto 0 0; width: calc(var(--w)*1%); border-radius: 6px; }
+  .v-crit .fill { background: linear-gradient(90deg, #8a2d27, var(--crit)); }
+  .v-warn .fill { background: linear-gradient(90deg, #8a5c1c, var(--warn)); }
+  .v-pass .fill { background: linear-gradient(90deg, #1d7a49, var(--pass)); }
+  .goal { position: absolute; top: -4px; bottom: -4px; left: calc(var(--g)*1%); width: 2px; background: var(--ivory); opacity: .85; }
+  .vfoot { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10.5px; color: var(--ash-dim); margin-top: 5px; }
+  .legend { font-family: var(--mono); font-size: 11px; color: var(--ash-dim); margin-top: 4px; }
+  .legend i { display: inline-block; width: 2px; height: 10px; background: var(--ivory); vertical-align: -1px; margin-right: 6px; }
+
+  /* ---------- weight ---------- */
+  .weights { background: var(--carbon); border: 1px solid var(--line); border-radius: 12px; padding: 28px; }
+  .stack { display: flex; height: 34px; border-radius: 8px; overflow: hidden; margin: 6px 0 14px; }
+  .stack div { min-width: 2px; }
+  .wkey { display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: var(--mono); font-size: 12px; color: var(--ash); }
+  .wkey b { color: var(--ivory); font-weight: 700; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 7px; }
+  .bigstat { display: flex; gap: 40px; flex-wrap: wrap; margin-bottom: 20px; }
+  .bigstat .bs b { display: block; font-family: var(--mono); font-size: 30px; font-weight: 700; color: var(--sky-2); letter-spacing: -.02em; }
+  .bigstat .bs span { font-size: 12.5px; color: var(--ash); text-transform: uppercase; letter-spacing: .07em; }
+  .offenders { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 18px; }
+  .offenders h3 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--ash); margin-bottom: 12px; font-weight: 600; }
+  .off { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 9px 0; border-bottom: 1px dashed #232329; font-size: 14px; }
+  .off:last-child { border-bottom: 0; }
+  .off .what { color: var(--ivory); }
+  .off .what span { display: block; font-size: 12.5px; color: var(--ash-dim); }
+  .off .kb { font-family: var(--mono); color: var(--warn); font-weight: 700; white-space: nowrap; }
+
+  /* ---------- findings ---------- */
+  .finding { display: grid; grid-template-columns: 92px 1fr; gap: 18px; background: var(--carbon); border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; margin-bottom: 14px; }
+  @media (max-width: 600px) { .finding { grid-template-columns: 1fr; gap: 8px; } }
+  .sev { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .1em; align-self: start; text-align: center; border-radius: 4px; padding: 4px 0; }
+  .sev-crit { color: var(--crit); border: 1px solid var(--crit); }
+  .sev-warn { color: var(--warn); border: 1px solid var(--warn); }
+  .sev-info { color: var(--sky-2); border: 1px solid var(--sky-deep); }
+  .finding h3 { font-size: 16.5px; font-weight: 700; margin-bottom: 4px; }
+  .finding p { color: var(--ash); font-size: 14.5px; max-width: 70ch; }
+  .finding code { font-family: var(--mono); font-size: 12.5px; color: var(--sky-1); background: #101418; border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; }
+
+  /* ---------- working ---------- */
+  .working { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .working { grid-template-columns: 1fr; } }
+  .win { background: var(--carbon); border: 1px solid #1c3a2b; border-radius: 12px; padding: 18px 20px; font-size: 14.5px; color: var(--ash); }
+  .win b { color: var(--pass); display: block; margin-bottom: 3px; font-size: 15px; }
+
+  /* ---------- plan ---------- */
+  .plan { background: linear-gradient(150deg, #0c141c, var(--carbon-2)); border: 1px solid #14384f; border-radius: 14px; padding: 36px; }
+  .plan ol { counter-reset: step; list-style: none; margin-top: 22px; display: flex; flex-direction: column; gap: 16px; }
+  .plan li { counter-increment: step; display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
+  .plan li::before { content: counter(step, decimal-leading-zero); font-family: var(--mono); font-size: 15px; font-weight: 700; color: var(--sky-2); border: 1px solid var(--sky-deep); border-radius: 8px; width: 40px; height: 40px; display: grid; place-items: center; }
+  .plan li b { display: block; font-size: 15.5px; margin-bottom: 2px; }
+  .plan li p { color: var(--ash); font-size: 14px; max-width: 62ch; }
+  .target { font-family: var(--mono); font-size: 12.5px; color: var(--pass); }
+
+  /* ---------- CTA ---------- */
+  .cta { margin-top: 68px; text-align: center; background: var(--carbon); border: 1px solid var(--line); border-radius: 14px; padding: 48px 32px; }
+  .cta h2 { margin-bottom: 10px; }
+  .cta p { color: var(--ash); max-width: 54ch; margin: 0 auto 26px; }
+  .cta a.btn { display: inline-block; font-weight: 700; font-size: 15px; color: var(--onyx); background: linear-gradient(120deg, var(--sky-1), var(--sky-2)); border-radius: 10px; padding: 15px 34px; text-decoration: none; letter-spacing: .02em; }
+  .cta a.btn:hover { filter: brightness(1.08); }
+  .cta .alt { display: block; margin-top: 16px; font-family: var(--mono); font-size: 12.5px; color: var(--ash-dim); }
+  .cta .alt a { color: var(--sky-2); text-decoration: none; }
+
+  footer { margin-top: 72px; border-top: 1px solid var(--line); padding-top: 22px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; color: var(--ash-dim); }
+  footer b { color: var(--sky-2); font-weight: 700; letter-spacing: .18em; }
+  footer a { color: inherit; text-decoration: none; }
+  footer a:hover { color: var(--sky-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brandline">
+      <div class="brand"><a href="/">SOCIAL FIRE SOLUTIONS</a> <span>/ SITE AUDIT</span></div>
+      <div class="stamp">Tested July 31, 2026 · Google Lighthouse · mobile emulation + live probes</div>
+    </div>
+    <div style="margin-top:36px">
+      <div class="subject">reliablepermitsolutions.com</div>
+      <h1>The site works hard.<br>Visitors never see it.</h1>
+      <div class="prepared">Prepared for Peter — Reliable Permit Solutions</div>
+      <p class="lede">Reliable Permit Solutions has real assets — <strong>302 published blog articles</strong>, active updates, a clean sitemap. But the site takes <strong>21.8 seconds</strong> to show its main content on a phone, and a broken chat widget is <strong>hiding the entire homepage from mobile visitors</strong>. Here's the data.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="eyebrow">Finding 01 — Critical</div>
+    <div class="flagship">
+      <div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="ps-nav">
+              <div class="ps-logo">Reliable<em>Permit Solutions</em></div>
+              <div class="ps-burger"><i></i><i></i><i></i></div>
+            </div>
+            <div class="ps-void"></div>
+            <div class="ps-chat"><div class="bubble">Write your message here</div><div class="clip"></div></div>
+          </div>
+        </div>
+        <div class="phone-caption">Faithful recreation of the actual mobile render — fresh load, iPhone viewport, verified on two separate loads</div>
+      </div>
+      <div class="flag-copy">
+        <span class="tag">MOBILE = BLANK PAGE</span>
+        <h2>The chat widget swallows the whole site on phones</h2>
+        <p>The RingCentral chat window auto-opens on page load. On a phone-sized screen it expands to fill the entire viewport with an empty white conversation panel — covering the headline, the phone number, the services, everything. A mobile visitor sees a logo, a white void, and a chat box.</p>
+        <p>Truckers and dispatchers searching for permits are overwhelmingly on phones. Right now, every one of those visitors lands on what looks like a broken page — and Google's mobile-first crawler renders the page the same way.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Lighthouse Scores — Mobile</div>
+    <h2>One score is dragging down everything the others earn</h2>
+    <p class="note">SEO basics pass and accessibility is strong. But Google ties rankings and ad quality scores to real loading performance — and performance is failing.</p>
+    <div class="scores">
+      <div class="score">
+        <div class="ring r-crit" style="--v:41"><b>41</b></div>
+        <div class="label">Performance</div>
+        <small>failing — the problem</small>
+      </div>
+      <div class="score">
+        <div class="ring r-warn" style="--v:77"><b>77</b></div>
+        <div class="label">Best Practices</div>
+        <small>needs work</small>
+      </div>
+      <div class="score">
+        <div class="ring r-pass" style="--v:97"><b>97</b></div>
+        <div class="label">Accessibility</div>
+        <small>strong</small>
+      </div>
+      <div class="score">
+        <div class="ring r-pass" style="--v:100"><b>100</b></div>
+        <div class="label">SEO Basics</div>
+        <small>on-page tags pass</small>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Core Web Vitals</div>
+    <h2>21.8 seconds to show the main content</h2>
+    <p class="note">These are Google's own pass/fail metrics — they directly affect where the site ranks. The white line on each bar is Google's <strong>"good"</strong> threshold. The site isn't near the line; it's a different zip code.</p>
+    <div class="vitals">
+      <div class="vital v-crit">
+        <div class="vhead"><span class="vname">Largest Contentful Paint <span>— when the main content appears</span></span><span class="vval">21.8 s</span></div>
+        <div class="track"><span class="fill" style="--w:97"></span><span class="goal" style="--g:11"></span></div>
+        <div class="vfoot"><span>goal ≤ 2.5 s</span><span>8.7× over the limit</span></div>
+      </div>
+      <div class="vital v-crit">
+        <div class="vhead"><span class="vname">Time to Interactive <span>— when the page responds to taps</span></span><span class="vval">23.6 s</span></div>
+        <div class="track"><span class="fill" style="--w:98"></span><span class="goal" style="--g:16"></span></div>
+        <div class="vfoot"><span>goal ≤ 3.8 s</span><span>6.2× over the limit</span></div>
+      </div>
+      <div class="vital v-crit">
+        <div class="vhead"><span class="vname">First Contentful Paint <span>— when anything appears</span></span><span class="vval">6.6 s</span></div>
+        <div class="track"><span class="fill" style="--w:73"></span><span class="goal" style="--g:20"></span></div>
+        <div class="vfoot"><span>goal ≤ 1.8 s</span><span>3.7× over the limit</span></div>
+      </div>
+      <div class="vital v-warn">
+        <div class="vhead"><span class="vname">Total Blocking Time <span>— main-thread freeze from scripts</span></span><span class="vval">580 ms</span></div>
+        <div class="track"><span class="fill" style="--w:58"></span><span class="goal" style="--g:20"></span></div>
+        <div class="vfoot"><span>goal ≤ 200 ms</span><span>2.9× over the limit</span></div>
+      </div>
+      <div class="vital v-warn">
+        <div class="vhead"><span class="vname">Server Response (TTFB) <span>— repeated live probes</span></span><span class="vval">1.7–2.3 s</span></div>
+        <div class="track"><span class="fill" style="--w:52"></span><span class="goal" style="--g:21"></span></div>
+        <div class="vfoot"><span>goal ≤ 0.8 s</span><span>slow hosting / no edge cache</span></div>
+      </div>
+      <div class="vital v-pass">
+        <div class="vhead"><span class="vname">Cumulative Layout Shift <span>— visual stability</span></span><span class="vval">0.004</span></div>
+        <div class="track"><span class="fill" style="--w:4"></span><span class="goal" style="--g:40"></span></div>
+        <div class="vfoot"><span>goal ≤ 0.10</span><span>passing — credit where due</span></div>
+      </div>
+      <div class="legend"><i></i>white line = Google's "good" threshold for each metric</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Why It's Slow</div>
+    <h2>4.7 MB and 178 requests for one page</h2>
+    <p class="note">The homepage ships <strong>88 separate JavaScript files (3.2 MB)</strong> — the signature of a heavyweight page builder plus a stack of plugins, with <strong>98 of 178 requests going to third parties</strong>. Lighthouse measured 658 KB of that JavaScript as never executed at all.</p>
+    <div class="weights">
+      <div class="bigstat">
+        <div class="bs"><b>4.7 MB</b><span>page weight</span></div>
+        <div class="bs"><b>178</b><span>requests</span></div>
+        <div class="bs"><b>88</b><span>script files</span></div>
+        <div class="bs"><b>98</b><span>third-party calls</span></div>
+      </div>
+      <div class="stack">
+        <div style="flex:3232; background:#f0564a" title="Scripts 3232 KB"></div>
+        <div style="flex:820; background:#f2a63b" title="Images 820 KB"></div>
+        <div style="flex:296; background:#38BDF8" title="CSS 296 KB"></div>
+        <div style="flex:183; background:#8f7ef2" title="Fonts 183 KB"></div>
+        <div style="flex:137; background:#3fc97c" title="Documents + other 137 KB"></div>
+      </div>
+      <div class="wkey">
+        <span><i class="dot" style="background:#f0564a"></i>JavaScript <b>3.2 MB</b></span>
+        <span><i class="dot" style="background:#f2a63b"></i>Images <b>820 KB</b></span>
+        <span><i class="dot" style="background:#38BDF8"></i>CSS <b>296 KB</b></span>
+        <span><i class="dot" style="background:#8f7ef2"></i>Fonts <b>183 KB</b></span>
+        <span><i class="dot" style="background:#3fc97c"></i>Docs + misc <b>137 KB</b></span>
+      </div>
+      <div class="offenders">
+        <h3>Heaviest offenders, by host</h3>
+        <div class="off"><span class="what">YouTube embed player <span>full player loads up-front for one video — 20 requests</span></span><span class="kb">1.9 MB</span></div>
+        <div class="off"><span class="what">Google Tag Manager stack <span>7 requests of tracking scripts</span></span><span class="kb">956 KB</span></div>
+        <div class="off"><span class="what">Theme + WordPress plugins <span>80 requests from the site's own server</span></span><span class="kb">1.3 MB</span></div>
+        <div class="off"><span class="what">RingCentral chat widget <span>the one that blanks the mobile site</span></span><span class="kb">263 KB</span></div>
+        <div class="off"><span class="what">WordPress emoji assets <span>45 tiny requests, pure connection overhead</span></span><span class="kb">43 KB</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Full Findings</div>
+    <h2>What's broken, ranked</h2>
+    <div class="finding">
+      <span class="sev sev-crit">CRITICAL</span>
+      <div>
+        <h3>Mobile homepage is a blank white screen</h3>
+        <p>The chat widget auto-opens and covers the full phone viewport with an empty panel. Verified on repeated fresh loads. Every mobile visitor — and Google's mobile-first crawler — meets this first.</p>
+      </div>
+    </div>
+    <div class="finding">
+      <span class="sev sev-crit">CRITICAL</span>
+      <div>
+        <h3>Main content takes 21.8 s to appear on mobile</h3>
+        <p>Google's passing grade is 2.5 s. Industry data puts the majority of mobile abandonment at ~3 s — this page is still blank at that point, and stays interactive-dead until 23.6 s.</p>
+      </div>
+    </div>
+    <div class="finding">
+      <span class="sev sev-warn">MAJOR</span>
+      <div>
+        <h3>3.2 MB of JavaScript, 658 KB of it never used</h3>
+        <p>Page-builder scripts, sliders, and plugin bundles load on every page whether used or not. Lighthouse estimates 2.8 s of load time recoverable from unused JavaScript alone, plus 199 KB of unused CSS.</p>
+      </div>
+    </div>
+    <div class="finding">
+      <span class="sev sev-warn">MAJOR</span>
+      <div>
+        <h3>Slow server, no edge caching</h3>
+        <p>Time-to-first-byte measured 1.7–2.3 s across repeated probes (goal: under 0.8 s), and a redirect chain adds an estimated 1.5 s more. Every page view pays this tax before a single pixel loads.</p>
+      </div>
+    </div>
+    <div class="finding">
+      <span class="sev sev-warn">MAJOR</span>
+      <div>
+        <h3>No business schema markup — invisible to rich results</h3>
+        <p>The only structured data on the page is a navigation menu list. No <code>Organization</code>, <code>LocalBusiness</code>, <code>Service</code>, or <code>FAQ</code> schema — the things that earn map packs, star ratings, and AI-search citations for "oversize load permits" queries.</p>
+      </div>
+    </div>
+    <div class="finding">
+      <span class="sev sev-info">MINOR</span>
+      <div>
+        <h3>Invalid heading structure</h3>
+        <p>The homepage's main heading is an <code>&lt;h2&gt;</code> nested <em>inside</em> an <code>&lt;h1&gt;</code> — invalid HTML from the page builder that muddies how crawlers read the page hierarchy.</p>
+      </div>
+    </div>
+    <div class="finding">
+      <span class="sev sev-info">MINOR</span>
+      <div>
+        <h3>Full YouTube player loads before anyone clicks play</h3>
+        <p>1.9 MB across 20 requests for a single embedded video. A click-to-load poster image would cut page weight by 40% on its own.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">What's Already Working</div>
+    <h2>The good news: the hard part is done</h2>
+    <p class="note">This matters — the expensive assets already exist. They're just trapped in a slow frame.</p>
+    <div class="working">
+      <div class="win"><b>302 published blog articles</b>Actively maintained — latest posts July 14, 2026. Years of content equity in the exact niche their customers search.</div>
+      <div class="win"><b>On-page SEO fundamentals pass</b>Titles, meta descriptions, sitemap, robots.txt, image alt text — the basics are covered. Lighthouse SEO: 100.</div>
+      <div class="win"><b>Accessibility is strong (97)</b>Rare for a site of this age — worth preserving in any rebuild.</div>
+      <div class="win"><b>Layout is stable</b>CLS of 0.004 is genuinely excellent. When the page finally loads, it doesn't jump around.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">The Path Forward</div>
+    <div class="plan">
+      <h2>Keep the equity. Replace the frame.</h2>
+      <p class="note">The rebuild isn't starting from zero — it's moving 300+ articles of content equity into a site that loads in under 3 seconds and actually renders on a phone.</p>
+      <ol>
+        <li><div><b>Kill the mobile blackout — day one</b><p>Reconfigure or replace the chat widget so it never auto-opens over content. This is the single highest-ROI fix available.</p></div></li>
+        <li><div><b>Rebuild on a modern lightweight stack</b><p>Same brand, new frame: no page-builder bloat, one bundled stylesheet, click-to-load video, edge-cached hosting. <span class="target">Target: LCP under 2.5 s, page weight under 1 MB, performance score 90+.</span></p></div></li>
+        <li><div><b>Migrate all 302 articles with 1:1 redirects</b><p>Every existing URL 301-redirects to its new home so years of Google equity transfers instead of evaporating.</p></div></li>
+        <li><div><b>Layer in the missing schema</b><p>Organization, Service, and FAQ structured data on every service page — eligibility for rich results and AI-search citations the current site can't earn.</p></div></li>
+        <li><div><b>Measure it honestly</b><p>Proper analytics with conversion events (calls, estimate requests), so "the new site works" is a number, not a feeling.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2>Want the fast version of this site?</h2>
+    <p>Social Fire Solutions builds sites that load in under three seconds, keep every ounce of your SEO equity, and turn visitors into phone calls. Let's talk about what that looks like for Reliable Permit Solutions.</p>
+    <a class="btn" href="/#contact">Start the Conversation</a>
+    <span class="alt">or see how we work at <a href="https://socialfire.solutions">socialfire.solutions</a></span>
+  </div>
+
+  <footer>
+    <span><b>SOCIAL FIRE SOLUTIONS</b> · <a href="https://socialfire.solutions">socialfire.solutions</a></span>
+    <span>Data: Google Lighthouse (mobile emulation) + live server probes, July 31, 2026</span>
+  </footer>
+</div>
+</body>
+</html>
