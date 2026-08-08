@@ -8,8 +8,13 @@
 // The form falls back to a mailto: link if this endpoint is missing or errors,
 // so no lead is ever lost.
 
+const crypto = require("crypto");
+
 const GHL_BASE = "https://services.leadconnectorhq.com";
 const GHL_VERSION = "2021-07-28";
+
+// Meta Conversions API. Bump META_API_VERSION in Vercel if Meta sunsets this one.
+const META_API_VERSION = process.env.META_API_VERSION || "v21.0";
 
 const FIELD_ORDER = [
   ["hassite", "Has a website?"],
@@ -37,6 +42,77 @@ function noteBody(d) {
   }
   lines.push("", `Consent: ${d.consent ? "Yes" : "—"}`);
   return lines.join("\n");
+}
+
+// ── Meta Conversions API ────────────────────────────────────────────────────
+// Server-side twin of the browser `Lead` event. Shares the browser's
+// _fbEventId so Meta collapses the pair into ONE conversion. Best-effort:
+// a CAPI failure must never fail the lead.
+
+const sha256 = (v) =>
+  crypto.createHash("sha256").update(String(v).trim().toLowerCase()).digest("hex");
+
+function readCookie(req, name) {
+  const m = (req.headers.cookie || "").match(
+    new RegExp("(?:^|;\\s*)" + name + "=([^;]+)")
+  );
+  return m ? decodeURIComponent(m[1]) : undefined;
+}
+
+async function sendMetaLead(req, d, email, phone) {
+  const pixel = process.env.META_PIXEL_ID;
+  const token = process.env.META_CAPI_TOKEN;
+  if (!pixel || !token) return; // not configured yet — silently no-op
+
+  const { firstName, lastName } = splitName(d.name);
+  const digits = String(phone || "").replace(/\D/g, "");
+
+  const user_data = {
+    client_user_agent: req.headers["user-agent"],
+    client_ip_address:
+      (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || undefined,
+    fbp: readCookie(req, "_fbp"),
+    fbc: readCookie(req, "_fbc"),
+  };
+  if (email) user_data.em = sha256(email);
+  if (digits) user_data.ph = sha256(digits);
+  if (firstName) user_data.fn = sha256(firstName);
+  if (lastName) user_data.ln = sha256(lastName);
+
+  const payload = {
+    data: [
+      {
+        event_name: "Lead",
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: d._fbEventId, // dedupe key — must match the browser event
+        event_source_url:
+          req.headers.referer || "https://socialfire.solutions/free-website",
+        action_source: "website",
+        user_data,
+        custom_data: {
+          content_name: "Free Website Survey",
+          value: 499,
+          currency: "USD",
+        },
+      },
+    ],
+  };
+  if (process.env.META_TEST_EVENT_CODE) {
+    payload.test_event_code = process.env.META_TEST_EVENT_CODE;
+  }
+
+  try {
+    await fetch(
+      `https://graph.facebook.com/${META_API_VERSION}/${pixel}/events?access_token=${encodeURIComponent(token)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
+  } catch (_) {
+    /* analytics must never break the lead */
+  }
 }
 
 module.exports = async (req, res) => {
@@ -121,6 +197,10 @@ module.exports = async (req, res) => {
         });
       } catch (_) { /* note is non-critical */ }
     }
+
+    // Server-side Lead. Awaited so it completes before Vercel freezes the
+    // function; it swallows its own errors, so it can't fail the lead.
+    await sendMetaLead(req, d, email, phone);
 
     return res.status(200).json({ ok: true, contactId });
   } catch (err) {

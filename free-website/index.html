@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8" />
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P350HNJX4Y"></script>
 <script>
@@ -9,7 +10,18 @@
   gtag('js', new Date());
   gtag('config', 'G-P350HNJX4Y');
 </script>
-<meta charset="UTF-8" />
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1904534047174026');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {content_name: 'Free Website Offer'});
+</script>
+<!-- End Meta Pixel -->
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Free Website — Social Fire Solutions</title>
 <link rel="icon" type="image/png" href="/media/favicon.png">
@@ -472,10 +484,16 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
     return { ok: ok, firstBad: firstBad };
   }
 
+  var startedTracked = false;
   function next(){
     var p = panels[idx];
     var res = validate(p);
     if(!res.ok){ showErr(p); return; }
+    // Meta: survey started — leading indicator, fires once per session
+    if(!startedTracked && window.fbq){
+      startedTracked = true;
+      fbq('track', 'SubmitApplication', {content_name: 'Free Website Survey'});
+    }
     if(idx < panels.length-1) show(idx+1, 'fwd');
   }
   function back(){ if(idx>0) show(idx-1, 'back'); }
@@ -560,6 +578,10 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
     var body = bodyText(d);
     var subject = "Free Website Survey — " + (d.bizname || d.name || "New lead");
 
+    // Shared id so the browser Lead and the server-side CAPI Lead dedupe
+    // into ONE event instead of double-counting.
+    d._fbEventId = 'lead.' + Date.now() + '.' + Math.random().toString(36).slice(2,10);
+
     // 1) Send to GoHighLevel via the serverless endpoint
     if(CONFIG.ENDPOINT){
       var btn = document.getElementById('submitBtn');
@@ -568,7 +590,14 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
         method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'},
         body: JSON.stringify(d)
       }).then(function(r){
-        if(r.ok) finish(false, body);            // delivered to GHL silently
+        if(r.ok){
+          // Only a confirmed GHL write counts as a Lead — the mailto fallback
+          // below is unverified, so it deliberately does not fire.
+          if(window.fbq) fbq('track', 'Lead',
+            {content_name: 'Free Website Survey', value: 499, currency: 'USD'},
+            {eventID: d._fbEventId});
+          finish(false, body);                   // delivered to GHL silently
+        }
         else { finish(true, body); openMail(subject, body); }  // fallback to email
       }).catch(function(){ finish(true, body); openMail(subject, body); });
       return;
