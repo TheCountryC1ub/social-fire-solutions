@@ -34,9 +34,9 @@ fbq('track', 'ViewContent', {content_name: 'Free Website Offer'});
 <style>
 :root{
   --onyx:#0A0A0B; --carbon:#161618; --carbon-2:#1F1F22;
-  --ember:#C81E1E; --molten:#F2531B; --ignition:#FFB020;
+  --ember:#1E5AC8; --molten:#1B8CF2; --ignition:#7FE0FF;
   --ivory:#F4F1EA; --ash:#9A9AA0; --line:#2a2a2e;
-  --burn:linear-gradient(100deg,#FFB020,#F2531B 50%,#C81E1E);
+  --burn:linear-gradient(100deg,#7FE0FF,#1B8CF2 50%,#1E5AC8);
   --err:#c0473a;
   --max:760px; --r:14px;
   --ease:cubic-bezier(.22,1,.36,1);
@@ -57,8 +57,8 @@ a{color:inherit; text-decoration:none}
 /* ambient background */
 .bg{position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
-    radial-gradient(120% 80% at 14% 0%, rgba(242,83,27,.10), transparent 55%),
-    radial-gradient(120% 90% at 86% 100%, rgba(200,30,30,.12), transparent 60%),
+    radial-gradient(120% 80% at 14% 0%, rgba(27,140,242,.10), transparent 55%),
+    radial-gradient(120% 90% at 86% 100%, rgba(30,90,200,.12), transparent 60%),
     linear-gradient(180deg,#0A0A0B,#0d0d10 60%,#08080a);
 }
 .bg::after{content:""; position:absolute; inset:0; opacity:.04;
@@ -71,7 +71,7 @@ a{color:inherit; text-decoration:none}
   background:linear-gradient(180deg,rgba(10,10,11,.92),rgba(10,10,11,0));
 }
 .brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:15px; letter-spacing:.01em}
-.brand .flame{width:22px;height:22px;flex:none;background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:0 0 18px rgba(242,83,27,.55)}
+.brand .flame{width:22px;height:22px;flex:none;background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:0 0 18px rgba(27,140,242,.55)}
 .brand span.co{color:var(--ash);font-weight:400}
 .exit{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ash); border:1px solid var(--line);
   padding:9px 16px; border-radius:50px; transition:.25s; background:rgba(255,255,255,.02)}
@@ -107,7 +107,7 @@ input[type=text],input[type=email],input[type=tel],textarea,select{
 }
 input::placeholder,textarea::placeholder{color:#606066}
 textarea{min-height:120px; resize:vertical; line-height:1.55}
-input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten); background:rgba(242,83,27,.05)}
+input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten); background:rgba(27,140,242,.05)}
 .invalid{border-color:var(--err)!important}
 
 /* choice cards (radio / checkbox) */
@@ -115,7 +115,7 @@ input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten)
 .choices.grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
 .choice{position:relative; display:flex; align-items:flex-start; gap:14px; cursor:pointer;
   border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:rgba(255,255,255,.02); transition:.22s var(--ease)}
-.choice:hover{border-color:rgba(242,83,27,.55); background:rgba(242,83,27,.05); transform:translateY(-2px)}
+.choice:hover{border-color:rgba(27,140,242,.55); background:rgba(27,140,242,.05); transform:translateY(-2px)}
 .choice input{position:absolute; opacity:0; pointer-events:none}
 .choice .box{flex:0 0 auto; width:22px; height:22px; border-radius:50%; border:1.6px solid var(--ash); margin-top:2px; display:grid; place-items:center; transition:.2s}
 .choice.chk .box{border-radius:6px}
@@ -125,23 +125,23 @@ input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten)
 .choice .ctext span{display:block; color:var(--ash); font-size:.9rem; margin-top:3px}
 .choice input:checked ~ .box{background:var(--burn); border-color:var(--ignition)}
 .choice input:checked ~ .box svg{opacity:1; transform:none}
-.choice:has(input:checked){border-color:var(--molten); background:rgba(242,83,27,.09); box-shadow:0 10px 30px -18px rgba(242,83,27,.8)}
+.choice:has(input:checked){border-color:var(--molten); background:rgba(27,140,242,.09); box-shadow:0 10px 30px -18px rgba(27,140,242,.8)}
 
 /* chips (compact multi-select) */
 .chips{display:flex; flex-wrap:wrap; gap:10px}
 .chip{position:relative; cursor:pointer}
 .chip input{position:absolute; opacity:0; pointer-events:none}
 .chip span{display:inline-block; border:1px solid var(--line); border-radius:50px; padding:11px 18px; font-size:.92rem; color:var(--ivory); transition:.2s var(--ease); background:rgba(255,255,255,.02)}
-.chip:hover span{border-color:rgba(242,83,27,.55)}
-.chip input:checked + span{background:linear-gradient(135deg,rgba(255,176,32,.20),rgba(200,30,30,.20)); border-color:var(--molten); color:var(--ignition); font-weight:600}
+.chip:hover span{border-color:rgba(27,140,242,.55)}
+.chip input:checked + span{background:linear-gradient(135deg,rgba(127,224,255,.20),rgba(30,90,200,.20)); border-color:var(--molten); color:var(--ignition); font-weight:600}
 
 /* nav buttons */
 .actions{display:flex; align-items:center; gap:14px; margin-top:30px; flex-wrap:wrap}
 .btn{display:inline-flex; align-items:center; gap:.55rem; cursor:pointer; border:1px solid transparent;
   font-family:'Inter'; font-weight:600; font-size:.84rem; letter-spacing:.1em; text-transform:uppercase;
   padding:16px 30px; border-radius:50px; transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, color .25s, border-color .25s}
-.btn-primary{background:var(--burn); color:#0A0A0B; box-shadow:0 10px 30px -8px rgba(242,83,27,.5)}
-.btn-primary:hover{transform:translateY(-3px); box-shadow:0 16px 40px -8px rgba(242,83,27,.7)}
+.btn-primary{background:var(--burn); color:#0A0A0B; box-shadow:0 10px 30px -8px rgba(27,140,242,.5)}
+.btn-primary:hover{transform:translateY(-3px); box-shadow:0 16px 40px -8px rgba(27,140,242,.7)}
 .btn-ghost{border-color:var(--line); color:var(--ash); background:transparent; padding:14px 22px}
 .btn-ghost:hover{border-color:var(--molten); color:var(--molten)}
 .btn:focus-visible{outline:3px solid var(--ignition); outline-offset:3px}
@@ -168,7 +168,7 @@ input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten)
 .done{display:none; text-align:center}
 .done.show{display:block; animation:rise .6s var(--ease) both}
 .ring{width:74px;height:74px;border-radius:50%;margin:0 auto 24px;display:grid;place-items:center;
-  background:var(--burn); box-shadow:0 20px 50px -18px rgba(242,83,27,.8)}
+  background:var(--burn); box-shadow:0 20px 50px -18px rgba(27,140,242,.8)}
 .ring svg{width:34px;height:34px;stroke:#0A0A0B;fill:none}
 .done h2{font-size:clamp(1.9rem,4.6vw,2.7rem); margin-bottom:14px}
 .done p{color:var(--ash); font-size:1.06rem; max-width:46ch; margin:0 auto 10px}
@@ -251,11 +251,12 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
         <label class="choice"><input type="radio" name="biztype" value="Restaurant / food"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Restaurant / food</b><span>Restaurant, café, truck, catering…</span></span></label>
         <label class="choice"><input type="radio" name="biztype" value="Retail / local shop"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Retail / local shop</b><span>Storefront, boutique, products…</span></span></label>
         <label class="choice"><input type="radio" name="biztype" value="Professional services"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Professional services</b><span>Legal, accounting, real estate, coaching…</span></span></label>
+        <label class="choice"><input type="radio" name="biztype" value="Personal website"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Personal website</b><span>Your name, portfolio, personal brand…</span></span></label>
         <label class="choice"><input type="radio" name="biztype" value="Something else"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span><span class="ctext"><b>Something else</b><span>Tell us below.</span></span></label>
       </div>
       <div class="field">
-        <label class="fl">Business name</label>
-        <input type="text" name="bizname" placeholder="e.g. Tennant & Sons Plumbing" required />
+        <label class="fl">Business (or your) name</label>
+        <input type="text" name="bizname" placeholder="e.g. Tennant & Sons Plumbing — or just your name" required />
       </div>
       <div class="field">
         <label class="fl">What do you do, and where? <span style="text-transform:none;letter-spacing:0;color:#606066">(one sentence is perfect)</span></label>
