@@ -198,7 +198,7 @@ footer .flame{background:var(--burn);-webkit-background-clip:text;background-cli
   </div>
 
   <div class="tiles">
-    <div class="tile spark"><div class="k">Sparks Today</div><div class="v" id="t-sparks">—</div></div>
+    <div class="tile spark"><div class="k" id="t-sparks-k">Sparks Today</div><div class="v" id="t-sparks">—</div></div>
     <div class="tile"><div class="k">Visitors</div><div class="v" id="t-users">—</div></div>
     <div class="tile"><div class="k">Sessions</div><div class="v" id="t-sessions">—</div></div>
     <div class="tile"><div class="k">Page Views</div><div class="v" id="t-views">—</div></div>
@@ -346,7 +346,23 @@ footer .flame{background:var(--burn);-webkit-background-clip:text;background-cli
     $("b-week").textContent = nf.format(week);
     $("b-all").textContent = nf.format(all) + (L.window ? "*" : "");
     if (L.window) $("b-all").title = "counted over the " + L.window;
-    $("t-sparks").textContent = nf.format(today);
+    state.sparks = { today: today, week: week, all: all, window: L.window || null };
+    updateSparksTile();
+  }
+
+  /* Sparks tile follows the range pills: today / 7d exactly, 28d+season fall
+     back to the all-time count (the leads API only breaks out today & week). */
+  function updateSparksTile(){
+    var s = state.sparks; if (!s) return;
+    var label = "Sparks Today", val = s.today, note = "";
+    if (state.range === "7d"){ label = "Sparks — 7 Days"; val = s.week; }
+    else if (state.range === "28d" || state.range === "season"){
+      label = "Sparks — All Time"; val = s.all;
+      if (s.window) note = "counted over the " + s.window;
+    }
+    $("t-sparks-k").textContent = label;
+    $("t-sparks").textContent = nf.format(val);
+    $("t-sparks").title = note;
   }
 
   /* ---------- traffic ---------- */
@@ -511,6 +527,7 @@ footer .flame{background:var(--burn);-webkit-background-clip:text;background-cli
     document.querySelectorAll(".pill").forEach(function(x){ x.classList.remove("on"); });
     b.classList.add("on");
     state.range = b.getAttribute("data-r");
+    updateSparksTile();
     pollTraffic();
   });
 
