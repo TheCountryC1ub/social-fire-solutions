@@ -15,6 +15,7 @@
   --deep:#1E5AC8; --bright:#1B8CF2; --sky:#7FE0FF;
   --ivory:#F4F1EA; --ash:#9A9AA0; --line:#2a2a2e;
   --burn:linear-gradient(100deg,#7FE0FF,#1B8CF2 50%,#1E5AC8);
+  --ember:linear-gradient(100deg,#FFB020,#F2531B 50%,#C81E1E);
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -28,7 +29,9 @@ body{
   line-height:1.6; -webkit-font-smoothing:antialiased;
 }
 .fire{background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ember{background:var(--ember);-webkit-background-clip:text;background-clip:text;color:transparent}
 .flame{width:26px;height:26px;flex:none;background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:0 0 20px rgba(27,140,242,.6)}
+.flame.red{background:var(--ember);box-shadow:0 0 20px rgba(242,83,27,.6)}
 
 /* ---------- gate ---------- */
 #gate{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;text-align:center}
@@ -60,7 +63,7 @@ body{
 .chathead{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}
 .chathead .who{flex:1}
 .chathead .who b{display:block;font-size:1.02rem}
-.chathead .who span{color:var(--ash);font-size:.85rem}
+.chathead .who > span{color:var(--ash);font-size:.85rem}
 .chathead a{color:var(--ash);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid var(--line);border-radius:50px;padding:8px 14px}
 .chathead a:hover{border-color:var(--bright);color:var(--bright)}
 #msgs{flex:1;overflow-y:auto;padding:26px 20px;display:flex;flex-direction:column;gap:16px}
@@ -112,12 +115,12 @@ body{
 <!-- CHAT -->
 <section id="chat">
   <div class="chathead">
-    <div class="flame"></div>
-    <div class="who"><b>Social Fire <span class="fire">AI</span></b><span id="whoSite">your concierge</span></div>
+    <div class="flame red"></div>
+    <div class="who"><b>Social Fire <span class="ember">AI</span></b><span id="whoSite">Sky — your concierge</span></div>
     <a href="#" id="logout">Sign out</a>
   </div>
   <div id="msgs">
-    <div class="typing" id="typing">Social Fire AI is thinking…</div>
+    <div class="typing" id="typing">Sky is thinking…</div>
   </div>
   <div class="pending" id="pending"></div>
   <div class="inputrow">
@@ -173,7 +176,7 @@ body{
     $("chat").style.display = "flex";
     $("whoSite").textContent = state.client && state.client.site
       ? "building for " + state.client.site.replace(/^https?:\/\//,"")
-      : "your website concierge";
+      : "Sky — your website concierge";
     if(greeting && !state.history.length) addMsg("ai", greeting);
     $("box").focus();
   }

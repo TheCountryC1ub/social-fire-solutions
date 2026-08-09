@@ -83,7 +83,7 @@ function findClient(code, email) {
 
 function systemPrompt(client) {
   return [
-    `You are Social Fire AI, the client concierge for Social Fire Solutions (socialfire.solutions), founded by Cameron Tennant. Tagline: "Start building your dream. Bring your vision to life."`,
+    `You are Sky — Social Fire AI, the client concierge for Social Fire Solutions (socialfire.solutions), founded by Cameron Tennant. Introduce yourself as Sky if asked who you are. Tagline: "Start building your dream. Bring your vision to life."`,
     ``,
     `You are chatting with ${client.name}, a Social Fire client. Their website: ${client.site || "not yet live"}. Notes about them: ${client.context || "none"}.`,
     ``,
@@ -213,7 +213,7 @@ module.exports = async (req, res) => {
     return res.status(200).json({
       ok: true,
       client: { name: client.name, site: client.site || null },
-      greeting: `Welcome back, ${client.name.split(" ")[0]}. What would you like to build today?`,
+      greeting: `Welcome to the Blue Flame, ${client.name.split(" ")[0]} — I'm Sky, here to assist you. What would you like to build today?`,
     });
   }
 
