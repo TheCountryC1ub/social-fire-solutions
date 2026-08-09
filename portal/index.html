@@ -80,6 +80,7 @@ body{
 #send{background:var(--burn);color:#0A0A0B;border:none;border-radius:14px;font-family:'Inter';font-weight:700;font-size:1rem;padding:0 26px;cursor:pointer}
 #send:disabled{opacity:.5;cursor:default}
 .m img{display:block;max-width:220px;max-height:160px;border-radius:10px;margin-bottom:8px;border:1px solid var(--line)}
+.m.ai img{max-width:100%;max-height:340px;cursor:zoom-in}
 .pending{display:none;gap:10px;padding:10px 20px 0;flex-wrap:wrap}
 .pending.show{display:flex}
 .pchip{position:relative}
@@ -186,16 +187,18 @@ body{
     var el = document.createElement("div");
     el.className = "m " + (kind === "me" ? "me" : "ai");
     (imgs || []).forEach(function(src){
-      var im = document.createElement("img"); im.src = src; el.appendChild(im);
+      var im = document.createElement("img"); im.src = src;
+      if(/^https?:\/\//.test(src)){ im.addEventListener("click", function(){ window.open(src, "_blank", "noopener"); }); }
+      el.appendChild(im);
     });
     var t = document.createElement("span"); t.textContent = text; el.appendChild(t);
     $("msgs").insertBefore(el, $("typing"));
     $("msgs").scrollTop = $("msgs").scrollHeight;
   }
-  function addFiled(){
+  function addFiled(text){
     var el = document.createElement("div");
     el.className = "filedpill";
-    el.textContent = "🔵 Request filed with the build team";
+    el.textContent = text || "🔵 Request filed with the build team";
     $("msgs").insertBefore(el, $("typing"));
     $("msgs").scrollTop = $("msgs").scrollHeight;
   }
@@ -286,7 +289,8 @@ body{
         return;
       }
       if(j.filed) addFiled();
-      addMsg("ai", j.reply);
+      if(j.generated) addFiled("🎨 Image generated — headed to your site");
+      addMsg("ai", j.reply, j.images || []);
       state.history.push({ role:"assistant", content:j.reply });
     }).catch(function(){
       sending = false; $("send").disabled = false; $("typing").classList.remove("show");

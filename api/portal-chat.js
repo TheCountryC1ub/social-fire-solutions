@@ -5,11 +5,20 @@
 //   PORTAL_CLIENTS     = JSON roster keyed by access code, e.g.
 //     {"001":{"name":"Cameron Tennant","email":"cameron@socialfire.solutions",
 //             "site":"https://socialfire.solutions","context":"Internal test client.",
-//             "plan":"Founder","allowance":"unlimited edits, 10 AI images"}}
+//             "plan":"Founder","allowance":"unlimited edits, 10 AI images",
+//             "imageCap":10}}
 //     `plan`/`allowance` are optional — the concierge states them verbatim and
-//     never invents terms. Enforced caps arrive with self-serve generation.
+//     never invents terms. `imageCap` (number) = that client's self-serve
+//     images per calendar month; falls back to PORTAL_IMAGE_CAP, then 5.
+//     Set 0 to turn self-serve generation off for a client.
 //   PORTAL_MODEL       = optional model override (default claude-opus-5)
 //   GHL_TOKEN / GHL_LOCATION = already set — reused to file edit requests.
+//   HF_API_KEY / HF_API_SECRET (or combined HF_CREDENTIALS "id:secret")
+//                      = Higgsfield platform keys (platform.higgsfield.ai).
+//                        When absent, Sky files creative requests instead of
+//                        generating — the portal works exactly as before.
+//   PORTAL_IMAGE_CAP   = default self-serve images per client per month (5)
+//   PORTAL_IMAGE_QUALITY = Soul quality "720p" | "1080p" (default 1080p)
 //
 // Actions: {action:"login", code, email} and
 //          {action:"chat", code, email, messages:[{role, content}...]}
@@ -20,6 +29,35 @@ const Anthropic = require("@anthropic-ai/sdk");
 const GHL_BASE = "https://services.leadconnectorhq.com";
 const GHL_VERSION = "2021-07-28";
 const MODEL = process.env.PORTAL_MODEL || "claude-opus-5";
+
+// --- Higgsfield self-serve image generation (Soul model) ---
+// Notes on the client's GHL contact double as the monthly usage counter:
+// every generation files one note starting with IMG_NOTE_MARK, and the cap
+// check counts this month's marks. No extra datastore needed.
+const IMG_NOTE_MARK = "🖼️ PORTAL IMAGE GENERATED";
+const IMG_DEFAULT_CAP = 5;
+const SOUL_ENDPOINT = "/v1/text2image/soul";
+const SOUL_SIZES = { square: "1536x1536", portrait: "1536x2048", landscape: "2048x1536", wide: "2048x1152" };
+
+function hfCredentials() {
+  const combined = process.env.HF_CREDENTIALS || "";
+  if (combined.includes(":")) {
+    const [apiKey, apiSecret] = combined.split(":");
+    if (apiKey && apiSecret) return { apiKey, apiSecret };
+  }
+  if (process.env.HF_API_KEY && process.env.HF_API_SECRET) {
+    return { apiKey: process.env.HF_API_KEY, apiSecret: process.env.HF_API_SECRET };
+  }
+  return null;
+}
+
+function imageCap(client) {
+  const own = Number(client.imageCap);
+  if (Number.isFinite(own) && own >= 0) return own;
+  const def = Number(process.env.PORTAL_IMAGE_CAP);
+  if (Number.isFinite(def) && def >= 0) return def;
+  return IMG_DEFAULT_CAP;
+}
 
 // Attached images arrive as data URLs. Hard caps keep requests under
 // Vercel's ~4.5MB body limit: 3 images per request, ~1.5MB each after
@@ -67,6 +105,31 @@ const CREATIVE_TOOL = {
   },
 };
 
+const IMAGE_GEN_TOOL = {
+  name: "generate_image",
+  description:
+    "Generate a custom AI image for the client's website right now, shown to them in this chat. Use only after the client has agreed on the subject and mood/style (restate it first unless already unambiguous). One image per call. Each generation counts against the client's monthly included images — if the call reports the allowance is used up, offer to file the idea as a creative request instead. For video, always use file_creative_request.",
+  input_schema: {
+    type: "object",
+    properties: {
+      prompt: {
+        type: "string",
+        description:
+          "Full visual description for the image model: subject, setting, mood, lighting, color palette, photographic or illustration style. Write it like a photography brief. The image must not contain any words, logos, or text.",
+      },
+      aspect: {
+        type: "string",
+        enum: ["square", "portrait", "landscape", "wide"],
+        description:
+          "Image shape: square (default), portrait for tall/mobile sections, landscape for standard photos, wide for full-width hero banners",
+      },
+      summary: { type: "string", description: "One-line label for the delivery note, e.g. 'Hero image — warm café interior at golden hour'" },
+      page: { type: "string", description: "Which page or section of the site it's for, if known" },
+    },
+    required: ["prompt", "summary"],
+  },
+};
+
 function roster() {
   try { return JSON.parse(process.env.PORTAL_CLIENTS || "{}"); } catch (_) { return {}; }
 }
@@ -89,7 +152,9 @@ function systemPrompt(client) {
     ``,
     `Your job: help them shape edits and updates to their website — copy changes, new sections, photo swaps, hours, style tweaks — and turn vague wishes into concrete, buildable requests. Ask at most one clarifying question at a time. Keep replies warm, plain-spoken, and brief (usually 2–4 sentences).`,
     ``,
-    `You can also take requests for custom AI-generated images and video for their site. For those, help them nail down the subject, the mood/style, and where it goes, then call file_creative_request. The Social Fire team generates the asset and delivers it into their site — you never generate it yourself in this chat.`,
+    hfCredentials()
+      ? `You can create custom AI-generated images for their site, live in this chat: help them nail down the subject, the mood/style, and where it goes, then call generate_image. The image appears right in the chat and is also sent to the Social Fire team, who place it on the site — you generate the picture, but never claim it is on the site yet. Redoing an image with tweaks is welcome, but each generation uses one of their monthly included images, so mention that before regenerating. If their monthly images are used up (the tool will tell you), offer to file the idea with file_creative_request so Cameron can take it from there. Video is always a request: use file_creative_request.`
+      : `You can also take requests for custom AI-generated images and video for their site. For those, help them nail down the subject, the mood/style, and where it goes, then call file_creative_request. The Social Fire team generates the asset and delivers it into their site — you never generate it yourself in this chat.`,
     ``,
     `Clients can attach images to the chat — logos, photos of their business, screenshots of styles they like. Look at them and use them to sharpen the request. When a filed request relies on an attached image, say so in the details field (the images are automatically passed to the build team alongside your note).`,
     client.plan
@@ -141,25 +206,33 @@ async function uploadImagesToGHL(location, token, images, code) {
   return urls;
 }
 
-async function fileToGHL(client, code, input, kind, images) {
-  const token = process.env.GHL_TOKEN;
-  const location = process.env.GHL_LOCATION;
-  if (!token || !location || !client.email) return false;
-  const headers = {
+function ghlHeaders(token) {
+  return {
     Authorization: `Bearer ${token}`,
     Version: GHL_VERSION,
     "Content-Type": "application/json",
     Accept: "application/json",
     "User-Agent": "Mozilla/5.0 (SocialFirePortal)",
   };
+}
+
+async function upsertContact(headers, location, client) {
+  const up = await fetch(`${GHL_BASE}/contacts/upsert`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ locationId: location, email: client.email, name: client.name }),
+  });
+  const upJson = await up.json().catch(() => ({}));
+  return (upJson && upJson.contact && upJson.contact.id) || null;
+}
+
+async function fileToGHL(client, code, input, kind, images) {
+  const token = process.env.GHL_TOKEN;
+  const location = process.env.GHL_LOCATION;
+  if (!token || !location || !client.email) return false;
+  const headers = ghlHeaders(token);
   try {
-    const up = await fetch(`${GHL_BASE}/contacts/upsert`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ locationId: location, email: client.email, name: client.name }),
-    });
-    const upJson = await up.json().catch(() => ({}));
-    const contactId = upJson && upJson.contact && upJson.contact.id;
+    const contactId = await upsertContact(headers, location, client);
     if (!contactId) return false;
     const isCreative = kind === "creative";
     const header = isCreative
@@ -189,6 +262,152 @@ async function fileToGHL(client, code, input, kind, images) {
     return true;
   } catch (_) {
     return false;
+  }
+}
+
+// Count this calendar month's generation notes on the contact — the usage meter.
+async function imagesUsedThisMonth(headers, contactId) {
+  // No query params — GHL's notes GET 422s on ?limit and returns all notes anyway.
+  const r = await fetch(`${GHL_BASE}/contacts/${contactId}/notes`, { headers });
+  if (!r.ok) throw new Error(`notes ${r.status}`);
+  const j = await r.json().catch(() => ({}));
+  const notes = Array.isArray(j && j.notes) ? j.notes : [];
+  const now = new Date();
+  return notes.filter((n) => {
+    if (!n || typeof n.body !== "string" || !n.body.startsWith(IMG_NOTE_MARK)) return false;
+    const when = new Date(n.dateAdded || n.createdAt || 0);
+    return when.getUTCFullYear() === now.getUTCFullYear() && when.getUTCMonth() === now.getUTCMonth();
+  }).length;
+}
+
+// Pull the finished render back and re-host it in the GHL media library so the
+// delivery link is ours, not a Higgsfield CDN URL that may expire.
+async function mirrorImageToGHL(location, token, imageUrl, code) {
+  try {
+    const r = await fetch(imageUrl);
+    if (!r.ok) return null;
+    const type = (r.headers.get("content-type") || "image/jpeg").split(";")[0];
+    const ext = type === "image/png" ? "png" : type === "image/webp" ? "webp" : "jpeg";
+    const buf = Buffer.from(await r.arrayBuffer());
+    if (buf.length > 15_000_000) return null;
+    const dataUrl = `data:image/${ext};base64,${buf.toString("base64")}`;
+    const urls = await uploadImagesToGHL(location, token, [dataUrl], code);
+    return urls[0] || null;
+  } catch (_) {
+    return null;
+  }
+}
+
+// Full self-serve generation round: cap check → Soul render → GHL note + tag.
+// Returns {ok, url, remaining, cap, message} — `message` is what the model
+// (Sky) is told either way, so it can speak to the client accurately.
+async function generateImage(client, code, input) {
+  const creds = hfCredentials();
+  if (!creds) {
+    return { ok: false, message: "Image generation is not switched on yet. File the idea with file_creative_request instead." };
+  }
+  const token = process.env.GHL_TOKEN;
+  const location = process.env.GHL_LOCATION;
+  if (!token || !location || !client.email) {
+    return { ok: false, message: "The delivery system is unavailable right now. File the idea with file_creative_request instead." };
+  }
+  const cap = imageCap(client);
+  if (cap <= 0) {
+    return { ok: false, message: "This client's plan does not include self-serve image generation. Offer to file it with file_creative_request for Cameron to handle personally." };
+  }
+
+  const headers = ghlHeaders(token);
+  let contactId = null;
+  let used = 0;
+  try {
+    contactId = await upsertContact(headers, location, client);
+    if (!contactId) throw new Error("no contact");
+    used = await imagesUsedThisMonth(headers, contactId);
+  } catch (_) {
+    return { ok: false, message: "The delivery system is unavailable right now. File the idea with file_creative_request instead." };
+  }
+  if (used >= cap) {
+    return {
+      ok: false,
+      message: `The client has used all ${cap} of their included images this month. Let them know kindly, and offer to file the idea with file_creative_request so Cameron can take care of it.`,
+    };
+  }
+
+  const prompt = String(input.prompt || "").slice(0, 2000);
+  if (!prompt) return { ok: false, message: "No prompt was provided — describe the image first." };
+  const size = SOUL_SIZES[input.aspect] || SOUL_SIZES.square;
+  const quality = process.env.PORTAL_IMAGE_QUALITY === "720p" ? "720p" : "1080p";
+
+  let HiggsfieldClient, NotEnoughCreditsError;
+  try {
+    ({ HiggsfieldClient, NotEnoughCreditsError } = require("@higgsfield/client"));
+  } catch (_) {
+    return { ok: false, message: "Image generation is not available right now. File the idea with file_creative_request instead." };
+  }
+
+  try {
+    // Poll budget stays well inside the function's 60s window, leaving room
+    // for the mirror upload and the model's follow-up turn.
+    const hf = new HiggsfieldClient({ ...creds, pollInterval: 2500, maxPollTime: 35000 });
+    const jobSet = await hf.generate(SOUL_ENDPOINT, {
+      prompt,
+      width_and_height: size,
+      quality,
+      batch_size: 1,
+    });
+    const done = (jobSet.jobs || []).find((jb) => jb.status === "completed" && jb.results && jb.results.raw && jb.results.raw.url);
+    if (jobSet.isNsfw) {
+      return { ok: false, message: "The image model declined this prompt on content-safety grounds. Rephrase the idea with the client or suggest a different direction. Their allowance was not used." };
+    }
+    if (!done) throw new Error("generation did not complete");
+
+    const rawUrl = done.results.raw.url;
+    const hostedUrl = (await mirrorImageToGHL(location, token, rawUrl, code)) || rawUrl;
+
+    // The note doubles as the usage-counter tick — file it before replying.
+    const noteBody = [
+      `${IMG_NOTE_MARK} — ${String(input.summary || "").slice(0, 200) || "untitled"}`,
+      ``,
+      `Page: ${input.page || "not specified"}`,
+      `Prompt: ${prompt}`,
+      ``,
+      `Image: ${hostedUrl}`,
+      hostedUrl === rawUrl ? `` : `Higgsfield original: ${rawUrl}`,
+      ``,
+      `— generated by Sky for ${client.name} (portal code ${code}) · ${used + 1}/${cap} this month`,
+    ].join("\n");
+    try {
+      await fetch(`${GHL_BASE}/contacts/${contactId}/notes`, {
+        method: "POST", headers, body: JSON.stringify({ body: noteBody }),
+      });
+      await fetch(`${GHL_BASE}/contacts/${contactId}/tags`, {
+        method: "POST", headers, body: JSON.stringify({ tags: ["portal image generated"] }),
+      }).catch(() => {});
+    } catch (_) { /* the render still reaches the client in chat */ }
+
+    const remaining = cap - used - 1;
+    return {
+      ok: true,
+      url: hostedUrl,
+      remaining,
+      cap,
+      message: `Image generated — it is being shown to the client in the chat right now, and the build team received it to place on the site. ${remaining} of ${cap} included images left this month. Do not paste the image URL in your reply; just talk about the picture.`,
+    };
+  } catch (e) {
+    if (NotEnoughCreditsError && e instanceof NotEnoughCreditsError) {
+      // Platform credits, not the client's allowance — a Cameron problem.
+      await fileToGHL(client, code, { summary: `⚠️ Higgsfield credits empty — ${String(input.summary || "").slice(0, 150)}`, details: `Self-serve generation failed: Higgsfield platform credits are exhausted. Client prompt:\n\n${prompt}`, media_type: "image", page: input.page }, "creative", []);
+      return { ok: false, filed: true, message: "Generation is temporarily unavailable (not the client's fault or allowance). The idea was filed with the team to deliver — reassure the client it is in good hands." };
+    }
+    // Timeout / transient failure → hand the brief to the humans instead.
+    const filed = await fileToGHL(client, code, { summary: String(input.summary || "").slice(0, 200) || "Image request (auto-filed after generation hiccup)", details: `Self-serve generation didn't finish (${String((e && e.message) || e).slice(0, 120)}). Please generate and deliver.\n\nPrompt:\n${prompt}\n\nAspect: ${input.aspect || "square"}`, media_type: "image", page: input.page }, "creative", []);
+    return {
+      ok: false,
+      filed,
+      message: filed
+        ? "The render is taking longer than this chat allows, so the request was filed with the build team to generate and deliver instead. Reassure the client — their idea is in the queue and their allowance was not used."
+        : "Generation failed and the filing system is also unavailable — apologize and ask the client to email their request.",
+    };
   }
 }
 
@@ -263,7 +482,9 @@ module.exports = async (req, res) => {
   );
 
   const anthropic = new Anthropic();
+  const tools = hfCredentials() ? [EDIT_TOOL, CREATIVE_TOOL, IMAGE_GEN_TOOL] : [EDIT_TOOL, CREATIVE_TOOL];
   let filed = false;
+  const generatedImages = [];
 
   try {
     let messages = apiMessages;
@@ -272,15 +493,21 @@ module.exports = async (req, res) => {
       max_tokens: 4096,
       output_config: { effort: "low" },
       system: [{ type: "text", text: systemPrompt(client), cache_control: { type: "ephemeral" } }],
-      tools: [EDIT_TOOL, CREATIVE_TOOL],
+      tools,
       messages,
     });
 
-    // One tool round: file the request, then let the model confirm to the client.
+    // One tool round: act on the request, then let the model confirm to the client.
     for (let i = 0; i < 2 && response.stop_reason === "tool_use"; i++) {
       const results = [];
       for (const block of response.content) {
-        if (block.type === "tool_use" && (block.name === "file_edit_request" || block.name === "file_creative_request")) {
+        if (block.type !== "tool_use") continue;
+        if (block.name === "generate_image") {
+          const g = await generateImage(client, d.code, block.input || {});
+          if (g.ok && g.url) generatedImages.push(g.url);
+          filed = filed || !!g.filed;
+          results.push({ type: "tool_result", tool_use_id: block.id, content: g.message, is_error: !g.ok });
+        } else if (block.name === "file_edit_request" || block.name === "file_creative_request") {
           const kind = block.name === "file_creative_request" ? "creative" : "edit";
           const ok = await fileToGHL(client, d.code, block.input || {}, kind, attachedImages);
           filed = filed || ok;
@@ -292,6 +519,8 @@ module.exports = async (req, res) => {
               : "Filing system unavailable — apologize and ask the client to also email their request.",
             is_error: !ok,
           });
+        } else {
+          results.push({ type: "tool_result", tool_use_id: block.id, content: "Unknown tool.", is_error: true });
         }
       }
       messages = [...messages, { role: "assistant", content: response.content }, { role: "user", content: results }];
@@ -300,13 +529,13 @@ module.exports = async (req, res) => {
         max_tokens: 4096,
         output_config: { effort: "low" },
         system: [{ type: "text", text: systemPrompt(client), cache_control: { type: "ephemeral" } }],
-        tools: [EDIT_TOOL, CREATIVE_TOOL],
+        tools,
         messages,
       });
     }
 
     if (response.stop_reason === "refusal") {
-      return res.status(200).json({ ok: true, reply: "I can't help with that one — but I'd love to keep working on your website. What would you like to change?", filed });
+      return res.status(200).json({ ok: true, reply: "I can't help with that one — but I'd love to keep working on your website. What would you like to change?", filed, images: generatedImages, generated: generatedImages.length > 0 });
     }
 
     const reply = response.content
@@ -314,10 +543,10 @@ module.exports = async (req, res) => {
       .map((b) => b.text)
       .join("\n")
       .trim();
-    return res.status(200).json({ ok: true, reply: reply || "…", filed });
+    return res.status(200).json({ ok: true, reply: reply || "…", filed, images: generatedImages, generated: generatedImages.length > 0 });
   } catch (e) {
     if (e instanceof Anthropic.RateLimitError || e instanceof Anthropic.InternalServerError) {
-      return res.status(200).json({ ok: true, reply: "I'm a little swamped right now — give me a minute and try again.", filed });
+      return res.status(200).json({ ok: true, reply: "I'm a little swamped right now — give me a minute and try again.", filed, images: generatedImages, generated: generatedImages.length > 0 });
     }
     return res.status(502).json({ ok: false, error: String((e && e.message) || e).slice(0, 200) });
   }

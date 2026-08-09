@@ -2,6 +2,7 @@
   "name": "social-fire-solutions",
   "private": true,
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.110.0"
+    "@anthropic-ai/sdk": "^0.110.0",
+    "@higgsfield/client": "^0.2.1"
   }
 }
