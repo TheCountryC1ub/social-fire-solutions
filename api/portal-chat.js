@@ -4,7 +4,10 @@
 //   ANTHROPIC_API_KEY  = Claude API key (console.anthropic.com)
 //   PORTAL_CLIENTS     = JSON roster keyed by access code, e.g.
 //     {"001":{"name":"Cameron Tennant","email":"cameron@socialfire.solutions",
-//             "site":"https://socialfire.solutions","context":"Internal test client."}}
+//             "site":"https://socialfire.solutions","context":"Internal test client.",
+//             "plan":"Founder","allowance":"unlimited edits, 10 AI images"}}
+//     `plan`/`allowance` are optional — the concierge states them verbatim and
+//     never invents terms. Enforced caps arrive with self-serve generation.
 //   PORTAL_MODEL       = optional model override (default claude-opus-5)
 //   GHL_TOKEN / GHL_LOCATION = already set — reused to file edit requests.
 //
@@ -37,6 +40,26 @@ const EDIT_TOOL = {
   },
 };
 
+const CREATIVE_TOOL = {
+  name: "file_creative_request",
+  description:
+    "File a request for a custom AI-generated image or video for the client's website. Call this once the client has described what they want clearly enough to brief a designer: the subject, the mood/style, and where on the site it will go. The Social Fire team generates it and delivers it into their site.",
+  input_schema: {
+    type: "object",
+    properties: {
+      summary: { type: "string", description: "One-line summary of the creative asset requested" },
+      details: {
+        type: "string",
+        description:
+          "Full creative brief: subject, style/mood, colors, any text that must appear, and where on the site it goes",
+      },
+      media_type: { type: "string", enum: ["image", "video"], description: "What kind of asset" },
+      page: { type: "string", description: "Which page or section it's for, if known" },
+    },
+    required: ["summary", "details", "media_type"],
+  },
+};
+
 function roster() {
   try { return JSON.parse(process.env.PORTAL_CLIENTS || "{}"); } catch (_) { return {}; }
 }
@@ -59,7 +82,12 @@ function systemPrompt(client) {
     ``,
     `Your job: help them shape edits and updates to their website — copy changes, new sections, photo swaps, hours, style tweaks — and turn vague wishes into concrete, buildable requests. Ask at most one clarifying question at a time. Keep replies warm, plain-spoken, and brief (usually 2–4 sentences).`,
     ``,
-    `When the client has described a change clearly enough to act on, restate it back in one sentence. Once they agree — or the request is already unambiguous — call the file_edit_request tool. After filing, tell them it's in the build queue and the Social Fire team will have it live soon. Never promise an exact turnaround time.`,
+    `You can also take requests for custom AI-generated images and video for their site. For those, help them nail down the subject, the mood/style, and where it goes, then call file_creative_request. The Social Fire team generates the asset and delivers it into their site — you never generate it yourself in this chat.`,
+    client.plan
+      ? `Their plan: ${client.plan}.${client.allowance ? ` Included each month: ${client.allowance}. If a request would clearly go beyond that, file it anyway and note that Cameron will confirm whether it's covered.` : ""} Never invent plan details beyond what is written here.`
+      : `If they ask what their plan includes, say Cameron will confirm the details personally — never invent plan terms.`,
+    ``,
+    `When the client has described a change clearly enough to act on, restate it back in one sentence. Once they agree — or the request is already unambiguous — call the file_edit_request tool (or file_creative_request for images/video). After filing, tell them it's in the build queue and the Social Fire team will have it live soon. Never promise an exact turnaround time.`,
     ``,
     `Rules:`,
     `- Only discuss ${client.name}'s own website and their Social Fire service. Never mention other clients, their sites, or any internal information.`,
@@ -71,7 +99,7 @@ function systemPrompt(client) {
   ].join("\n");
 }
 
-async function fileToGHL(client, code, input) {
+async function fileToGHL(client, code, input, kind) {
   const token = process.env.GHL_TOKEN;
   const location = process.env.GHL_LOCATION;
   if (!token || !location || !client.email) return false;
@@ -91,8 +119,12 @@ async function fileToGHL(client, code, input) {
     const upJson = await up.json().catch(() => ({}));
     const contactId = upJson && upJson.contact && upJson.contact.id;
     if (!contactId) return false;
+    const isCreative = kind === "creative";
+    const header = isCreative
+      ? `🎨 PORTAL CREATIVE REQUEST (${(input.media_type || "image").toUpperCase()}) — ${input.summary}`
+      : `🔵 PORTAL EDIT REQUEST — ${input.summary}`;
     const body = [
-      `🔵 PORTAL EDIT REQUEST — ${input.summary}`,
+      header,
       ``,
       `Page: ${input.page || "not specified"}`,
       ``,
@@ -104,7 +136,9 @@ async function fileToGHL(client, code, input) {
       method: "POST", headers, body: JSON.stringify({ body }),
     });
     await fetch(`${GHL_BASE}/contacts/${contactId}/tags`, {
-      method: "POST", headers, body: JSON.stringify({ tags: ["portal edit request"] }),
+      method: "POST",
+      headers,
+      body: JSON.stringify({ tags: [isCreative ? "portal creative request" : "portal edit request"] }),
     }).catch(() => {});
     return true;
   } catch (_) {
@@ -163,7 +197,7 @@ module.exports = async (req, res) => {
       max_tokens: 4096,
       output_config: { effort: "low" },
       system: [{ type: "text", text: systemPrompt(client), cache_control: { type: "ephemeral" } }],
-      tools: [EDIT_TOOL],
+      tools: [EDIT_TOOL, CREATIVE_TOOL],
       messages,
     });
 
@@ -171,8 +205,9 @@ module.exports = async (req, res) => {
     for (let i = 0; i < 2 && response.stop_reason === "tool_use"; i++) {
       const results = [];
       for (const block of response.content) {
-        if (block.type === "tool_use" && block.name === "file_edit_request") {
-          const ok = await fileToGHL(client, d.code, block.input || {});
+        if (block.type === "tool_use" && (block.name === "file_edit_request" || block.name === "file_creative_request")) {
+          const kind = block.name === "file_creative_request" ? "creative" : "edit";
+          const ok = await fileToGHL(client, d.code, block.input || {}, kind);
           filed = filed || ok;
           results.push({
             type: "tool_result",
@@ -190,7 +225,7 @@ module.exports = async (req, res) => {
         max_tokens: 4096,
         output_config: { effort: "low" },
         system: [{ type: "text", text: systemPrompt(client), cache_control: { type: "ephemeral" } }],
-        tools: [EDIT_TOOL],
+        tools: [EDIT_TOOL, CREATIVE_TOOL],
         messages,
       });
     }
