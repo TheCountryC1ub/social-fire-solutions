@@ -26,7 +26,7 @@ fbq('track', 'ViewContent', {content_name: 'Personal Website Offer'});
 <title>Your Name Matters — Free Personal Website — Social Fire Solutions</title>
 <link rel="icon" type="image/png" href="/media/favicon.png">
 <link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
-<meta name="description" content="We believe your name matters. We build your personal website free — you see it finished first. Love it? It's $499, once, and it's yours. Don't? You owe nothing." />
+<meta name="description" content="We believe your name matters. We build your personal website free — you see the first draft before you pay a cent. Love it? It's $399, once ($100 off our usual $499). Don't? You owe nothing." />
 <meta name="robots" content="noindex" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,9 +34,9 @@ fbq('track', 'ViewContent', {content_name: 'Personal Website Offer'});
 <style>
 :root{
   --onyx:#0A0A0B; --carbon:#161618; --carbon-2:#1F1F22;
-  --ember:#C81E1E; --molten:#F2531B; --ignition:#FFB020;
+  --ember:#1E5AC8; --molten:#1B8CF2; --ignition:#7FE0FF;
   --ivory:#F4F1EA; --ash:#9A9AA0; --line:#2a2a2e;
-  --burn:linear-gradient(100deg,#FFB020,#F2531B 50%,#C81E1E);
+  --burn:linear-gradient(100deg,#7FE0FF,#1B8CF2 50%,#1E5AC8);
   --err:#c0473a;
   --max:760px; --r:14px;
   --ease:cubic-bezier(.22,1,.36,1);
@@ -57,8 +57,8 @@ a{color:inherit; text-decoration:none}
 /* ambient background */
 .bg{position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
-    radial-gradient(120% 80% at 14% 0%, rgba(242,83,27,.10), transparent 55%),
-    radial-gradient(120% 90% at 86% 100%, rgba(200,30,30,.12), transparent 60%),
+    radial-gradient(120% 80% at 14% 0%, rgba(27,140,242,.10), transparent 55%),
+    radial-gradient(120% 90% at 86% 100%, rgba(30,90,200,.12), transparent 60%),
     linear-gradient(180deg,#0A0A0B,#0d0d10 60%,#08080a);
 }
 .bg::after{content:""; position:absolute; inset:0; opacity:.04;
@@ -71,7 +71,7 @@ a{color:inherit; text-decoration:none}
   background:linear-gradient(180deg,rgba(10,10,11,.92),rgba(10,10,11,0));
 }
 .brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:15px; letter-spacing:.01em}
-.brand .flame{width:22px;height:22px;flex:none;background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:0 0 18px rgba(242,83,27,.55)}
+.brand .flame{width:22px;height:22px;flex:none;background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:0 0 18px rgba(27,140,242,.55)}
 .brand span.co{color:var(--ash);font-weight:400}
 .exit{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ash); border:1px solid var(--line);
   padding:9px 16px; border-radius:50px; transition:.25s; background:rgba(255,255,255,.02)}
@@ -107,7 +107,7 @@ input[type=text],input[type=email],input[type=tel],textarea,select{
 }
 input::placeholder,textarea::placeholder{color:#606066}
 textarea{min-height:120px; resize:vertical; line-height:1.55}
-input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten); background:rgba(242,83,27,.05)}
+input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten); background:rgba(27,140,242,.05)}
 .invalid{border-color:var(--err)!important}
 
 /* choice cards (radio / checkbox) */
@@ -115,7 +115,7 @@ input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten)
 .choices.grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
 .choice{position:relative; display:flex; align-items:flex-start; gap:14px; cursor:pointer;
   border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:rgba(255,255,255,.02); transition:.22s var(--ease)}
-.choice:hover{border-color:rgba(242,83,27,.55); background:rgba(242,83,27,.05); transform:translateY(-2px)}
+.choice:hover{border-color:rgba(27,140,242,.55); background:rgba(27,140,242,.05); transform:translateY(-2px)}
 .choice input{position:absolute; opacity:0; pointer-events:none}
 .choice .box{flex:0 0 auto; width:22px; height:22px; border-radius:50%; border:1.6px solid var(--ash); margin-top:2px; display:grid; place-items:center; transition:.2s}
 .choice.chk .box{border-radius:6px}
@@ -125,23 +125,23 @@ input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten)
 .choice .ctext span{display:block; color:var(--ash); font-size:.9rem; margin-top:3px}
 .choice input:checked ~ .box{background:var(--burn); border-color:var(--ignition)}
 .choice input:checked ~ .box svg{opacity:1; transform:none}
-.choice:has(input:checked){border-color:var(--molten); background:rgba(242,83,27,.09); box-shadow:0 10px 30px -18px rgba(242,83,27,.8)}
+.choice:has(input:checked){border-color:var(--molten); background:rgba(27,140,242,.09); box-shadow:0 10px 30px -18px rgba(27,140,242,.8)}
 
 /* chips (compact multi-select) */
 .chips{display:flex; flex-wrap:wrap; gap:10px}
 .chip{position:relative; cursor:pointer}
 .chip input{position:absolute; opacity:0; pointer-events:none}
 .chip span{display:inline-block; border:1px solid var(--line); border-radius:50px; padding:11px 18px; font-size:.92rem; color:var(--ivory); transition:.2s var(--ease); background:rgba(255,255,255,.02)}
-.chip:hover span{border-color:rgba(242,83,27,.55)}
-.chip input:checked + span{background:linear-gradient(135deg,rgba(255,176,32,.20),rgba(200,30,30,.20)); border-color:var(--molten); color:var(--ignition); font-weight:600}
+.chip:hover span{border-color:rgba(27,140,242,.55)}
+.chip input:checked + span{background:linear-gradient(135deg,rgba(127,224,255,.20),rgba(30,90,200,.20)); border-color:var(--molten); color:var(--ignition); font-weight:600}
 
 /* nav buttons */
 .actions{display:flex; align-items:center; gap:14px; margin-top:30px; flex-wrap:wrap}
 .btn{display:inline-flex; align-items:center; gap:.55rem; cursor:pointer; border:1px solid transparent;
   font-family:'Inter'; font-weight:600; font-size:.84rem; letter-spacing:.1em; text-transform:uppercase;
   padding:16px 30px; border-radius:50px; transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s, color .25s, border-color .25s}
-.btn-primary{background:var(--burn); color:#0A0A0B; box-shadow:0 10px 30px -8px rgba(242,83,27,.5)}
-.btn-primary:hover{transform:translateY(-3px); box-shadow:0 16px 40px -8px rgba(242,83,27,.7)}
+.btn-primary{background:var(--burn); color:#0A0A0B; box-shadow:0 10px 30px -8px rgba(27,140,242,.5)}
+.btn-primary:hover{transform:translateY(-3px); box-shadow:0 16px 40px -8px rgba(27,140,242,.7)}
 .btn-ghost{border-color:var(--line); color:var(--ash); background:transparent; padding:14px 22px}
 .btn-ghost:hover{border-color:var(--molten); color:var(--molten)}
 .btn:focus-visible{outline:3px solid var(--ignition); outline-offset:3px}
@@ -160,13 +160,13 @@ input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten)
 
 /* the address bar */
 .urlbar{display:flex; align-items:center; gap:12px; margin:0 0 22px;
-  border:1px solid rgba(242,83,27,.4); border-radius:50px;
-  background:linear-gradient(180deg,#191210,#100c0a);
+  border:1px solid rgba(27,140,242,.4); border-radius:50px;
+  background:linear-gradient(180deg,#121721,#0D1016);
   padding:13px 20px; width:fit-content; max-width:100%;
-  box-shadow:0 18px 50px -26px rgba(242,83,27,.7), inset 0 1px 0 rgba(255,176,32,.1);
+  box-shadow:0 18px 50px -26px rgba(27,140,242,.7), inset 0 1px 0 rgba(127,224,255,.1);
   font-size:clamp(1rem,2.6vw,1.22rem); font-weight:500; letter-spacing:.01em}
 .urlbar .lock{width:11px;height:11px;flex:none;border-radius:50% 50% 50% 0;transform:rotate(45deg);
-  background:var(--burn); box-shadow:0 0 12px rgba(242,83,27,.8)}
+  background:var(--burn); box-shadow:0 0 12px rgba(27,140,242,.8)}
 .urlbar .u{color:var(--ash); white-space:nowrap}
 .urlbar .u b{font-weight:700; background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent}
 .urlbar .caret{width:2px;height:1.1em;flex:none;background:var(--molten);animation:blink 1.15s steps(1,end) infinite}
@@ -183,7 +183,7 @@ input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten)
 .done{display:none; text-align:center}
 .done.show{display:block; animation:rise .6s var(--ease) both}
 .ring{width:74px;height:74px;border-radius:50%;margin:0 auto 24px;display:grid;place-items:center;
-  background:var(--burn); box-shadow:0 20px 50px -18px rgba(242,83,27,.8)}
+  background:var(--burn); box-shadow:0 20px 50px -18px rgba(27,140,242,.8)}
 .ring svg{width:34px;height:34px;stroke:#0A0A0B;fill:none}
 .done h2{font-size:clamp(1.9rem,4.6vw,2.7rem); margin-bottom:14px}
 .done p{color:var(--ash); font-size:1.06rem; max-width:46ch; margin:0 auto 10px}
@@ -228,7 +228,7 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
       <div class="deal">
         <div class="row"><span class="num">1</span><span><b>We build your personal website for free.</b> <span>Your story, your work, your proof — designed and built by us. You pay nothing to get it made.</span></span></div>
         <div class="row"><span class="num">2</span><span><b>You see it finished first.</b> <span>We send you a private link to the real, working site — not a mockup, not a sales pitch.</span></span></div>
-        <div class="row"><span class="num">3</span><span><b>Love it? It's $499, once. Don't? Walk away.</b> <span>If you don't love it, you owe us nothing and we part as friends. That's it. That's the catch — there isn't one.</span></span></div>
+        <div class="row"><span class="num">3</span><span><b>Love it? It's $399, once. Don't? Walk away.</b> <span>We believe your name matters, so personal sites get $100 off our usual $499. If you don't love it, you owe us nothing and we part as friends. That's it. That's the catch — there isn't one.</span></span></div>
       </div>
       <div class="meta">
         <span><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~2 minutes</span>
@@ -304,18 +304,14 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
       <div class="err-msg">Please pick at least one.</div>
     </section>
 
-    <!-- 4 · WHAT THEY HAVE + THE URL -->
+    <!-- 4 · WHAT WE SHOULD SAY + THE URL -->
     <section class="q">
       <div class="stepno"><span class="n"></span></div>
-      <h2>What do you already have?</h2>
-      <p class="desc">"Nothing yet" is a completely fine answer — you bring the story, we do the organizing.</p>
-      <div class="chips" style="margin-bottom:22px">
-        <label class="chip"><input type="checkbox" name="assets" value="Headshots / photos of me"><span>Headshots or photos</span></label>
-        <label class="chip"><input type="checkbox" name="assets" value="A bio I like"><span>A bio I like</span></label>
-        <label class="chip"><input type="checkbox" name="assets" value="Work samples / portfolio pieces"><span>Work samples</span></label>
-        <label class="chip"><input type="checkbox" name="assets" value="Testimonials / nice things people said"><span>Testimonials</span></label>
-        <label class="chip"><input type="checkbox" name="assets" value="A domain (yourname.com)"><span>A domain already</span></label>
-        <label class="chip"><input type="checkbox" name="assets" value="Nothing yet"><span>Nothing yet</span></label>
+      <h2>What would you like us to <em>say</em> about you?</h2>
+      <p class="desc">1–2 sentences is plenty — but the more you give us, the better. Don't overthink it: your site will evolve over time.</p>
+      <div class="field">
+        <label class="fl">In your own words</label>
+        <textarea name="aboutcopy" placeholder="Who you are, what you're great at, who you help, what you want people to know…" required></textarea>
       </div>
       <div class="field">
         <label class="fl">The URL you'd want <span style="text-transform:none;letter-spacing:0;color:#606066">(dream out loud — not sure is fine, we'll help you pick)</span></label>
@@ -323,13 +319,13 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
       </div>
       <div class="field">
         <label class="fl">Links — LinkedIn, Instagram, current site… <span style="text-transform:none;letter-spacing:0;color:#606066">(optional, but helps us a lot)</span></label>
-        <textarea name="links" placeholder="linkedin.com/in/you&#10;instagram.com/you&#10;your current site"></textarea>
+        <textarea name="links" placeholder="linkedin.com/in/you&#10;instagram.com/you&#10;your current site" style="min-height:90px"></textarea>
       </div>
       <div class="actions">
         <button type="button" class="btn btn-ghost" data-back>Back</button>
         <button type="button" class="btn btn-primary" data-next>Continue</button>
       </div>
-      <div class="err-msg">Pick what you have — or "Nothing yet."</div>
+      <div class="err-msg">Give us a sentence or two — that's all we need to start.</div>
     </section>
 
     <!-- 5 · TIMING -->
@@ -349,8 +345,8 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
     <!-- 6 · CONTACT + SUBMIT -->
     <section class="q">
       <div class="stepno"><span class="n"></span></div>
-      <h2>Where do we send <em>your name's</em> new home?</h2>
-      <p class="desc tight">We'll build it and email you a private preview link. You look at the finished thing, then decide. $0 until you say "I love it."</p>
+      <h2>Where do we send your site's <em>first draft?</em></h2>
+      <p class="desc tight">We'll build your site and email you the first draft — a private preview link to the real, working thing. You look, then decide. $0 until you say "I love it."</p>
       <div class="field">
         <label class="fl">Your name</label>
         <input type="text" name="name" autocomplete="name" placeholder="Your name" required />
@@ -383,7 +379,7 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
     <div class="done" id="done" role="status" aria-live="polite">
       <div class="ring"><svg viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>Your name is in the queue.</h2>
-      <p id="doneMsg">We'll design and build your personal website, then email you a private preview link — the real, working site. If you love it, it's $499 once and it's yours, live on your own domain. If you don't, you owe nothing. No tricks, no gimmicks.</p>
+      <p id="doneMsg">We'll design and build your personal website, then email you the first draft — a private preview link to the real, working site. If you love it, it's $399 once ($100 off our usual $499, because your name matters) and it's yours, live on your own domain. If you don't, you owe nothing. No tricks, no gimmicks.</p>
 
       <div class="copybox" id="copybox">
         <p>If your email app didn't open, copy your answers below and send them to us however you like:</p>
@@ -431,7 +427,7 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
     name:"Name", email:"Email", phone:"Phone",
     hassite:"What their name shows today", purpose:"Site is for",
     sitename:"Name on the site", about:"What they do",
-    goals:"What the site should do", assets:"What they have",
+    goals:"What the site should do", aboutcopy:"What to say about them",
     dreamurl:"URL they want", links:"Links",
     timeline:"Timeline", consent:"Consent"
   };
@@ -603,7 +599,7 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
       document.getElementById('copyText').value = body;
       document.getElementById('copybox').classList.add('show');
       document.getElementById('doneMsg').textContent =
-        "Your email should have opened, ready to send — just hit send and you're done. We'll build your personal website and email you a private preview link. Love it? $499 once. Don't? You owe nothing.";
+        "Your email should have opened, ready to send — just hit send and you're done. We'll build your personal website and email you the first draft. Love it? $399 once — $100 off our usual $499. Don't? You owe nothing.";
     }
     window.scrollTo({top:0, behavior: reduce?'auto':'smooth'});
   }
@@ -632,7 +628,7 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
           // Only a confirmed GHL write counts as a Lead — the mailto fallback
           // below is unverified, so it deliberately does not fire.
           if(window.fbq) fbq('track', 'Lead',
-            {content_name: 'Personal Website Survey', value: 499, currency: 'USD'},
+            {content_name: 'Personal Website Survey', value: 399, currency: 'USD'},
             {eventID: d._fbEventId});
           finish(false, body);                   // delivered to GHL silently
         }

@@ -24,7 +24,7 @@ const FIELD_ORDER = [
   ["sitename", "Name on the site"],
   ["about", "What they do"],
   ["goals", "What the site should do"],
-  ["assets", "What they have"],
+  ["aboutcopy", "What to say about them"],
   ["dreamurl", "URL they want"],
   ["links", "Links"],
   ["timeline", "Timeline"],
@@ -94,7 +94,7 @@ async function sendMetaLead(req, d, email, phone) {
         user_data,
         custom_data: {
           content_name: "Personal Website Survey",
-          value: 499,
+          value: 399,
           currency: "USD",
         },
       },

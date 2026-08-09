@@ -8,8 +8,9 @@
 //   PORTAL_MODEL       = optional model override (default claude-opus-5)
 //   GHL_TOKEN / GHL_LOCATION = already set — reused to file edit requests.
 //
-// Actions: {action:"login", code, name} and
-//          {action:"chat", code, name, messages:[{role, content}...]}
+// Actions: {action:"login", code, email} and
+//          {action:"chat", code, email, messages:[{role, content}...]}
+// The roster email is the login credential; display name comes from the roster.
 
 const Anthropic = require("@anthropic-ai/sdk");
 
@@ -40,15 +41,13 @@ function roster() {
   try { return JSON.parse(process.env.PORTAL_CLIENTS || "{}"); } catch (_) { return {}; }
 }
 
-function findClient(code, name) {
+function findClient(code, email) {
   const c = roster()[String(code || "").trim()];
   if (!c) return null;
-  // Soft name check: first word of either name appears in the other, case-insensitive.
-  const a = String(name || "").trim().toLowerCase();
-  const b = String(c.name || "").trim().toLowerCase();
-  if (!a || !b) return null;
-  const first = (s) => s.split(/\s+/)[0];
-  if (!b.includes(first(a)) && !a.includes(first(b))) return null;
+  // Exact email match, case-insensitive — the email in the roster is the login.
+  const a = String(email || "").trim().toLowerCase();
+  const b = String(c.email || "").trim().toLowerCase();
+  if (!a || !b || a !== b) return null;
   return c;
 }
 
@@ -123,7 +122,7 @@ module.exports = async (req, res) => {
   if (typeof d === "string") { try { d = JSON.parse(d); } catch (_) { d = {}; } }
   d = d || {};
 
-  const client = findClient(d.code, d.name);
+  const client = findClient(d.code, d.email);
   if (!client) {
     // Small constant delay to blunt code guessing.
     await new Promise((r) => setTimeout(r, 800));

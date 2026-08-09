@@ -38,8 +38,8 @@ body{
 #gate .sub{color:var(--ash);font-size:1.05rem;margin-bottom:34px}
 .gatecard{width:100%;max-width:400px;background:var(--carbon);border:1px solid var(--line);border-radius:18px;padding:30px 26px 26px}
 .gatecard label{display:block;text-align:left;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);font-weight:600;margin-bottom:8px}
-#clientName{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:15px 16px;color:var(--ivory);font-family:'Inter';font-size:1.05rem;margin-bottom:24px}
-#clientName:focus{outline:none;border-color:var(--bright);background:rgba(27,140,242,.06)}
+#clientEmail{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:15px 16px;color:var(--ivory);font-family:'Inter';font-size:1.05rem;margin-bottom:24px}
+#clientEmail:focus{outline:none;border-color:var(--bright);background:rgba(27,140,242,.06)}
 .dots{display:flex;justify-content:center;gap:16px;margin-bottom:22px}
 .dot{width:16px;height:16px;border-radius:50%;border:1.6px solid var(--ash);transition:.2s}
 .dot.on{background:var(--burn);border-color:var(--sky);box-shadow:0 0 12px rgba(27,140,242,.6)}
@@ -84,10 +84,10 @@ body{
 <section id="gate">
   <div class="brand"><div class="flame"></div>SOCIAL FIRE <span class="co">SOLUTIONS</span></div>
   <h1>Start building <em class="fire">your dream.</em></h1>
-  <p class="sub">Bring your vision to life — enter your name and client code.</p>
+  <p class="sub">Bring your vision to life — enter your email and client code.</p>
   <div class="gatecard">
-    <label for="clientName">Your name</label>
-    <input id="clientName" type="text" autocomplete="name" placeholder="e.g. Josue" />
+    <label for="clientEmail">Your email</label>
+    <input id="clientEmail" type="email" autocomplete="email" placeholder="you@email.com" />
     <label>Client code</label>
     <div class="dots"><div class="dot" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div></div>
     <div class="pad" id="pad">
@@ -121,7 +121,7 @@ body{
 (function(){
   var $ = function(id){ return document.getElementById(id); };
   var LS = "sfs_portal";
-  var state = { code:"", name:"", client:null, history:[] };
+  var state = { code:"", email:"", client:null, history:[] };
 
   /* ---------- gate ---------- */
   var entered = "";
@@ -137,18 +137,18 @@ body{
   });
 
   function tryLogin(){
-    var name = $("clientName").value.trim();
-    if(!name){ $("gateErr").textContent = "Add your name first, then your code."; entered=""; paint(); return; }
+    var email = $("clientEmail").value.trim();
+    if(!email || email.indexOf("@") < 1){ $("gateErr").textContent = "Add your email first, then your code."; entered=""; paint(); return; }
     $("gateErr").textContent = ""; $("gateBusy").style.display = "block";
     fetch("/api/portal-chat", {
       method:"POST", headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ action:"login", code: entered, name: name })
+      body: JSON.stringify({ action:"login", code: entered, email: email })
     }).then(function(r){ return r.json().then(function(j){ return {status:r.status, j:j}; }); })
     .then(function(res){
       $("gateBusy").style.display = "none";
-      if(!res.j.ok){ $("gateErr").textContent = "That name and code don't match. Check with Cameron if you need your code."; entered=""; paint(); return; }
-      state.code = entered; state.name = name; state.client = res.j.client;
-      try{ localStorage.setItem(LS, JSON.stringify({code:state.code, name:state.name})); }catch(_){}
+      if(!res.j.ok){ $("gateErr").textContent = "That email and code don't match. Check with Cameron if you need your code."; entered=""; paint(); return; }
+      state.code = entered; state.email = email; state.client = res.j.client;
+      try{ localStorage.setItem(LS, JSON.stringify({code:state.code, email:state.email})); }catch(_){}
       openChat(res.j.greeting);
     }).catch(function(){
       $("gateBusy").style.display = "none";
@@ -193,7 +193,7 @@ body{
     sending = true; $("send").disabled = true; $("typing").classList.add("show");
     fetch("/api/portal-chat", {
       method:"POST", headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ action:"chat", code: state.code, name: state.name, messages: state.history })
+      body: JSON.stringify({ action:"chat", code: state.code, email: state.email, messages: state.history })
     }).then(function(r){ return r.json(); })
     .then(function(j){
       sending = false; $("send").disabled = false; $("typing").classList.remove("show");
@@ -224,13 +224,13 @@ body{
   /* ---------- resume ---------- */
   try{
     var saved = JSON.parse(localStorage.getItem(LS) || "null");
-    if(saved && saved.code && saved.name){
-      $("clientName").value = saved.name;
+    if(saved && saved.code && saved.email){
+      $("clientEmail").value = saved.email;
       fetch("/api/portal-chat", {
         method:"POST", headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({ action:"login", code: saved.code, name: saved.name })
+        body: JSON.stringify({ action:"login", code: saved.code, email: saved.email })
       }).then(function(r){ return r.json(); }).then(function(j){
-        if(j.ok){ state.code = saved.code; state.name = saved.name; state.client = j.client; openChat(j.greeting); }
+        if(j.ok){ state.code = saved.code; state.email = saved.email; state.client = j.client; openChat(j.greeting); }
       }).catch(function(){});
     }
   }catch(_){}
