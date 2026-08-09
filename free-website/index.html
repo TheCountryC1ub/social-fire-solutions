@@ -343,8 +343,8 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
         <input type="email" name="email" autocomplete="email" placeholder="you@email.com" required />
       </div>
       <div class="field">
-        <label class="fl">Phone <span style="text-transform:none;letter-spacing:0;color:#606066">(optional — handy if we have a quick question about your business)</span></label>
-        <input type="tel" name="phone" autocomplete="tel" placeholder="+1 (555) 000-0000" />
+        <label class="fl">Phone <span style="text-transform:none;letter-spacing:0;color:#606066">(so we can reach you if we have a quick question about your build)</span></label>
+        <input type="tel" name="phone" autocomplete="tel" placeholder="+1 (555) 000-0000" required />
       </div>
       <label class="choice chk" style="margin-top:6px">
         <input type="checkbox" name="consent" value="Consented to be contacted" required>
@@ -357,7 +357,7 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
       </div>
-      <div class="err-msg">Please add your name and a valid email, and confirm you want the free build.</div>
+      <div class="err-msg">Please add your name, a valid email and phone number, and confirm you want the free build.</div>
     </section>
 
     </form>
@@ -461,7 +461,8 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
     p.querySelectorAll('input[required], textarea[required], select[required]').forEach(function(el){
       if(el.type === 'radio' || el.type === 'checkbox') return; // handled below
       var v = (el.value||'').trim();
-      var bad = !v || (el.type === 'email' && !emailValid(v));
+      var bad = !v || (el.type === 'email' && !emailValid(v))
+                   || (el.type === 'tel' && v.replace(/\D/g,'').length < 7);
       if(bad){ ok=false; el.classList.add('invalid'); firstBad = firstBad||el; }
       else el.classList.remove('invalid');
     });
