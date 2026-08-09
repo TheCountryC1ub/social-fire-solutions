@@ -1,0 +1,7 @@
+{
+  "name": "social-fire-solutions",
+  "private": true,
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.110.0"
+  }
+}
