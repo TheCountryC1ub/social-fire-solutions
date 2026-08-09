@@ -30,6 +30,7 @@ body{
 }
 .fire{background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent}
 .ember{background:var(--ember);-webkit-background-clip:text;background-clip:text;color:transparent}
+.skyblue{color:var(--sky)}
 .flame{width:26px;height:26px;flex:none;background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:0 0 20px rgba(27,140,242,.6)}
 .flame.red{background:var(--ember);box-shadow:0 0 20px rgba(242,83,27,.6)}
 
@@ -115,8 +116,8 @@ body{
 <!-- CHAT -->
 <section id="chat">
   <div class="chathead">
-    <div class="flame red"></div>
-    <div class="who"><b>Social Fire <span class="ember">AI</span></b><span id="whoSite">Sky — your concierge</span></div>
+    <div class="flame"></div>
+    <div class="who"><b>Social Fire <span class="skyblue">AI</span></b><span id="whoSite">Sky — your concierge</span></div>
     <a href="#" id="logout">Sign out</a>
   </div>
   <div id="msgs">
