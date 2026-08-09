@@ -79,6 +79,7 @@ h1 .grad{background:var(--skyburn);-webkit-background-clip:text;background-clip:
 .panel h3{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;display:flex;align-items:center;gap:9px}
 .panel .cap{color:var(--ash);font-size:12.5px;margin:4px 0 14px}
 .duo{display:grid;grid-template-columns:1.7fr 1fr;gap:14px;margin-bottom:22px}
+.col{display:flex;flex-direction:column;gap:14px;min-width:0}
 
 /* ---------- signal feed ---------- */
 #feed{list-style:none;max-height:520px;overflow-y:auto;scrollbar-width:thin}
@@ -103,6 +104,20 @@ h1 .grad{background:var(--skyburn);-webkit-background-clip:text;background-clip:
 .lead-meta span{border:1px solid var(--line);border-radius:6px;padding:1px 7px;margin-right:5px;display:inline-block;margin-top:4px}
 .lead-when{color:var(--ash);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .empty{color:var(--ash);font-size:13.5px;padding:26px 6px;text-align:center;font-style:italic}
+
+/* ---------- fireside (appointments) ---------- */
+#appts{list-style:none;max-height:380px;overflow-y:auto;scrollbar-width:thin}
+#appts li{padding:10px 6px;border-top:1px solid var(--line)}
+#appts li:first-child{border-top:0}
+#appts li.new{animation:landed 2.4s ease-out}
+#appts li.ap-past{opacity:.45}
+.ap-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.ap-when{font-weight:600;font-size:13px;color:var(--sky);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ap-count{font-size:11px;color:#FFB020;font-weight:700;white-space:nowrap}
+.ap-now{font-size:9.5px;font-weight:800;letter-spacing:.1em;background:var(--burn);color:#fff;border-radius:99px;padding:2px 8px;flex:none}
+.ap-name{font-weight:600}
+.ap-join{font-size:11.5px;white-space:nowrap}
+.ap-cal{width:100%;font-size:11px;color:var(--ash);margin-top:2px}
 
 /* ---------- scoreboard ---------- */
 #board table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
@@ -212,14 +227,21 @@ footer .flame{background:var(--burn);-webkit-background-clip:text;background-cli
       <p class="cap">Free Website &amp; AI Brain surveys — plus every client-page lead — checked every 60 seconds.</p>
       <ul id="feed"><li class="empty">Listening…</li></ul>
     </div>
-    <div class="panel" id="board">
-      <h3>The Scoreboard</h3>
-      <p class="cap">Submissions by form.</p>
-      <table>
-        <thead><tr><th>Form</th><th>Today</th><th>7d</th><th>All</th></tr></thead>
-        <tbody id="boardBody"><tr><td class="empty" colspan="4">—</td></tr></tbody>
-        <tfoot><tr><td>Total</td><td class="today" id="b-today">—</td><td id="b-week">—</td><td id="b-all">—</td></tr></tfoot>
-      </table>
+    <div class="col">
+      <div class="panel" id="board">
+        <h3>The Scoreboard</h3>
+        <p class="cap">Submissions by form.</p>
+        <table>
+          <thead><tr><th>Form</th><th>Today</th><th>7d</th><th>All</th></tr></thead>
+          <tbody id="boardBody"><tr><td class="empty" colspan="4">—</td></tr></tbody>
+          <tfoot><tr><td>Total</td><td class="today" id="b-today">—</td><td id="b-week">—</td><td id="b-all">—</td></tr></tfoot>
+        </table>
+      </div>
+      <div class="panel">
+        <h3>The Fireside</h3>
+        <p class="cap">Booked calls &amp; meetings — GHL calendar, next 60 days.</p>
+        <ul id="appts"><li class="empty">Checking the books…</li></ul>
+      </div>
     </div>
   </div>
 
@@ -243,7 +265,7 @@ footer .flame{background:var(--burn);-webkit-background-clip:text;background-cli
     </div>
   </div>
 
-  <footer>The <span class="flame">fire</span> is always lit · The Fire Watch refreshes itself — sparks every minute, traffic every five.</footer>
+  <footer>The <span class="flame">fire</span> is always lit · The Fire Watch refreshes itself — sparks every minute, traffic &amp; fireside every five.</footer>
 </div>
 
 <div id="tooltip"></div>
@@ -253,7 +275,7 @@ footer .flame{background:var(--burn);-webkit-background-clip:text;background-cli
 (function(){
   "use strict";
   var LS_KEY = "sfs_dash_pass";
-  var state = { pass:null, range:"today", seen:null, unseen:0, leadAt:0, trafAt:0 };
+  var state = { pass:null, range:"today", seen:null, seenAp:null, unseen:0, leadAt:0, trafAt:0 };
   var timers = {};
   var $ = function(id){ return document.getElementById(id); };
   var nf = new Intl.NumberFormat("en-US");
@@ -363,6 +385,57 @@ footer .flame{background:var(--burn);-webkit-background-clip:text;background-cli
     $("t-sparks-k").textContent = label;
     $("t-sparks").textContent = nf.format(val);
     $("t-sparks").title = note;
+  }
+
+  /* ---------- fireside (appointments) ---------- */
+  function apWhen(iso){
+    var d = new Date(iso), now = new Date();
+    var day = d.toDateString() === now.toDateString() ? "Today"
+      : d.toDateString() === new Date(now.getTime() + 86400000).toDateString() ? "Tomorrow"
+      : d.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});
+    return day + " · " + d.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+  }
+  function apIn(ms){
+    var m = Math.round(ms/60000);
+    if (m < 1) return "now";
+    if (m < 60) return "in " + m + "m";
+    var h = Math.floor(m/60);
+    if (h < 48) return "in " + h + "h " + (m%60) + "m";
+    return "in " + Math.round(h/24) + "d";
+  }
+  function renderAppts(A){
+    if (!A || !A.ready) return;
+    var first = state.seenAp === null;
+    if (first) state.seenAp = {};
+    var now = Date.now();
+    var html = "", fresh = [], nextFound = false;
+    (A.events || []).forEach(function(x){
+      var isNew = !first && !state.seenAp[x.id];
+      if (isNew) fresh.push(x);
+      state.seenAp[x.id] = 1;
+      var s = Date.parse(x.start);
+      var e = x.end ? Date.parse(x.end) : s + 30*60000;
+      var live = now >= s && now <= e;
+      var past = e < now;
+      var isNext = false;
+      if (!past && !live && !nextFound){ isNext = true; nextFound = true; }
+      var join = x.where && /^https?:\/\//i.test(x.where) ? esc(x.where).replace(/"/g,"%22") : null;
+      var sub = [x.calendar, x.status === "new" ? "unconfirmed" : null].filter(Boolean).join(" · ");
+      html += '<li class="' + (past ? 'ap-past' : '') + (isNew ? ' new' : '') + '">'
+        + '<div class="ap-top">'
+        + '<span class="ap-when">' + esc(apWhen(x.start)) + '</span>'
+        + (live ? '<span class="ap-now">NOW</span>' : '')
+        + (isNext ? '<span class="ap-count">' + esc(apIn(s - now)) + '</span>' : '')
+        + (isNew ? '<span class="newpill">NEW</span>' : '')
+        + '<span class="ap-name">' + esc(x.title) + '</span>'
+        + (join ? '<a class="ap-join" href="' + join + '" target="_blank" rel="noopener">join ↗</a>' : '')
+        + '</div>'
+        + (sub ? '<div class="ap-cal">' + esc(sub) + '</div>' : '')
+        + '</li>';
+    });
+    $("appts").innerHTML = html || '<li class="empty">Nothing on the books yet — the fireside sits ready.</li>';
+    fresh.forEach(function(x){ toast("🔥 New booking — " + x.title + " · " + apWhen(x.start)); });
+    if (fresh.length && document.hidden){ state.unseen += fresh.length; setTitle(); }
   }
 
   /* ---------- traffic ---------- */
@@ -479,6 +552,9 @@ footer .flame{background:var(--burn);-webkit-background-clip:text;background-cli
   function pollTraffic(){
     api("traffic").then(function(j){ renderTraffic(j.traffic); }).catch(fail);
   }
+  function pollAppts(){
+    api("appts").then(function(j){ renderAppts(j.appts); }).catch(fail);
+  }
   function fail(e){
     if (e && e.auth){ lock("Not tonight."); return; }
     if (e && e.setup){ lock("The watch isn't configured yet — set DASHBOARD_PASS on the Vercel project, then redeploy."); return; }
@@ -487,9 +563,9 @@ footer .flame{background:var(--burn);-webkit-background-clip:text;background-cli
 
   /* ---------- gate ---------- */
   function lock(msg){
-    clearInterval(timers.leads); clearInterval(timers.traffic);
+    clearInterval(timers.leads); clearInterval(timers.traffic); clearInterval(timers.appts);
     localStorage.removeItem(LS_KEY);
-    state.pass = null; state.seen = null;
+    state.pass = null; state.seen = null; state.seenAp = null;
     $("gate").style.display = "flex";
     $("gateErr").textContent = msg || "";
     $("pw").focus();
@@ -497,11 +573,12 @@ footer .flame{background:var(--burn);-webkit-background-clip:text;background-cli
   function unlock(){
     $("gate").style.display = "none";
     $("app").style.visibility = "visible";
-    state.seen = null;
-    pollLeads(); pollTraffic();
-    clearInterval(timers.leads); clearInterval(timers.traffic);
+    state.seen = null; state.seenAp = null;
+    pollLeads(); pollTraffic(); pollAppts();
+    clearInterval(timers.leads); clearInterval(timers.traffic); clearInterval(timers.appts);
     timers.leads = setInterval(pollLeads, 60000);
     timers.traffic = setInterval(pollTraffic, 300000);
+    timers.appts = setInterval(pollAppts, 300000);
   }
   function tryPass(p){
     state.pass = p;
