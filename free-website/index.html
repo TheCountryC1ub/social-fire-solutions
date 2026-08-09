@@ -375,6 +375,12 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
           <button type="button" class="btn btn-primary" id="copyBtn">Copy my answers</button>
         </div>
       </div>
+      <div class="actions" style="margin-top:22px;justify-content:center">
+        <a class="btn btn-primary" href="/blog/?utm_source=free-website&utm_medium=post-submit">While you wait — read The Blue Flame
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <p id="redirectNote" style="display:none;color:var(--ash);font-size:.92rem;margin-top:14px">Taking you to our blog in a few seconds&hellip;</p>
       <div class="again"><a class="exit" href="/">← Back to Social Fire Solutions</a></div>
     </div>
 
@@ -564,6 +570,15 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
     progressEl.style.width = '100%';
     var done = document.getElementById('done');
     done.classList.add('show');
+    if(!usedEmail){
+      // Clean GHL path: let the success message land, then carry them to the
+      // blog. The delay also gives the Lead pixel event time to send.
+      // The mailto fallback NEVER redirects — those users need the copy box.
+      document.getElementById('redirectNote').style.display = 'block';
+      setTimeout(function(){
+        window.location.href = '/blog/?utm_source=free-website&utm_medium=post-submit';
+      }, 8000);
+    }
     if(usedEmail){
       document.getElementById('copyText').value = body;
       document.getElementById('copybox').classList.add('show');
