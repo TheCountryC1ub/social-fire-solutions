@@ -26,7 +26,7 @@ fbq('track', 'ViewContent', {content_name: 'Personal Website Offer'});
 <title>Your Name Matters — Free Personal Website — Social Fire Solutions</title>
 <link rel="icon" type="image/png" href="/media/favicon.png">
 <link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
-<meta name="description" content="We believe your name matters. We build your personal website free — you see the first draft before you pay a cent. Love it? It's $399, once ($100 off our usual $499). Don't? You owe nothing." />
+<meta name="description" content="We believe your name matters. We build your personal website free — you see the first draft before you pay a cent. Love it? It's $499, once, and it's yours. Don't? You owe nothing." />
 <meta name="robots" content="noindex" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -172,6 +172,18 @@ input:focus,textarea:focus,select:focus{outline:none; border-color:var(--molten)
 .urlbar .caret{width:2px;height:1.1em;flex:none;background:var(--molten);animation:blink 1.15s steps(1,end) infinite}
 @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
 
+/* the gift card on the last step */
+.gift{display:flex; align-items:flex-start; gap:14px; margin:0 0 24px;
+  border:1px solid rgba(27,140,242,.5); border-radius:14px; padding:18px 20px;
+  background:linear-gradient(135deg,rgba(127,224,255,.10),rgba(30,90,200,.10));
+  box-shadow:0 14px 40px -22px rgba(27,140,242,.8)}
+.gift .gtag{flex:none; font-size:.66rem; letter-spacing:.22em; text-transform:uppercase; font-weight:700;
+  color:#0A0A0B; background:var(--burn); border-radius:50px; padding:7px 13px; margin-top:3px}
+.gift .gtext b{display:block; color:var(--ivory); font-weight:600; font-size:1.02rem; margin-bottom:3px}
+.gift .gtext span{color:var(--ash); font-size:.94rem}
+.gift .gtext s{color:#606066}
+.gift .gtext em.now{font-style:normal; font-weight:700; background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent}
+
 /* the deal strip on the welcome panel */
 .deal{display:flex; flex-direction:column; gap:10px; margin:6px 0 28px; max-width:560px}
 .deal .row{display:flex; align-items:flex-start; gap:12px; border:1px solid var(--line); border-radius:12px; padding:14px 18px; background:rgba(255,255,255,.02)}
@@ -228,7 +240,7 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
       <div class="deal">
         <div class="row"><span class="num">1</span><span><b>We build your personal website for free.</b> <span>Your story, your work, your proof — designed and built by us. You pay nothing to get it made.</span></span></div>
         <div class="row"><span class="num">2</span><span><b>You see it finished first.</b> <span>We send you a private link to the real, working site — not a mockup, not a sales pitch.</span></span></div>
-        <div class="row"><span class="num">3</span><span><b>Love it? It's $399, once. Don't? Walk away.</b> <span>We believe your name matters, so personal sites get $100 off our usual $499. If you don't love it, you owe us nothing and we part as friends. That's it. That's the catch — there isn't one.</span></span></div>
+        <div class="row"><span class="num">3</span><span><b>Love it? It's $499, once. Don't? Walk away.</b> <span>If you don't love it, you owe us nothing and we part as friends. That's it. That's the catch — there isn't one.</span></span></div>
       </div>
       <div class="meta">
         <span><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~2 minutes</span>
@@ -347,6 +359,13 @@ footer{position:relative; z-index:5; text-align:center; padding:8px 0 40px; colo
       <div class="stepno"><span class="n"></span></div>
       <h2>Where do we send your site's <em>first draft?</em></h2>
       <p class="desc tight">We'll build your site and email you the first draft — a private preview link to the real, working thing. You look, then decide. $0 until you say "I love it."</p>
+      <div class="gift">
+        <div class="gtag">A gift</div>
+        <div class="gtext">
+          <b>We believe your name matters — so take $100 off.</b>
+          <span>If you love your site, it's <s>$499</s> <em class="now">$399, once.</em> Still $0 today, still nothing if you walk away.</span>
+        </div>
+      </div>
       <div class="field">
         <label class="fl">Your name</label>
         <input type="text" name="name" autocomplete="name" placeholder="Your name" required />
