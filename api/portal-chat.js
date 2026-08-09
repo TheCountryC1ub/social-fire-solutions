@@ -21,6 +21,13 @@ const GHL_BASE = "https://services.leadconnectorhq.com";
 const GHL_VERSION = "2021-07-28";
 const MODEL = process.env.PORTAL_MODEL || "claude-opus-5";
 
+// Attached images arrive as data URLs. Hard caps keep requests under
+// Vercel's ~4.5MB body limit: 3 images per request, ~1.5MB each after
+// the client-side resize.
+const IMG_RE = /^data:image\/(jpeg|png|webp|gif);base64,([A-Za-z0-9+/=]+)$/;
+const IMG_MAX_CHARS = 2_000_000;
+const IMG_MAX_COUNT = 3;
+
 const EDIT_TOOL = {
   name: "file_edit_request",
   description:
@@ -83,6 +90,8 @@ function systemPrompt(client) {
     `Your job: help them shape edits and updates to their website — copy changes, new sections, photo swaps, hours, style tweaks — and turn vague wishes into concrete, buildable requests. Ask at most one clarifying question at a time. Keep replies warm, plain-spoken, and brief (usually 2–4 sentences).`,
     ``,
     `You can also take requests for custom AI-generated images and video for their site. For those, help them nail down the subject, the mood/style, and where it goes, then call file_creative_request. The Social Fire team generates the asset and delivers it into their site — you never generate it yourself in this chat.`,
+    ``,
+    `Clients can attach images to the chat — logos, photos of their business, screenshots of styles they like. Look at them and use them to sharpen the request. When a filed request relies on an attached image, say so in the details field (the images are automatically passed to the build team alongside your note).`,
     client.plan
       ? `Their plan: ${client.plan}.${client.allowance ? ` Included each month: ${client.allowance}. If a request would clearly go beyond that, file it anyway and note that Cameron will confirm whether it's covered.` : ""} Never invent plan details beyond what is written here.`
       : `If they ask what their plan includes, say Cameron will confirm the details personally — never invent plan terms.`,
@@ -99,7 +108,40 @@ function systemPrompt(client) {
   ].join("\n");
 }
 
-async function fileToGHL(client, code, input, kind) {
+async function uploadImagesToGHL(location, token, images, code) {
+  const urls = [];
+  for (const img of images.slice(0, IMG_MAX_COUNT)) {
+    try {
+      const m = IMG_RE.exec(img);
+      if (!m) continue;
+      const ext = m[1] === "jpeg" ? "jpg" : m[1];
+      const buf = Buffer.from(m[2], "base64");
+      const fd = new FormData();
+      const stamp = Date.now() + "-" + Math.random().toString(36).slice(2, 6);
+      fd.append("file", new Blob([buf], { type: `image/${m[1]}` }), `portal-${code}-${stamp}.${ext}`);
+      fd.append("hosted", "false");
+      fd.append("name", `portal-${code}-${stamp}`);
+      fd.append("altId", location);
+      fd.append("altType", "location");
+      // No Content-Type header — FormData sets the multipart boundary itself.
+      const r = await fetch(`${GHL_BASE}/medias/upload-file`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Version: GHL_VERSION,
+          Accept: "application/json",
+          "User-Agent": "Mozilla/5.0 (SocialFirePortal)",
+        },
+        body: fd,
+      });
+      const j = await r.json().catch(() => ({}));
+      if (j && j.url) urls.push(j.url);
+    } catch (_) { /* attachments are best-effort */ }
+  }
+  return urls;
+}
+
+async function fileToGHL(client, code, input, kind, images) {
   const token = process.env.GHL_TOKEN;
   const location = process.env.GHL_LOCATION;
   if (!token || !location || !client.email) return false;
@@ -123,12 +165,16 @@ async function fileToGHL(client, code, input, kind) {
     const header = isCreative
       ? `🎨 PORTAL CREATIVE REQUEST (${(input.media_type || "image").toUpperCase()}) — ${input.summary}`
       : `🔵 PORTAL EDIT REQUEST — ${input.summary}`;
+    const imageUrls = images && images.length
+      ? await uploadImagesToGHL(location, token, images, code)
+      : [];
     const body = [
       header,
       ``,
       `Page: ${input.page || "not specified"}`,
       ``,
       input.details,
+      imageUrls.length ? `\nReference images from the client:\n${imageUrls.join("\n")}` : ``,
       ``,
       `— filed by Social Fire AI for ${client.name} (portal code ${code})`,
     ].join("\n");
@@ -178,20 +224,49 @@ module.exports = async (req, res) => {
     return res.status(503).json({ ok: false, error: "not_configured" });
   }
 
-  // Sanitize history: role/content strings only, capped.
+  // Sanitize history: role/content strings only, capped; images only on
+  // user messages, validated data URLs, newest-first budget of IMG_MAX_COUNT.
   const history = (Array.isArray(d.messages) ? d.messages : [])
     .filter((m) => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string")
     .slice(-30)
-    .map((m) => ({ role: m.role, content: m.content.slice(0, 4000) }));
+    .map((m) => ({
+      role: m.role,
+      content: m.content.slice(0, 4000),
+      images: m.role === "user" && Array.isArray(m.images)
+        ? m.images.filter((s) => typeof s === "string" && s.length <= IMG_MAX_CHARS && IMG_RE.test(s))
+        : [],
+    }));
   if (!history.length || history[history.length - 1].role !== "user") {
     return res.status(400).json({ ok: false, error: "no_message" });
   }
+  let imgBudget = IMG_MAX_COUNT;
+  const attachedImages = []; // newest-first, for GHL filing
+  for (let i = history.length - 1; i >= 0; i--) {
+    const kept = history[i].images.slice(0, Math.max(0, imgBudget));
+    imgBudget -= kept.length;
+    history[i].images = kept;
+    for (const s of kept) attachedImages.push(s);
+  }
+  const apiMessages = history.map((m) =>
+    m.images.length
+      ? {
+          role: "user",
+          content: [
+            ...m.images.map((s) => {
+              const mm = IMG_RE.exec(s);
+              return { type: "image", source: { type: "base64", media_type: `image/${mm[1]}`, data: mm[2] } };
+            }),
+            { type: "text", text: m.content || "(see attached image)" },
+          ],
+        }
+      : { role: m.role, content: m.content }
+  );
 
   const anthropic = new Anthropic();
   let filed = false;
 
   try {
-    let messages = history;
+    let messages = apiMessages;
     let response = await anthropic.messages.create({
       model: MODEL,
       max_tokens: 4096,
@@ -207,7 +282,7 @@ module.exports = async (req, res) => {
       for (const block of response.content) {
         if (block.type === "tool_use" && (block.name === "file_edit_request" || block.name === "file_creative_request")) {
           const kind = block.name === "file_creative_request" ? "creative" : "edit";
-          const ok = await fileToGHL(client, d.code, block.input || {}, kind);
+          const ok = await fileToGHL(client, d.code, block.input || {}, kind, attachedImages);
           filed = filed || ok;
           results.push({
             type: "tool_result",
