@@ -13,8 +13,10 @@
 //     Set 0 to turn self-serve generation off for a client.
 //   PORTAL_MODEL       = optional model override (default claude-opus-5)
 //   GHL_TOKEN / GHL_LOCATION = already set — reused to file edit requests.
-//   HF_API_KEY / HF_API_SECRET (or combined HF_CREDENTIALS "id:secret")
-//                      = Higgsfield platform keys (platform.higgsfield.ai).
+//   HF_API_KEY / HF_API_SECRET = Higgsfield platform keys (cloud.higgsfield.ai).
+//                        Also accepts HF_API_KEY_ID / HF_API_SECRET_KEY, or a
+//                        combined HF_CREDENTIALS "id:secret" — whichever names
+//                        the dashboard export happened to use.
 //                        When absent, Sky files creative requests instead of
 //                        generating — the portal works exactly as before.
 //   PORTAL_IMAGE_CAP   = default self-serve images per client per month (5)
@@ -45,9 +47,9 @@ function hfCredentials() {
     const [apiKey, apiSecret] = combined.split(":");
     if (apiKey && apiSecret) return { apiKey, apiSecret };
   }
-  if (process.env.HF_API_KEY && process.env.HF_API_SECRET) {
-    return { apiKey: process.env.HF_API_KEY, apiSecret: process.env.HF_API_SECRET };
-  }
+  const apiKey = process.env.HF_API_KEY || process.env.HF_API_KEY_ID;
+  const apiSecret = process.env.HF_API_SECRET || process.env.HF_API_SECRET_KEY;
+  if (apiKey && apiSecret) return { apiKey, apiSecret };
   return null;
 }
 
