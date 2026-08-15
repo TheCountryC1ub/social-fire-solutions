@@ -15,8 +15,82 @@ const GHL_BASE = "https://services.leadconnectorhq.com";
 const GHL_VERSION = "2021-07-28";
 const PRODUCT_ID = "DEO2B"; // AI Brain Webinar · $27
 
+// Meta Conversions API — same env vars as /api/seo-audit and /api/free-website.
+const META_API_VERSION = process.env.META_API_VERSION || "v21.0";
+
 function expectedKey(token) {
   return crypto.createHash("sha256").update("aibw:" + token).digest("hex").slice(0, 32);
+}
+
+const sha256 = (v) =>
+  crypto.createHash("sha256").update(String(v).trim().toLowerCase()).digest("hex");
+
+// The Commas transaction id, used as Meta's event_id. If a browser-side
+// Purchase twin is ever added on /thanks, give it this SAME id so Meta
+// collapses the pair into one conversion instead of counting two.
+function findTxId(obj) {
+  const cands = [
+    obj.transaction_id, obj.id, obj.payment_id, obj.order_id, obj.charge_id,
+    obj.data && obj.data.transaction_id,
+    obj.data && obj.data.id,
+    obj.data && obj.data.payment_id,
+    obj.data && obj.data.order_id,
+    obj.data && obj.data.transaction && obj.data.transaction.id,
+  ];
+  for (const v of cands) if (v !== undefined && v !== null && String(v).trim()) return String(v).trim();
+  return "";
+}
+
+// Server-side Purchase. This is the ONLY Purchase source for this funnel:
+// it fires on money actually received, so it can't be blocked by an ad
+// blocker and can't false-positive on someone reloading the thanks page.
+// Deliberately omits client_ip_address / client_user_agent — this request
+// comes from Commas' server, so those values describe Commas, not the buyer,
+// and wrong values hurt match quality more than absent ones.
+// Best-effort: a CAPI failure must never fail the GHL write.
+async function capiPurchase({ email, firstName, lastName, txId, amount }) {
+  const pixel = process.env.META_PIXEL_ID;
+  const token = process.env.META_CAPI_TOKEN;
+  if (!pixel || !token) return { sent: false, reason: "not_configured" };
+
+  const user_data = {};
+  if (email) user_data.em = sha256(email);
+  if (firstName) user_data.fn = sha256(firstName);
+  if (lastName) user_data.ln = sha256(lastName);
+
+  const payload = {
+    data: [
+      {
+        event_name: "Purchase",
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: txId ? "aibw-" + txId : undefined,
+        event_source_url: "https://socialfire.solutions/ai-brain-webinar/checkout",
+        action_source: "website",
+        user_data,
+        custom_data: {
+          content_name: "AI Brain Webinar",
+          content_ids: [PRODUCT_ID],
+          content_type: "product",
+          value: Number(amount) || 27,
+          currency: "USD",
+        },
+      },
+    ],
+  };
+  if (process.env.META_TEST_EVENT_CODE) payload.test_event_code = process.env.META_TEST_EVENT_CODE;
+
+  try {
+    const r = await fetch(
+      `https://graph.facebook.com/${META_API_VERSION}/${pixel}/events?access_token=${encodeURIComponent(token)}`,
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }
+    );
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) console.error("[webinar-purchase] CAPI rejected:", JSON.stringify(j).slice(0, 400));
+    return { sent: r.ok, received: j.events_received, error: j.error ? j.error.message : undefined };
+  } catch (err) {
+    console.error("[webinar-purchase] CAPI failed:", err && err.message);
+    return { sent: false, reason: "request_failed" };
+  }
 }
 
 function findEmail(obj) {
@@ -75,6 +149,19 @@ module.exports = async (req, res) => {
 
   const k = (req.query && req.query.k) || "";
   if (k !== expectedKey(token)) return res.status(401).json({ ok: false, error: "bad_key" });
+
+  // ?dry=1 — config check that writes nothing and sends no event. Lets us
+  // confirm the Meta CAPI credentials are live in prod without polluting the
+  // pixel dataset with a purchase that never happened.
+  if (req.query && req.query.dry) {
+    return res.status(200).json({
+      ok: true,
+      dry: true,
+      ghl: "configured",
+      capi: process.env.META_PIXEL_ID && process.env.META_CAPI_TOKEN ? "configured" : "not_configured",
+      capiTestMode: process.env.META_TEST_EVENT_CODE ? "on" : "off",
+    });
+  }
 
   let d = req.body;
   if (typeof d === "string") { try { d = JSON.parse(d); } catch (_) { d = {}; } }
@@ -144,7 +231,16 @@ module.exports = async (req, res) => {
       } catch (_) {}
     }
 
-    return res.status(200).json({ ok: true, contactId });
+    // Meta Purchase — after the GHL write, so a CAPI hiccup never costs us the buyer.
+    const capi = await capiPurchase({
+      email,
+      firstName,
+      lastName,
+      txId: findTxId(d),
+      amount: d.amount || (d.data && d.data.amount),
+    });
+
+    return res.status(200).json({ ok: true, contactId, capi });
   } catch (err) {
     console.error("[webinar-purchase] request failed:", err && err.message);
     return res.status(502).json({ ok: false, error: "ghl_request_failed" });

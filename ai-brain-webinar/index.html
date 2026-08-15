@@ -571,6 +571,13 @@ footer .disc{max-width:640px; margin:14px auto 0; font-size:.72rem; color:#4d485
   var payBtn = document.querySelector('.js-paylink');
   if (PAY.LINK) payBtn.href = PAY.LINK;
 
+  // AddToCart = the click that leaves this page for checkout. The other CTAs
+  // only scroll to the offer box, so they deliberately don't fire it.
+  payBtn.addEventListener('click', function(){
+    if (window.fbq) fbq('track', 'AddToCart',
+      {content_name:'AI Brain Webinar', content_ids:['DEO2B'], content_type:'product', value:27, currency:'USD'});
+  });
+
   // date lines
   if (PAY.DATE){
     var d1 = document.querySelector('.js-date');

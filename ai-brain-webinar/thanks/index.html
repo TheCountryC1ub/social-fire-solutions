@@ -19,14 +19,11 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1904534047174026');
 fbq('track', 'PageView');
-/* browser-side Purchase, once per browser session (no server event exists yet,
-   so no dedup concern; the guard stops reload double-counts) */
-try{
-  if (!sessionStorage.getItem('aibw_purchase_fired')){
-    fbq('track', 'Purchase', {content_name:'AI Brain Webinar', value:27, currency:'USD'});
-    sessionStorage.setItem('aibw_purchase_fired','1');
-  }
-}catch(_){ fbq('track', 'Purchase', {content_name:'AI Brain Webinar', value:27, currency:'USD'}); }
+/* NO browser Purchase here on purpose. Purchase fires server-side from
+   /api/webinar-purchase when Commas confirms the money — that can't be blocked
+   and can't false-positive on a reload, a shared link, or a direct visit to
+   this page. Adding a browser twin here would double-count unless it carries
+   the SAME event_id the server uses ("aibw-<commas transaction id>"). */
 </script>
 <!-- End Meta Pixel -->
 <meta name="viewport" content="width=device-width, initial-scale=1" />
