@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P350HNJX4Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P350HNJX4Y');
+</script>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1904534047174026');
+fbq('track', 'PageView');
+fbq('track', 'InitiateCheckout', {content_name:'AI Brain Webinar', value:27, currency:'USD'});
+</script>
+<!-- End Meta Pixel -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Secure Checkout — AI Brain Webinar · Social Fire Solutions</title>
+<link rel="icon" type="image/png" href="/media/favicon.png">
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- fetch the Commas embed SDK in parallel with everything else -->
+<link rel="preload" as="script" href="https://cdn.embedded.fanbasis.io/embed/index.js">
+<!-- warm the iframe origin too (DNS+TLS) — the embed loads from a different host than the SDK cdn -->
+<link rel="preconnect" href="https://embedded.fanbasis.io">
+<style>
+:root{
+  --onyx:#0A0812; --carbon:#141020; --carbon-2:#1B1526;
+  --violet:#A855F7; --violet-deep:#7C3AED; --violet-soft:#C084FC; --violet-pale:#F0E1FF;
+  --ivory:#F4F1EA; --mist:#CDC9D6; --ash:#9A96A6; --line:#2b2436;
+  --brain:linear-gradient(100deg,#F0E1FF,#C084FC 55%,#9333EA);
+  --brain-btn:linear-gradient(135deg,#A855F7,#7C3AED);
+  --burn:linear-gradient(100deg,#7FE0FF,#1B8CF2 50%,#1E5AC8);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--onyx); color:var(--ivory); font-family:'Inter',system-ui,sans-serif;
+  font-size:18px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; min-height:100dvh}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif; font-weight:600; line-height:1.15}
+a{color:inherit; text-decoration:none}
+.brain{background:var(--brain);-webkit-background-clip:text;background-clip:text;color:transparent}
+::selection{background:var(--violet-deep);color:#fff}
+
+.bg{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(110% 70% at 18% 0%, rgba(147,51,234,.16), transparent 55%),
+    radial-gradient(120% 90% at 50% 105%, rgba(168,85,247,.12), transparent 60%),
+    linear-gradient(180deg,#0A0812,#0d0a16 60%,#080610)}
+
+/* minimal top bar — fewer exits, more trust */
+.topbar{position:relative; z-index:5; display:flex; align-items:center; justify-content:space-between;
+  padding:18px clamp(18px,4vw,34px)}
+.brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:15px}
+.brand .flame{width:22px;height:22px;flex:none;background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:0 0 18px rgba(27,140,242,.55)}
+.brand span.co{color:var(--ash);font-weight:400}
+.back{font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ash);
+  border:1px solid var(--line); padding:9px 16px; border-radius:50px; transition:.25s}
+.back:hover{border-color:var(--violet); color:var(--violet-soft)}
+
+main{position:relative; z-index:5; max-width:1060px; margin:0 auto; padding:clamp(16px,3vw,40px) clamp(18px,4vw,34px) 70px}
+.headrow{text-align:center; margin-bottom:clamp(24px,4vw,40px)}
+.headrow .eyebrow{font-size:.76rem; letter-spacing:.3em; text-transform:uppercase; color:var(--violet-soft); font-weight:600; margin-bottom:12px}
+.headrow h1{font-size:clamp(1.8rem,4.4vw,2.6rem)}
+.headrow p{color:var(--mist); margin-top:8px; font-size:1rem}
+
+.cols{display:grid; grid-template-columns:.92fr 1.08fr; gap:clamp(20px,3.5vw,36px); align-items:start}
+
+/* order summary */
+.summary{background:linear-gradient(180deg,var(--carbon),rgba(20,16,32,.6));
+  border:1px solid rgba(168,85,247,.35); border-radius:20px; overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.45), 0 0 60px rgba(124,58,237,.12)}
+.sumimg{aspect-ratio:16/7; overflow:hidden; position:relative}
+.sumimg img{width:100%; height:100%; object-fit:cover; object-position:center 40%; display:block}
+.sumimg::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(20,16,32,.92))}
+.sumbody{padding:24px 26px 28px}
+.sumbody h2{font-size:1.5rem; margin-bottom:2px}
+.sumwhen{color:var(--violet-soft); font-size:.86rem; letter-spacing:.12em; text-transform:uppercase; font-weight:600; margin-bottom:16px}
+.pricerow{display:flex; align-items:baseline; justify-content:space-between; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:14px 0; margin-bottom:16px}
+.pricerow .lbl{color:var(--mist); font-size:1rem}
+.pricerow .amt{font-family:'Playfair Display'; font-size:2rem; font-weight:700;
+  background:var(--brain);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pricerow .amt small{font-size:.4em; font-family:'Inter'; font-weight:600; letter-spacing:.08em}
+.inc{list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:18px}
+.inc li{display:flex; gap:10px; color:var(--ivory); font-size:.97rem}
+.inc .mk{flex:none; width:20px; height:20px; border-radius:50%; background:rgba(168,85,247,.25); color:var(--violet-pale);
+  display:flex; align-items:center; justify-content:center; font-size:.66rem; font-weight:700; margin-top:3px}
+.anchor{color:var(--mist); font-size:.95rem}
+.anchor s{color:var(--ash)}
+.anchor b{color:var(--violet-pale)}
+
+/* payment card */
+.paycard{background:linear-gradient(180deg,#171126,#120d1e);
+  border:1px solid rgba(168,85,247,.45); border-radius:20px; padding:clamp(18px,3vw,28px);
+  box-shadow:0 30px 90px rgba(0,0,0,.5), 0 0 70px rgba(124,58,237,.14)}
+.paycard .paylbl{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px}
+.paycard .paylbl b{font-size:1.02rem}
+.paycard .paylbl span{font-size:.78rem; color:var(--ash); letter-spacing:.06em}
+/* zoom scales the Commas iframe's rendered text up (form text is set inside
+   the iframe, out of our CSS reach otherwise) — readability first */
+#payframe-holder iframe{width:100%; height:660px; border:0; display:block; border-radius:12px; zoom:1.12}
+.skeleton{height:660px; border-radius:12px; background:linear-gradient(100deg,rgba(255,255,255,.04) 30%,rgba(168,85,247,.10) 50%,rgba(255,255,255,.04) 70%);
+  background-size:200% 100%; animation:shimmer 1.6s infinite; display:flex; align-items:center; justify-content:center;
+  color:var(--mist); font-size:.95rem; text-align:center; padding:20px}
+@keyframes shimmer{to{background-position:-200% 0}}
+.pay-fallback{height:auto; padding:46px 26px; border-radius:12px; background:rgba(255,255,255,.03); border:1px solid var(--line); text-align:center}
+.pay-fallback .lock{font-size:1.8rem; margin-bottom:12px}
+.pay-fallback h3{font-size:1.3rem; margin-bottom:8px}
+.pay-fallback p{color:var(--mist); font-size:.98rem; max-width:34ch; margin:0 auto 22px}
+.btn{display:inline-block; font-weight:700; font-size:1rem; color:#fff; background:var(--brain-btn);
+  padding:16px 34px; border-radius:60px; box-shadow:0 8px 32px rgba(147,51,234,.4); transition:.25s}
+.btn:hover{transform:translateY(-2px)}
+.trust{margin-top:14px; text-align:center; color:var(--ash); font-size:.85rem}
+.trust b{color:var(--mist)}
+
+footer{position:relative; z-index:5; text-align:center; padding:0 20px 40px; color:#605a6c; font-size:.78rem}
+
+@media(max-width:900px){
+  .cols{grid-template-columns:1fr}
+  .sumimg{aspect-ratio:16/6}
+  #payframe-holder iframe{height:980px}
+  .skeleton{height:520px}
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+
+<div class="topbar">
+  <a class="brand" href="/ai-brain-webinar"><span class="flame"></span>Social Fire&nbsp;<span class="co">Solutions</span></a>
+  <a class="back" href="/ai-brain-webinar">← Back to details</a>
+</div>
+
+<main>
+  <div class="headrow">
+    <div class="eyebrow">Secure checkout</div>
+    <h1>Save your seat at the <span class="brain">AI&nbsp;Brain</span> Webinar</h1>
+    <p>One live hour. Everything included. See you Tuesday.</p>
+  </div>
+
+  <div class="cols">
+    <!-- order summary -->
+    <aside class="summary">
+      <div class="sumimg"><img src="/media/webinar-crystal-hand.webp" alt="The AI Brain — a glowing purple crystal in hand"/></div>
+      <div class="sumbody">
+        <h2>The <span class="brain">AI Brain</span> Setup — Live</h2>
+        <div class="sumwhen">Tuesdays · 7:00 PM Eastern · On Zoom</div>
+        <div class="pricerow"><span class="lbl">Your seat, today</span><span class="amt">$27<small> USD</small></span></div>
+        <ul class="inc">
+          <li><span class="mk">✓</span><span><b>1-hour live webinar</b> — we build your brain together</span></li>
+          <li><span class="mk">✓</span><span><b>The key setup tricks</b>, on screen</span></li>
+          <li><span class="mk">✓</span><span><b>Step-by-step setup guide</b> — yours forever</span></li>
+          <li><span class="mk">✓</span><span><b>Live help + Q&amp;A</b> while you build</span></li>
+          <li><span class="mk">✓</span><span><b>Full recording</b> of the session</span></li>
+          <li><span class="mk">✓</span><span><b>🎁 A bonus present</b> after the session</span></li>
+        </ul>
+        <p class="anchor">Businesses pay <s>$5,000</s> for this setup in a private live training. <b>Today it's $27.</b></p>
+      </div>
+    </aside>
+
+    <!-- payment -->
+    <section class="paycard">
+      <div class="paylbl"><b>Payment</b><span>🔒 256-bit encrypted</span></div>
+      <div id="payframe-holder">
+        <div class="skeleton">Preparing your secure checkout…</div>
+      </div>
+      <p class="trust"><b>Secure checkout by Commas.</b> Takes under a minute · Card, Apple&nbsp;Pay &amp; Google&nbsp;Pay</p>
+    </section>
+  </div>
+</main>
+
+<footer>Spread like fire. · © 2026 Social Fire Solutions</footer>
+
+<script src="https://cdn.embedded.fanbasis.io/embed/index.js"></script>
+<script>
+(function(){
+  /* Commas (Fanbasis) embedded checkout — same org + embed pattern as the
+     c1ub's /checkout (see thecountryc1ub-site/checkout.html). The session
+     secret is the org's public-by-design embed secret, NOT an API key. */
+  var FANBASIS = {
+    handle: "the-country-c1ub",
+    secret: "06c73965-c5fe-47b7-8f19-c196ca4c21aa",
+    product: "DEO2B"                                  /* AI Brain Webinar · $27 */
+  };
+  var HOSTED_LINK = "https://commas.com/checkout/DEO2B5MtehJ5Zh";  /* fallback — never dead-end a buyer */
+  var SUCCESS_URL = "https://socialfire.solutions/ai-brain-webinar/thanks";
+
+  var holder = document.getElementById('payframe-holder');
+
+  function showFallback(){
+    holder.innerHTML = '<div class="pay-fallback"><div class="lock">🔒</div><h3>Secure payment</h3>' +
+      '<p>You\'ll complete payment on our secure Commas checkout — it takes about a minute.</p>' +
+      '<a class="btn" href="' + HOSTED_LINK + '">Continue to secure payment →</a></div>';
+  }
+
+  function mount(){
+    if (typeof PaymentCheckout === 'undefined'){ showFallback(); return; }
+    try{
+      holder.innerHTML = '';
+      var checkout = PaymentCheckout.create({
+        creatorId: FANBASIS.handle,
+        productId: FANBASIS.product,
+        checkoutSessionSecret: FANBASIS.secret,
+        environment: 'production',
+        redirectSettings: { success_redirect_url: SUCCESS_URL, always_redirect: true },
+        theme: {
+          theme: 'light',
+          accent_color: 'A855F7',            /* pay button — the AI Brain purple */
+          background_color: 'FBFAFE',
+          surface_color: 'F1EBFA',
+          heading_color: '231B2E',
+          label_color: '5A5468',
+          product_text_color: '231B2E',
+          input_background_color: 'FFFFFF',
+          border_color: 'D8CFEA',
+          product_image: 'https://socialfire.solutions/media/the-purple-crystal.webp',
+          show_product_info: false,
+          show_coupon_row: false
+        }
+      });
+      checkout.attachToElement(holder);
+      checkout.on('checkout:success', function(){
+        try{ if(window.fbq) fbq('track','AddPaymentInfo',{content_name:'AI Brain Webinar', value:27, currency:'USD'}); }catch(_){}
+        try{ window.top.location.href = SUCCESS_URL; }catch(_){ window.location.href = SUCCESS_URL; }
+      });
+      checkout.on('checkout:error', function(err){
+        try{ console.error('[checkout]', err && err.code, err && err.message); }catch(_){}
+        showFallback();
+      });
+      checkout.init();
+    }catch(e){ showFallback(); }
+  }
+
+  /* if the SDK script failed to load entirely, fall back after a beat */
+  if (document.readyState === 'complete' || document.readyState === 'interactive') mount();
+  else document.addEventListener('DOMContentLoaded', mount);
+  setTimeout(function(){
+    var iframe = holder.querySelector('iframe');
+    if (!iframe && !holder.querySelector('.pay-fallback')) showFallback();
+  }, 6000);
+})();
+</script>
+</body>
+</html>

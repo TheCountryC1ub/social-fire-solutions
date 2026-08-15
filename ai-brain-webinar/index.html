@@ -563,16 +563,13 @@ footer .disc{max-width:640px; margin:14px auto 0; font-size:.72rem; color:#4d485
 (function(){
   // ── CONFIG — paste the Commas payment link + webinar date here ──
   var PAY = {
-    LINK: 'https://commas.com/checkout/DEO2B5MtehJ5Zh',
+    LINK: '/ai-brain-webinar/checkout',   // custom purple checkout (Commas embed inside; hosted fallback lives there)
     DATE: 'Tuesdays · 7:00 PM Eastern'
   };
 
-  // wire the checkout button
+  // wire the checkout button (InitiateCheckout fires on the checkout page itself)
   var payBtn = document.querySelector('.js-paylink');
   if (PAY.LINK) payBtn.href = PAY.LINK;
-  payBtn.addEventListener('click', function(){
-    if (window.fbq) fbq('track', 'InitiateCheckout', {content_name:'AI Brain Webinar', value:27, currency:'USD'});
-  });
 
   // date lines
   if (PAY.DATE){
