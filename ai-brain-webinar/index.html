@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P350HNJX4Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P350HNJX4Y');
+</script>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1904534047174026');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {content_name: 'AI Brain Webinar'});
+</script>
+<!-- End Meta Pixel -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Set Up Your AI Brain — Live 1-Hour Webinar · Social Fire Solutions</title>
+<link rel="icon" type="image/png" href="/media/favicon.png">
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
+<meta name="description" content="One live hour. You leave with an AI Brain — an AI that knows you, remembers everything, and works while you sleep. Setup guide + live help included. $27." />
+<meta property="og:title" content="Set Up Your AI Brain — Live 1-Hour Webinar" />
+<meta property="og:description" content="Businesses pay us $5,000 for this setup in private live trainings. One live hour, setup guide + live help included — $27." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --onyx:#0A0812; --carbon:#141020; --carbon-2:#1B1526;
+  --violet:#A855F7; --violet-deep:#7C3AED; --violet-soft:#C084FC; --violet-pale:#F0E1FF;
+  --ember:#1E5AC8; --molten:#1B8CF2; --ignition:#7FE0FF;
+  --ivory:#F4F1EA; --mist:#CDC9D6; --ash:#9A96A6; --line:#2b2436;
+  --brain:linear-gradient(100deg,#F0E1FF,#C084FC 55%,#9333EA);
+  --brain-btn:linear-gradient(135deg,#A855F7,#7C3AED);
+  --burn:linear-gradient(100deg,#7FE0FF,#1B8CF2 50%,#1E5AC8);
+  --max:880px; --r:16px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--onyx); color:var(--ivory);
+  font-family:'Inter',system-ui,sans-serif; font-weight:400;
+  font-size:18px; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  min-height:100dvh;
+}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif; font-weight:600; line-height:1.14; letter-spacing:.2px}
+a{color:inherit; text-decoration:none}
+.brain{background:var(--brain);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:inherit}
+.fire{background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent}
+::selection{background:var(--violet-deep);color:#fff}
+
+/* ambient background */
+.bg{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(110% 70% at 18% 0%, rgba(147,51,234,.16), transparent 55%),
+    radial-gradient(100% 80% at 85% 30%, rgba(124,58,237,.10), transparent 60%),
+    radial-gradient(120% 90% at 50% 105%, rgba(168,85,247,.13), transparent 60%),
+    linear-gradient(180deg,#0A0812,#0d0a16 60%,#080610);
+}
+.bg::after{content:""; position:absolute; inset:0; opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* top bar */
+.topbar{position:fixed; top:0; left:0; right:0; z-index:55;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:16px clamp(18px,4vw,34px);
+  background:linear-gradient(180deg,rgba(10,8,18,.94),rgba(10,8,18,0));
+}
+.brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:15px; letter-spacing:.01em}
+.brand .flame{width:22px;height:22px;flex:none;background:var(--burn);border-radius:50% 50% 50% 0;transform:rotate(45deg);box-shadow:0 0 18px rgba(27,140,242,.55)}
+.brand span.co{color:var(--ash);font-weight:400}
+.toppill{font-size:.8rem; font-weight:600; letter-spacing:.06em; color:#fff;
+  padding:11px 20px; border-radius:50px; background:var(--brain-btn);
+  box-shadow:0 0 22px rgba(168,85,247,.35); transition:.25s; white-space:nowrap}
+.toppill:hover{transform:translateY(-1px); box-shadow:0 0 30px rgba(168,85,247,.55)}
+
+main{position:relative; z-index:5}
+section{padding:clamp(64px,9vw,110px) clamp(20px,5vw,40px)}
+.wrap{max-width:var(--max); margin:0 auto}
+.eyebrow{font-size:.78rem; letter-spacing:.3em; text-transform:uppercase; color:var(--violet-soft); font-weight:600; margin-bottom:18px; display:flex; align-items:center; gap:12px}
+.eyebrow::before{content:""; width:26px; height:1px; background:var(--violet); flex:none}
+h2{font-size:clamp(1.9rem,4.6vw,2.9rem); margin-bottom:16px}
+.lead{color:var(--mist); font-size:1.12rem; max-width:62ch}
+
+/* hero */
+.hero{padding-top:clamp(120px,16vw,170px); text-align:center}
+.hero .eyebrow{justify-content:center}
+.hero .eyebrow::after{content:""; width:26px; height:1px; background:var(--violet); flex:none}
+.hero h1{font-size:clamp(2.6rem,7vw,4.6rem); line-height:1.06; margin-bottom:22px}
+.hero .lead{margin:0 auto 34px; font-size:clamp(1.08rem,2.4vw,1.28rem)}
+.btn{display:inline-block; font-family:'Inter'; font-weight:700; font-size:1.05rem; letter-spacing:.03em;
+  color:#fff; background:var(--brain-btn); border:none; cursor:pointer;
+  padding:19px 42px; border-radius:60px; box-shadow:0 8px 40px rgba(147,51,234,.42);
+  transition:transform .25s var(--ease), box-shadow .25s}
+.btn:hover{transform:translateY(-2px); box-shadow:0 12px 52px rgba(168,85,247,.6)}
+.btn .tag{font-weight:400; opacity:.85}
+.anchorline{margin-top:22px; color:var(--mist); font-size:1.02rem}
+.anchorline s{color:var(--ash)}
+.anchorline b{color:var(--violet-pale); font-weight:600}
+.dateline{margin-top:14px; color:var(--violet-soft); font-size:.95rem; letter-spacing:.08em; text-transform:uppercase; font-weight:600; display:none}
+.chips{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:40px}
+.chip{font-size:.86rem; font-weight:600; letter-spacing:.04em; color:var(--violet-pale);
+  border:1px solid rgba(168,85,247,.35); background:rgba(147,51,234,.10);
+  padding:10px 18px; border-radius:50px}
+
+/* chat mockup */
+.chatwrap{max-width:640px; margin:0 auto}
+.chatcard{background:linear-gradient(180deg,var(--carbon),var(--carbon-2));
+  border:1px solid var(--line); border-radius:22px; overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.5), 0 0 60px rgba(124,58,237,.12)}
+.chathead{display:flex; align-items:center; gap:12px; padding:16px 20px; border-bottom:1px solid var(--line); background:rgba(255,255,255,.02)}
+.chathead .dot{width:34px;height:34px;border-radius:50%;background:var(--brain-btn);display:flex;align-items:center;justify-content:center;font-size:16px;flex:none;box-shadow:0 0 16px rgba(168,85,247,.5)}
+.chathead b{font-size:.98rem}
+.chathead span{display:block; font-size:.78rem; color:var(--ash); font-weight:400}
+.chatbody{padding:22px 20px 26px; display:flex; flex-direction:column; gap:14px}
+.msg{max-width:86%; padding:14px 18px; border-radius:18px; font-size:1rem; line-height:1.55}
+.msg.you{align-self:flex-end; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.08); border-bottom-right-radius:6px}
+.msg.ai{align-self:flex-start; background:rgba(147,51,234,.14); border:1px solid rgba(168,85,247,.3); border-bottom-left-radius:6px; color:var(--violet-pale)}
+.msg.ai b{color:#fff}
+.chatnote{text-align:center; color:var(--mist); font-size:.95rem; margin-top:22px}
+
+/* cards */
+.cards3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:44px}
+.card{background:linear-gradient(180deg,var(--carbon),rgba(20,16,32,.6));
+  border:1px solid var(--line); border-radius:var(--r); padding:30px 26px;
+  transition:border-color .3s, transform .3s var(--ease)}
+.card:hover{border-color:rgba(168,85,247,.45); transform:translateY(-4px)}
+.card .ic{font-size:1.6rem; margin-bottom:14px}
+.card h3{font-size:1.32rem; margin-bottom:10px}
+.card p{color:var(--mist); font-size:1rem}
+
+/* field notes */
+.notes{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:40px}
+.note{background:rgba(147,51,234,.07); border:1px solid rgba(168,85,247,.22); border-radius:var(--r); padding:24px 24px}
+.note b{display:block; font-family:'Playfair Display'; font-size:1.18rem; font-weight:600; margin-bottom:8px; color:var(--violet-pale)}
+.note p{color:var(--mist); font-size:.98rem}
+.notesrc{margin-top:20px; color:var(--ash); font-size:.9rem; text-align:center}
+
+/* the hour */
+.parts{margin-top:44px; display:flex; flex-direction:column; gap:14px}
+.part{display:flex; gap:22px; align-items:flex-start; background:var(--carbon);
+  border:1px solid var(--line); border-radius:var(--r); padding:26px 28px}
+.pnum{font-family:'Playfair Display'; font-size:1.9rem; font-weight:700; line-height:1;
+  background:var(--brain);-webkit-background-clip:text;background-clip:text;color:transparent; flex:none; width:44px}
+.part h3{font-size:1.24rem; margin-bottom:6px}
+.part p{color:var(--mist); font-size:1rem}
+
+/* pros & cons */
+.pc{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:44px}
+.pcol{border-radius:var(--r); padding:32px 28px; border:1px solid var(--line)}
+.pcol.pros{background:linear-gradient(180deg,rgba(147,51,234,.12),rgba(147,51,234,.04)); border-color:rgba(168,85,247,.4)}
+.pcol.cons{background:var(--carbon)}
+.pcol h3{font-size:1.4rem; margin-bottom:20px; display:flex; align-items:center; gap:10px}
+.pcol ul{list-style:none; display:flex; flex-direction:column; gap:16px}
+.pcol li{display:flex; gap:12px; color:var(--mist); font-size:1rem; line-height:1.55}
+.pcol li b{color:var(--ivory); font-weight:600}
+.pcol .mk{flex:none; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.72rem; font-weight:700; margin-top:2px}
+.pros .mk{background:rgba(168,85,247,.25); color:var(--violet-pale)}
+.cons .mk{background:rgba(255,255,255,.08); color:var(--ash)}
+.pcnote{margin-top:22px; text-align:center; color:var(--mist); font-size:1rem}
+
+/* offer */
+.offerbox{background:linear-gradient(180deg,#171126,#120d1e);
+  border:1px solid rgba(168,85,247,.45); border-radius:24px;
+  padding:clamp(34px,6vw,56px); text-align:center;
+  box-shadow:0 40px 110px rgba(0,0,0,.55), 0 0 90px rgba(124,58,237,.16)}
+.offerbox h2{margin-bottom:8px}
+.offersub{color:var(--mist); font-size:1.05rem; margin-bottom:30px}
+.anchorbig{max-width:56ch; margin:0 auto 34px; color:var(--mist); font-size:1.1rem}
+.anchorbig s{color:var(--ash)}
+.anchorbig b{color:var(--violet-pale)}
+.price{font-family:'Playfair Display'; font-size:clamp(3.4rem,9vw,5rem); font-weight:700; line-height:1;
+  background:var(--brain);-webkit-background-clip:text;background-clip:text;color:transparent}
+.price small{font-size:.35em; letter-spacing:.1em; font-family:'Inter'; font-weight:600}
+.inc{list-style:none; max-width:460px; margin:30px auto 34px; text-align:left; display:flex; flex-direction:column; gap:13px}
+.inc li{display:flex; gap:12px; color:var(--ivory); font-size:1.02rem}
+.inc .mk{flex:none; width:22px; height:22px; border-radius:50%; background:rgba(168,85,247,.25); color:var(--violet-pale);
+  display:flex; align-items:center; justify-content:center; font-size:.72rem; font-weight:700; margin-top:3px}
+.paysafe{margin-top:16px; color:var(--ash); font-size:.9rem}
+.seatnote{margin-top:8px; color:var(--mist); font-size:.95rem}
+
+/* faq */
+.faq{max-width:720px; margin:40px auto 0}
+.qa{border-bottom:1px solid var(--line)}
+.qa button{width:100%; background:none; border:none; color:var(--ivory); font-family:'Inter'; font-size:1.08rem; font-weight:600;
+  text-align:left; padding:22px 40px 22px 4px; cursor:pointer; position:relative}
+.qa button::after{content:"+"; position:absolute; right:8px; top:50%; transform:translateY(-50%); font-size:1.4rem; font-weight:300; color:var(--violet-soft); transition:transform .3s}
+.qa.open button::after{transform:translateY(-50%) rotate(45deg)}
+.qa .a{max-height:0; overflow:hidden; transition:max-height .4s var(--ease)}
+.qa .a p{color:var(--mist); font-size:1rem; padding:0 4px 24px; max-width:60ch}
+
+/* close */
+.close{text-align:center}
+.close h2{font-size:clamp(2rem,5.4vw,3.2rem)}
+.close .lead{margin:0 auto 36px}
+.contactline{margin-top:26px; color:var(--ash); font-size:.95rem}
+.contactline a{color:var(--violet-soft)}
+
+footer{position:relative; z-index:5; text-align:center; padding:8px 20px 44px; color:#605a6c; font-size:.78rem; letter-spacing:.03em; line-height:1.8}
+footer .disc{max-width:640px; margin:14px auto 0; font-size:.72rem; color:#4d4859}
+
+/* reveal */
+.rv{opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease)}
+.rv.in{opacity:1; transform:none}
+
+@media(max-width:820px){
+  .cards3{grid-template-columns:1fr}
+  .pc{grid-template-columns:1fr}
+  .notes{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  body{font-size:17px}
+  .toppill{display:none}
+  .part{flex-direction:column; gap:10px}
+  .btn{width:100%; padding:19px 20px}
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+
+<div class="topbar">
+  <a class="brand" href="/"><span class="flame"></span>Social Fire&nbsp;<span class="co">Solutions</span></a>
+  <a class="toppill js-pay" href="#offer">Save my seat — $27</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow rv">Live webinar · One hour · $27</div>
+    <h1 class="rv">Set Up Your <span class="brain">AI&nbsp;Brain</span><br/>In One Live Hour</h1>
+    <p class="lead rv">An <span class="brain">AI Brain</span> is an AI that knows you — your work, your voice, your goals — remembers everything, and works while you sleep. In one live hour, we set yours up together. Built for creatives, business owners, and people ready to finally start one.</p>
+    <div class="rv">
+      <a class="btn js-pay" href="#offer">Save my seat — $27</a>
+      <p class="dateline js-date"></p>
+      <p class="anchorline">Businesses pay us <s>$5,000</s> to set this up in a private live training — one business, one session.<br/><b>Today, you set up the same thing live for $27.</b></p>
+    </div>
+    <div class="chips rv">
+      <span class="chip">🔴 1 Hour, Live</span>
+      <span class="chip">🗝️ Key Setup Tricks</span>
+      <span class="chip">📘 Setup Guide Included</span>
+      <span class="chip">🤝 Live Help While You Build</span>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT MOCKUP -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv" style="justify-content:center">What mornings look like after</div>
+    <div class="chatwrap rv">
+      <div class="chatcard">
+        <div class="chathead">
+          <span class="dot">🧠</span>
+          <div><b>Your AI Brain</b><span>7:04 AM</span></div>
+        </div>
+        <div class="chatbody">
+          <div class="msg you">Morning. What happened while I slept?</div>
+          <div class="msg ai">Morning ☕ Three things, ready for your approval:<br/><br/>
+            <b>1.</b> Two new inquiries came in overnight — I drafted a warm reply to each in your voice.<br/>
+            <b>2.</b> Tomorrow's post is written, based on the idea you mentioned Tuesday.<br/>
+            <b>3.</b> The proposal you were dreading? First draft's done.<br/><br/>
+            Want the post first?</div>
+        </div>
+      </div>
+      <p class="chatnote">Nothing goes out without your approval. It drafts — <b>you</b> decide.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv">Who this is for</div>
+    <h2 class="rv">Three kinds of people leave with an <span class="brain">AI&nbsp;Brain</span></h2>
+    <div class="cards3">
+      <div class="card rv">
+        <div class="ic">🎨</div>
+        <h3>The Creative</h3>
+        <p>You make things. Your <span class="brain">AI Brain</span> holds every idea, every draft, every version — and helps you finish what you start, in your style, not the internet's.</p>
+      </div>
+      <div class="card rv">
+        <div class="ic">🏛️</div>
+        <h3>The Business Owner</h3>
+        <p>You're the bottleneck for everything — replies, follow-ups, proposals, posts. Your <span class="brain">AI Brain</span> drafts the busywork so you just review, approve, and get your day back.</p>
+      </div>
+      <div class="card rv">
+        <div class="ic">🚀</div>
+        <h3>The Starter</h3>
+        <p>You've been meaning to start something for years. An <span class="brain">AI Brain</span> is the unfair head start: a partner that remembers the plan and moves it forward with you every day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT IS -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv">What it actually is</div>
+    <h2 class="rv">An <span class="brain">AI Brain</span> is not a chatbot.</h2>
+    <p class="lead rv">A chatbot forgets you the moment you close the tab. You re-introduce yourself, re-explain your business, re-paste your notes — every single time.</p>
+    <p class="lead rv" style="margin-top:18px">An <span class="brain">AI Brain</span> is set up once, properly: it keeps a memory of who you are and what you're building, it learns every time you work with it, and it gets a little sharper every week. Plain English the whole way — no code, no tech skills.</p>
+  </div>
+</section>
+
+<!-- FIELD NOTES -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv">Receipts, not promises</div>
+    <h2 class="rv">What our own <span class="brain">AI Brain</span> has done</h2>
+    <div class="notes">
+      <div class="note rv"><b>Built a client's website in a day</b><p>Full site — copy, design, photos placed — drafted and live in a single working day.</p></div>
+      <div class="note rv"><b>Greets new leads in minutes</b><p>Around the clock. A lead comes in at 11 PM, it's welcomed by 11:05 — every single time.</p></div>
+      <div class="note rv"><b>Builds dashboards overnight</b><p>Ask for a reporting dashboard at dinner, review it with coffee.</p></div>
+      <div class="note rv"><b>Writes in our voice</b><p>Posts, emails, and proposals drafted the way we'd say it — not generic AI-speak.</p></div>
+    </div>
+    <p class="notesrc">All four are from our own books at Social Fire Solutions — this is the system we run every day.</p>
+  </div>
+</section>
+
+<!-- THE HOUR -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv">The live hour</div>
+    <h2 class="rv">Sixty minutes, four moves</h2>
+    <div class="parts">
+      <div class="part rv"><div class="pnum">1</div><div><h3>The idea — and the key setup tricks</h3><p>Why AI keeps disappointing you, and the setup tricks that change it: the few decisions at the start that make an <span class="brain">AI Brain</span> feel like a partner instead of a search box.</p></div></div>
+      <div class="part rv"><div class="pnum">2</div><div><h3>Set it up — live, together</h3><p>On screen, click by click, with the setup guide in your hands. You build along with us, and live help is in the room the whole way.</p></div></div>
+      <div class="part rv"><div class="pnum">3</div><div><h3>Load yourself in</h3><p>Your work, your voice, your goals — this is the step almost everyone skips, and it's the difference between a toy and a <span class="brain">brain</span>.</p></div></div>
+      <div class="part rv"><div class="pnum">4</div><div><h3>Put it to work + live Q&amp;A</h3><p>First real tasks before we log off — then open questions on <em>your</em> setup, your business, your ideas.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROS & CONS -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv">The honest version</div>
+    <h2 class="rv">Pros and cons of having an <span class="brain">AI&nbsp;Brain</span></h2>
+    <p class="lead rv">We sell this thing, so of course we love it. But you should walk in with clear eyes — here's both sides.</p>
+    <div class="pc">
+      <div class="pcol pros rv">
+        <h3>The pros</h3>
+        <ul>
+          <li><span class="mk">✓</span><span><b>It never forgets.</b> Your projects, your preferences, your voice — you explain yourself once, ever.</span></li>
+          <li><span class="mk">✓</span><span><b>It works while you sleep.</b> Drafts, research, and follow-ups waiting with your morning coffee.</span></li>
+          <li><span class="mk">✓</span><span><b>It compounds.</b> Every week you use it, it knows you better and does more. Most tools depreciate — this one appreciates.</span></li>
+          <li><span class="mk">✓</span><span><b>It multiplies you.</b> One person with an <span class="brain">AI Brain</span> outputs like a small team — without hiring one.</span></li>
+          <li><span class="mk">✓</span><span><b>You stay in control.</b> It drafts; you approve. Nothing leaves without your say-so.</span></li>
+        </ul>
+      </div>
+      <div class="pcol cons rv">
+        <h3>The cons</h3>
+        <ul>
+          <li><span class="mk">–</span><span><b>It's not magic.</b> A proper setup takes real effort — that's exactly why the webinar exists: one focused hour instead of weeks of fumbling.</span></li>
+          <li><span class="mk">–</span><span><b>It has a running cost.</b> The AI itself is a subscription (roughly a-couple-of-coffees-a-month territory). We'll show you exactly what to get and what to skip.</span></li>
+          <li><span class="mk">–</span><span><b>It's only as good as what you feed it.</b> Load it with nothing and it knows nothing. Part 3 of the hour fixes this.</span></li>
+          <li><span class="mk">–</span><span><b>There's a first-week learning curve.</b> Delegating is a habit. It feels strange for a few days — then it feels like breathing.</span></li>
+          <li><span class="mk">–</span><span><b>There's no going back.</b> Once you've worked with a brain that knows you, a blank chatbot feels broken. You've been warned.</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="pcnote">If the cons scare you off, no hard feelings. If they sound like fair trades — <b>we'll see you in the room.</b></p>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section id="offer">
+  <div class="wrap">
+    <div class="offerbox rv">
+      <div class="eyebrow" style="justify-content:center">Your seat</div>
+      <h2>The <span class="brain">AI Brain</span> Setup — Live</h2>
+      <p class="offersub js-date2">One hour, live online. You build yours in the room.</p>
+      <p class="anchorbig">This is the same setup businesses pay us <s>$5,000</s> for in a private live training — one business, one session, done together. <b>The webinar is that session, for the price of lunch.</b></p>
+      <div class="price">$27<small> USD</small></div>
+      <ul class="inc">
+        <li><span class="mk">✓</span><span><b>1-hour live webinar</b> — we set up your <span class="brain">AI Brain</span> together, on screen</span></li>
+        <li><span class="mk">✓</span><span><b>The key setup tricks</b> — the decisions that make it a partner, not a toy</span></li>
+        <li><span class="mk">✓</span><span><b>The step-by-step setup guide</b> — yours to keep, forever</span></li>
+        <li><span class="mk">✓</span><span><b>Live help while you build</b> — stuck for ten seconds, not ten days</span></li>
+        <li><span class="mk">✓</span><span><b>Live Q&amp;A</b> — bring your business, your craft, your idea</span></li>
+      </ul>
+      <a class="btn js-paylink" href="#">Save my seat — $27</a>
+      <p class="paysafe">Secure checkout · takes under a minute</p>
+      <p class="seatnote">Seats are capped so the live help stays personal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv" style="justify-content:center">Quick answers</div>
+    <h2 class="rv" style="text-align:center">Questions people ask</h2>
+    <div class="faq rv">
+      <div class="qa"><button>Do I need to be technical?</button><div class="a"><p>No. If you can type a message, you can build this. Everything is plain English — no code, no jargon, and live help in the room if you get stuck.</p></div></div>
+      <div class="qa"><button>What do I need?</button><div class="a"><p>A computer and one focused hour. We'll point you to everything else — including exactly which AI subscription to get — during the session.</p></div></div>
+      <div class="qa"><button>Mac or Windows?</button><div class="a"><p>Both work. The setup guide covers each.</p></div></div>
+      <div class="qa"><button>I'm a creative, not a "business person." Is this for me?</button><div class="a"><p>Especially you. The brain molds to whatever you feed it — a novel, a brand, a portfolio, a business plan. Creatives are half the reason we run this.</p></div></div>
+      <div class="qa"><button>Is my data safe?</button><div class="a"><p>You decide what it knows — you load it in yourself, and nothing gets sent anywhere without your approval. We cover the safety settings during setup.</p></div></div>
+      <div class="qa"><button>What if I can't make it live?</button><div class="a"><p>The live hour is the product — that's where the setup and the help happen. The setup guide is yours to keep either way, so you can build at your own pace if life gets in the way.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close">
+  <div class="wrap">
+    <div class="eyebrow rv" style="justify-content:center">One hour. One decision.</div>
+    <h2 class="rv">The single best thing you can do<br/>for yourself in <span class="brain">2026</span></h2>
+    <p class="lead rv">A year from now you'll be a year older either way. The only question is whether there's an <span class="brain">AI Brain</span> next to you that's spent that year learning how you work — drafting your mornings, holding your ideas, moving your thing forward. One hour. Twenty-seven dollars. Go.</p>
+    <div class="rv">
+      <a class="btn js-pay" href="#offer">Save my seat — $27</a>
+      <p class="contactline">Questions? <a href="mailto:cameron@socialfire.solutions">cameron@socialfire.solutions</a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Spread like fire. · © 2026 Social Fire Solutions
+  <div class="disc">This site is not a part of the Facebook or Meta website and is not endorsed by Meta Platforms, Inc. in any way. Results described are from our own work at Social Fire Solutions; what you build depends on how you use what you learn.</div>
+</footer>
+
+<script>
+(function(){
+  // ── CONFIG — paste the Commas payment link + webinar date here ──
+  var PAY = {
+    LINK: '',                     // e.g. 'https://pay.trycommas.com/xxxxx'
+    DATE: ''                      // e.g. 'Tuesday, August 26 · 7:00 PM ET' (leave '' to hide)
+  };
+
+  // wire the checkout button
+  var payBtn = document.querySelector('.js-paylink');
+  if (PAY.LINK) payBtn.href = PAY.LINK;
+  payBtn.addEventListener('click', function(){
+    if (window.fbq) fbq('track', 'InitiateCheckout', {content_name:'AI Brain Webinar', value:27, currency:'USD'});
+  });
+
+  // date lines
+  if (PAY.DATE){
+    var d1 = document.querySelector('.js-date');
+    d1.textContent = PAY.DATE; d1.style.display = 'block';
+    document.querySelector('.js-date2').textContent = PAY.DATE + ' · Live online. You build yours in the room.';
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.qa button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var qa = btn.parentElement, a = qa.querySelector('.a'), open = qa.classList.contains('open');
+      document.querySelectorAll('.qa.open').forEach(function(o){ o.classList.remove('open'); o.querySelector('.a').style.maxHeight = 0; });
+      if (!open){ qa.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    });
+  });
+
+  // reveal on scroll
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
