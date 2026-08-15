@@ -113,6 +113,41 @@ h2{font-size:clamp(1.9rem,4.6vw,2.9rem); margin-bottom:16px}
   border:1px solid rgba(168,85,247,.35); background:rgba(147,51,234,.10);
   padding:10px 18px; border-radius:50px}
 
+/* imagery */
+.imgframe{border-radius:20px; overflow:hidden; border:1px solid rgba(168,85,247,.35);
+  box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 70px rgba(124,58,237,.18); position:relative}
+.imgframe img{display:block; width:100%; height:100%; object-fit:cover}
+.imgframe::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,8,18,.18),transparent 30%,transparent 72%,rgba(10,8,18,.42))}
+.herocrystal{max-width:840px; margin:60px auto 0; aspect-ratio:16/9}
+.offerimg{max-width:560px; margin:0 auto 34px; aspect-ratio:16/10}
+.offerimg img{object-position:center 42%}
+.closeimg{max-width:760px; margin:0 auto 48px; aspect-ratio:16/9}
+.closeimg img{object-position:center 45%}
+.imgcap{margin-top:16px; text-align:center; color:var(--mist); font-size:.95rem; font-style:italic}
+
+/* blue brain visual */
+.whatgrid{display:grid; grid-template-columns:1.05fr 1fr; gap:clamp(36px,6vw,64px); align-items:center; margin-top:8px}
+.brain-visual{position:relative; display:grid; place-items:center}
+.brain-visual svg{width:100%; max-width:520px; height:auto; display:block}
+.brain-visual .rings circle{fill:none; stroke:rgba(244,241,234,.08); stroke-width:1; stroke-dasharray:2 7}
+.brain-visual .lines path{stroke:rgba(244,241,234,.10); stroke-width:1.2; fill:none}
+.brain-visual .sparks path{stroke:url(#burnGradBlue); stroke-width:1.8; fill:none; stroke-linecap:round;
+  stroke-dasharray:12 320; stroke-dashoffset:332; animation:spark 3.4s linear infinite}
+.brain-visual .sparks path:nth-child(2){animation-delay:.6s}
+.brain-visual .sparks path:nth-child(3){animation-delay:1.1s}
+.brain-visual .sparks path:nth-child(4){animation-delay:1.7s}
+.brain-visual .sparks path:nth-child(5){animation-delay:2.2s}
+.brain-visual .sparks path:nth-child(6){animation-delay:2.8s}
+@keyframes spark{to{stroke-dashoffset:0}}
+.brain-visual .nodes circle.halo{fill:rgba(27,140,242,.16)}
+.brain-visual .nodes circle.pt{fill:#1B8CF2}
+.brain-visual .nodes text{fill:#B9B5C4; font-family:'Inter',sans-serif; font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; font-weight:600}
+.brain-core{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:14px; pointer-events:none}
+.brain-core .flame{width:64px; height:64px; background:url('/media/sfs-flame-blue.png') center/contain no-repeat; animation:coreglow 2.6s ease-in-out infinite}
+.brain-core .corelbl{font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--ivory); font-weight:600; text-shadow:0 2px 12px rgba(10,8,18,.9); white-space:nowrap}
+@keyframes coreglow{0%,100%{filter:drop-shadow(0 0 14px rgba(27,140,242,.75))}50%{filter:drop-shadow(0 0 34px rgba(127,224,255,.95))}}
+
 /* chat mockup */
 .chatwrap{max-width:640px; margin:0 auto}
 .chatcard{background:linear-gradient(180deg,var(--carbon),var(--carbon-2));
@@ -128,6 +163,12 @@ h2{font-size:clamp(1.9rem,4.6vw,2.9rem); margin-bottom:16px}
 .msg.ai{align-self:flex-start; background:rgba(147,51,234,.14); border:1px solid rgba(168,85,247,.3); border-bottom-left-radius:6px; color:var(--violet-pale)}
 .msg.ai b{color:#fff}
 .chatnote{text-align:center; color:var(--mist); font-size:.95rem; margin-top:22px}
+
+/* pull quote */
+.quoteband{text-align:center; padding-top:clamp(30px,4vw,50px); padding-bottom:clamp(30px,4vw,50px)}
+.quoteband .q{font-family:'Playfair Display',Georgia,serif; font-style:italic; font-weight:600;
+  font-size:clamp(1.7rem,4.4vw,2.7rem); line-height:1.25; max-width:22ch; margin:0 auto}
+.quoteband .sub{color:var(--mist); font-size:1.08rem; margin-top:20px; max-width:52ch; margin-left:auto; margin-right:auto}
 
 /* cards */
 .cards3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:44px}
@@ -166,7 +207,7 @@ h2{font-size:clamp(1.9rem,4.6vw,2.9rem); margin-bottom:16px}
 .pcol li b{color:var(--ivory); font-weight:600}
 .pcol .mk{flex:none; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.72rem; font-weight:700; margin-top:2px}
 .pros .mk{background:rgba(168,85,247,.25); color:var(--violet-pale)}
-.cons .mk{background:rgba(255,255,255,.08); color:var(--ash)}
+.cons .mk{background:rgba(192,71,58,.18); color:#E8907F}
 .pcnote{margin-top:22px; text-align:center; color:var(--mist); font-size:1rem}
 
 /* offer */
@@ -253,6 +294,9 @@ footer .disc{max-width:640px; margin:14px auto 0; font-size:.72rem; color:#4d485
       <span class="chip">📘 Setup Guide Included</span>
       <span class="chip">🤝 Live Help While You Build</span>
     </div>
+    <div class="herocrystal imgframe rv">
+      <img src="/media/the-purple-crystal.webp" alt="The AI Brain — a glowing amethyst discovered in jungle ruins" fetchpriority="high"/>
+    </div>
   </div>
 </section>
 
@@ -305,13 +349,71 @@ footer .disc{max-width:640px; margin:14px auto 0; font-size:.72rem; color:#4d485
   </div>
 </section>
 
+<!-- PULL QUOTE -->
+<section class="quoteband">
+  <div class="wrap">
+    <p class="q rv">"What makes you unique is your <span class="brain">brain</span> — not your idea."</p>
+    <p class="sub rv">Ideas are everywhere. A brain that thinks like you is one of one. That's the thing worth building around — and now you can.</p>
+  </div>
+</section>
+
 <!-- WHAT IT IS -->
 <section>
   <div class="wrap">
     <div class="eyebrow rv">What it actually is</div>
     <h2 class="rv">An <span class="brain">AI Brain</span> is not a chatbot.</h2>
-    <p class="lead rv">A chatbot forgets you the moment you close the tab. You re-introduce yourself, re-explain your business, re-paste your notes — every single time.</p>
-    <p class="lead rv" style="margin-top:18px">An <span class="brain">AI Brain</span> is set up once, properly: it keeps a memory of who you are and what you're building, it learns every time you work with it, and it gets a little sharper every week. Plain English the whole way — no code, no tech skills.</p>
+    <div class="whatgrid">
+      <div>
+        <p class="lead rv">A chatbot forgets you the moment you close the tab. You re-introduce yourself, re-explain your business, re-paste your notes — every single time.</p>
+        <p class="lead rv" style="margin-top:18px">An <span class="brain">AI Brain</span> is set up once, properly: it keeps a memory of who you are and what you're building, it learns every time you work with it, and it gets a little sharper every week. Plain English the whole way — no code, no tech skills.</p>
+      </div>
+      <div class="brain-visual rv" aria-hidden="true">
+        <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="burnGradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#7FE0FF"/>
+              <stop offset="50%" stop-color="#1B8CF2"/>
+              <stop offset="100%" stop-color="#1E5AC8"/>
+            </linearGradient>
+          </defs>
+          <g class="rings">
+            <circle cx="260" cy="210" r="95"/>
+            <circle cx="260" cy="210" r="160"/>
+          </g>
+          <g class="lines">
+            <path d="M260 210 Q265 130 260 60"/>
+            <path d="M260 210 Q335 165 405 140"/>
+            <path d="M260 210 Q330 265 390 300"/>
+            <path d="M260 210 Q255 290 260 360"/>
+            <path d="M260 210 Q185 265 115 300"/>
+            <path d="M260 210 Q190 165 130 140"/>
+          </g>
+          <g class="sparks">
+            <path d="M260 210 Q265 130 260 60"/>
+            <path d="M260 210 Q335 165 405 140"/>
+            <path d="M260 210 Q330 265 390 300"/>
+            <path d="M260 210 Q255 290 260 360"/>
+            <path d="M260 210 Q185 265 115 300"/>
+            <path d="M260 210 Q190 165 130 140"/>
+          </g>
+          <g class="nodes">
+            <circle class="halo" cx="260" cy="60" r="11"/><circle class="pt" cx="260" cy="60" r="5"/>
+            <circle class="halo" cx="405" cy="140" r="11"/><circle class="pt" cx="405" cy="140" r="5"/>
+            <circle class="halo" cx="390" cy="300" r="11"/><circle class="pt" cx="390" cy="300" r="5"/>
+            <circle class="halo" cx="260" cy="360" r="11"/><circle class="pt" cx="260" cy="360" r="5"/>
+            <circle class="halo" cx="115" cy="300" r="11"/><circle class="pt" cx="115" cy="300" r="5"/>
+            <circle class="halo" cx="130" cy="140" r="11"/><circle class="pt" cx="130" cy="140" r="5"/>
+            <text x="260" y="40" text-anchor="middle">Your ideas</text>
+            <text x="422" y="144" text-anchor="start">Content</text>
+            <text x="406" y="304" text-anchor="start">Leads</text>
+            <text x="260" y="388" text-anchor="middle">Follow-ups</text>
+            <text x="99" y="304" text-anchor="end">Your voice</text>
+            <text x="114" y="144" text-anchor="end">Your plan</text>
+          </g>
+        </svg>
+        <div class="brain-core"><span class="flame"></span><span class="corelbl">Your AI Brain</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -348,11 +450,11 @@ footer .disc{max-width:640px; margin:14px auto 0; font-size:.72rem; color:#4d485
 <section>
   <div class="wrap">
     <div class="eyebrow rv">The honest version</div>
-    <h2 class="rv">Pros and cons of having an <span class="brain">AI&nbsp;Brain</span></h2>
-    <p class="lead rv">We sell this thing, so of course we love it. But you should walk in with clear eyes — here's both sides.</p>
+    <h2 class="rv">The pros of an <span class="brain">AI&nbsp;Brain</span> — and the cons of going without one in 2026</h2>
+    <p class="lead rv">We sell this thing, so of course we love it. So here's the real math instead: what you get with one, and what it quietly costs to keep working without one.</p>
     <div class="pc">
       <div class="pcol pros rv">
-        <h3>The pros</h3>
+        <h3>Having one</h3>
         <ul>
           <li><span class="mk">✓</span><span><b>It never forgets.</b> Your projects, your preferences, your voice — you explain yourself once, ever.</span></li>
           <li><span class="mk">✓</span><span><b>It works while you sleep.</b> Drafts, research, and follow-ups waiting with your morning coffee.</span></li>
@@ -362,17 +464,17 @@ footer .disc{max-width:640px; margin:14px auto 0; font-size:.72rem; color:#4d485
         </ul>
       </div>
       <div class="pcol cons rv">
-        <h3>The cons</h3>
+        <h3>Not having one in 2026</h3>
         <ul>
-          <li><span class="mk">–</span><span><b>It's not magic.</b> A proper setup takes real effort — that's exactly why the webinar exists: one focused hour instead of weeks of fumbling.</span></li>
-          <li><span class="mk">–</span><span><b>It has a running cost.</b> The AI itself is a subscription (roughly a-couple-of-coffees-a-month territory). We'll show you exactly what to get and what to skip.</span></li>
-          <li><span class="mk">–</span><span><b>It's only as good as what you feed it.</b> Load it with nothing and it knows nothing. Part 3 of the hour fixes this.</span></li>
-          <li><span class="mk">–</span><span><b>There's a first-week learning curve.</b> Delegating is a habit. It feels strange for a few days — then it feels like breathing.</span></li>
-          <li><span class="mk">–</span><span><b>There's no going back.</b> Once you've worked with a brain that knows you, a blank chatbot feels broken. You've been warned.</span></li>
+          <li><span class="mk">✕</span><span><b>You re-explain yourself forever.</b> Every chat starts at zero — same context, same backstory, typed again for the thousandth time.</span></li>
+          <li><span class="mk">✕</span><span><b>You stay the bottleneck.</b> Every reply, follow-up, and draft waits in line behind you — nights and weekends included.</span></li>
+          <li><span class="mk">✕</span><span><b>Your ideas keep dying in the notes app.</b> No memory holding them, no partner moving them forward while life gets busy.</span></li>
+          <li><span class="mk">✕</span><span><b>Your mornings start from a blank page.</b> Meanwhile, someone in your lane wakes up to work that's already drafted.</span></li>
+          <li><span class="mk">✕</span><span><b>The gap compounds against you.</b> An <span class="brain">AI Brain</span> gets smarter every week it runs — so every month you wait, catching up costs more.</span></li>
         </ul>
       </div>
     </div>
-    <p class="pcnote">If the cons scare you off, no hard feelings. If they sound like fair trades — <b>we'll see you in the room.</b></p>
+    <p class="pcnote">Staying where you are is free. It just isn't <i>cheap</i>. If you're ready — <b>we'll see you in the room.</b></p>
   </div>
 </section>
 
@@ -384,6 +486,7 @@ footer .disc{max-width:640px; margin:14px auto 0; font-size:.72rem; color:#4d485
       <h2>The <span class="brain">AI Brain</span> Setup — Live</h2>
       <p class="offersub js-date2">One hour, live online. You build yours in the room.</p>
       <p class="anchorbig">This is the same setup businesses pay us <s>$5,000</s> for in a private live training — one business, one session, done together. <b>The webinar is that session, for the price of lunch.</b></p>
+      <div class="offerimg imgframe"><img src="/media/webinar-crystal-hand.webp" alt="A glowing purple crystal held in an explorer's hand" loading="lazy"/></div>
       <div class="price">$27<small> USD</small></div>
       <ul class="inc">
         <li><span class="mk">✓</span><span><b>1-hour live webinar</b> — we set up your <span class="brain">AI Brain</span> together, on screen</span></li>
@@ -418,6 +521,9 @@ footer .disc{max-width:640px; margin:14px auto 0; font-size:.72rem; color:#4d485
 <!-- CLOSE -->
 <section class="close">
   <div class="wrap">
+    <div class="closeimg imgframe rv">
+      <img src="/media/webinar-crystal-door.webp" alt="Explorers stepping toward a temple doorway glowing purple" loading="lazy"/>
+    </div>
     <div class="eyebrow rv" style="justify-content:center">One hour. One decision.</div>
     <h2 class="rv">The single best thing you can do<br/>for yourself in <span class="brain">2026</span></h2>
     <p class="lead rv">A year from now you'll be a year older either way. The only question is whether there's an <span class="brain">AI Brain</span> next to you that's spent that year learning how you work — drafting your mornings, holding your ideas, moving your thing forward. One hour. Twenty-seven dollars. Go.</p>
@@ -439,7 +545,7 @@ footer .disc{max-width:640px; margin:14px auto 0; font-size:.72rem; color:#4d485
 (function(){
   // ── CONFIG — paste the Commas payment link + webinar date here ──
   var PAY = {
-    LINK: '',                     // e.g. 'https://pay.trycommas.com/xxxxx'
+    LINK: 'https://commas.com/checkout/DEO2B5MtehJ5Zh',
     DATE: ''                      // e.g. 'Tuesday, August 26 · 7:00 PM ET' (leave '' to hide)
   };
 
