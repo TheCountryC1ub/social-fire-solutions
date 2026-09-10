@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P350HNJX4Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P350HNJX4Y');
+</script>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1904534047174026');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {content_name: 'Ad Creative Studio'});
+</script>
+<!-- End Meta Pixel -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ad Creative — Social Fire Solutions</title>
+<link rel="canonical" href="https://socialfire.solutions/creative">
+<link rel="icon" type="image/png" href="/media/favicon.png">
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
+<meta name="description" content="Image and video ads, built for your brand and delivered ready to run. You tell us how many ads you want. We create them. Schedule a call." />
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tell us how many ads you want. We'll make them.">
+<meta property="og:description" content="Image and video ads built for your brand — your real product, crisp copy, platform-ready. Schedule a call with Social Fire Solutions.">
+<meta property="og:url" content="https://socialfire.solutions/creative">
+<meta property="og:image" content="https://socialfire.solutions/creative/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Service","@id":"https://socialfire.solutions/creative#service",
+     "name":"Ad Creative Production","serviceType":"Advertising creative — image and video ads",
+     "provider":{"@type":"Organization","@id":"https://socialfire.solutions/#org","name":"Social Fire Solutions","url":"https://socialfire.solutions"},
+     "areaServed":"US","url":"https://socialfire.solutions/creative",
+     "description":"Image and video ad creative built for your brand and delivered ready to run. Clients choose how many ads they want; Social Fire Solutions concepts, produces and delivers them in platform specs."},
+    {"@type":"WebPage","@id":"https://socialfire.solutions/creative#page","url":"https://socialfire.solutions/creative",
+     "name":"Ad Creative — Social Fire Solutions","isPartOf":{"@id":"https://socialfire.solutions/#website"},
+     "about":{"@id":"https://socialfire.solutions/creative#service"},
+     "primaryImageOfPage":"https://socialfire.solutions/creative/assets/og.jpg"}
+  ]
+}
+</script>
+<style>
+:root{
+  --onyx:#0A0A0B; --carbon:#161618; --carbon-2:#1F1F22;
+  --ember:#1E5AC8; --molten:#1B8CF2; --ignition:#7FE0FF;
+  --ivory:#F4F1EA; --ash:#A3A3A9; --line:#2a2a2e;
+  --burn:linear-gradient(100deg,#7FE0FF,#1B8CF2 50%,#1E5AC8);
+  --wrap:1180px; --r:16px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--onyx); color:var(--ivory);
+  font-family:'Inter',system-ui,sans-serif; font-weight:400; font-size:18px;
+  line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif; font-weight:600; line-height:1.12; letter-spacing:.2px}
+a{color:inherit; text-decoration:none}
+img,video{display:block; max-width:100%}
+.fire{background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent}
+::selection{background:var(--molten);color:#fff}
+
+/* ambient background */
+.bg{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 14% 0%, rgba(27,140,242,.10), transparent 55%),
+    radial-gradient(120% 90% at 86% 100%, rgba(30,90,200,.12), transparent 60%),
+    linear-gradient(180deg,#0A0A0B,#0d0d10 60%,#08080a);
+}
+.bg::after{content:""; position:absolute; inset:0; opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+main,nav,footer{position:relative; z-index:2}
+.wrap{width:min(var(--wrap),100% - 2*clamp(18px,5vw,40px)); margin:0 auto}
+
+/* nav */
+nav{position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:16px clamp(18px,4vw,34px);
+  background:linear-gradient(180deg,rgba(10,10,11,.96),rgba(10,10,11,.82)); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.05)}
+.brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:16px; letter-spacing:.01em}
+.flame{width:26px;height:26px;flex:none;background:url('/media/sfs-flame-blue.png') center/contain no-repeat;filter:drop-shadow(0 0 10px rgba(27,140,242,.6))}
+.brand span.co{color:var(--ash);font-weight:400}
+.navlinks{display:flex; align-items:center; gap:22px}
+.navlinks .home{font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ash); transition:.2s}
+.navlinks .home:hover{color:var(--ignition)}
+
+/* buttons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:.6rem; cursor:pointer; border:1px solid transparent;
+  border-radius:60px; padding:17px 30px; font-family:'Inter'; font-weight:600; font-size:1rem; line-height:1; transition:.28s var(--ease); white-space:nowrap}
+.btn-primary{background:var(--burn); color:#06121f; box-shadow:0 12px 34px -10px rgba(27,140,242,.75)}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 18px 44px -10px rgba(27,140,242,.95)}
+.btn-ghost{border-color:var(--line); color:var(--ivory); background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:var(--molten); color:var(--ignition)}
+.btn-sm{padding:12px 20px; font-size:.86rem}
+.btn-lg{padding:21px 40px; font-size:1.1rem}
+
+/* eyebrow / headings */
+.eyebrow{font-size:.74rem; letter-spacing:.3em; text-transform:uppercase; color:var(--molten); font-weight:600; display:flex; align-items:center; gap:12px; margin-bottom:18px}
+.eyebrow::before{content:""; width:28px; height:1px; background:var(--molten); opacity:.7}
+.sec{padding:clamp(72px,9vw,120px) 0}
+.sec h2{font-size:clamp(2rem,4.6vw,3.2rem); margin-bottom:18px; max-width:20ch}
+.sec h2 em{font-style:italic; color:var(--molten)}
+.lead{color:var(--ash); font-size:clamp(1.05rem,1.6vw,1.25rem); max-width:60ch; line-height:1.6}
+.lead b{color:var(--ivory); font-weight:600}
+.split{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px,5vw,70px); align-items:end}
+
+/* hero */
+.hero{padding:clamp(56px,8vw,96px) 0 clamp(40px,6vw,64px)}
+.hero h1{font-size:clamp(2.6rem,6.4vw,5rem); line-height:1.04; max-width:15ch; margin-bottom:22px; letter-spacing:-.5px}
+.hero h1 em{font-style:italic; font-weight:600; background:var(--burn); -webkit-background-clip:text; background-clip:text; color:transparent}
+.hero .lead{max-width:52ch; margin-bottom:34px}
+.hero .cta-row{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+.hero .note{margin-top:20px; font-size:.9rem; color:var(--ash)}
+.hero .note b{color:var(--ivory)}
+.hero-film{position:relative; margin-top:clamp(36px,5vw,56px); border-radius:var(--r); overflow:hidden; background:#000;
+  box-shadow:0 40px 100px -40px rgba(27,140,242,.55), 0 0 0 1px rgba(255,255,255,.06)}
+.hero-film video{width:100%; aspect-ratio:16/9; object-fit:cover}
+.hero-film .badge{position:absolute; left:16px; top:16px; display:flex; gap:8px; align-items:center;
+  font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; font-weight:600; color:var(--ivory);
+  background:rgba(10,10,11,.65); border:1px solid rgba(255,255,255,.12); padding:8px 12px; border-radius:40px; backdrop-filter:blur(8px)}
+.hero-film .badge i{width:8px;height:8px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 10px #ff3b3b;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.hero-film .sound{position:absolute; right:16px; bottom:16px; cursor:pointer; display:flex; align-items:center; gap:8px;
+  font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; font-weight:600; color:var(--ivory);
+  background:rgba(10,10,11,.7); border:1px solid rgba(255,255,255,.14); padding:10px 16px; border-radius:40px; backdrop-filter:blur(8px); transition:.2s}
+.hero-film .sound:hover{border-color:var(--molten)}
+.hero-film .cap{position:absolute; left:16px; bottom:16px; font-size:.78rem; color:var(--ash); letter-spacing:.04em;
+  background:rgba(10,10,11,.6); padding:8px 12px; border-radius:8px; backdrop-filter:blur(8px)}
+.hero-film .cap b{color:var(--ivory)}
+
+/* platform strip */
+.strip{border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:20px 0; overflow:hidden; background:rgba(255,255,255,.015)}
+.strip .row{display:flex; gap:44px; white-space:nowrap; animation:slide 38s linear infinite; width:max-content}
+.strip .row span{font-size:.82rem; letter-spacing:.24em; text-transform:uppercase; color:var(--ash); display:flex; align-items:center; gap:14px}
+.strip .row span::after{content:"✦"; color:var(--molten); font-size:.7rem}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.strip .row{animation:none} .hero-film .badge i{animation:none}}
+
+/* how it works */
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:44px}
+.step{position:relative; border:1px solid var(--line); border-radius:var(--r); padding:30px 28px 30px; background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)); transition:.3s var(--ease)}
+.step:hover{border-color:rgba(27,140,242,.5); transform:translateY(-3px)}
+.step .n{font-family:'Playfair Display'; font-style:italic; font-size:3rem; line-height:1; background:var(--burn); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:16px}
+.step h3{font-size:1.45rem; margin-bottom:10px}
+.step p{color:var(--ash); font-size:1rem}
+.step p b{color:var(--ivory); font-weight:600}
+.counts{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px}
+.counts span{border:1px solid var(--line); border-radius:50px; padding:10px 18px; font-size:.95rem; color:var(--ivory); background:rgba(255,255,255,.02)}
+.counts span.hi{border-color:var(--molten); color:var(--ignition); background:rgba(27,140,242,.08); font-weight:600}
+
+/* portfolio */
+.client{padding:clamp(56px,7vw,92px) 0; border-top:1px solid var(--line)}
+.client-head{display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:34px; flex-wrap:wrap}
+.client-head h2{font-size:clamp(1.9rem,3.8vw,2.7rem); margin-bottom:8px; max-width:none}
+.client-head .lead{max-width:62ch; font-size:1.05rem}
+.tags{display:flex; gap:8px; flex-wrap:wrap}
+.tags span{font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ash); border:1px solid var(--line); padding:7px 12px; border-radius:40px}
+.gallery{display:grid; gap:14px; align-items:start}
+.gallery .film.vert.span2{grid-row:span 2}
+.gallery .film.vert.span2 video{max-height:none}
+.gallery .film.vert.fit video{aspect-ratio:4/5; object-fit:contain; max-height:none}
+.g-trucks{grid-template-columns:repeat(12,1fr)}
+.g-trucks .tile:nth-child(1){grid-column:span 12}
+.g-trucks .tile:nth-child(n+2){grid-column:span 4}
+.g-life{grid-template-columns:repeat(3,1fr); margin-top:14px}
+.g-cans{grid-template-columns:repeat(5,1fr); margin-top:14px}
+.g-sq{grid-template-columns:repeat(4,1fr)}
+.g-sq3{grid-template-columns:repeat(3,1fr)}
+.tile{position:relative; border-radius:12px; overflow:hidden; background:var(--carbon); cursor:zoom-in; border:1px solid rgba(255,255,255,.05); transition:.35s var(--ease)}
+.tile:hover{transform:translateY(-3px); border-color:rgba(27,140,242,.5); box-shadow:0 24px 50px -30px rgba(27,140,242,.8)}
+.tile img{width:100%; height:auto; object-fit:cover; aspect-ratio:1/1; transition:transform .6s var(--ease)}
+.tile.wide img{aspect-ratio:16/9}
+.tile.tall img{aspect-ratio:4/5}
+.tile.port img{aspect-ratio:4/5}
+.tile:hover img{transform:scale(1.03)}
+.tile .lab{position:absolute; left:12px; bottom:12px; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ivory);
+  background:rgba(10,10,11,.7); border:1px solid rgba(255,255,255,.12); padding:6px 10px; border-radius:30px; backdrop-filter:blur(6px); pointer-events:none; opacity:0; transform:translateY(6px); transition:.3s}
+.tile:hover .lab{opacity:1; transform:none}
+.subhead{display:flex; align-items:center; gap:14px; margin:34px 0 14px; font-size:.74rem; letter-spacing:.26em; text-transform:uppercase; color:var(--ash); font-weight:600}
+.subhead::after{content:""; flex:1; height:1px; background:var(--line)}
+.films{display:grid; grid-template-columns:2fr 1fr; gap:14px; margin-top:14px}
+.film{position:relative; border-radius:12px; overflow:hidden; background:#000; border:1px solid rgba(255,255,255,.06)}
+.film video{width:100%; height:100%; object-fit:cover; aspect-ratio:16/9; background:#000}
+.film.vert video{aspect-ratio:9/16; max-height:640px; margin:0 auto}
+.film .meta{position:absolute; left:14px; top:14px; display:flex; gap:8px; pointer-events:none}
+.film .meta span{font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ivory); background:rgba(10,10,11,.7); border:1px solid rgba(255,255,255,.12); padding:6px 10px; border-radius:30px; backdrop-filter:blur(6px)}
+.rule{display:flex; gap:16px; align-items:flex-start; border:1px solid rgba(27,140,242,.35); background:rgba(27,140,242,.06); border-radius:12px; padding:20px 22px; margin-top:22px; font-size:1rem; color:var(--ash)}
+.rule b{color:var(--ivory)}
+.rule .ico{flex:none; width:34px; height:34px; border-radius:50%; background:var(--burn); display:grid; place-items:center; color:#06121f; font-weight:700}
+
+/* what you get */
+.get{display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(30px,5vw,80px); align-items:start}
+.list{display:grid; gap:12px; margin-top:30px}
+.li{display:flex; gap:16px; align-items:flex-start; border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:rgba(255,255,255,.02)}
+.li .chk{flex:none; width:26px; height:26px; border-radius:50%; background:var(--burn); display:grid; place-items:center}
+.li .chk svg{width:13px; height:13px; stroke:#06121f; stroke-width:3; fill:none}
+.li b{display:block; font-weight:600; font-size:1.06rem}
+.li span{color:var(--ash); font-size:.96rem}
+.why{display:grid; gap:14px; margin-top:30px}
+.why div{border-left:2px solid var(--molten); padding:6px 0 6px 20px}
+.why h3{font-size:1.3rem; margin-bottom:6px}
+.why p{color:var(--ash); font-size:1rem}
+.quote{margin-top:34px; border-radius:var(--r); padding:30px 32px; background:linear-gradient(135deg,rgba(127,224,255,.08),rgba(30,90,200,.10)); border:1px solid rgba(27,140,242,.3)}
+.quote p{font-family:'Playfair Display'; font-style:italic; font-size:clamp(1.3rem,2.2vw,1.7rem); line-height:1.35}
+.quote small{display:block; margin-top:14px; color:var(--ash); font-size:.9rem; letter-spacing:.06em}
+
+/* book */
+.book{padding:clamp(72px,9vw,120px) 0; border-top:1px solid var(--line)}
+.book-card{border-radius:22px; overflow:hidden; border:1px solid rgba(27,140,242,.35); background:linear-gradient(180deg,rgba(27,140,242,.07),rgba(10,10,11,0) 40%), var(--carbon); box-shadow:0 50px 120px -50px rgba(27,140,242,.6)}
+.book-top{padding:clamp(34px,5vw,60px) clamp(22px,5vw,60px) 10px; text-align:center}
+.book-top .flame{width:52px; height:52px; margin:0 auto 22px}
+.book-top h2{max-width:none; margin:0 auto 14px}
+.book-top .lead{margin:0 auto 26px}
+.book-frame{padding:10px clamp(10px,3vw,40px) clamp(24px,4vw,48px); min-height:720px}
+.book-frame iframe{width:100%; min-height:720px; border:0; border-radius:14px; background:#fff}
+.book-alt{text-align:center; padding:0 22px 30px; color:var(--ash); font-size:.95rem}
+.book-alt a{color:var(--ignition); border-bottom:1px solid rgba(127,224,255,.4)}
+
+/* faq */
+.faq{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:34px}
+.faq details{border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.02); padding:0 22px}
+.faq summary{cursor:pointer; list-style:none; padding:20px 0; font-weight:600; font-size:1.06rem; display:flex; justify-content:space-between; gap:16px; align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+"; color:var(--molten); font-size:1.4rem; font-weight:300; transition:.25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--ash); padding:0 0 22px; font-size:1rem}
+
+/* footer */
+footer{border-top:1px solid var(--line); padding:44px 0 120px; color:var(--ash); font-size:.92rem}
+footer .wrap{display:flex; flex-wrap:wrap; gap:18px 34px; align-items:center; justify-content:space-between}
+footer .tag{font-family:'Playfair Display'; font-style:italic; color:var(--ivory)}
+footer a:hover{color:var(--ignition)}
+
+/* sticky cta */
+.sticky{position:fixed; left:0; right:0; bottom:0; z-index:60; padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(10,10,11,0),rgba(10,10,11,.96) 40%); display:none}
+.sticky .btn{width:100%}
+
+/* lightbox */
+.lb{position:fixed; inset:0; z-index:100; background:rgba(5,5,6,.94); display:none; align-items:center; justify-content:center; padding:24px; cursor:zoom-out; backdrop-filter:blur(6px)}
+.lb.on{display:flex}
+.lb img{max-width:min(96vw,1200px); max-height:90vh; border-radius:12px; box-shadow:0 40px 100px rgba(0,0,0,.7); object-fit:contain}
+.lb .x{position:absolute; top:18px; right:22px; color:var(--ivory); font-size:2rem; line-height:1; opacity:.7}
+
+/* reveal */
+.rv{opacity:0; transform:translateY(22px); transition:opacity .7s var(--ease), transform .7s var(--ease)}
+.rv.in{opacity:1; transform:none}
+.no-js .rv{opacity:1; transform:none}
+
+@media (max-width:1000px){
+  .split,.get{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .g-cans{grid-template-columns:repeat(3,1fr)}
+  .g-trucks .tile:nth-child(n+2){grid-column:span 6}
+  .films{grid-template-columns:1fr}
+  .film.vert video{max-height:560px}
+  .faq{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{font-size:17px}
+  .navlinks .home{display:none}
+  nav .brand{white-space:nowrap}
+  nav .brand .co{display:none}
+  .g-sq{grid-template-columns:repeat(2,1fr)}
+  .g-sq3{grid-template-columns:repeat(2,1fr)}
+  .g-cans{grid-template-columns:repeat(2,1fr)}
+  .g-life{grid-template-columns:1fr 1fr}
+  .g-trucks .tile:nth-child(n+2){grid-column:span 12}
+  .sticky{display:block}
+  .hero .cta-row .btn{width:100%}
+  .book-frame{padding:8px 8px 20px}
+  .book-frame iframe{min-height:820px}
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
+<div class="bg"></div>
+
+<nav>
+  <a class="brand" href="/"><span class="flame"></span><b>Social Fire</b>&nbsp;<span class="co">Solutions</span></a>
+  <div class="navlinks">
+    <a href="/" class="home">Home</a>
+    <a href="#book" class="btn btn-primary btn-sm js-cta">Schedule a Call</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">Ad creative · image &amp; video</div>
+    <h1>Tell us how many ads you want. <em>We'll make them.</em></h1>
+    <p class="lead">Scroll-stopping image and video ads, built around <b>your</b> brand and delivered ready to run. You pick the number. We handle the concepts, the copy, the visuals and the final files.</p>
+    <div class="cta-row">
+      <a href="#book" class="btn btn-primary btn-lg js-cta">Schedule a Call</a>
+      <a href="#work" class="btn btn-ghost btn-lg">See the work ↓</a>
+    </div>
+    <p class="note"><b>Five ads or five hundred.</b> One brand or ten. The call is free, and you leave it with a plan and a price.</p>
+
+    <div class="hero-film rv">
+      <video id="heroVid" autoplay muted loop playsinline preload="metadata" poster="/creative/assets/poster-ultra-berry.jpg">
+        <source src="/creative/assets/ultra-berry-20s.mp4" type="video/mp4">
+      </video>
+      <div class="badge"><i></i>Video ad · 20 seconds</div>
+      <div class="cap"><b>PLAYR1</b> · Ultra Berry · "Architecture"</div>
+      <button class="sound" id="soundBtn" type="button" aria-label="Turn sound on">🔇&nbsp; Tap for sound</button>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-hidden="true">
+  <div class="row">
+    <span>Instagram</span><span>Facebook</span><span>TikTok</span><span>YouTube</span><span>Product pages</span><span>Carousels</span><span>Billboards &amp; print</span><span>Landing pages</span>
+    <span>Instagram</span><span>Facebook</span><span>TikTok</span><span>YouTube</span><span>Product pages</span><span>Carousels</span><span>Billboards &amp; print</span><span>Landing pages</span>
+  </div>
+</div>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2>You say the number. <em>We do the rest.</em></h2>
+    <p class="lead">No retainers, no creative-by-committee. Tell us how many ads you need, where they'll run, and what you're selling. We come back with finished creative.</p>
+    <div class="steps rv">
+      <div class="step"><div class="n">01</div><h3>Tell us the number</h3><p>How many ads, which sizes, which platforms. <b>Ten statics for Instagram. Three video spots for YouTube. A full launch set.</b> Any count works.</p></div>
+      <div class="step"><div class="n">02</div><h3>We build them</h3><p>Concept, copy, imagery and video. Your real product in every frame, every word typeset by hand. <b>First concepts land in days, not weeks.</b></p></div>
+      <div class="step"><div class="n">03</div><h3>You run them</h3><p>Delivered in the exact specs for each placement, named and organized. <b>Want us to run them too?</b> We do that as well.</p></div>
+    </div>
+    <div class="counts rv" aria-label="Order sizes">
+      <span>1 ad</span><span>5 ads</span><span class="hi">10 ads</span><span>25 ads</span><span>50 ads</span><span class="hi">100+ ads</span><span>Video · Image · Carousel</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE WORK ===== -->
+<div id="work">
+
+<!-- PLAYR1 -->
+<section class="client">
+  <div class="wrap">
+    <div class="client-head rv">
+      <div>
+        <div class="eyebrow">The work · 01</div>
+        <h2>PLAYR1 <em>energy drink</em></h2>
+        <p class="lead">Product heroes, a branded fleet, lifestyle stills and a 20-second commercial for a new hydration brand. Every can in every image is the client's real can artwork, composited in by hand.</p>
+      </div>
+      <div class="tags"><span>Video ads</span><span>Product pages</span><span>Fleet &amp; lifestyle</span><span>Print</span></div>
+    </div>
+
+    <div class="subhead">The truck</div>
+    <div class="gallery g-trucks rv">
+      <a class="tile wide" href="/creative/assets/truck-highway.webp"><img src="/creative/assets/truck-highway.webp" alt="PLAYR1 branded 18-wheeler on a black highway at golden hour" loading="lazy"><span class="lab">Branded fleet · golden hour</span></a>
+      <a class="tile wide" href="/creative/assets/truck-stadium.webp"><img src="/creative/assets/truck-stadium.webp" alt="White PLAYR1 truck with the five-can lineup outside a stadium" loading="lazy"><span class="lab">Stadium lineup</span></a>
+      <a class="tile wide" href="/creative/assets/truck-night-city.webp"><img src="/creative/assets/truck-night-city.webp" alt="Matte black PLAYR1 truck in a night city" loading="lazy"><span class="lab">Night city</span></a>
+      <a class="tile wide" href="/creative/assets/truck-c1ub-gates.webp"><img src="/creative/assets/truck-c1ub-gates.webp" alt="PLAYR1 truck passing under the crest at The Country C1ub gates" loading="lazy"><span class="lab">Crossover · The Country C1ub</span></a>
+    </div>
+
+    <div class="subhead">Lifestyle</div>
+    <div class="gallery g-life rv">
+      <a class="tile tall" href="/creative/assets/lifestyle-tunnel.webp"><img src="/creative/assets/lifestyle-tunnel.webp" alt="Athlete carrying a PLAYR1 case through a stadium tunnel" loading="lazy"><span class="lab">Stadium tunnel</span></a>
+      <a class="tile tall" href="/creative/assets/lifestyle-warehouse.webp"><img src="/creative/assets/lifestyle-warehouse.webp" alt="Man carrying two PLAYR1 cases in a warehouse" loading="lazy"><span class="lab">Warehouse</span></a>
+      <a class="tile tall" href="/creative/assets/lifestyle-driveway.webp"><img src="/creative/assets/lifestyle-driveway.webp" alt="Delivery of three PLAYR1 cases on a driveway" loading="lazy"><span class="lab">Doorstep delivery</span></a>
+    </div>
+
+    <div class="subhead">Product page heroes · one per flavor</div>
+    <div class="gallery g-cans rv">
+      <a class="tile port" href="/creative/assets/can-ultra-berry.webp"><img src="/creative/assets/can-ultra-berry.webp" alt="PLAYR1 Ultra Berry can hero with condensation and berry splash" loading="lazy"><span class="lab">Ultra Berry</span></a>
+      <a class="tile port" href="/creative/assets/can-sour-blue-raz.webp"><img src="/creative/assets/can-sour-blue-raz.webp" alt="PLAYR1 Sour Blue Raz can hero" loading="lazy"><span class="lab">Sour Blue Raz</span></a>
+      <a class="tile port" href="/creative/assets/can-watt-a-melon.webp"><img src="/creative/assets/can-watt-a-melon.webp" alt="PLAYR1 Watt-A-Melon can hero" loading="lazy"><span class="lab">Watt-A-Melon</span></a>
+      <a class="tile port" href="/creative/assets/can-tropical-fusion.webp"><img src="/creative/assets/can-tropical-fusion.webp" alt="PLAYR1 Tropical Fusion can hero" loading="lazy"><span class="lab">Tropical Fusion</span></a>
+      <a class="tile port" href="/creative/assets/can-inner-lemon.webp"><img src="/creative/assets/can-inner-lemon.webp" alt="PLAYR1 Inner Lemon can hero" loading="lazy"><span class="lab">Inner Lemon</span></a>
+    </div>
+
+    <div class="rule rv"><div class="ico">✓</div><div><b>The real-product rule.</b> AI can invent a can that looks right and get the small print wrong. So we never use one. The client's actual label goes into every image and every frame, and we zoom-check it before anything ships.</div></div>
+  </div>
+</section>
+
+<!-- THE COUNTRY C1UB -->
+<section class="client">
+  <div class="wrap">
+    <div class="client-head rv">
+      <div>
+        <div class="eyebrow">The work · 02</div>
+        <h2>The Country C1ub <em>membership</em></h2>
+        <p class="lead">A private members' community with 30-plus finished static ads across six angles, plus a cinematic reveal film. Bright, warm, and every headline typeset so the text is always crisp.</p>
+      </div>
+      <div class="tags"><span>Static ads</span><span>Ad formats</span><span>Vertical video</span></div>
+    </div>
+
+    <div class="gallery g-sq rv">
+      <div class="film vert span2">
+        <video controls preload="none" playsinline poster="/creative/assets/poster-md2080.jpg">
+          <source src="/creative/assets/md2080-reveal-9x16.mp4" type="video/mp4">
+        </video>
+        <div class="meta"><span>Reveal film</span><span>9:16 · 1:40</span></div>
+      </div>
+      <a class="tile" href="/creative/assets/c1ub-overlap.webp"><img src="/creative/assets/c1ub-overlap.webp" alt="Ad: three circles, the good life lives in the overlap" loading="lazy"><span class="lab">Typographic Venn</span></a>
+      <a class="tile" href="/creative/assets/c1ub-three-circles.webp"><img src="/creative/assets/c1ub-three-circles.webp" alt="Ad: three photo circles, one c1ub all three" loading="lazy"><span class="lab">Photo circles</span></a>
+      <a class="tile" href="/creative/assets/c1ub-goldcard.webp"><img src="/creative/assets/c1ub-goldcard.webp" alt="Ad: gold membership card hero" loading="lazy"><span class="lab">Offer hero</span></a>
+      <a class="tile" href="/creative/assets/c1ub-pick-two.webp"><img src="/creative/assets/c1ub-pick-two.webp" alt="Ad: golf, business, women, which two are you picking" loading="lazy"><span class="lab">Pick two</span></a>
+      <a class="tile" href="/creative/assets/c1ub-brain.webp"><img src="/creative/assets/c1ub-brain.webp" alt="Ad: learn to build your own AI brain" loading="lazy"><span class="lab">Learn AI angle</span></a>
+      <a class="tile" href="/creative/assets/c1ub-mindset.webp"><img src="/creative/assets/c1ub-mindset.webp" alt="Ad: cinematic poster series, Mindset" loading="lazy"><span class="lab">Poster series</span></a>
+      <a class="tile" href="/creative/assets/c1ub-five-reasons.webp"><img src="/creative/assets/c1ub-five-reasons.webp" alt="Ad: us-versus-them comparison ledger" loading="lazy"><span class="lab">Us vs them ledger</span></a>
+      <a class="tile" href="/creative/assets/c1ub-text-thread.webp"><img src="/creative/assets/c1ub-text-thread.webp" alt="Ad: iMessage thread format" loading="lazy"><span class="lab">Text-thread format</span></a>
+      <a class="tile" href="/creative/assets/c1ub-number.webp"><img src="/creative/assets/c1ub-number.webp" alt="Ad: giant member number stat headline" loading="lazy"><span class="lab">Stat headline</span></a>
+      <a class="tile" href="/creative/assets/c1ub-dont-join.webp"><img src="/creative/assets/c1ub-dont-join.webp" alt="Ad: reverse psychology, don't join" loading="lazy"><span class="lab">Reverse psychology</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL FIRE -->
+<section class="client">
+  <div class="wrap">
+    <div class="client-head rv">
+      <div>
+        <div class="eyebrow">The work · 03</div>
+        <h2>Our own <em>campaigns</em></h2>
+        <p class="lead">We run what we make. Direct-response statics for our free-website offer, a story carousel for the AI Brain, and a vertical avatar spot for the homepage.</p>
+      </div>
+      <div class="tags"><span>Direct response</span><span>Carousel</span><span>AI avatar video</span></div>
+    </div>
+
+    <div class="gallery g-sq rv">
+      <a class="tile" href="/creative/assets/sfs-offer.webp"><img src="/creative/assets/sfs-offer.webp" alt="Ad: the free website offer" loading="lazy"><span class="lab">The offer</span></a>
+      <a class="tile" href="/creative/assets/sfs-receipt.webp"><img src="/creative/assets/sfs-receipt.webp" alt="Ad: receipt showing zero due" loading="lazy"><span class="lab">Receipt format</span></a>
+      <a class="tile" href="/creative/assets/sfs-your-url.webp"><img src="/creative/assets/sfs-your-url.webp" alt="Ad: your ideas, your thoughts, your dreams, your URL" loading="lazy"><span class="lab">Your URL</span></a>
+      <a class="tile" href="/creative/assets/sfs-instagram.webp"><img src="/creative/assets/sfs-instagram.webp" alt="Ad: do you have a website? I have an Instagram." loading="lazy"><span class="lab">Objection flip</span></a>
+    </div>
+    <div class="gallery g-sq rv" style="margin-top:14px">
+      <a class="tile port" href="/creative/assets/crystal-cover.webp"><img src="/creative/assets/crystal-cover.webp" alt="Carousel cover: the Purple Crystal" loading="lazy"><span class="lab">Carousel · cover</span></a>
+      <a class="tile port" href="/creative/assets/crystal-memory.webp"><img src="/creative/assets/crystal-memory.webp" alt="Carousel slide: infinite memory" loading="lazy"><span class="lab">Carousel · slide 3</span></a>
+      <a class="tile port" href="/creative/assets/crystal-adventure.webp"><img src="/creative/assets/crystal-adventure.webp" alt="Carousel slide: start your adventure" loading="lazy"><span class="lab">Carousel · close</span></a>
+      <div class="film vert fit">
+        <video controls preload="none" playsinline poster="/creative/assets/poster-truth.jpg">
+          <source src="/media/truth-video.mp4" type="video/mp4">
+        </video>
+        <div class="meta"><span>Avatar spot</span><span>9:16</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /work -->
+
+<!-- ===== WHAT YOU GET ===== -->
+<section class="sec" id="get">
+  <div class="wrap get">
+    <div class="rv">
+      <div class="eyebrow">What you get</div>
+      <h2>Finished creative, <em>not homework.</em></h2>
+      <p class="lead">Every order arrives ready to upload. Named, sized, and organized by placement.</p>
+      <div class="list">
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>Static image ads</b><span>1:1, 4:5 and 9:16. Feed, Stories, Reels covers, display.</span></div></div>
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>Video ads</b><span>Six seconds to sixty. Horizontal and vertical. Voice, music and captions included.</span></div></div>
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>Carousels &amp; story sets</b><span>Multi-slide narratives built to be swiped through, with the caption written.</span></div></div>
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>Product &amp; lifestyle imagery</b><span>Your real product in scenes you could never afford to shoot. Trucks, stadiums, kitchens, anywhere.</span></div></div>
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>Headlines &amp; primary text</b><span>Suggested copy for every ad, so you can paste and launch.</span></div></div>
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>Multiple angles per order</b><span>Offer, story, format, objection. So you can test what works instead of guessing.</span></div></div>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="eyebrow">Why it works</div>
+      <h2>Built like a studio. <em>Moves like a startup.</em></h2>
+      <div class="why">
+        <div><h3>Speed</h3><p>The newest AI film and image tools, finished by a human hand. What used to take a crew and a month now takes days.</p></div>
+        <div><h3>Your product, never a lookalike</h3><p>Label art, logos and colors are yours exactly. We composite the real thing in and check it under a loupe.</p></div>
+        <div><h3>Words you can read</h3><p>Every headline, price and URL is typeset, never generated. No garbled text, ever.</p></div>
+        <div><h3>Volume without the drop-off</h3><p>The tenth ad is as sharp as the first. That's what lets you test angles instead of betting on one.</p></div>
+      </div>
+      <div class="quote">
+        <p>"Tell us the number. We'll tell you the price. Then you get to say yes to finished ads instead of a proposal."</p>
+        <small>Cameron Tennant · Social Fire Solutions</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BOOK ===== -->
+<section class="book" id="book">
+  <div class="wrap">
+    <div class="book-card rv">
+      <div class="book-top">
+        <span class="flame"></span>
+        <div class="eyebrow" style="justify-content:center">Schedule a call</div>
+        <h2>Pick a time. <em>Bring the number.</em></h2>
+        <p class="lead">A twenty-minute call. You tell us what you sell, where the ads will run and how many you want. You leave with a plan and a price.</p>
+      </div>
+      <div class="book-frame">
+        <iframe src="https://api.leadconnectorhq.com/widget/booking/8qVrNv1XSH2gqAi7tQrl" id="8qVrNv1XSH2gqAi7tQrl_creative" title="Schedule a call with Social Fire Solutions" loading="lazy" scrolling="no"></iframe>
+      </div>
+      <p class="book-alt">Calendar not loading? <a href="https://api.leadconnectorhq.com/widget/booking/8qVrNv1XSH2gqAi7tQrl" target="_blank" rel="noopener" class="js-cta">Open the booking page</a> or email <a href="mailto:cameron@socialfire.solutions">cameron@socialfire.solutions</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Questions</div>
+    <h2>Before the call</h2>
+    <div class="faq rv">
+      <details><summary>How many ads can I order?</summary><p>Any number. One hero video, a ten-ad launch set, or a rolling hundred a month. The call is where we settle the count and the price.</p></details>
+      <details><summary>Do you need our photos?</summary><p>Send your logo, product files and any brand guide you have. If you don't have product photography, we can build the scenes around your real artwork, like the PLAYR1 cans and trucks above.</p></details>
+      <details><summary>How fast?</summary><p>First concepts usually land within days. A full set depends on the count and how many video pieces are in it. You'll get a date on the call.</p></details>
+      <details><summary>Can you run the ads too?</summary><p>Yes. Creative is the piece most businesses are missing, but if you want the campaign managed as well, that's what <a href="/" style="color:var(--ignition)">the rest of Social Fire</a> does.</p></details>
+      <details><summary>Will the text in the images be right?</summary><p>Yes. We never let AI generate words. Every headline, price and URL is typeset by hand, so it reads exactly the way you wrote it.</p></details>
+      <details><summary>What if I don't like something?</summary><p>Tell us. Revisions are part of the order, and because we work fast, a change is usually back the same day.</p></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="flame"></span><b>Social Fire</b>&nbsp;<span class="co">Solutions</span></div>
+    <div class="tag">Spread like fire</div>
+    <a href="/blog">The Blue Flame — our blog</a>
+    <div class="copy">© 2026 Social Fire Solutions. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky"><a href="#book" class="btn btn-primary js-cta">Schedule a Call →</a></div>
+
+<div class="lb" id="lb" role="dialog" aria-label="Enlarged image"><span class="x">×</span><img id="lbImg" alt=""></div>
+
+<script src="https://link.msgsndr.com/js/form_embed.js" async></script>
+<script>
+(function(){
+  // Reveal on scroll
+  var rv=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    rv.forEach(function(el){io.observe(el)});
+  }else{rv.forEach(function(el){el.classList.add('in')})}
+
+  // Hero sound toggle
+  var v=document.getElementById('heroVid'), b=document.getElementById('soundBtn');
+  if(v&&b){
+    b.addEventListener('click',function(){
+      v.muted=!v.muted;
+      if(!v.muted){v.currentTime=0;v.play();}
+      b.innerHTML=v.muted?'🔇&nbsp; Tap for sound':'🔊&nbsp; Sound on';
+      b.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');
+    });
+    // pause offscreen
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){v.play().catch(function(){})} else {v.pause()} })},{threshold:.2}).observe(v);
+    }
+  }
+  // Pause the hero if any other video starts
+  document.querySelectorAll('.film video').forEach(function(f){
+    f.addEventListener('play',function(){ if(v){v.pause();} document.querySelectorAll('.film video').forEach(function(o){ if(o!==f) o.pause(); }); });
+    f.addEventListener('pause',function(){ if(v && !document.querySelector('.film video:not([paused])')){ /* leave hero paused until scrolled */ } });
+  });
+
+  // Lightbox
+  var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg');
+  document.querySelectorAll('a.tile').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      lbImg.src=a.getAttribute('href'); lbImg.alt=a.querySelector('img').alt; lb.classList.add('on'); document.body.style.overflow='hidden';
+    });
+  });
+  function closeLb(){lb.classList.remove('on'); lbImg.src=''; document.body.style.overflow='';}
+  lb.addEventListener('click',closeLb);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb()});
+
+  // CTA tracking
+  document.querySelectorAll('.js-cta').forEach(function(a){
+    a.addEventListener('click',function(){
+      try{ if(window.fbq) fbq('track','Contact',{content_name:'Ad Creative — Schedule a Call'}); }catch(e){}
+      try{ if(window.gtag) gtag('event','schedule_call_click',{page:'creative'}); }catch(e){}
+    });
+  });
+
+  // Hide sticky CTA while the booking section is on screen
+  var sticky=document.getElementById('sticky'), book=document.getElementById('book');
+  if(sticky&&book&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){sticky.style.opacity=e.isIntersecting?'0':'1'; sticky.style.pointerEvents=e.isIntersecting?'none':'auto';})},{threshold:.05}).observe(book);
+  }
+})();
+</script>
+</body>
+</html>
