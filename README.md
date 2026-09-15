@@ -31,21 +31,33 @@ Hosted on **Vercel** (auto-deploys from GitHub `main`). Works as static + one se
 - If the function is missing/unconfigured/errors, the form **falls back to a pre-filled
   mailto** to the address in `ai-brain-form/index.html` → `CONFIG.EMAIL`, so no lead is lost.
 
-## Free Website funnel → GoHighLevel
-- `/free-website` is the "Free website — no tricks, no gimmicks" survey funnel for small
-  businesses: we build the site free, host it, show it finished; if they love it it's $499
-  once, if not they owe nothing. Same Typeform-style engine as `/ai-brain-form`.
-- Homepage section **"04 — The Free Website"** (sky-blue box, the one cool-toned section on
-  the page) links to it. **We do NOT build e-commerce/online stores** (too many steps &
+## Website funnel → GoHighLevel
+- `/website` is the "a 2026 website that moves as fast as you think" survey funnel for
+  small businesses. Two doors everywhere: **schedule a call** (GHL booking widget
+  `8qVrNv1XSH2gqAi7tQrl`, opens in a new tab) or **take the survey**. Same
+  Typeform-style engine as `/ai-brain-form`. No price on the page — the survey ends with
+  "we'll come back with what we'd build, how fast, and what it costs."
+- History: it was `/free-website` ("we build it free, $499 if you love it") from
+  2026-07-22 to 2026-09-15. That offer is retired; `vercel.json` 308-redirects
+  `/free-website` → `/website` so the old ad links still land.
+- Homepage section **"04 — The 2026 Website"** (sky-blue box, the one cool-toned section on
+  the page) carries both doors. **We do NOT build e-commerce/online stores** (too many steps &
   optimizations) — stated on both the homepage box and the funnel welcome; there is no
   "sell products online" option in the survey.
 - Steps: has-a-website? → business type + name + one-liner → what the site should do →
-  what they already have (+ links) → timeline → contact + consent.
-- On submit it POSTs to **`/api/free-website`** which upserts the GHL contact (source
-  "Free Website Survey (Website)", companyName = business name), appends tags
-  (`Free Website Survey`, `Has site: …`, `Type: …`, `Timeline: …`) and attaches the full
-  survey as a note. Uses the SAME `GHL_TOKEN` / `GHL_LOCATION` env vars as `/api/lead` —
+  what they already have (+ links) → timeline → contact + consent. Success screen =
+  "Schedule a call" + blog link (no auto-redirect).
+- On submit it POSTs to **`/api/free-website`** (endpoint path unchanged) which upserts the
+  GHL contact (source "Website Survey (Website)", companyName = business name), appends tags
+  (`Website Survey`, `Has site: …`, `Type: …`, `Timeline: …`) and attaches the full survey
+  as a note. The tag was `Free Website Survey` before 2026-09-15 — the published GHL
+  workflow "FREE Website Optin" still triggers on the OLD tag (and still emails the
+  free/$499 copy), so it deliberately does not fire on new leads until its copy is
+  updated and its trigger re-pointed. `/api/dash.js` classifies both tags as "Website
+  Survey". Uses the SAME `GHL_TOKEN` / `GHL_LOCATION` env vars as `/api/lead` —
   nothing new to configure. Falls back to a pre-filled mailto if the function errors.
+- `/your-name` is the personal-website variant (noindex): same two doors, same
+  "send me the plan" ending, tag `Personal Website Survey` via `/api/your-name`.
 
 ## Assets
 Images and the ambient hero video are hosted on Higgsfield's CDN and referenced by URL,

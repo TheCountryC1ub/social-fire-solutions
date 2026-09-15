@@ -1,4 +1,4 @@
-// Vercel serverless function — receives the Free Website survey and pushes it
+// Vercel serverless function — receives the Website survey (/website) and pushes it
 // into GoHighLevel (v2 / LeadConnector). Same pattern as /api/lead.
 //
 // Uses the SAME environment variables as /api/lead (already set in Vercel):
@@ -35,7 +35,7 @@ function splitName(full) {
 }
 
 function noteBody(d) {
-  const lines = ["FREE WEBSITE SURVEY", ""];
+  const lines = ["WEBSITE SURVEY", ""];
   for (const [key, label] of FIELD_ORDER) {
     const v = (d[key] || "").toString().trim();
     lines.push(`${label}: ${v || "—"}`);
@@ -86,11 +86,11 @@ async function sendMetaLead(req, d, email, phone) {
         event_time: Math.floor(Date.now() / 1000),
         event_id: d._fbEventId, // dedupe key — must match the browser event
         event_source_url:
-          req.headers.referer || "https://socialfire.solutions/free-website",
+          req.headers.referer || "https://socialfire.solutions/website",
         action_source: "website",
         user_data,
         custom_data: {
-          content_name: "Free Website Survey",
+          content_name: "Website Survey",
           value: 499,
           currency: "USD",
         },
@@ -140,7 +140,12 @@ module.exports = async (req, res) => {
   }
 
   const { firstName, lastName } = splitName(d.name);
-  const tags = ["Free Website Survey"];
+  // 2026-09-15: the free-build offer is retired and the page is now /website.
+  // New leads are tagged "Website Survey" so the published GHL workflow
+  // "FREE Website Optin" (triggered by the old "Free Website Survey" tag, and
+  // still carrying the free/$499 email copy) does NOT fire on them. Re-point
+  // that workflow to this tag once its email copy is updated.
+  const tags = ["Website Survey"];
   if (d.hassite) tags.push(`Has site: ${d.hassite}`);
   if (d.biztype) tags.push(`Type: ${d.biztype}`);
   if (d.timeline) tags.push(`Timeline: ${d.timeline}`);
@@ -166,7 +171,7 @@ module.exports = async (req, res) => {
         email: email || undefined,
         phone: phone || undefined,
         companyName: (d.bizname || "").toString().trim() || undefined,
-        source: "Free Website Survey (Website)",
+        source: "Website Survey (Website)",
       }),
     });
 

@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/free-website",
+      "destination": "/website",
+      "permanent": true
+    },
+    {
+      "source": "/free-website/",
+      "destination": "/website",
+      "permanent": true
+    }
+  ]
+}

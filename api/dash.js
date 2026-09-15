@@ -2,7 +2,7 @@
 // Pass-gated: requires ?pass= matching env DASHBOARD_PASS (case/space-insensitive).
 //
 // Two halves, fetched separately so the page can poll leads fast and traffic slow:
-//   ?part=leads    — recent form submissions from GoHighLevel (Free Website,
+//   ?part=leads    — recent form submissions from GoHighLevel (Website,
 //                    AI Brain, and the client-page leads), newest first,
 //                    plus per-form today / 7-day / all-time counts.
 //                    Uses the SAME env vars as the lead endpoints (already set):
@@ -31,7 +31,7 @@ const RANGES = { today: "today", "7d": "7daysAgo", "28d": "28daysAgo", season: S
 
 // Lead classification: GHL returns tags lowercased. First match wins.
 const FORMS = [
-  { key: "free", label: "Free Website", tag: "free website survey" },
+  { key: "free", label: "Website Survey", tags: ["website survey", "free website survey"] },
   { key: "brain", label: "AI Brain", tag: "ai brain survey" },
   { key: "ariel", label: "Ariel Zeigler", tag: "ariel zeigler lead" },
   { key: "madeline", label: "Madeline Reams", tag: "madeline reams lead" },
@@ -61,7 +61,7 @@ async function ga4AccessToken() {
 
 function classify(contact) {
   const tags = (contact.tags || []).map((t) => String(t).toLowerCase());
-  for (const f of FORMS) if (tags.includes(f.tag)) return f;
+  for (const f of FORMS) if ((f.tags || [f.tag]).some((t) => tags.includes(t))) return f;
   const src = String(contact.source || "").toLowerCase();
   for (const f of FORMS) if (src.includes(f.label.toLowerCase())) return f;
   return null;
