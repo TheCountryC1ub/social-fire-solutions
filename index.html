@@ -274,6 +274,25 @@ h2.big{font-size:clamp(32px,5vw,60px);letter-spacing:-.02em;max-width:16ch;}
   transition:border-color .3s,background .3s;
 }
 .truth-sound:hover{border-color:rgba(242,83,27,.55);background:rgba(10,10,11,.85);}
+/* the play plate — the film waits on its poster until the viewer taps, then runs with sound from the first second */
+.truth-play{
+  position:absolute;inset:2px;z-index:3;border:0;border-radius:28px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  background:linear-gradient(180deg,rgba(10,10,11,.08),rgba(10,10,11,.58));
+  color:var(--ivory);font:600 12px/1 "Inter",sans-serif;letter-spacing:.14em;text-transform:uppercase;
+  transition:background .3s;
+}
+.truth-play:hover{background:linear-gradient(180deg,rgba(10,10,11,.14),rgba(10,10,11,.66));}
+.truth-play .tp-ring{
+  width:82px;height:82px;border-radius:50%;display:grid;place-items:center;padding-left:6px;
+  font-size:28px;color:var(--ivory);background:rgba(10,10,11,.62);backdrop-filter:blur(10px);
+  border:2px solid rgba(255,255,255,.38);
+  box-shadow:0 0 0 10px rgba(242,83,27,.18),0 18px 40px rgba(0,0,0,.45);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .3s;
+}
+.truth-play:hover .tp-ring{transform:scale(1.07);border-color:var(--molten);box-shadow:0 0 0 14px rgba(242,83,27,.26),0 18px 40px rgba(0,0,0,.45);}
+.truth-play .tp-lab{text-shadow:0 2px 12px rgba(0,0,0,.6);}
+.truth-play[hidden],.truth-sound[hidden]{display:none;}
 
 /* OFFER CARDS */
 .offer-head{max-width:720px;}
@@ -531,8 +550,11 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
     </div>
     <div class="truth-frame reveal">
       <div class="truth-border">
-        <video class="truth-video" id="truthVideo" src="media/truth-video.mp4" poster="media/truth-poster.jpg" autoplay muted loop playsinline></video>
-        <button class="truth-sound" id="truthSound" type="button" aria-label="Toggle sound">🔇 Tap for sound</button>
+        <!-- no autoplay on purpose: muted autoplay meant anyone who tapped for sound had already missed the open.
+             The film waits on its poster and starts, with sound, when the viewer presses play. -->
+        <video class="truth-video" id="truthVideo" src="media/truth-video.mp4" poster="media/truth-poster.jpg" preload="metadata" playsinline></video>
+        <button class="truth-play" id="truthPlay" type="button" aria-label="Play the video, with sound"><span class="tp-ring" aria-hidden="true">▶</span><span class="tp-lab">Play · sound on</span></button>
+        <button class="truth-sound" id="truthSound" type="button" aria-label="Pause the video" hidden>⏸ Pause</button>
       </div>
     </div>
   </div>
@@ -792,17 +814,35 @@ const FORM_URL = "/ai-brain-form";
   // Stagger card / step reveals
   document.querySelectorAll('.cards .card, .steps .step').forEach((el,i)=>{ el.style.transitionDelay = (i*0.08)+'s'; });
 
-  // Truth video sound toggle (autoplays muted; pause offscreen to save battery)
+  // Truth video — starts on the viewer's tap, sound on, from the first second.
+  // (It used to autoplay muted: anyone who tapped for sound had already missed the open.)
+  // Pauses when scrolled away and picks back up on return; the play plate returns when the film ends.
   const tv = document.getElementById('truthVideo');
+  const tp = document.getElementById('truthPlay');
   const ts = document.getElementById('truthSound');
-  if (tv && ts){
-    ts.addEventListener('click', ()=>{
-      tv.muted = !tv.muted;
-      if (!tv.muted) tv.play();
-      ts.textContent = tv.muted ? '🔇 Tap for sound' : '🔊 Sound on';
-    });
+  if (tv && tp && ts){
+    let started = false, awayPaused = false;
+    const idle = ()=>{ started = false; awayPaused = false; tp.hidden = false; ts.hidden = true; };
+    const start = ()=>{
+      started = true; tv.muted = false; tv.currentTime = 0;
+      tv.play().then(()=>{
+        tp.hidden = true; ts.hidden = false; ts.textContent = '⏸ Pause';
+        if (typeof gtag === 'function') gtag('event', 'truth_video_play', { page: 'home' });
+      }).catch(idle);
+    };
+    const toggle = ()=>{ if (!started) return start(); tv.paused ? tv.play().catch(()=>{}) : tv.pause(); };
+    tp.addEventListener('click', start);
+    ts.addEventListener('click', toggle);
+    tv.addEventListener('click', toggle);
+    tv.addEventListener('play', ()=>{ if (started) ts.textContent = '⏸ Pause'; });
+    tv.addEventListener('pause', ()=>{ if (started && !tv.ended) ts.textContent = '▶ Resume'; });
+    tv.addEventListener('ended', ()=>{ idle(); tv.load(); }); // back to the poster, ready to play again
     new IntersectionObserver((es)=>{
-      es.forEach(e=>{ e.isIntersecting ? tv.play().catch(()=>{}) : tv.pause(); });
+      es.forEach(e=>{
+        if (!started) return;
+        if (!e.isIntersecting && !tv.paused){ tv.pause(); awayPaused = true; }
+        else if (e.isIntersecting && awayPaused){ awayPaused = false; tv.play().catch(()=>{}); }
+      });
     },{threshold:0.2}).observe(tv);
   }
 
