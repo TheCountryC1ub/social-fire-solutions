@@ -220,6 +220,9 @@ nav{position:sticky; top:0; z-index:50; display:flex; align-items:center; justif
 .story h3 small{display:block; font-family:'Inter'; font-weight:500; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--molten); margin-bottom:6px}
 .story p{color:var(--ash); font-size:.98rem}
 .story p b{color:var(--ivory); font-weight:600}
+.story.wide{grid-column:1/-1; grid-template-columns:1.55fr 1fr; align-items:center; gap:clamp(18px,3vw,36px); margin-bottom:10px}
+.story.wide h3{font-size:1.8rem}
+.story.wide p{font-size:1.04rem}
 
 /* any world */
 .worlds{display:grid; grid-template-columns:repeat(6,1fr); gap:14px; margin-top:40px}
@@ -297,6 +300,7 @@ footer a:hover{color:var(--ignition)}
   .gallery .tile:nth-child(n+3){grid-column:span 6}
   .worlds .tile:nth-child(n+3){grid-column:span 3}
   .reel{grid-template-columns:1fr}
+  .story.wide{grid-template-columns:1fr}
   .faq{grid-template-columns:1fr}
 }
 @media (max-width:640px){
@@ -458,9 +462,20 @@ footer a:hover{color:var(--ignition)}
 <section class="sec" id="stories" style="padding-top:0">
   <div class="wrap">
     <div class="eyebrow">More stories we've told</div>
-    <h2>A trucking company. Two friends. <em>A can of energy drink.</em></h2>
+    <h2>An energy drink. A trucking company. <em>Two friends.</em></h2>
     <p class="lead">Every one of these started as a conversation. None of them had a shoot day.</p>
     <div class="reel rv">
+      <div class="story wide">
+        <div class="film" data-film="three-jobs">
+          <video preload="none" playsinline poster="/storytelling/assets/poster-three-jobs.jpg"><source src="/storytelling/assets/three-jobs.mp4" type="video/mp4"></video>
+          <div class="meta"><span>Brand film</span><span>1:41</span></div>
+          <button class="play" type="button" aria-label="Play Three Jobs, with sound"><span class="ring" aria-hidden="true">▶</span><span class="l">Play · sound on</span></button>
+        </div>
+        <div>
+          <h3><small>PLAYR1 · a brand</small>"Three Jobs"</h3>
+          <p>A hundred seconds of science for an energy-drink brand: thirty-seven trillion cells, three jobs, one formula. <b>Built for screens that run with the sound off,</b> so every line is on screen, typeset by hand, timed to the picture. The cans are the client's real artwork, never redrawn.</p>
+        </div>
+      </div>
       <div class="story">
         <div class="film" data-film="one-call">
           <video preload="none" playsinline poster="/storytelling/assets/poster-one-call.jpg"><source src="/storytelling/assets/one-call.mp4" type="video/mp4"></video>
