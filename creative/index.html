@@ -98,7 +98,25 @@ nav{position:sticky; top:0; z-index:50; display:flex; align-items:center; justif
 .brand span.co{color:var(--ash);font-weight:400}
 .navlinks{display:flex; align-items:center; gap:22px}
 .navlinks .home{font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ash); transition:.2s}
-.navlinks .home:hover{color:var(--ignition)}
+.navlinks .home:hover,.navlinks .home.on{color:var(--ignition)}
+nav .brand,nav .nav-burger{position:relative; z-index:2}
+.nav-burger{display:none; width:44px; height:44px; border:0; background:transparent; cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; padding:0; margin-right:-8px}
+.nav-burger span{display:block; width:22px; height:2px; background:var(--ivory); border-radius:2px; transition:transform .3s,opacity .3s}
+nav.open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+nav.open .nav-burger span:nth-child(2){opacity:0}
+nav.open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media (max-width:900px){
+  .nav-burger{display:flex}
+  .navlinks{position:absolute; top:100%; left:0; right:0; height:100dvh; overflow:auto; z-index:1;
+    flex-direction:column; align-items:stretch; gap:0; padding:14px 28px 140px;
+    background:rgba(10,10,11,.985); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    opacity:0; pointer-events:none; transform:translateY(-6px); transition:opacity .28s var(--ease),transform .28s var(--ease)}
+  nav.open{background:rgba(10,10,11,.985)}
+  nav.open .navlinks{opacity:1; pointer-events:auto; transform:none}
+  .navlinks .home{font-family:'Playfair Display',serif; font-size:32px; font-weight:600; letter-spacing:0; text-transform:none; color:var(--ivory); padding:16px 0; border-bottom:1px solid rgba(255,255,255,.08)}
+  .navlinks .home.on{color:var(--ignition)}
+  .navlinks .btn{margin-top:26px; justify-content:center; padding:18px 24px; font-size:1rem}
+}
 
 /* buttons */
 .btn{display:inline-flex; align-items:center; justify-content:center; gap:.6rem; cursor:pointer; border:1px solid transparent;
@@ -274,7 +292,6 @@ footer a:hover{color:var(--ignition)}
 }
 @media (max-width:640px){
   body{font-size:17px}
-  .navlinks .home{display:none}
   nav .brand{white-space:nowrap}
   nav .brand .co{display:none}
   .g-sq{grid-template-columns:repeat(2,1fr)}
@@ -293,12 +310,17 @@ footer a:hover{color:var(--ignition)}
 <script>document.body.classList.remove('no-js')</script>
 <div class="bg"></div>
 
-<nav>
+<nav id="nav">
   <a class="brand" href="/"><span class="flame"></span><b>Social Fire</b>&nbsp;<span class="co">Solutions</span></a>
-  <div class="navlinks">
-    <a href="/" class="home">Home</a>
+  <div class="navlinks" id="navMenu">
+    <a href="/#ai-brain" class="home">AI Brain</a>
+    <a href="/#website" class="home">Websites</a>
+    <a href="/creative" class="home on" aria-current="page">Ad Creative</a>
+    <a href="/storytelling" class="home">Films</a>
+    <a href="/blog" class="home">The Blog</a>
     <a href="#book" class="btn btn-primary btn-sm js-cta">Schedule a Call</a>
   </div>
+  <button class="nav-burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
 </nav>
 
 <main>
@@ -544,6 +566,16 @@ footer a:hover{color:var(--ignition)}
 
 <script>
 (function(){
+  // Section menu: hamburger drawer on phones
+  var navEl=document.getElementById('nav'), burger=document.getElementById('navBurger');
+  if(navEl&&burger){
+    var setOpen=function(o){navEl.classList.toggle('open',o); burger.setAttribute('aria-expanded',o?'true':'false'); burger.setAttribute('aria-label',o?'Close menu':'Open menu'); document.body.style.overflow=o?'hidden':''};
+    burger.addEventListener('click',function(){setOpen(!navEl.classList.contains('open'))});
+    navEl.querySelectorAll('#navMenu a').forEach(function(a){a.addEventListener('click',function(){setOpen(false)})});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')setOpen(false)});
+    window.addEventListener('resize',function(){if(window.innerWidth>900)setOpen(false)},{passive:true});
+  }
+
   // Reveal on scroll
   var rv=document.querySelectorAll('.rv');
   if('IntersectionObserver' in window){
