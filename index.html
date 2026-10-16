@@ -53,7 +53,7 @@ fbq('track', 'PageView');
         "width": 512,
         "height": 512
       },
-      "knowsAbout": ["Branding", "Paid media growth", "AI Brain implementation", "Website design"]
+      "knowsAbout": ["Branding", "Paid media growth", "AI Brain implementation", "Website design", "AI video creation", "Brand films and storytelling"]
     }
   ]
 }
@@ -153,6 +153,38 @@ p.lead{color:var(--ash);font-size:clamp(16px,1.5vw,19px);max-width:620px;}
 .fastweb-doors .btn{width:100%;justify-content:center;}
 .btn-skyline{background:transparent;color:#BAE6FD;border:1px solid rgba(56,189,248,.45);font-size:16px;padding:18px 38px;}
 .btn-skyline:hover{border-color:#38BDF8;color:#fff;transform:translateY(-2px);box-shadow:0 14px 40px -14px rgba(56,189,248,.5);}
+
+/* STORY / AI VIDEO (05) */
+.storyfilm-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:48px;align-items:center;margin-top:56px;}
+.storyfilm{position:relative;border-radius:24px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 40px 100px -40px rgba(242,83,27,.5),0 30px 60px rgba(0,0,0,.5);}
+.storyfilm video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;}
+.storyfilm .sf-meta{position:absolute;left:16px;top:16px;z-index:3;display:flex;gap:8px;pointer-events:none;}
+.storyfilm .sf-meta span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ivory);background:rgba(10,10,11,.7);border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:30px;backdrop-filter:blur(6px);}
+.storyfilm .sf-cap{position:absolute;left:16px;bottom:16px;z-index:3;font-size:12px;color:var(--ash);letter-spacing:.04em;background:rgba(10,10,11,.6);padding:8px 12px;border-radius:8px;backdrop-filter:blur(8px);pointer-events:none;}
+.storyfilm .sf-cap b{color:var(--ivory);}
+.storyfilm .sf-play{position:absolute;inset:0;z-index:4;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  background:linear-gradient(180deg,rgba(10,10,11,.06),rgba(10,10,11,.58));color:var(--ivory);font:600 12px/1 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;transition:background .25s;}
+.storyfilm .sf-play:hover{background:linear-gradient(180deg,rgba(10,10,11,.12),rgba(10,10,11,.66));}
+.storyfilm .sf-play .ring{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;padding-left:6px;font-size:30px;
+  background:rgba(10,10,11,.62);backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.38);transition:transform .25s,box-shadow .3s,border-color .3s;}
+.storyfilm .sf-play:hover .ring{transform:scale(1.07);border-color:var(--molten);box-shadow:0 0 0 14px rgba(242,83,27,.26),0 18px 40px rgba(0,0,0,.45);}
+.storyfilm .sf-play .lab{text-shadow:0 2px 12px rgba(0,0,0,.6);}
+.storyfilm.on .sf-play,.storyfilm.on .sf-meta,.storyfilm.on .sf-cap{display:none;}
+.story-side{display:flex;flex-direction:column;gap:14px;}
+.story-row{display:flex;gap:14px;align-items:flex-start;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:16px 18px;background:rgba(255,255,255,.02);}
+.story-row .k{flex:none;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ignition);font-weight:600;margin-top:4px;min-width:92px;}
+.story-row p{color:var(--ash);font-size:14.5px;line-height:1.55;}
+.story-row p b{color:var(--ivory);font-weight:600;}
+.story-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
+.story-note{margin-top:26px;color:var(--ash);font-size:13.5px;letter-spacing:.02em;max-width:760px;}
+.story-note b{color:var(--ivory);font-weight:600;}
+@media (max-width:900px){
+  .storyfilm-grid{grid-template-columns:1fr;gap:28px;}
+  .story-cta .btn{width:100%;justify-content:center;}
+  .storyfilm .sf-play .ring{width:70px;height:70px;font-size:24px;}
+}
+@media (max-width:640px){ .storyfilm .sf-cap{display:none;} }
 
 /* ---------- NAV ---------- */
 nav{
@@ -685,6 +717,33 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
   </div>
 </section>
 
+<!-- ===== AI VIDEO / STORYTELLING ===== -->
+<section class="block storyblock" id="story">
+  <div class="wrap">
+    <span class="eyebrow reveal">05 — AI Video Creation</span>
+    <h2 class="big reveal">Everyone has a story. We turn yours into a <span class="fire">film.</span></h2>
+    <p class="lead reveal" style="margin-top:22px;">Individuals, companies, families, founders. Tell us the story in a paragraph or a phone call. We write it, cast it from your photos, build the world and hand you a finished film. In days, with no crew and no shoot day.</p>
+    <div class="storyfilm-grid reveal">
+      <div class="storyfilm" id="storyFilm">
+        <video id="storyVideo" src="/storytelling/assets/the-carry.mp4" poster="/storytelling/assets/poster-the-carry.jpg" preload="none" playsinline></video>
+        <div class="sf-meta"><span>Short film</span><span>1:33 · sound on</span></div>
+        <div class="sf-cap"><b>The Carry</b> · 1927 · four real people, one shot over water</div>
+        <button class="sf-play" id="storyPlay" type="button" aria-label="Play The Carry, with sound"><span class="ring" aria-hidden="true">▶</span><span class="lab">Play · sound on</span></button>
+      </div>
+      <div class="story-side">
+        <div class="story-row"><span class="k">Individuals</span><p><b>Your life, your craft, your message.</b> A founder's story, a coach's philosophy, a letter to your kids they can watch in twenty years.</p></div>
+        <div class="story-row"><span class="k">Companies</span><p><b>How you started, what you stand for.</b> Brand films, commercials, product launches, the recruiting piece that makes the right people apply.</p></div>
+        <div class="story-row"><span class="k">Moments</span><p><b>One day, one person, told like a film.</b> Birthdays, anniversaries, tributes, events.</p></div>
+        <div class="story-cta">
+          <a href="/storytelling" class="btn btn-primary">See how we build it <span class="arrow">→</span></a>
+          <a href="https://api.leadconnectorhq.com/widget/booking/8qVrNv1XSH2gqAi7tQrl" class="btn btn-ghost" target="_blank" rel="noopener">Tell us your story</a>
+        </div>
+      </div>
+    </div>
+    <p class="story-note reveal"><b>Any era, any place, any face.</b> 1927 or 2080, your kitchen or a floating city: the location is a sentence in the script. Real people come from their photos, real products from their artwork, and every word on screen is typeset by hand.</p>
+  </div>
+</section>
+
 <!-- ===== SHOWCASE 3D ===== -->
 <section class="block showcase">
   <div class="wrap showcase-grid">
@@ -692,7 +751,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
       <div class="showcase-img" id="showImg" role="img" aria-label="Cinematic dark creative studio representing premium branding work"></div>
     </div>
     <div class="reveal">
-      <span class="eyebrow">05 — The look</span>
+      <span class="eyebrow">06 — The look</span>
       <h2 class="big">Built in the dark. Designed to <span class="fire">glow.</span></h2>
       <p class="lead" style="margin-top:18px;">Quiet luxury, with heat behind it. We keep it cinematic, high-contrast and intentional — the kind of brand that looks expensive before you say a word.</p>
       <ul>
@@ -707,7 +766,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 <!-- ===== PROCESS ===== -->
 <section class="block process">
   <div class="wrap">
-    <span class="eyebrow reveal">06 — How the fire spreads</span>
+    <span class="eyebrow reveal">07 — How the fire spreads</span>
     <h2 class="big reveal">Four steps from spark to <span class="fire">wildfire.</span></h2>
     <div class="steps">
       <div class="step reveal"><div class="no">01</div><h3>Discover</h3><p>We dig into your brand, your market and your numbers to find the real opportunity.</p></div>
@@ -722,7 +781,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 <section class="block proof">
   <div class="proof-bg"></div><div class="proof-grade"></div>
   <div class="wrap inner">
-    <span class="eyebrow reveal">07 — The receipts</span>
+    <span class="eyebrow reveal">08 — The receipts</span>
     <div class="huge fire reveal">$10M+</div>
     <p class="cap reveal"><b>in ad spend managed</b> — for hundreds of brands, people and businesses who decided blending in wasn't an option. Numbers don't exaggerate. They just compound.</p>
     <div class="row reveal">
@@ -736,7 +795,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
 <!-- ===== FAQ ===== -->
 <section class="block faqsec">
   <div class="wrap">
-    <span class="eyebrow reveal">08 — Before you book</span>
+    <span class="eyebrow reveal">09 — Before you book</span>
     <h2 class="big reveal">The honest <span class="fire">answers.</span></h2>
     <div class="faq-list reveal">
       <div class="faq"><button>What exactly is the AI Brain?<span class="x">+</span></button><div class="ans"><p>A custom AI system we implement inside your business — trained on your voice, your offers and your customers. It drafts content, answers and follows up with leads, and automates the repetitive work: the output of a full-time hire, without the payroll. <a href="/ai-brain-form" style="color:var(--molten);text-decoration:underline;">Fill out the short survey</a> and we'll map exactly what yours would do.</p></div></div>
@@ -765,6 +824,7 @@ footer .tag{color:var(--molten);font-size:13px;letter-spacing:.22em;text-transfo
   <div class="wrap">
     <div class="brand"><span class="flame"></span><b>Social Fire</b>&nbsp;<span>Solutions</span></div>
     <div class="tag">Spread like fire</div>
+    <a href="/storytelling" class="nav-blog">Your story, on film</a>
     <a href="/blog" class="nav-blog">The Blue Flame — our blog</a>
     <div class="copy">© 2026 Social Fire Solutions. All rights reserved.</div>
   </div>
@@ -844,6 +904,21 @@ const FORM_URL = "/ai-brain-form";
         else if (e.isIntersecting && awayPaused){ awayPaused = false; tv.play().catch(()=>{}); }
       });
     },{threshold:0.2}).observe(tv);
+  }
+
+  // Story film (The Carry, section 05) — waits on its poster, plays with sound on tap
+  const sfBox = document.getElementById('storyFilm');
+  const sfVid = document.getElementById('storyVideo');
+  const sfBtn = document.getElementById('storyPlay');
+  if (sfBox && sfVid && sfBtn){
+    sfBtn.addEventListener('click', ()=>{
+      if (tv && !tv.paused) tv.pause();
+      sfVid.muted = false; sfVid.controls = true; sfBox.classList.add('on');
+      sfVid.play().catch(()=>{ sfVid.muted = true; sfVid.play().catch(()=>{}); });
+      if (typeof gtag === 'function') gtag('event', 'film_play', { film: 'the-carry', page: 'home' });
+    });
+    sfVid.addEventListener('ended', ()=>{ sfBox.classList.remove('on'); sfVid.controls = false; sfVid.load(); });
+    new IntersectionObserver((es)=>{ es.forEach(e=>{ if (!e.isIntersecting && !sfVid.paused) sfVid.pause(); }); },{threshold:0.2}).observe(sfVid);
   }
 
   // FAQ accordion

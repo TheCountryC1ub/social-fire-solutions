@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P350HNJX4Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P350HNJX4Y');
+</script>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1904534047174026');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {content_name: 'Storytelling Films'});
+</script>
+<!-- End Meta Pixel -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Storytelling &amp; AI Film — Social Fire Solutions</title>
+<link rel="canonical" href="https://socialfire.solutions/storytelling">
+<link rel="icon" type="image/png" href="/media/favicon.png">
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png">
+<meta name="description" content="Everyone has a story. Individuals, companies, families and founders. Tell us yours in a paragraph or a phone call and we write it, cast it from your photos, build the world and hand you a finished film. AI video creation with a human director." />
+<meta property="og:type" content="website">
+<meta property="og:title" content="Everyone has a story. Let's bring yours to life.">
+<meta property="og:description" content="Brand films, founder stories, tributes and commercials, built with AI and directed by hand. No crew, no shoot day, no limits. Tell us your story.">
+<meta property="og:url" content="https://socialfire.solutions/storytelling">
+<meta property="og:image" content="https://socialfire.solutions/storytelling/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Service","@id":"https://socialfire.solutions/storytelling#service",
+     "name":"Storytelling & AI Film Production","serviceType":"Brand films, founder stories and commercials created with AI video",
+     "provider":{"@type":"Organization","@id":"https://socialfire.solutions/#org","name":"Social Fire Solutions","url":"https://socialfire.solutions"},
+     "areaServed":"US","url":"https://socialfire.solutions/storytelling",
+     "description":"Social Fire Solutions turns a client's story into a finished film: script, casting from the client's own photos, AI-generated scenes directed by hand, edit, titles and score. For individuals, companies and moments."},
+    {"@type":"WebPage","@id":"https://socialfire.solutions/storytelling#page","url":"https://socialfire.solutions/storytelling",
+     "name":"Storytelling & AI Film — Social Fire Solutions","isPartOf":{"@id":"https://socialfire.solutions/#website"},
+     "about":{"@id":"https://socialfire.solutions/storytelling#service"},
+     "primaryImageOfPage":"https://socialfire.solutions/storytelling/assets/og.jpg"},
+    {"@type":"VideoObject","@id":"https://socialfire.solutions/storytelling#the-carry",
+     "name":"The Carry","description":"A short period film set at the 18th hole of a 1927 tournament: one shot over water, a caddie who says go for it, and two announcers calling it from a wooden tower. Four real club members play the leads.",
+     "thumbnailUrl":"https://socialfire.solutions/storytelling/assets/poster-the-carry.jpg",
+     "contentUrl":"https://socialfire.solutions/storytelling/assets/the-carry.mp4",
+     "uploadDate":"2026-09-24","duration":"PT1M33S"}
+  ]
+}
+</script>
+<style>
+:root{
+  --onyx:#0A0A0B; --carbon:#161618; --carbon-2:#1F1F22;
+  --ember:#1E5AC8; --molten:#1B8CF2; --ignition:#7FE0FF;
+  --ivory:#F4F1EA; --ash:#A3A3A9; --line:#2a2a2e;
+  --burn:linear-gradient(100deg,#7FE0FF,#1B8CF2 50%,#1E5AC8);
+  --wrap:1180px; --r:16px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--onyx); color:var(--ivory);
+  font-family:'Inter',system-ui,sans-serif; font-weight:400; font-size:18px;
+  line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif; font-weight:600; line-height:1.12; letter-spacing:.2px}
+a{color:inherit; text-decoration:none}
+img,video{display:block; max-width:100%}
+.fire{background:var(--burn);-webkit-background-clip:text;background-clip:text;color:transparent}
+::selection{background:var(--molten);color:#fff}
+
+/* ambient background */
+.bg{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 14% 0%, rgba(27,140,242,.10), transparent 55%),
+    radial-gradient(120% 90% at 86% 100%, rgba(30,90,200,.12), transparent 60%),
+    linear-gradient(180deg,#0A0A0B,#0d0d10 60%,#08080a);
+}
+.bg::after{content:""; position:absolute; inset:0; opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+main,nav,footer{position:relative; z-index:2}
+.wrap{width:min(var(--wrap),100% - 2*clamp(18px,5vw,40px)); margin:0 auto}
+
+/* nav */
+nav{position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:16px clamp(18px,4vw,34px);
+  background:linear-gradient(180deg,rgba(10,10,11,.96),rgba(10,10,11,.82)); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.05)}
+.brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:16px; letter-spacing:.01em}
+.flame{width:26px;height:26px;flex:none;background:url('/media/sfs-flame-blue.png') center/contain no-repeat;filter:drop-shadow(0 0 10px rgba(27,140,242,.6))}
+.brand span.co{color:var(--ash);font-weight:400}
+.navlinks{display:flex; align-items:center; gap:22px}
+.navlinks .home{font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ash); transition:.2s}
+.navlinks .home:hover{color:var(--ignition)}
+
+/* buttons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:.6rem; cursor:pointer; border:1px solid transparent;
+  border-radius:60px; padding:17px 30px; font-family:'Inter'; font-weight:600; font-size:1rem; line-height:1; transition:.28s var(--ease); white-space:nowrap}
+.btn-primary{background:var(--burn); color:#06121f; box-shadow:0 12px 34px -10px rgba(27,140,242,.75)}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 18px 44px -10px rgba(27,140,242,.95)}
+.btn-ghost{border-color:var(--line); color:var(--ivory); background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:var(--molten); color:var(--ignition)}
+.btn-sm{padding:12px 20px; font-size:.86rem}
+.btn-lg{padding:21px 40px; font-size:1.1rem}
+
+/* eyebrow / headings */
+.eyebrow{font-size:.74rem; letter-spacing:.3em; text-transform:uppercase; color:var(--molten); font-weight:600; display:flex; align-items:center; gap:12px; margin-bottom:18px}
+.eyebrow::before{content:""; width:28px; height:1px; background:var(--molten); opacity:.7}
+.sec{padding:clamp(72px,9vw,120px) 0}
+.sec h2{font-size:clamp(2rem,4.6vw,3.2rem); margin-bottom:18px; max-width:20ch}
+.sec h2 em,.hero h1 em,h2 em{font-style:italic; color:var(--molten)}
+.lead{color:var(--ash); font-size:clamp(1.05rem,1.6vw,1.25rem); max-width:60ch; line-height:1.6}
+.lead b{color:var(--ivory); font-weight:600}
+.split{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px,5vw,70px); align-items:start}
+
+/* hero */
+.hero{padding:clamp(56px,8vw,96px) 0 clamp(40px,6vw,64px)}
+.hero h1{font-size:clamp(2.6rem,6.4vw,5rem); line-height:1.04; max-width:15ch; margin-bottom:22px; letter-spacing:-.5px}
+.hero h1 em{font-style:italic; font-weight:600; background:var(--burn); -webkit-background-clip:text; background-clip:text; color:transparent}
+.hero .lead{max-width:56ch; margin-bottom:34px}
+.hero .cta-row{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+.hero .note{margin-top:20px; font-size:.9rem; color:var(--ash)}
+.hero .note b{color:var(--ivory)}
+
+/* film player (hero + tiles) */
+.film{position:relative; border-radius:var(--r); overflow:hidden; background:#000; border:1px solid rgba(255,255,255,.06)}
+.film video{width:100%; aspect-ratio:16/9; object-fit:cover; background:#000}
+.film .meta{position:absolute; left:16px; top:16px; display:flex; gap:8px; pointer-events:none; z-index:2}
+.film .meta span{font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ivory); background:rgba(10,10,11,.7); border:1px solid rgba(255,255,255,.12); padding:6px 10px; border-radius:30px; backdrop-filter:blur(6px)}
+.film .cap{position:absolute; left:16px; bottom:16px; font-size:.78rem; color:var(--ash); letter-spacing:.04em; z-index:2; pointer-events:none;
+  background:rgba(10,10,11,.6); padding:8px 12px; border-radius:8px; backdrop-filter:blur(8px)}
+.film .cap b{color:var(--ivory)}
+.film .play{position:absolute; inset:0; z-index:3; border:0; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  background:linear-gradient(180deg,rgba(10,10,11,.06),rgba(10,10,11,.55)); color:var(--ivory); font:600 .8rem/1 'Inter',sans-serif; letter-spacing:.14em; text-transform:uppercase; transition:.25s}
+.film .play:hover{background:linear-gradient(180deg,rgba(10,10,11,.12),rgba(10,10,11,.64))}
+.film .play .ring{width:78px; height:78px; border-radius:50%; display:grid; place-items:center; padding-left:6px; font-size:26px;
+  background:rgba(10,10,11,.6); backdrop-filter:blur(10px); border:2px solid rgba(255,255,255,.4); transition:.25s var(--ease)}
+.film .play:hover .ring{transform:scale(1.07); border-color:var(--molten); box-shadow:0 0 0 14px rgba(27,140,242,.22)}
+.film .play span.l{text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.film.on .play,.film.on .cap,.film.on .meta{display:none}
+.hero-film{margin-top:clamp(36px,5vw,56px); box-shadow:0 40px 100px -40px rgba(27,140,242,.55), 0 0 0 1px rgba(255,255,255,.06)}
+.hero-film .play .ring{width:96px; height:96px; font-size:32px}
+
+/* strip */
+.strip{border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:20px 0; overflow:hidden; background:rgba(255,255,255,.015)}
+.strip .row{display:flex; gap:44px; white-space:nowrap; animation:slide 44s linear infinite; width:max-content}
+.strip .row span{font-size:.82rem; letter-spacing:.24em; text-transform:uppercase; color:var(--ash); display:flex; align-items:center; gap:14px}
+.strip .row span::after{content:"✦"; color:var(--molten); font-size:.7rem}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.strip .row{animation:none}}
+
+/* who it's for */
+.who{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:44px}
+.who article{position:relative; border:1px solid var(--line); border-radius:var(--r); padding:30px 28px 32px; background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)); transition:.3s var(--ease)}
+.who article:hover{border-color:rgba(27,140,242,.5); transform:translateY(-3px)}
+.who .k{font-size:.7rem; letter-spacing:.24em; text-transform:uppercase; color:var(--ignition); font-weight:600}
+.who h3{font-size:1.6rem; margin:12px 0 10px}
+.who p{color:var(--ash); font-size:1rem}
+.who p b{color:var(--ivory); font-weight:600}
+.who ul{list-style:none; margin-top:16px; display:grid; gap:7px}
+.who li{font-size:.95rem; color:var(--ash); padding-left:18px; position:relative}
+.who li::before{content:"✦"; position:absolute; left:0; top:0; color:var(--molten); font-size:.7rem}
+
+/* case study */
+.case{padding:clamp(72px,9vw,120px) 0; border-top:1px solid var(--line)}
+.case-head{display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(28px,5vw,70px); align-items:end; margin-bottom:34px}
+.case-head h2{font-size:clamp(2rem,4.6vw,3.2rem); margin-bottom:18px; max-width:none}
+.facts{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+.fact{border:1px solid var(--line); border-radius:12px; padding:16px 18px; background:rgba(255,255,255,.02)}
+.fact b{display:block; font-family:'Playfair Display'; font-style:italic; font-size:1.5rem; line-height:1.1; background:var(--burn); -webkit-background-clip:text; background-clip:text; color:transparent}
+.fact span{display:block; margin-top:6px; color:var(--ash); font-size:.9rem}
+.gallery{display:grid; gap:14px; grid-template-columns:repeat(12,1fr)}
+.gallery .tile:nth-child(1),.gallery .tile:nth-child(2){grid-column:span 6}
+.gallery .tile:nth-child(n+3){grid-column:span 3}
+.tile{position:relative; border-radius:12px; overflow:hidden; background:var(--carbon); cursor:zoom-in; border:1px solid rgba(255,255,255,.05); transition:.35s var(--ease)}
+.tile:hover{transform:translateY(-3px); border-color:rgba(27,140,242,.5); box-shadow:0 24px 50px -30px rgba(27,140,242,.8)}
+.tile img{width:100%; height:auto; object-fit:cover; aspect-ratio:16/9; transition:transform .6s var(--ease)}
+.tile:hover img{transform:scale(1.03)}
+.tile .lab{position:absolute; left:12px; bottom:12px; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ivory);
+  background:rgba(10,10,11,.7); border:1px solid rgba(255,255,255,.12); padding:6px 10px; border-radius:30px; backdrop-filter:blur(6px); pointer-events:none; opacity:0; transform:translateY(6px); transition:.3s}
+.tile:hover .lab{opacity:1; transform:none}
+.made{display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin-top:34px; border:1px solid var(--line); border-radius:var(--r); overflow:hidden; background:rgba(255,255,255,.02)}
+.made div{padding:22px 20px; border-right:1px solid var(--line)}
+.made div:last-child{border-right:0}
+.made .n{font-size:.68rem; letter-spacing:.24em; text-transform:uppercase; color:var(--molten); font-weight:600}
+.made h4{font-family:'Inter'; font-weight:600; font-size:1.02rem; margin:8px 0 4px}
+.made p{color:var(--ash); font-size:.9rem; line-height:1.5}
+.rule{display:flex; gap:16px; align-items:flex-start; border:1px solid rgba(27,140,242,.35); background:rgba(27,140,242,.06); border-radius:12px; padding:20px 22px; margin-top:22px; font-size:1rem; color:var(--ash)}
+.rule b{color:var(--ivory)}
+.rule .ico{flex:none; width:34px; height:34px; border-radius:50%; background:var(--burn); display:grid; place-items:center; color:#06121f; font-weight:700}
+
+/* how it works */
+.steps{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:44px}
+.step{position:relative; border:1px solid var(--line); border-radius:var(--r); padding:30px 26px 30px; background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)); transition:.3s var(--ease)}
+.step:hover{border-color:rgba(27,140,242,.5); transform:translateY(-3px)}
+.step .n{font-family:'Playfair Display'; font-style:italic; font-size:3rem; line-height:1; background:var(--burn); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:16px}
+.step h3{font-size:1.4rem; margin-bottom:10px}
+.step p{color:var(--ash); font-size:.98rem}
+.step p b{color:var(--ivory); font-weight:600}
+.counts{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px}
+.counts span{border:1px solid var(--line); border-radius:50px; padding:10px 18px; font-size:.95rem; color:var(--ivory); background:rgba(255,255,255,.02)}
+.counts span.hi{border-color:var(--molten); color:var(--ignition); background:rgba(27,140,242,.08); font-weight:600}
+
+/* more stories */
+.reel{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:40px}
+.story{display:grid; gap:14px}
+.story h3{font-size:1.35rem}
+.story h3 small{display:block; font-family:'Inter'; font-weight:500; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--molten); margin-bottom:6px}
+.story p{color:var(--ash); font-size:.98rem}
+.story p b{color:var(--ivory); font-weight:600}
+
+/* any world */
+.worlds{display:grid; grid-template-columns:repeat(6,1fr); gap:14px; margin-top:40px}
+.worlds .tile:nth-child(1),.worlds .tile:nth-child(2){grid-column:span 3}
+.worlds .tile:nth-child(n+3){grid-column:span 2}
+.worlds .tile img{aspect-ratio:16/9}
+
+/* what you get */
+.get{display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(30px,5vw,80px); align-items:start}
+.list{display:grid; gap:12px; margin-top:30px}
+.li{display:flex; gap:16px; align-items:flex-start; border:1px solid var(--line); border-radius:12px; padding:18px 20px; background:rgba(255,255,255,.02)}
+.li .chk{flex:none; width:26px; height:26px; border-radius:50%; background:var(--burn); display:grid; place-items:center}
+.li .chk svg{width:13px; height:13px; stroke:#06121f; stroke-width:3; fill:none}
+.li b{display:block; font-weight:600; font-size:1.06rem}
+.li span{color:var(--ash); font-size:.96rem}
+.why{display:grid; gap:14px; margin-top:30px}
+.why div{border-left:2px solid var(--molten); padding:6px 0 6px 20px}
+.why h3{font-size:1.3rem; margin-bottom:6px}
+.why p{color:var(--ash); font-size:1rem}
+.quote{margin-top:34px; border-radius:var(--r); padding:30px 32px; background:linear-gradient(135deg,rgba(127,224,255,.08),rgba(30,90,200,.10)); border:1px solid rgba(27,140,242,.3)}
+.quote p{font-family:'Playfair Display'; font-style:italic; font-size:clamp(1.3rem,2.2vw,1.7rem); line-height:1.35}
+.quote small{display:block; margin-top:14px; color:var(--ash); font-size:.9rem; letter-spacing:.06em}
+
+/* book */
+.book{padding:clamp(72px,9vw,120px) 0; border-top:1px solid var(--line)}
+.book-card{border-radius:22px; overflow:hidden; border:1px solid rgba(27,140,242,.35); background:linear-gradient(180deg,rgba(27,140,242,.07),rgba(10,10,11,0) 40%), var(--carbon); box-shadow:0 50px 120px -50px rgba(27,140,242,.6)}
+.book-top{padding:clamp(34px,5vw,60px) clamp(22px,5vw,60px) 10px; text-align:center}
+.book-top .flame{width:52px; height:52px; margin:0 auto 22px}
+.book-top h2{max-width:none; margin:0 auto 14px}
+.book-top .lead{margin:0 auto 26px}
+.book-frame{padding:10px clamp(10px,3vw,40px) clamp(24px,4vw,48px); min-height:720px}
+.book-frame iframe{width:100%; height:860px; border:0; border-radius:14px; background:#fff; display:block}
+.book-alt{text-align:center; padding:0 22px 30px; color:var(--ash); font-size:.95rem}
+.book-alt a{color:var(--ignition); border-bottom:1px solid rgba(127,224,255,.4)}
+
+/* faq */
+.faq{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:34px}
+.faq details{border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.02); padding:0 22px}
+.faq summary{cursor:pointer; list-style:none; padding:20px 0; font-weight:600; font-size:1.06rem; display:flex; justify-content:space-between; gap:16px; align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+"; color:var(--molten); font-size:1.4rem; font-weight:300; transition:.25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--ash); padding:0 0 22px; font-size:1rem}
+.faq details p a{color:var(--ignition)}
+
+/* footer */
+footer{border-top:1px solid var(--line); padding:44px 0 120px; color:var(--ash); font-size:.92rem}
+footer .wrap{display:flex; flex-wrap:wrap; gap:18px 34px; align-items:center; justify-content:space-between}
+footer .tag{font-family:'Playfair Display'; font-style:italic; color:var(--ivory)}
+footer a:hover{color:var(--ignition)}
+
+/* sticky cta */
+.sticky{position:fixed; left:0; right:0; bottom:0; z-index:60; padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(10,10,11,0),rgba(10,10,11,.96) 40%); display:none}
+.sticky .btn{width:100%}
+
+/* lightbox */
+.lb{position:fixed; inset:0; z-index:100; background:rgba(5,5,6,.94); display:none; align-items:center; justify-content:center; padding:24px; cursor:zoom-out; backdrop-filter:blur(6px)}
+.lb.on{display:flex}
+.lb img{max-width:min(96vw,1200px); max-height:90vh; border-radius:12px; box-shadow:0 40px 100px rgba(0,0,0,.7); object-fit:contain}
+.lb .x{position:absolute; top:18px; right:22px; color:var(--ivory); font-size:2rem; line-height:1; opacity:.7}
+
+/* reveal */
+.rv{opacity:0; transform:translateY(22px); transition:opacity .7s var(--ease), transform .7s var(--ease)}
+.rv.in{opacity:1; transform:none}
+.no-js .rv{opacity:1; transform:none}
+
+@media (max-width:1000px){
+  .split,.get,.case-head{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .who{grid-template-columns:1fr}
+  .made{grid-template-columns:1fr}
+  .made div{border-right:0; border-bottom:1px solid var(--line)}
+  .made div:last-child{border-bottom:0}
+  .gallery .tile:nth-child(n+3){grid-column:span 6}
+  .worlds .tile:nth-child(n+3){grid-column:span 3}
+  .reel{grid-template-columns:1fr}
+  .faq{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{font-size:17px}
+  .navlinks .home{display:none}
+  nav .brand{white-space:nowrap}
+  nav .brand .co{display:none}
+  .steps{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .gallery .tile:nth-child(n){grid-column:span 6}
+  .worlds .tile:nth-child(n){grid-column:span 6}
+  .sticky{display:block}
+  .hero .cta-row .btn{width:100%}
+  .film .play .ring,.hero-film .play .ring{width:68px; height:68px; font-size:22px}
+  .film .cap{display:none}
+  .book-frame{padding:8px 8px 20px}
+  .book-frame iframe{height:940px}
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
+<div class="bg"></div>
+
+<nav>
+  <a class="brand" href="/"><span class="flame"></span><b>Social Fire</b>&nbsp;<span class="co">Solutions</span></a>
+  <div class="navlinks">
+    <a href="/" class="home">Home</a>
+    <a href="#book" class="btn btn-primary btn-sm js-cta">Tell us your story</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">Storytelling · AI film</div>
+    <h1>Everyone has a story. <em>Let's bring yours to life.</em></h1>
+    <p class="lead">Individuals, companies, families, founders. You have a story worth telling, and it deserves more than a slideshow. Tell it to us in a sentence, a paragraph or a phone call. <b>We write it, cast it, build the world and score it,</b> then hand you a finished film.</p>
+    <div class="cta-row">
+      <a href="#book" class="btn btn-primary btn-lg js-cta">Tell us your story</a>
+      <a href="#film" class="btn btn-ghost btn-lg">Watch a film ↓</a>
+    </div>
+    <p class="note"><b>No crew. No location days. No limits.</b> If you can imagine it, we can put it on screen.</p>
+
+    <div class="film hero-film rv" id="film" data-film="the-carry">
+      <video preload="metadata" playsinline poster="/storytelling/assets/poster-the-carry.jpg">
+        <source src="/storytelling/assets/the-carry.mp4" type="video/mp4">
+      </video>
+      <div class="meta"><span>Short film</span><span>1:33 · sound on</span></div>
+      <div class="cap"><b>The Carry</b> · 1927 · made for The Country C1ub</div>
+      <button class="play" type="button" aria-label="Play The Carry, with sound"><span class="ring" aria-hidden="true">▶</span><span class="l">Play · sound on</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-hidden="true">
+  <div class="row">
+    <span>Brand films</span><span>Founder stories</span><span>Origin stories</span><span>Product launches</span><span>Family tributes</span><span>Commercials</span><span>Period pieces</span><span>Worlds that don't exist</span><span>Social reels</span>
+    <span>Brand films</span><span>Founder stories</span><span>Origin stories</span><span>Product launches</span><span>Family tributes</span><span>Commercials</span><span>Period pieces</span><span>Worlds that don't exist</span><span>Social reels</span>
+  </div>
+</div>
+
+<!-- ===== WHO IT'S FOR ===== -->
+<section class="sec" id="who">
+  <div class="wrap">
+    <div class="eyebrow">Who it's for</div>
+    <h2>Every person has a story. <em>Every company does too.</em></h2>
+    <p class="lead">Most of them never get told, because telling a story on film used to mean a crew, a budget and a month of your life. It doesn't anymore. It means a conversation with us.</p>
+    <div class="who rv">
+      <article>
+        <div class="k">For individuals</div>
+        <h3>Your life, your craft, your message.</h3>
+        <p>The story of how you got here. The thing you believe that nobody has put into words. A letter to your kids they can watch in twenty years.</p>
+        <ul><li>Founder and personal-brand films</li><li>A coach's philosophy, on screen</li><li>A tribute, a toast, a legacy piece</li></ul>
+      </article>
+      <article>
+        <div class="k">For companies</div>
+        <h3>How you started. What you stand for.</h3>
+        <p>The work your customers never see. The reason the founder started it. A brand film for the website, a launch spot for the ads, a recruiting piece that makes the right people apply.</p>
+        <ul><li>Brand and origin films</li><li>Commercials, :15 to :60</li><li>Product launches and explainers</li></ul>
+      </article>
+      <article>
+        <div class="k">For moments</div>
+        <h3>One day. One person. Told like a film.</h3>
+        <p>A wedding, a birthday, a retirement, an anniversary. The moment that deserved a camera crew and never got one.</p>
+        <ul><li>Birthday and anniversary films</li><li>Event recaps and invitations</li><li>Memorials and tributes</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CASE STUDY: THE CARRY ===== -->
+<section class="case" id="the-carry">
+  <div class="wrap">
+    <div class="case-head rv">
+      <div>
+        <div class="eyebrow">A story, start to finish</div>
+        <h2>1927. The 18th hole. <em>Four real people.</em></h2>
+        <p class="lead">The Carry began as a two-sentence idea from a members' club: a golfer with one shot to win, a caddie who tells him to go for it, and two announcers calling it from a wooden tower. The four leads are real members, cast from a handful of photos. There was no set, no crew and no 1927. <b>There was a story.</b></p>
+      </div>
+      <div class="facts">
+        <div class="fact"><b>Four</b><span>real people in the cast, from photos</span></div>
+        <div class="fact"><b>Seven</b><span>scenes, written and directed shot by shot</span></div>
+        <div class="fact"><b>Zero</b><span>shoot days, crews or locations</span></div>
+        <div class="fact"><b>1:33</b><span>finished film, titles and score included</span></div>
+      </div>
+    </div>
+
+    <div class="gallery rv">
+      <a class="tile" href="/storytelling/assets/carry-01-title.webp"><img src="/storytelling/assets/carry-01-title.webp" alt="Title card over a misty 1927 fairway lined with spectators: The Elite Open, 18th hole" loading="lazy"><span class="lab">The title</span></a>
+      <a class="tile" href="/storytelling/assets/carry-02-the-swing.webp"><img src="/storytelling/assets/carry-02-the-swing.webp" alt="A golfer in a fedora addresses the ball in silhouette against the sunrise, the gallery behind him" loading="lazy"><span class="lab">The swing</span></a>
+      <a class="tile" href="/storytelling/assets/carry-03-the-player.webp"><img src="/storytelling/assets/carry-03-the-player.webp" alt="Close-up of the player in a fedora with a cigarette, morning light on his face" loading="lazy"><span class="lab">The player</span></a>
+      <a class="tile" href="/storytelling/assets/carry-04-the-caddie.webp"><img src="/storytelling/assets/carry-04-the-caddie.webp" alt="The caddie in a cardigan and bow tie, a red flag behind him" loading="lazy"><span class="lab">The caddie</span></a>
+      <a class="tile" href="/storytelling/assets/carry-05-the-tower.webp"><img src="/storytelling/assets/carry-05-the-tower.webp" alt="Two announcers in a wooden broadcast tower with a brass microphone and headphones" loading="lazy"><span class="lab">The tower</span></a>
+      <a class="tile" href="/storytelling/assets/carry-06-the-number.webp"><img src="/storytelling/assets/carry-06-the-number.webp" alt="The caddie hands the player a persimmon wood beside the lake" loading="lazy"><span class="lab">The number</span></a>
+      <a class="tile" href="/storytelling/assets/carry-07-through-the-glass.webp"><img src="/storytelling/assets/carry-07-through-the-glass.webp" alt="The announcer watching through binoculars" loading="lazy"><span class="lab">Through the glass</span></a>
+      <a class="tile" href="/storytelling/assets/carry-08-the-gallery.webp"><img src="/storytelling/assets/carry-08-the-gallery.webp" alt="The player and caddie seen from behind, a gallery of 1920s spectators lined along the lake" loading="lazy"><span class="lab">The gallery</span></a>
+      <a class="tile" href="/storytelling/assets/carry-09-the-flight.webp"><img src="/storytelling/assets/carry-09-the-flight.webp" alt="The ball in flight over the misty lake toward the sun, the crowd watching" loading="lazy"><span class="lab">The flight</span></a>
+      <a class="tile" href="/storytelling/assets/carry-10-the-flag.webp"><img src="/storytelling/assets/carry-10-the-flag.webp" alt="The red flag on the green at sunrise with the lake behind it" loading="lazy"><span class="lab">The flag</span></a>
+      <a class="tile" href="/storytelling/assets/carry-11-the-call.webp"><img src="/storytelling/assets/carry-11-the-call.webp" alt="The announcers react in the tower, hands on his head, her eyes wide" loading="lazy"><span class="lab">The call</span></a>
+      <a class="tile" href="/storytelling/assets/carry-12-the-roar.webp"><img src="/storytelling/assets/carry-12-the-roar.webp" alt="A silhouetted crowd throwing hats in the air in the golden mist" loading="lazy"><span class="lab">The roar</span></a>
+      <a class="tile" href="/storytelling/assets/carry-13-the-wink.webp"><img src="/storytelling/assets/carry-13-the-wink.webp" alt="The player and caddie share the moment after the shot, lake behind them" loading="lazy"><span class="lab">The wink</span></a>
+      <a class="tile" href="/storytelling/assets/carry-14-the-last-word.webp"><img src="/storytelling/assets/carry-14-the-last-word.webp" alt="A goose beside the flagstick at sunrise, the closing shot" loading="lazy"><span class="lab">The last word</span></a>
+    </div>
+
+    <div class="made rv">
+      <div><div class="n">01</div><h4>A paragraph</h4><p>The client described the scene in a few sentences. The year, the shot, the four people, the feeling.</p></div>
+      <div><div class="n">02</div><h4>A script</h4><p>Dialogue for the player, the caddie and the two announcers. The client read every line before a frame existed.</p></div>
+      <div><div class="n">03</div><h4>A cast</h4><p>Four real people built from their own photos, with the wardrobe locked so they stay themselves in every scene.</p></div>
+      <div><div class="n">04</div><h4>Seven scenes</h4><p>Each one directed shot by shot: the camera, the light, the sound, the performance. Re-rolled until it was right.</p></div>
+      <div><div class="n">05</div><h4>One film</h4><p>Cut together, title cards typeset by hand, scored, and delivered in the formats it needed to live in.</p></div>
+    </div>
+
+    <div class="rule rv"><div class="ico">✓</div><div><b>Real people stay real.</b> The faces in a story are the client's own, built from their photos and checked scene by scene. Real products keep their real artwork. Every word on screen is typeset, never generated.</div></div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2>You bring the story. <em>We bring the film.</em></h2>
+    <p class="lead">You don't need a script, a storyboard or a shot list. You need to know who the story is about and how it should feel. We take it from there.</p>
+    <div class="steps rv">
+      <div class="step"><div class="n">01</div><h3>Tell us the story</h3><p>A call, a voice memo, a paragraph. Who it's about, what happens, how it should feel. <b>Rough is fine.</b> That's what the first conversation is for.</p></div>
+      <div class="step"><div class="n">02</div><h3>We write it</h3><p>A short script with dialogue and a scene list. <b>You read it before anything is filmed</b> and change whatever you want.</p></div>
+      <div class="step"><div class="n">03</div><h3>We build it</h3><p>The cast, the world, the camera, the sound. Real people from their photos, real products from their artwork, <b>every scene directed by hand.</b></p></div>
+      <div class="step"><div class="n">04</div><h3>You get a film</h3><p>Cut, scored and titled. Horizontal for the website, vertical for your phone. <b>Yours to keep</b> and run anywhere.</p></div>
+    </div>
+    <div class="counts rv" aria-label="Film lengths">
+      <span>:15 spot</span><span>:30</span><span class="hi">:60 commercial</span><span>90-second story</span><span class="hi">2–3 minute short</span><span>16:9 · 9:16 · 1:1</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MORE STORIES ===== -->
+<section class="sec" id="stories" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">More stories we've told</div>
+    <h2>A trucking company. Two friends. <em>A can of energy drink.</em></h2>
+    <p class="lead">Every one of these started as a conversation. None of them had a shoot day.</p>
+    <div class="reel rv">
+      <div class="story">
+        <div class="film" data-film="one-call">
+          <video preload="none" playsinline poster="/storytelling/assets/poster-one-call.jpg"><source src="/storytelling/assets/one-call.mp4" type="video/mp4"></video>
+          <div class="meta"><span>Commercial</span><span>:60</span></div>
+          <button class="play" type="button" aria-label="Play One Call, with sound"><span class="ring" aria-hidden="true">▶</span><span class="l">Play · sound on</span></button>
+        </div>
+        <h3><small>Reliable Permit Solutions · a company</small>"One Call"</h3>
+        <p>A permit company for oversize trucking. Its drivers, its dispatcher, its phone number, and the story of what one call does for a driver stuck at a scale house. <b>Built from a conversation about what their customers actually go through.</b></p>
+      </div>
+      <div class="story">
+        <div class="film" data-film="pros-only">
+          <video preload="none" playsinline poster="/storytelling/assets/poster-pros-only.jpg"><source src="/storytelling/assets/pros-only.mp4" type="video/mp4"></video>
+          <div class="meta"><span>Short film</span><span>1:05</span></div>
+          <button class="play" type="button" aria-label="Play Pros Only, with sound"><span class="ring" aria-hidden="true">▶</span><span class="l">Play · sound on</span></button>
+        </div>
+        <h3><small>The Country C1ub · two people</small>"Pros Only"</h3>
+        <p>Two friends, a golf course and a door that says members only. A spy scene written around two real people, <b>cast from their own photos</b>, that starts on the first tee and ends somewhere nobody expected.</p>
+      </div>
+      <div class="story">
+        <div class="film" data-film="the-road">
+          <video preload="none" playsinline poster="/storytelling/assets/poster-the-road.jpg"><source src="/storytelling/assets/the-road.mp4" type="video/mp4"></video>
+          <div class="meta"><span>Scene</span><span>:27</span></div>
+          <button class="play" type="button" aria-label="Play The Road, with sound"><span class="ring" aria-hidden="true">▶</span><span class="l">Play · sound on</span></button>
+        </div>
+        <h3><small>Reliable Permits × The Country C1ub · a crossover</small>"The Road"</h3>
+        <p>A client's truck rolling into a story world that already exists, with a security escort and a driver in a cowboy hat. <b>The logo and the phone number on the trailer are real.</b> The gate is not.</p>
+      </div>
+      <div class="story">
+        <div class="film" data-film="ultra-berry">
+          <video preload="none" playsinline poster="/creative/assets/poster-ultra-berry.jpg"><source src="/creative/assets/ultra-berry-20s.mp4" type="video/mp4"></video>
+          <div class="meta"><span>Product spot</span><span>:20</span></div>
+          <button class="play" type="button" aria-label="Play the PLAYR1 spot, with sound"><span class="ring" aria-hidden="true">▶</span><span class="l">Play · sound on</span></button>
+        </div>
+        <h3><small>PLAYR1 · a product</small>"Architecture"</h3>
+        <p>Twenty seconds for a new energy drink. <b>The can is the client's real artwork in every frame</b>, dropped into a world of rivers, roots and lightning that would have cost a fortune to shoot.</p>
+      </div>
+    </div>
+    <p class="lead rv" style="margin-top:26px; font-size:1rem">Want ads instead of a story? <a href="/creative" style="color:var(--ignition); border-bottom:1px solid rgba(127,224,255,.4)">Tell us how many and we'll make them.</a></p>
+  </div>
+</section>
+
+<!-- ===== ANY WORLD ===== -->
+<section class="case" id="worlds">
+  <div class="wrap">
+    <div class="eyebrow">Any story. Any era. Any world.</div>
+    <h2 style="font-size:clamp(2rem,4.6vw,3.2rem); margin-bottom:18px; max-width:22ch">The location is a sentence. <em>So is the year.</em></h2>
+    <p class="lead">A bakery at dawn, a dock at golden hour, a diner in 1962, a sky that doesn't exist. These frames were built from a line of description each. Your story could be set in any of them, with you in it.</p>
+    <div class="worlds rv">
+      <a class="tile" href="/storytelling/assets/world-founder.webp"><img src="/storytelling/assets/world-founder.webp" alt="A baker stands in her shop doorway at dawn looking down a small-town main street" loading="lazy"><span class="lab">A founder at dawn</span></a>
+      <a class="tile" href="/storytelling/assets/world-dock.webp"><img src="/storytelling/assets/world-dock.webp" alt="A grandfather and a boy at the end of a dock at golden hour" loading="lazy"><span class="lab">A grandfather and a lake</span></a>
+      <a class="tile" href="/storytelling/assets/world-airship.webp"><img src="/storytelling/assets/world-airship.webp" alt="A woman at the bow of a wooden airship above the clouds at sunrise" loading="lazy"><span class="lab">A world that doesn't exist</span></a>
+      <a class="tile" href="/storytelling/assets/world-diner.webp"><img src="/storytelling/assets/world-diner.webp" alt="A young man leaning on a red convertible outside a neon diner, 1962" loading="lazy"><span class="lab">1962, blue hour</span></a>
+      <a class="tile" href="/storytelling/assets/world-family-business.webp"><img src="/storytelling/assets/world-family-business.webp" alt="A father and daughter in work shirts laughing in front of their van at sunrise" loading="lazy"><span class="lab">A family business</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT YOU GET ===== -->
+<section class="sec" id="get">
+  <div class="wrap get">
+    <div class="rv">
+      <div class="eyebrow">What you get</div>
+      <h2>A finished film, <em>not a project.</em></h2>
+      <p class="lead">You approve the script, you watch the cut, you get the files. Everything in between is ours.</p>
+      <div class="list">
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>The film</b><span>Fifteen seconds to three minutes. Cut, scored, titled, color-graded.</span></div></div>
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>Every format</b><span>16:9 for your website and YouTube. 9:16 for Reels, TikTok and Stories. Square if you need it.</span></div></div>
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>A script you approved</b><span>Dialogue, narration and scene list, signed off by you before anything is built.</span></div></div>
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>Real faces, real products</b><span>You, your team or your family from your photos. Your product from its actual artwork. Never a lookalike.</span></div></div>
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>Words you can read</b><span>Title cards, names and dates typeset by hand. No garbled text, ever.</span></div></div>
+        <div class="li"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div><div><b>Revisions</b><span>A line, a scene, an ending. Changes are part of the order, and they come back fast.</span></div></div>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="eyebrow">Why now</div>
+      <h2>Film used to need a crew. <em>Now it needs a story.</em></h2>
+      <div class="why">
+        <div><h3>Any era, any place</h3><p>1927 or 2080. Your kitchen or a floating city. The location is a sentence in the script, not a line in the budget.</p></div>
+        <div><h3>Real people, no shoot day</h3><p>A few photos of you, your team or your family, and you're in the film, in wardrobe, in character, in every scene.</p></div>
+        <div><h3>Days, not months</h3><p>A :30 can be back in days. A short film in a week or two. Nobody is waiting on a location permit.</p></div>
+        <div><h3>Priced for a story, not a production</h3><p>No crew, no travel, no rental house. Most of what made film expensive is gone. What's left is the writing, the direction and the taste.</p></div>
+      </div>
+      <div class="quote">
+        <p>"Everyone has a story. Most people just never had a way to put it on screen. Now they do, and it takes a phone call to start."</p>
+        <small>Cameron Tennant · Social Fire Solutions</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BOOK ===== -->
+<section class="book" id="book">
+  <div class="wrap">
+    <div class="book-card rv">
+      <div class="book-top">
+        <span class="flame"></span>
+        <div class="eyebrow" style="justify-content:center">Tell us your story</div>
+        <h2>Pick a time. <em>Bring the story.</em></h2>
+        <p class="lead">A thirty-minute call. Tell us who it's about, what happens and how it should feel. You leave with a treatment, a length and a price.</p>
+      </div>
+      <div class="book-frame">
+        <iframe src="https://api.leadconnectorhq.com/widget/booking/8qVrNv1XSH2gqAi7tQrl" title="Schedule a call with Social Fire Solutions" allow="payment"></iframe>
+      </div>
+      <p class="book-alt">Calendar not loading? <a href="https://api.leadconnectorhq.com/widget/booking/8qVrNv1XSH2gqAi7tQrl" target="_blank" rel="noopener" class="js-cta">Open the booking page</a> or email <a href="mailto:cameron@socialfire.solutions">cameron@socialfire.solutions</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Questions</div>
+    <h2>Before the call</h2>
+    <div class="faq rv">
+      <details><summary>Do I have to be on camera?</summary><p>No. Send a few photos and we build you, your team or your family into the film, in wardrobe and in character. Or keep it faceless and let the story carry it. Both work.</p></details>
+      <details><summary>What if I don't know what my story is?</summary><p>That's what the call is for. Almost everyone has it. They've just never said it out loud to someone whose job is to listen for it.</p></details>
+      <details><summary>Is it really made with AI?</summary><p>The world is generated, yes. The story, the script, the casting, the direction, the edit and the taste are human. Think of it as a film crew the size of one laptop, with a director who still has to earn every frame.</p></details>
+      <details><summary>Will it look like everyone else's AI video?</summary><p>No. The difference is direction. Every scene is written before it's built, every frame is checked, and anything that drifts gets re-shot. Watch The Carry above and judge for yourself.</p></details>
+      <details><summary>Can you use my real product and logo?</summary><p>Yes, and we insist on it. Your product goes in with its actual artwork, your logo stays your logo, and every word on screen is typeset by hand so it reads exactly as you wrote it.</p></details>
+      <details><summary>How long does it take?</summary><p>A :30 is usually back within days. A longer short runs a week or two depending on how many scenes and how many rounds of notes. You'll get a date on the call.</p></details>
+      <details><summary>What does it cost?</summary><p>It depends on length and the number of scenes, and it is a fraction of a shoot. Tell us the story on the call and you'll leave with a number.</p></details>
+      <details><summary>Can you run it as an ad too?</summary><p>Yes. The film is the piece most businesses are missing. If you want it in front of people with budget behind it, that's what <a href="/">the rest of Social Fire</a> does.</p></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="flame"></span><b>Social Fire</b>&nbsp;<span class="co">Solutions</span></div>
+    <div class="tag">Spread like fire</div>
+    <a href="/creative">Ad creative</a>
+    <a href="/blog">The Blue Flame — our blog</a>
+    <div class="copy">© 2026 Social Fire Solutions. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky"><a href="#book" class="btn btn-primary js-cta">Tell us your story →</a></div>
+
+<div class="lb" id="lb" role="dialog" aria-label="Enlarged image"><span class="x">×</span><img id="lbImg" alt=""></div>
+
+<script>
+(function(){
+  // Reveal on scroll
+  var rv=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    rv.forEach(function(el){io.observe(el)});
+  }else{rv.forEach(function(el){el.classList.add('in')})}
+
+  // Films: wait on the poster, play with sound on tap, one at a time
+  var films=document.querySelectorAll('.film');
+  function stopOthers(cur){films.forEach(function(f){if(f!==cur){var v=f.querySelector('video');if(v&&!v.paused){v.pause()}}})}
+  films.forEach(function(f){
+    var v=f.querySelector('video'), b=f.querySelector('.play'); if(!v||!b) return;
+    b.addEventListener('click',function(){
+      stopOthers(f);
+      v.muted=false; v.controls=true; f.classList.add('on');
+      var p=v.play(); if(p&&p.catch){p.catch(function(){v.muted=true; v.play()})}
+      try{gtag('event','film_play',{film:f.getAttribute('data-film')})}catch(e){}
+      try{fbq('trackCustom','FilmPlay',{film:f.getAttribute('data-film')})}catch(e){}
+    });
+    v.addEventListener('play',function(){stopOthers(f)});
+    v.addEventListener('ended',function(){f.classList.remove('on'); v.controls=false; try{v.currentTime=0}catch(e){}});
+  });
+
+  // Lightbox
+  var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg');
+  document.querySelectorAll('a.tile').forEach(function(a){
+    a.addEventListener('click',function(e){e.preventDefault(); lbImg.src=a.getAttribute('href'); lbImg.alt=(a.querySelector('img')||{}).alt||''; lb.classList.add('on'); document.body.style.overflow='hidden'});
+  });
+  function closeLb(){lb.classList.remove('on'); lbImg.src=''; document.body.style.overflow=''}
+  lb.addEventListener('click',closeLb);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape') closeLb()});
+
+  // CTA tracking
+  document.querySelectorAll('.js-cta').forEach(function(a){
+    a.addEventListener('click',function(){
+      try{gtag('event','schedule_call_click',{page:'storytelling'})}catch(e){}
+      try{fbq('track','Contact',{content_name:'Storytelling Films'})}catch(e){}
+    });
+  });
+
+  // Sticky CTA only after the hero
+  var st=document.getElementById('sticky');
+  if(st){window.addEventListener('scroll',function(){st.style.display=(window.scrollY>600&&window.innerWidth<=640)?'block':''},{passive:true})}
+})();
+</script>
+</body>
+</html>
